@@ -4,6 +4,7 @@ idf_component_register(
          "pet_render.c"
          "pet_text.c"
          "pet_link.c"
+         "pet_voice.c"
          "pet_engine.c"
          "pet_hal.c"
          "pet_hal_sticks3.c"

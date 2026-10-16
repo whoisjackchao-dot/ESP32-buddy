@@ -39,7 +39,7 @@
 | R12 协议不绑定客户端 | `E2E-02`（任意脚本发事件） | M4 | C | `NOT_RUN`（同上） | 同上 |
 | R13 任务卡最多 3 张 | `CARD-03` | M8 | T | `NOT_RUN`（M3 只 1 张） | — |
 | R14 三模式（值班/番茄钟/休闲） | `POMO-*` `LEI-*` | M7/M8 | T | `NOT_RUN` | — |
-| R15 语音：需确认/完成/失败各一次 | `AUD-01`…`AUD-03` | M5 | T+H | `NOT_RUN` | — |
+| R15 语音：需确认/完成/失败各一次 | `AUD-01`…`AUD-04` | M5 | T | `PASS`（逻辑与资产）；`AUD-05/06` H 类 `NOT_RUN` | `evidence/M5/2026-10-16-语音逻辑-T.md` |
 | R16 当日战绩轮播、按日清零、重启不丢 | `POMO-06` `UI-07` | M7 | T | `NOT_RUN` | — |
 | R17 休闲（5/30/90 分钟、关背光） | `LEI-01`…`LEI-05` | M8 | T | `NOT_RUN` | — |
 | R18 按键操作 | `BTN-01`…`BTN-06` | M6 | T+H | `NOT_RUN` | — |
@@ -77,6 +77,12 @@
 | `LINK-04` | 事件线解析：合法（全字段/空格/未知键/换行/超长截断）与非法（非 JSON、缺括号、数组、空串、version 错、缺 event、未知事件、类型不符、超长行）各自的错误码 | T | `PASS` | `tests/test_pet_link.c` |
 | `LINK-05` | 六个事件名 → `pet_event_kind_t`；`device.heartbeat` 只刷新链路不改状态 | T | `PASS` | 同上 |
 | `CARD-04` | 带卡片字段时 `has_card` 且 `card.state` 随事件映射；无字段时不产生卡片 | T | `PASS` | 同上 |
+| `AUD-01` | 播报→资产 id 一一对应；`NONE`/越界值 → `PET_VOICE_NONE`（不崩） | T | `PASS` | `tests/test_pet_voice.c` |
+| `AUD-02` | `should_play`：`NONE`→false、静音→false、三态未静音→true | T | `PASS` | 同上 |
+| `AUD-03` | 静音默认关、可开可关（不持久化） | T | `PASS` | 同上 |
+| `AUD-04` | 三个占位 PCM：存在、16-bit 对齐、时长 0.10–3.0s、非静音 | T | `PASS` | 同上 |
+| `AUD-05` | 真机播报（I2S/ES8311）听得到、不爆音 | **H** | `NOT_RUN`（增量 2 未做，设备无播放） | — |
+| `AUD-06` | 播报不阻塞主循环（动画不掉帧） | T+H | `NOT_RUN` | — |
 
 ## 4. 未覆盖提示（dayu `ids.md` §6：每条 R 至少一个用例）
 
@@ -92,5 +98,6 @@
 | `tests/test_pet_state.c` | 55 checks | `PASS`（0 failed） |
 | `tests/test_pet_card.c` | 21 checks | `PASS`（0 failed） |
 | `tests/test_pet_link.c` | 47 checks | `PASS`（0 failed） |
+| `tests/test_pet_voice.c` | 28 checks | `PASS`（0 failed） |
 
-命令：`tests/run.sh`（退出码 0）。证据：`evidence/M1/`、`evidence/M2/`、`evidence/M3/`、`evidence/M4/`。
+命令：`tests/run.sh`（退出码 0）。**合计 188 checks。** 证据：`evidence/M1/`…`evidence/M5/`。

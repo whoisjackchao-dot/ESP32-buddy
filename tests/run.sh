@@ -36,6 +36,13 @@ echo "== test_pet_card =="
     -o "$BUILD/test_pet_card"
 "$BUILD/test_pet_card" || status=1
 
+echo "== test_pet_voice =="
+"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+    tests/test_pet_voice.c \
+    firmware/components/pet/pet_voice.c \
+    -o "$BUILD/test_pet_voice"
+"$BUILD/test_pet_voice" || status=1
+
 echo "== test_pet_link =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_link.c \
