@@ -80,7 +80,7 @@
 | `AUD-01` | 播报→资产 id 一一对应；`NONE`/越界值 → `PET_VOICE_NONE`（不崩） | T | `PASS` | `tests/test_pet_voice.c` |
 | `AUD-02` | `should_play`：`NONE`→false、静音→false、三态未静音→true | T | `PASS` | 同上 |
 | `AUD-03` | 静音默认关、可开可关（不持久化） | T | `PASS` | 同上 |
-| `AUD-04` | 三个占位 PCM：存在、16-bit 对齐、时长 0.10–3.0s、非静音 | T | `PASS` | 同上 |
+| `AUD-04` | 三段语音 PCM：存在、16-bit 对齐、时长 0.10–3.0s、非静音 | T | `PASS` | 同上 |
 | `AUD-05` | 真机播报（I2S/ES8311）听得到、不爆音 | **H** | `NOT_RUN`（增量 2 未做，设备无播放） | — |
 | `AUD-06` | 播报不阻塞主循环（动画不掉帧） | T+H | `NOT_RUN` | — |
 

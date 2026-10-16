@@ -31,8 +31,9 @@
 | 资源 | 来源 | 许可 | 用途 |
 | --- | --- | --- | --- |
 | `font8x8_basic.h` | Daniel Hepper（基于 Marcel Sondaar / IBM VGA 公有领域点阵字体） | **Public Domain** | M3 卡片文本绘制（8×8 ASCII） |
+| 播报语音 `assets/*.pcm` | `tools/voice-tts.sh` 用 **edge-tts**（微软 Edge 朗读服务）合成，音色 `zh-CN-XiaoyiNeural` | edge-tts 代码为 **MIT**；**合成音频的再分发需自行确认服务条款** | M5 三段短语音 |
 
-> 该文件随源码放在 `firmware/components/pet/font8x8_basic.h`，未改动字形数据（仅把声明改为 `static const uint8_t` 并加 `stdint.h`）。
+> 字体文件随源码放在 `firmware/components/pet/font8x8_basic.h`，未改动字形数据（仅把声明改为 `static const uint8_t` 并加 `stdint.h`）。
 
 ## 4. 设计借鉴声明
 
