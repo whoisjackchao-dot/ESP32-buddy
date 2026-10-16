@@ -5,11 +5,15 @@ idf_component_register(
          "pet_text.c"
          "pet_link.c"
          "pet_voice.c"
+         "pet_audio.c"
          "pet_engine.c"
          "pet_hal.c"
          "pet_hal_sticks3.c"
          "pm1.c"
     INCLUDE_DIRS "include"
-    PRIV_REQUIRES esp_lcd esp_driver_spi esp_driver_i2c esp_driver_gpio esp_timer
+    PRIV_REQUIRES esp_lcd esp_driver_spi esp_driver_i2c esp_driver_gpio esp_driver_i2s esp_timer es8311
     EMBED_FILES "assets/robot.look"
+                "assets/input.pcm"
+                "assets/done.pcm"
+                "assets/failed.pcm"
 )

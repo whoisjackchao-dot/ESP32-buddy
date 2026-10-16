@@ -32,6 +32,7 @@
 | --- | --- | --- | --- |
 | `font8x8_basic.h` | Daniel Hepper（基于 Marcel Sondaar / IBM VGA 公有领域点阵字体） | **Public Domain** | M3 卡片文本绘制（8×8 ASCII） |
 | 播报语音 `assets/*.pcm` | `tools/voice-tts.sh` 用 **edge-tts**（微软 Edge 朗读服务）合成，音色 `zh-CN-XiaoyiNeural` | edge-tts 代码为 **MIT**；**合成音频的再分发需自行确认服务条款** | M5 三段短语音 |
+| `firmware/components/es8311/` | **vendored**：`espressif/esp-bsp` → `components/es8311`，版本 `1.0.0~1`，commit `4dabefca` | **Apache-2.0**（原样保留 `LICENSE` 与 `CHECKSUMS.json`） | ES8311 音频编解码器驱动（M5 播放） |
 
 > 字体文件随源码放在 `firmware/components/pet/font8x8_basic.h`，未改动字形数据（仅把声明改为 `static const uint8_t` 并加 `stdint.h`）。
 

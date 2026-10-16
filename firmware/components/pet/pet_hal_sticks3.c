@@ -11,6 +11,9 @@
 #include "pet_hal.h"
 #include "pet_hal_sticks3.h"
 
+#include "pet_audio.h"
+#include "pet_voice.h"
+
 #include <string.h>
 
 #include "driver/gpio.h"
@@ -77,12 +80,16 @@ static void sticks3_set_backlight(bool on)
 
 static void sticks3_play_sound(pet_sound_t sound)
 {
-    (void)sound; /* 语音属 M5，本节点不做 */
+    /* 静音或非播报事件 → 不播；否则入队（异步，不阻塞动画） */
+    if (!pet_voice_should_play(sound, pet_voice_muted())) {
+        return;
+    }
+    (void)pet_audio_play_voice(pet_voice_id_for(sound));
 }
 
 static bool sticks3_audio_busy(void)
 {
-    return false; /* 有音频后由 M5 实现 */
+    return pet_audio_busy();
 }
 
 /* ---- 硬件安装 ---- */
@@ -186,6 +193,11 @@ esp_err_t pet_hal_sticks3_install(void)
     }
     if (panel_bringup() != ESP_OK) {
         return ESP_FAIL;
+    }
+
+    /* 语音：失败不阻断显示（屏幕仍可用），但要记录 */
+    if (pet_audio_init() != ESP_OK) {
+        ESP_LOGW(TAG, "AUDIO INIT FAILED（屏幕不受影响）");
     }
 
     s_hal.now_ms        = sticks3_now_ms;
