@@ -23,7 +23,8 @@ void app_main(void)
 
     pet_engine_init();
     pet_engine_redraw();
-    ESP_LOGI(TAG, "PIXEL CARD READY（宠物一帧已显示）");
+    pet_engine_start();
+    ESP_LOGI(TAG, "PIXEL CARD READY（宠物已显示，动画节拍启动）");
 
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(10000));
