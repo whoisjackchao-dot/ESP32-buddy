@@ -1,0 +1,50 @@
+#pragma once
+#include <stddef.h>
+#include "pet_types.h"
+
+/* 一块 RGB565 little-endian、row-major 的画布；几何与 stride 由调用方给。 */
+typedef struct {
+    uint8_t *pixels;
+    int      width;
+    int      height;
+    int      stride;   /* 每行字节数 */
+} pet_surface_t;
+
+/* 立绘包（48×64、4bpp、RGB565 调色板、4 帧）。 */
+typedef struct pet_look pet_look_t;
+
+pet_look_t *pet_look_parse(const uint8_t *bytes, size_t len);
+void        pet_look_free(pet_look_t *look);
+
+/* 把宠物按 2× 画到 surface 的 (x, y)；越界裁剪。 */
+void pet_render_pet(const pet_view_t *v, const pet_look_t *look,
+                    pet_surface_t *surface, int x, int y);
+
+/* ---- M3：整屏场景（宠物 + 任务卡）---- */
+
+/* 竖屏 135×240 分区（契约 M3 §5.1，提案值） */
+#ifndef PET_SCENE_BG
+#define PET_SCENE_BG 0x0000u /* 场景底色（黑） */
+#endif
+#ifndef PET_SCENE_PET_X
+#define PET_SCENE_PET_X 19
+#endif
+#ifndef PET_SCENE_PET_Y
+#define PET_SCENE_PET_Y 8
+#endif
+#ifndef PET_CARD_X
+#define PET_CARD_X 4
+#endif
+#ifndef PET_CARD_Y
+#define PET_CARD_Y 146
+#endif
+#ifndef PET_CARD_W
+#define PET_CARD_W 127
+#endif
+#ifndef PET_CARD_H
+#define PET_CARD_H 58
+#endif
+
+/* 画整屏：宠物固定在宠物区，若有卡则在卡片区画 1 张。 */
+void pet_render_scene(const pet_view_t *v, const pet_look_t *look,
+                      pet_surface_t *surface);

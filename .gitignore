@@ -1,0 +1,23 @@
+# 构建产物
+tests/build/
+firmware/build/
+sim/
+*.o
+*.elf
+*.map
+*.bin
+
+# 烧录包：只提交说明与脚本，不提交二进制（用 tools/package-flash.sh 生成）
+flash/*.bin
+
+# ESP-IDF
+sdkconfig
+sdkconfig.old
+managed_components/
+dependencies.lock
+
+# 编辑器/系统
+.vscode/
+.idea/
+*.swp
+.DS_Store
