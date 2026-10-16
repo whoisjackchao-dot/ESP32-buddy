@@ -9,7 +9,8 @@
 | 本会话目标 | M2 渲染半段（gray / mirror / 头顶标记） |
 | 文档版本 | **基线 v0.3（2026-10-16）** |
 | 已冻结 | M1 契约（含缺陷修订）；**M2 契约 §7 状态机 + §8 渲染半段** |
-| 待批准 | ⏳ `Q15`、`Q17`、`M5 §4` 语音资产；⏳ `Q09` 托管、`Q10` 常量（新增 `MARK_OX/OY`、标记色、`DEBOUNCE=1500`） |
+| 待批准 | ⏳ `Q15`、`Q17`、`M5 §4` 语音资产；⏳ `Q10` 常量（新增 `MARK_OX/OY`、标记色、`DEBOUNCE=1500`、M3 卡片区参数） |
+| 已发布 | ✅ GitHub 公开仓库 `whoisjackchao-dot/ESP32-buddy`（2026-10-16） |
 | 阻塞 | **M1 的 H 部分**：设备已连到 Windows（`COM5`, `VID_303A&PID_1001` ✅），但 **WSL 需 `usbipd-win` 直通**（未安装）；其余无阻塞 |
 | 下一步 | 二选一：① M2 收尾（idle 眨眼/小动作的时间驱动，属动画节拍）；② 直接进 **M3 竖屏版式 + 任务卡** |
 
@@ -19,7 +20,9 @@
 | --- | --- |
 | [需求与决策基线](./ESP32-buddy_需求与决策基线.md) | **§0 顶层产品目标** + R / G / Q / B（含批准记录与边界） |
 | [M0–M9 开发计划](./ESP32-buddy_M0-M9开发计划.md) | 里程碑卡片、DoR、冻结时间表、授权、停止条件 |
+| [测试用例与追踪矩阵](./ESP32-buddy_测试用例与追踪矩阵.md) | `R → 用例 → M → 证据` 追踪、执行状态 |
 | [contracts/](./contracts/README.md) | 契约清单与冻结文档（见下表） |
+| [`.opencode/skills/dayu/`](./.opencode/skills/dayu/SKILL.md) | **内置的 dayu 方法论**（MIT，版权属作者本人）：新机器 clone 后即可按 dayu 规范继续开发；含 `references/templates/` |
 | [NOTICE](./NOTICE.md) | CC BY-SA 署名、商标边界、净室声明 |
 | [README](./README.md) | 项目简介、环境、仓库结构 |
 

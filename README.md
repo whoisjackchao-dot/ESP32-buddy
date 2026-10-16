@@ -52,5 +52,21 @@
 
 ## 5. 许可
 
-- **代码**：MIT（待用户在 M1 前确认；与立绘的 CC BY-SA 分开记录）。
-- **立绘与派生美术**：CC BY-SA 4.0，署名见 NOTICE.md。
+- **代码**：MIT（见 `LICENSE`）。
+- **立绘与派生美术**：本项目为**自绘**（未使用上游美术，故不涉及 CC BY-SA），见 `NOTICE.md`。
+- **内置方法论**：`.opencode/skills/dayu/` 为 MIT（版权属作者本人），见其 `LICENSE`。
+
+## 6. 方法论（dayu）
+
+本项目按 [dayu](.opencode/skills/dayu/SKILL.md) 规范推进，**该技能已随仓库内置**——
+在新机器上 clone 本仓库后，即可按同一规范继续开发与测试：
+
+- 单一入口：[文档索引](./ESP32-buddy_文档索引.md)（任何会话先读它）
+- 需求/决策：[需求与决策基线](./ESP32-buddy_需求与决策基线.md)
+- 规划：[M0–M9 开发计划](./ESP32-buddy_M0-M9开发计划.md)
+- 契约：[contracts/](./contracts/README.md)（含冻结时间表与参数冻结表）
+- 追踪：[测试用例与追踪矩阵](./ESP32-buddy_测试用例与追踪矩阵.md)
+- 证据：[evidence/](./evidence/)
+- 模板：`.opencode/skills/dayu/references/templates/`
+
+> 三条最贵的铁律（dayu）：**未批准不当作事实**；**文档不等于执行**（只有 RED→GREEN 证据能证明行为）；**两种"完成"分开**（文档交付 ≠ 产品交付）。

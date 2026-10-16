@@ -26,7 +26,15 @@
 - **不暗示**与上游存在隶属、赞助或官方关联；
 - 项目定名 **ESP32-buddy**。
 
-## 3. 设计借鉴声明
+## 3. 其他第三方资源
+
+| 资源 | 来源 | 许可 | 用途 |
+| --- | --- | --- | --- |
+| `font8x8_basic.h` | Daniel Hepper（基于 Marcel Sondaar / IBM VGA 公有领域点阵字体） | **Public Domain** | M3 卡片文本绘制（8×8 ASCII） |
+
+> 该文件随源码放在 `firmware/components/pet/font8x8_basic.h`，未改动字形数据（仅把声明改为 `static const uint8_t` 并加 `stdint.h`）。
+
+## 4. 设计借鉴声明
 
 本项目的宠物状态机、事件模型（`task.start` / `task.done` / `task.error` / `agent.input_required` / `agent.idle` / `agent.blocked`）与显示分层思路，借鉴自 vibebuddy 的**设计文档与行为规格**。
 
@@ -34,7 +42,7 @@
 
 > 边界：若将来本项目**复制**上游任何源文件，则该部分须按 GPL-3.0-or-later 处理，且不得与上述"净室"声明并存——届时应开 ADR 并回报用户。
 
-## 4. 待补
+## 5. 待补
 
 | 项 | 状态 |
 | --- | --- |
