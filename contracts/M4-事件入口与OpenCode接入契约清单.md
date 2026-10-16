@@ -61,9 +61,58 @@ OpenCode(M10 快照) ─────────┘
 | `idle` | `agent.idle` → IDLE | **`done` 需由下降沿合成**（B01） |
 | 快照超时（15s） | 无事件 → OFFLINE | 阈值见 M2 |
 
-## 5. 明确不做
+## 6. 冻结（2026-10-16，M4 增量 1：**device 侧事件线格式**）
+
+> 本增量只冻结 **设备侧"一行事件 → `pet_event_t`"的解析与映射**（纯逻辑、可 host 测）。
+> 主机侧 HTTP 入口（4.1/4.2/4.4）、传输（BLE/UART）、OpenCode 映射（4.5）留到增量 2。
+
+### 6.1 线格式（NDJSON）
+
+- **一行一个 JSON 对象**，UTF-8，以 `\n` 结尾；
+- 行长上限 **`PET_LINE_MAX = 512`** 字节，超长 → `TOO_LONG`（丢弃）；
+- 键：
+  - **必需**：`version`（数字，必须 `== 1`）、`event`（字符串）
+  - **可选**：`title`（字符串）、`project`（字符串）、`elapsed_s`（**非负整数**）
+- **未知键忽略**；**不支持嵌套对象与数组**（`tasks`/`stats` 属 M8）；
+- 类型不符 / 缺必需 / JSON 非法 → 返回错误，**不产生事件、不崩溃**；
+- 字符串支持转义 `\" \\ \/ \n \t`；`title`/`project` 超出 `PET_TITLE_MAX-1`（=63）**截断**。
+
+### 6.2 事件名 → 事件种类
+
+| `event` | `pet_event_kind_t` | 说明 |
+| --- | --- | --- |
+| `task.start` | `PET_EV_TASK_START` | → WORKING |
+| `agent.input_required` | `PET_EV_AGENT_INPUT_REQUIRED` | → INPUT_REQUIRED |
+| `task.done` | `PET_EV_TASK_DONE` | → DONE（显式，不去抖） |
+| `task.error` / `agent.blocked` | `PET_EV_TASK_ERROR` | → FAILED |
+| `agent.idle` | `PET_EV_AGENT_IDLE` | → IDLE（**边沿去抖在 `pet_state` 内**） |
+| `device.heartbeat` | `PET_EV_ANNOUNCEMENT` | **只刷新链路计时**，不改状态 |
+| 其它 | — | `UNKNOWN_EVENT` |
+
+### 6.3 卡片
+
+- 该行出现 `title` / `project` / `elapsed_s` **任一** → 产生**卡片更新**；
+- `card.state` 取**该事件映射后的新状态**（如 `task.start` → `WORKING`）；
+- 卡片**保持**，直到被新行替换；**清空属 M8**。
+
+### 6.4 错误码（只用这些）
+
+`OK` / `TOO_LONG` / `JSON` / `VERSION` / `EVENT` / `TYPE` / `UNKNOWN_EVENT`
+
+### 6.5 状态归属（`pet_state`）
+
+- 新增 `pet_state_set_card(s, card|NULL)`：存/清卡片；`pet_state_view` 把它填进 `pet_view.card` 并置 `has_card`。
+
+### 6.6 参数（提案值，**待批准**）
+
+| 符号 | 值 |
+| --- | --- |
+| `PET_LINE_MAX` | 512 |
+
+## 7. 明确不做
 
 - 不做设备直连入口（Q13 选了主机层）。
 - 不做除 OpenCode 外的 Agent（Q12）。
 - 不做多卡栈（M8）。
 - 不提供自动提交/审批/Shell 接口。
+- 本增量**不做** `tasks`/`stats` 数组、不做主机侧 HTTP 入口与传输。

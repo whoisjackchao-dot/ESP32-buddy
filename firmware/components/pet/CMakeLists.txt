@@ -3,6 +3,7 @@ idf_component_register(
     SRCS "pet_state.c"
          "pet_render.c"
          "pet_text.c"
+         "pet_link.c"
          "pet_engine.c"
          "pet_hal.c"
          "pet_hal_sticks3.c"

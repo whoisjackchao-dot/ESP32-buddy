@@ -35,8 +35,8 @@
 | R08 装进新仓库 | —（组织约束） | 全程 | D | `PASS` | 本仓库 |
 | R09 开源且不用 "VibeBuddy" 商标 | —（许可，非行为） | 全程 | D | `PASS` | `NOTICE.md` §2、已发布 GitHub |
 | R10 顶层产品目标（6 态/卡/语音/战绩/三模式） | `ST-*` `UI-02` `CARD-*` `AUD-*` `POMO-*` `LEI-*` | M2…M8 | T/H | 部分 `PASS`，其余见各节点 | 见下 |
-| R11 OpenCode 首选接入 | `E2E-01` | M4 | C+H | `NOT_RUN` | — |
-| R12 协议不绑定客户端 | `E2E-02`（任意脚本发事件） | M4 | C | `NOT_RUN` | — |
+| R11 OpenCode 首选接入 | `E2E-01` | M4 | C+H | `NOT_RUN`（增量 1 的设备侧解析已完成，**主机入口/映射未做**） | `evidence/M4/2026-10-16-事件线解析-T.md` |
+| R12 协议不绑定客户端 | `E2E-02`（任意脚本发事件） | M4 | C | `NOT_RUN`（同上） | 同上 |
 | R13 任务卡最多 3 张 | `CARD-03` | M8 | T | `NOT_RUN`（M3 只 1 张） | — |
 | R14 三模式（值班/番茄钟/休闲） | `POMO-*` `LEI-*` | M7/M8 | T | `NOT_RUN` | — |
 | R15 语音：需确认/完成/失败各一次 | `AUD-01`…`AUD-03` | M5 | T+H | `NOT_RUN` | — |
@@ -74,6 +74,9 @@
 | `UI-03` | 有卡时卡片区有内容；无卡时卡片区**只有场景底色**；宠物区始终有内容 | T | `PASS` | `tests/test_pet_card.c` |
 | `CARD-01` | 超长标题**不越界**（guard 完整、卡片右侧仍是底色） | T | `PASS` | 同上 |
 | `CARD-02` | 时长格式：`0S`/`45S`/`59S`/`1M`/`90S→1M`/`1H`/`2H` | T | `PASS` | 同上 |
+| `LINK-04` | 事件线解析：合法（全字段/空格/未知键/换行/超长截断）与非法（非 JSON、缺括号、数组、空串、version 错、缺 event、未知事件、类型不符、超长行）各自的错误码 | T | `PASS` | `tests/test_pet_link.c` |
+| `LINK-05` | 六个事件名 → `pet_event_kind_t`；`device.heartbeat` 只刷新链路不改状态 | T | `PASS` | 同上 |
+| `CARD-04` | 带卡片字段时 `has_card` 且 `card.state` 随事件映射；无字段时不产生卡片 | T | `PASS` | 同上 |
 
 ## 4. 未覆盖提示（dayu `ids.md` §6：每条 R 至少一个用例）
 
@@ -86,7 +89,8 @@
 | 测试 | 用例数 | 结果 |
 | --- | --- | --- |
 | `tests/test_pet_render.c` | 37 checks | `PASS`（0 failed） |
-| `tests/test_pet_state.c` | 49 checks | `PASS`（0 failed） |
+| `tests/test_pet_state.c` | 55 checks | `PASS`（0 failed） |
 | `tests/test_pet_card.c` | 21 checks | `PASS`（0 failed） |
+| `tests/test_pet_link.c` | 47 checks | `PASS`（0 failed） |
 
-命令：`tests/run.sh`（退出码 0）。证据：`evidence/M1/`、`evidence/M2/`。
+命令：`tests/run.sh`（退出码 0）。证据：`evidence/M1/`、`evidence/M2/`、`evidence/M3/`、`evidence/M4/`。

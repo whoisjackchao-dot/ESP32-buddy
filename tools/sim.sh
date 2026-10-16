@@ -14,6 +14,7 @@ mkdir -p sim tests/build
     tools/sim.c \
     firmware/components/pet/pet_render.c \
     firmware/components/pet/pet_text.c \
+    firmware/components/pet/pet_link.c \
     firmware/components/pet/pet_state.c \
     -o tests/build/sim
 

@@ -41,6 +41,8 @@ struct pet_state {
     uint32_t     pending_done_at; /* 0 = 无待定完成 */
     bool         started;
     pet_sound_t  pending_sound;
+    pet_card_t   card;            /* M4：任务卡 */
+    bool         has_card;
 };
 
 /* 环绕安全的时间差比较：now - then >= ms */
@@ -193,7 +195,10 @@ void pet_state_view(const struct pet_state *s, pet_view_t *out)
     out->state = s->state;
     out->gray = (s->state == PET_STATE_OFFLINE);
     out->mirror = false;
-    out->has_card = false;
+    out->has_card = s->has_card;
+    if (s->has_card) {
+        out->card = s->card;
+    }
     switch (s->state) {
     case PET_STATE_DONE:
         out->frame = PET_FRAME_HAPPY;
@@ -221,4 +226,17 @@ pet_sound_t pet_state_take_sound(struct pet_state *s)
     const pet_sound_t sound = s->pending_sound;
     s->pending_sound = PET_SOUND_NONE;
     return sound;
+}
+
+void pet_state_set_card(struct pet_state *s, const pet_card_t *card)
+{
+    if (s == NULL) {
+        return;
+    }
+    if (card == NULL) {
+        s->has_card = false;
+        return;
+    }
+    s->card = *card;
+    s->has_card = true;
 }

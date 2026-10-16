@@ -43,3 +43,6 @@ void pet_state_view(const struct pet_state *s, pet_view_t *out);
 
 /* 取一次性播报，取走即清。 */
 pet_sound_t pet_state_take_sound(struct pet_state *s);
+
+/* 存/清任务卡（M4）：card 为 NULL 时清除。 */
+void pet_state_set_card(struct pet_state *s, const pet_card_t *card);

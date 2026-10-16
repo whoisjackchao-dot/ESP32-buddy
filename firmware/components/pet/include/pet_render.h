@@ -30,13 +30,13 @@ void pet_render_pet(const pet_view_t *v, const pet_look_t *look,
 #define PET_SCENE_PET_X 19
 #endif
 #ifndef PET_SCENE_PET_Y
-#define PET_SCENE_PET_Y 8
+#define PET_SCENE_PET_Y 24 /* 留出头顶标记（y-18 起、14px 高）的空间 */
 #endif
 #ifndef PET_CARD_X
 #define PET_CARD_X 4
 #endif
 #ifndef PET_CARD_Y
-#define PET_CARD_Y 146
+#define PET_CARD_Y 156
 #endif
 #ifndef PET_CARD_W
 #define PET_CARD_W 127

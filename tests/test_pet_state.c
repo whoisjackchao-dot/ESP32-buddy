@@ -250,6 +250,31 @@ static void done_is_happy_during_dwell(void)
     CHECK(view_frame() == PET_FRAME_HAPPY);
 }
 
+static void card_is_exposed_in_view(void)
+{
+    pet_card_t card;
+    memset(&card, 0, sizeof card);
+    snprintf(card.title, sizeof card.title, "BUILD");
+    snprintf(card.project, sizeof card.project, "ESP32-buddy");
+    card.state = PET_STATE_WORKING;
+    card.elapsed_s = 75;
+
+    pet_view_t v;
+    pet_state_view(s, &v);
+    CHECK(v.has_card == false); /* 未设卡片前没有 */
+
+    pet_state_set_card(s, &card);
+    pet_state_view(s, &v);
+    CHECK(v.has_card == true);
+    CHECK(strcmp(v.card.title, "BUILD") == 0);
+    CHECK(strcmp(v.card.project, "ESP32-buddy") == 0);
+    CHECK(v.card.elapsed_s == 75);
+
+    pet_state_set_card(s, NULL); /* 清除 */
+    pet_state_view(s, &v);
+    CHECK(v.has_card == false);
+}
+
 int main(void)
 {
     s = pet_state_create();
@@ -314,6 +339,10 @@ int main(void)
 
     s = pet_state_create();
     done_is_happy_during_dwell();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    card_is_exposed_in_view();
     pet_state_destroy(s);
 
     REPORT();

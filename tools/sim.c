@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "pet_link.h"
 #include "pet_render.h"
 #include "pet_state.h"
 
@@ -239,6 +240,46 @@ int main(int argc, char **argv)
     if (ssheet != NULL) {
         write_bmp("sim/all-scenes.bmp", ssheet, W * ncases, H);
         free(ssheet);
+    }
+
+    /* M4：示例事件线 → 状态机 → 整屏场景 */
+    {
+        const char *lines[] = {
+            "{\"version\":1,\"event\":\"task.start\",\"title\":\"BUILD FIRMWARE\",\"project\":\"ESP32-buddy\",\"elapsed_s\":75}",
+            "{\"version\":1,\"event\":\"agent.input_required\",\"title\":\"REVIEW PR\",\"project\":\"ESP32-buddy\",\"elapsed_s\":900}",
+            "{\"version\":1,\"event\":\"task.done\",\"title\":\"RUN TESTS\",\"project\":\"ESP32-buddy\",\"elapsed_s\":120}",
+            "{\"version\":1,\"event\":\"task.error\",\"title\":\"FLASH DEVICE\",\"project\":\"ESP32-buddy\",\"elapsed_s\":30}",
+        };
+        for (int i = 0; i < (int)(sizeof lines / sizeof lines[0]); i++) {
+            pet_link_msg_t msg;
+            const pet_link_status_t st = pet_link_parse(lines[i], strlen(lines[i]), &msg);
+            if (st != PET_LINK_OK) {
+                printf("link parse failed (%d)\n", (int)st);
+                continue;
+            }
+            struct pet_state *ls = pet_state_create();
+            pet_event_t e;
+            memset(&e, 0, sizeof e);
+            e.kind = msg.kind;
+            e.now_ms = 1000;
+            pet_state_apply(ls, &e);
+            if (msg.has_card) {
+                pet_state_set_card(ls, &msg.card);
+            }
+            pet_view_t v;
+            pet_state_view(ls, &v);
+            pet_state_destroy(ls);
+
+            pet_render_scene(&v, look, &g_surface);
+            char path[64];
+            snprintf(path, sizeof path, "sim/link-%d.bmp", i);
+            uint8_t *rgb = malloc((size_t)W * H * 3);
+            surface_to_rgb(rgb);
+            write_bmp(path, rgb, W, H);
+            free(rgb);
+            printf("wrote %s (kind=%d card=%d title=%s)\n", path, (int)v.state,
+                   (int)v.has_card, v.has_card ? v.card.title : "-");
+        }
     }
 
     /* 立绘 4 帧单图（验美术） */
