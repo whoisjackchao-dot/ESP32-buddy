@@ -173,11 +173,12 @@ void pet_render_pet(const pet_view_t *v, const pet_look_t *look,
 #define CARD_BG      0x0841u
 #define CARD_BORDER  0x4208u
 #define CARD_TITLE   0xFFFFu
-#define CARD_PROJECT 0x8410u
+#define CARD_PROJECT 0xC618u /* 次要文字：调浅 */
 #define CARD_ELAPSED 0xFFFFu
 #ifndef CARD_TEXT_MAX
 #define CARD_TEXT_MAX 14
 #endif
+#define CARD_TITLE_MAX_BIG 7 /* 2× 字体下的最大字符数 */
 #define CARD_ACCENT_W 3
 
 static void fill_rect(pet_surface_t *s, int x0, int y0, int x1, int y1, uint16_t c)
@@ -204,6 +205,38 @@ static uint16_t state_accent(pet_state_t st)
     }
 }
 
+/* 可渲染（ASCII）字符数；UTF-8 多字节按 1 组跳过。 */
+static size_t ascii_len(const char *text)
+{
+    size_t n = 0;
+    for (const char *p = text; *p != '\0'; p++) {
+        if ((unsigned char)*p < 0x80u) {
+            n++;
+        } else {
+            while (p[1] != '\0' && ((unsigned char)p[1] & 0xC0) == 0x80) {
+                p++;
+            }
+        }
+    }
+    return n;
+}
+
+/* 卡片文本：短行用 2× 字体（更醒目），长行退回 1× 以免截断过多。 */
+static void draw_card_line(pet_surface_t *s, int x, int y, const char *text,
+                           uint16_t color, int max_scale)
+{
+    while (*text == ' ') {
+        text++; /* 中文被跳过后留下的前导空格：左对齐 */
+    }
+    const size_t n = ascii_len(text);
+    int scale = (n <= CARD_TITLE_MAX_BIG) ? 2 : 1;
+    if (scale > max_scale) {
+        scale = max_scale;
+    }
+    const int max_chars = (scale == 2) ? CARD_TITLE_MAX_BIG : CARD_TEXT_MAX;
+    (void)pet_text_draw(s, x, y, text, max_chars, color, scale);
+}
+
 static void draw_card(pet_surface_t *s, const pet_card_t *card)
 {
     const int x0 = PET_CARD_X;
@@ -222,13 +255,16 @@ static void draw_card(pet_surface_t *s, const pet_card_t *card)
 
     const int tx = x0 + CARD_ACCENT_W + 4;
     const char *title = (card->title[0] != '\0') ? card->title : "[NO TASK]";
-    (void)pet_text_draw(s, tx, y0 + 6, title, CARD_TEXT_MAX, CARD_TITLE, 1);
+    if (ascii_len(title) == 0) {
+        title = "[TASK]"; /* 纯非 ASCII 标题：字库只能显示英文 */
+    }
+    draw_card_line(s, tx, y0 + 4, title, CARD_TITLE, 2);
     if (card->project[0] != '\0') {
-        (void)pet_text_draw(s, tx, y0 + 22, card->project, CARD_TEXT_MAX, CARD_PROJECT, 1);
+        draw_card_line(s, tx, y0 + 24, card->project, CARD_PROJECT, 2);
     }
     char elapsed[16];
     pet_format_elapsed(elapsed, sizeof elapsed, card->elapsed_s);
-    (void)pet_text_draw(s, tx, y0 + 38, elapsed, CARD_TEXT_MAX, CARD_ELAPSED, 1);
+    draw_card_line(s, tx, y0 + 44, elapsed, CARD_ELAPSED, 1); /* 时长行固定 1× */
 }
 
 void pet_render_scene(const pet_view_t *v, const pet_look_t *look,

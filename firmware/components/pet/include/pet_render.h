@@ -44,7 +44,7 @@ void pet_render_pet(const pet_view_t *v, const pet_look_t *look,
 #define PET_CARD_W 127
 #endif
 #ifndef PET_CARD_H
-#define PET_CARD_H 58
+#define PET_CARD_H 64
 #endif
 
 /* 画整屏：宠物固定在宠物区，若有卡则在卡片区画 1 张。 */

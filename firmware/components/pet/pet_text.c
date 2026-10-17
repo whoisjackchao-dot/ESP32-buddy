@@ -32,7 +32,14 @@ int pet_text_draw(pet_surface_t *surface, int x, int y, const char *text,
             break;
         }
         const unsigned char ch = (unsigned char)*p;
-        if (ch < 128u) {
+        if (ch >= 128u) {
+            /* 8×8 字库只有 ASCII：跳过 UTF-8 后续字节，且不占用字符格 */
+            while (p[1] != '\0' && ((unsigned char)p[1] & 0xC0) == 0x80) {
+                p++;
+            }
+            continue;
+        }
+        {
             const uint8_t *rows = font8x8_basic[ch];
             for (int r = 0; r < GLYPH_H; r++) {
                 for (int c = 0; c < GLYPH_W; c++) {

@@ -35,7 +35,7 @@
 | R08 装进新仓库 | —（组织约束） | 全程 | D | `PASS` | 本仓库 |
 | R09 开源且不用 "VibeBuddy" 商标 | —（许可，非行为） | 全程 | D | `PASS` | `NOTICE.md` §2、已发布 GitHub |
 | R10 顶层产品目标（6 态/卡/语音/战绩/三模式） | `ST-*` `UI-02` `CARD-*` `AUD-*` `POMO-*` `LEI-*` | M2…M8 | T/H | 部分 `PASS`，其余见各节点 | 见下 |
-| R11 OpenCode 首选接入 | `E2E-01` | M4 | C+H | `NOT_RUN`（增量 1 设备侧解析 + 增量 2a 主机入口核心已完成；**OpenCode 真源映射未做**，旧项目不在本机→2b 阻塞） | `evidence/M4/2026-10-16-事件线解析-T.md`、`evidence/M4/2026-10-16-主机入口核心-T.md` |
+| R11 OpenCode 首选接入 | `E2E-01` | M4 | C+H | ✅ **`PASS`**（**真实 OpenCode 真源**：库轮询 busy/idle → 设备 WORKING→DONE+语音，2026-10-17 真机）；`waiting` 未做；桥接为验证脚手架 | `evidence/M4/2026-10-17-OpenCode真源-spike.md`、`evidence/M4/2026-10-17-OpenCode轮询器-T.md`、`evidence/M4/2026-10-17-OpenCode端到端-H.md` |
 | R12 协议不绑定客户端 | `E2E-02`（任意脚本发事件） | M4 | C+H | `PASS`——**端到端**：脚本 → 主机（入口核心 §8 + 传输 §9）→ 设备 → 状态/卡/语音均生效（2026-10-17 真机） | `evidence/M4/2026-10-16-主机入口核心-T.md`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | R13 任务卡最多 3 张 | `CARD-03` | M8 | T | `NOT_RUN`（M3 只 1 张） | — |
 | R14 三模式（值班/番茄钟/休闲） | `POMO-*` `LEI-*` | M7/M8 | T | 番茄钟逻辑 `PASS`（M7 增量1）；**模式切换（KEY2）属 M6/H**；休闲 `NOT_RUN`（M8） | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
