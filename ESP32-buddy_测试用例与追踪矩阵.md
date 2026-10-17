@@ -108,7 +108,8 @@
 | `LEI-02` | 累计 30 min → SLEEPY | T | `PASS` | 同上 |
 | `LEI-03` | 90 min **且夜间**(23–07) → LIGHTS_OUT；白天不熄 | T | `PASS` | 同上 |
 | `LEI-04` | 小剧：首段 3 s、BORED 20–40 s / SLEEPY 120–300 s、id 轮换、同 seed 确定 | T | `PASS` | 同上 |
-| `LEI-05` | 唤醒：`agent_active` → 立即 DUTY 并重置空闲计时 | T | `PASS` | 同上 |
+| `LEI-05` | 唤醒：`agent_active`（含断链）/ 任意按键 → 立即 DUTY 并重置空闲计时 | T+H | `PASS`（逻辑 + 真机按键唤醒） | 同上 / `evidence/M8/2026-10-17-小剧与背光-H.md` |
+| `LEI-06` | 小剧真机可见（7 种）+ LIGHTS_OUT 关背光 + 按键唤醒亮屏 | H | ✅ **PASS**（demo 阈值） | `evidence/M8/2026-10-17-小剧与背光-H.md` |
 | `E2E-02` | 主机入口核心：简式/富式（`tasks[0]` 优先）→ 设备线；`stats` 忽略；title 截 63；heartbeat 无线外字段；**loopback 集成** POST→200 且 sink 收线；**真机端到端**：脚本发事件 → 设备状态/卡/语音生效 | C+H | `PASS`（核心 + 端到端） | `host/tests/test_pet_ingest.py`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | `E2E-03` | 非法输入：方法/路径/content-type/超长/非 JSON/version/event/事件名/类型 → 对应码与 HTTP 状态；**错误不广播**；不崩 | C | `PASS` | 同上 |
 | `SEC-01` | 仅 loopback 绑定（`server_address[0]=="127.0.0.1"`） | C | `PASS`（loopback）；token 待定 | 同上 |

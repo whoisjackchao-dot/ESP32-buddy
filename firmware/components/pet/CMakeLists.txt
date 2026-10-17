@@ -11,6 +11,7 @@ idf_component_register(
          "pet_button.c"
          "pet_keymap.c"
          "pet_menu.c"
+         "pet_leisure.c"
          "pet_keys.c"
          "pet_voice.c"
          "pet_audio.c"

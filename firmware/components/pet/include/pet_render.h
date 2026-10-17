@@ -63,3 +63,10 @@ void pet_render_pomo(pet_surface_t *s, const pet_pomo_view_t *v);
 
 /* 菜单整屏：全屏底色 + 标题 + 两行（选中行反色）+ 底部统计。 */
 void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v);
+
+/* ---- M8 增量 1b：小剧渲染（契约 M8 §7.1）---- */
+
+/* 休闲小剧整屏：底色 + 头像按剧目位移/道具绘制；t_ms 为小剧起始后的毫秒，
+ * 位移以 2 s 为周期。剧目 0..6；非法 id 退回值班整屏（pet_render_scene）。 */
+void pet_render_skit(pet_surface_t *s, const pet_look_t *look,
+                     const pet_view_t *v, int skit_id, uint32_t t_ms);

@@ -455,3 +455,147 @@ void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v)
              (unsigned long)v->focus_seconds);
     (void)pet_text_draw(s, MENU_ROW_X, 200, row, MENU_TEXT_MAX, MENU_C_TEXT, 1);
 }
+
+/* ---- M8 增量 1b：小剧渲染（契约 M8 §7.1）---- */
+
+/* 位移周期（2 s）与道具颜色（硬编码 RGB565，与头顶标记同法） */
+#define SKIT_PERIOD_MS 2000u
+#define SKIT_C_STAR 0xFFE0u /* 黄：星光 */
+#define SKIT_C_BALL 0xFFFFu /* 白：小球 */
+#define SKIT_C_BOOK 0x8410u /* 灰：书身 */
+#define SKIT_C_PAGE 0xFFFFu /* 白：书页线 */
+#define SKIT_C_INK  0x0000u /* 黑：梦话嘴部 */
+
+/* 踢球：8×8 小球（切角圆盘），右下沿弧线（sin 拱）滚动 */
+static void draw_skit_ball(pet_surface_t *s, uint32_t phase)
+{
+    const int bx = 96 + (int)(phase * 24u / SKIT_PERIOD_MS);
+    const int by = 168 -
+        (int)lround(24.0 * sin(POMO_PI * (double)phase / (double)SKIT_PERIOD_MS));
+    for (int dy = 0; dy < 8; dy++) {
+        for (int dx = 0; dx < 8; dx++) {
+            const int ex = 2 * dx - 7;
+            const int ey = 2 * dy - 7;
+            if (ex * ex + ey * ey <= 52) {
+                put_px(s, bx + dx, by + dy, SKIT_C_BALL);
+            }
+        }
+    }
+}
+
+/* 看书：头像（96px 宽）正下方 16×8 小书 + 两条书页线 */
+static void draw_skit_book(pet_surface_t *s)
+{
+    const int x0 = PET_SCENE_PET_X + 40;
+    const int y0 = PET_SCENE_PET_Y + 134; /* 头像下沿（低头 +2 后 154）再留 4px */
+    fill_rect(s, x0, y0, x0 + 15, y0 + 7, SKIT_C_BOOK);
+    fill_rect(s, x0, y0 + 2, x0 + 15, y0 + 2, SKIT_C_PAGE);
+    fill_rect(s, x0, y0 + 5, x0 + 15, y0 + 5, SKIT_C_PAGE);
+}
+
+/* 数星星：头顶上方 3 颗十字星光，按 250 ms 槽位交错显隐 */
+static void draw_skit_sparkles(pet_surface_t *s, uint32_t phase)
+{
+    static const int sx[3] = {30, 66, 102};
+    static const int sy[3] = {12, 6, 14};
+    const uint32_t slot = phase / 250u;
+    for (int i = 0; i < 3; i++) {
+        if ((slot + (uint32_t)i) % 2u != 0u) {
+            continue;
+        }
+        for (int d = -2; d <= 2; d++) {
+            put_px(s, sx[i] + d, sy[i], SKIT_C_STAR);
+            put_px(s, sx[i], sy[i] + d, SKIT_C_STAR);
+        }
+    }
+}
+
+void pet_render_skit(pet_surface_t *s, const pet_look_t *look,
+                     const pet_view_t *v, int skit_id, uint32_t t_ms)
+{
+    if (s == NULL || s->pixels == NULL) {
+        return;
+    }
+    if (skit_id < 0 || skit_id > 6) {
+        pet_render_scene(v, look, s); /* 非法剧目：退回值班整屏 */
+        return;
+    }
+    for (int y = 0; y < s->height; y++) {
+        for (int x = 0; x < s->width; x++) {
+            put_px(s, x, y, PET_SCENE_BG);
+        }
+    }
+    if (look == NULL) {
+        return;
+    }
+
+    /* 需要换帧的剧目改写本地副本，不动调用方的 view */
+    pet_view_t local;
+    const pet_view_t *vp = v;
+    if (v != NULL) {
+        local = *v;
+        vp = &local;
+    }
+
+    const uint32_t phase = t_ms % SKIT_PERIOD_MS;
+    const double ang = 2.0 * POMO_PI * (double)phase / (double)SKIT_PERIOD_MS;
+    int ox = 0;
+    int oy = 0;
+
+    switch (skit_id) {
+    case 0: /* 巡逻：x = ±6 来回（正弦取余弦相位：0 ms 在 +6、1000 ms 在 −6） */
+        ox = (int)lround(6.0 * cos(ang));
+        break;
+    case 1: /* 踢球：y 弹跳 ±3 */
+        oy = (int)lround(3.0 * sin(ang));
+        break;
+    case 2: /* 看书：略低头 */
+        oy = 2;
+        break;
+    case 3: /* 数星星：上抬 */
+        oy = -2;
+        break;
+    case 4: /* 躲猫猫：y 0→+10→0 三角波；躲下（y>4）换闭眼帧 */
+        oy = (phase < 1000u) ? (int)(phase / 100u)
+                             : (int)((SKIT_PERIOD_MS - phase) / 100u);
+        if (oy > 4 && v != NULL) {
+            local.frame = PET_FRAME_EYES_CLOSED;
+        }
+        break;
+    case 5: /* 被吓醒：前 300 ms 急跳 −6→0；睁大眼帧 */
+        oy = (phase < 300u) ? -(int)((300u - phase) / 50u) : 0;
+        if (v != NULL) {
+            local.frame = PET_FRAME_INPUT;
+        }
+        break;
+    case 6: /* 梦话：静止闭眼 */
+        if (v != NULL) {
+            local.frame = PET_FRAME_EYES_CLOSED;
+        }
+        break;
+    default:
+        break;
+    }
+
+    pet_render_pet(vp, look, s, PET_SCENE_PET_X + ox, PET_SCENE_PET_Y + oy);
+
+    switch (skit_id) {
+    case 1:
+        draw_skit_ball(s, phase);
+        break;
+    case 2:
+        draw_skit_book(s);
+        break;
+    case 3:
+        draw_skit_sparkles(s, phase);
+        break;
+    case 6: /* 嘴部 2×1 开合：立绘嘴部 look(21,41) → 屏幕 (61,106) */
+        if ((phase / 250u) % 2u == 0u) {
+            fill_rect(s, PET_SCENE_PET_X + 42, PET_SCENE_PET_Y + 82,
+                      PET_SCENE_PET_X + 43, PET_SCENE_PET_Y + 82, SKIT_C_INK);
+        }
+        break;
+    default:
+        break;
+    }
+}

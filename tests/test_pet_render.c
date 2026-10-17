@@ -588,6 +588,125 @@ static void menu_view_selected_follows_field(void)
     CHECK(get_px(&psurf, 20, 62) == PET_SCENE_BG);
 }
 
+/* ---- M8 增量 1b：小剧渲染（LEI-04，契约 M8 §7.1）----
+ * 135×240 整屏 + 真实立绘：位移用整屏摘要（FNV）断言，道具用颜色/区域断言。 */
+
+static void skit_render(int skit_id, uint32_t t_ms)
+{
+    pomo_fill(SENTINEL);
+    pet_view_t v = { .state = PET_STATE_IDLE, .frame = PET_FRAME_NORMAL };
+    pet_render_skit(&psurf, g_look, &v, skit_id, t_ms);
+}
+
+static uint32_t pfb_digest(void)
+{
+    uint32_t h = 2166136261u;
+    for (int i = 0; i < PW * PH * 2; i++) {
+        h = (h ^ pfb[i]) * 16777619u;
+    }
+    return h;
+}
+
+static uint32_t skit_digest(int skit_id, uint32_t t_ms)
+{
+    skit_render(skit_id, t_ms);
+    return pfb_digest();
+}
+
+static int count_color_in(uint16_t c, int x0, int y0, int x1, int y1)
+{
+    int n = 0;
+    for (int y = y0; y <= y1; y++) {
+        for (int x = x0; x <= x1; x++) {
+            if (get_px(&psurf, x, y) == c) {
+                n++;
+            }
+        }
+    }
+    return n;
+}
+
+static bool has_non_bg_in(int x0, int y0, int x1, int y1)
+{
+    for (int y = y0; y <= y1; y++) {
+        for (int x = x0; x <= x1; x++) {
+            const uint16_t c = get_px(&psurf, x, y);
+            if (c != PET_SCENE_BG && c != SENTINEL) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/* 巡逻：0 ms 头像在 +6、1000 ms 在 −6 → 两帧摘要不同，且头像仍在画布内 */
+static void skit_patrol_moves_head_horizontally(void)
+{
+    CHECK(skit_digest(0, 0) != skit_digest(0, 1000));
+    skit_render(0, 1000);
+    CHECK(has_non_bg_in(10, 25, 120, 151));
+}
+
+/* 踢球：右下出现白色小球，且随时间移动 */
+static void skit_kick_ball_bottom_right(void)
+{
+    skit_render(1, 0);
+    CHECK(count_color_in(0xFFFFu, 90, 156, 134, 183) > 0);
+    CHECK(skit_digest(1, 0) != skit_digest(1, 1000));
+}
+
+/* 看书：头像下方有小书（灰身 + 白页线） */
+static void skit_book_below_head(void)
+{
+    skit_render(2, 0);
+    CHECK(count_color_in(0x8410u, 55, 156, 85, 170) > 0);
+    CHECK(count_color_in(0xFFFFu, 55, 156, 85, 170) > 0);
+}
+
+/* 数星星：头顶上方有黄色星光，且 250 ms 交替显隐 */
+static void skit_sparkles_above_head(void)
+{
+    skit_render(3, 0);
+    const int n0 = count_color_in(0xFFE0u, 19, 0, 115, 20);
+    skit_render(3, 250);
+    const int n1 = count_color_in(0xFFE0u, 19, 0, 115, 20);
+    CHECK(n0 > 0);
+    CHECK(n1 > 0);
+    CHECK(n0 != n1);
+}
+
+/* 躲猫猫：躲下（1000 ms，y=10）时换闭眼帧 → 与 0 ms 摘要不同 */
+static void skit_peekaboo_duck_closed_eyes(void)
+{
+    CHECK(skit_digest(4, 0) != skit_digest(4, 1000));
+}
+
+/* 被吓醒：前 300 ms 急跳 −6，之后回落 → 两帧摘要不同 */
+static void skit_scared_jolt_settles(void)
+{
+    CHECK(skit_digest(5, 0) != skit_digest(5, 1000));
+}
+
+/* 梦话：嘴部 2×1 每 250 ms 开合 → 两帧摘要不同 */
+static void skit_sleep_talk_mouth_toggles(void)
+{
+    CHECK(skit_digest(6, 0) != skit_digest(6, 250));
+}
+
+/* 非法剧目 id：退回值班整屏（与 pet_render_scene 逐字节一致；底色 + 头像） */
+static void skit_invalid_id_renders_normal_scene(void)
+{
+    pomo_fill(SENTINEL);
+    pet_view_t v = { .state = PET_STATE_IDLE, .frame = PET_FRAME_NORMAL };
+    pet_render_scene(&v, g_look, &psurf);
+    const uint32_t scene = pfb_digest();
+
+    CHECK(skit_digest(-1, 0) == scene);
+    CHECK(skit_digest(99, 12345) == scene);
+    skit_render(-1, 0);
+    CHECK(has_non_bg_in(19, 24, 115, 152));
+}
+
 int main(int argc, char **argv)
 {
     const char *path = (argc > 1) ? argv[1] : PET_FIXTURE;
@@ -624,6 +743,14 @@ int main(int argc, char **argv)
         RUN(mirror_flips_asymmetric_pixel);
         RUN(working_and_input_draw_marks_above_head);
         RUN(states_render_differently);
+        RUN(skit_patrol_moves_head_horizontally);
+        RUN(skit_kick_ball_bottom_right);
+        RUN(skit_book_below_head);
+        RUN(skit_sparkles_above_head);
+        RUN(skit_peekaboo_duck_closed_eyes);
+        RUN(skit_scared_jolt_settles);
+        RUN(skit_sleep_talk_mouth_toggles);
+        RUN(skit_invalid_id_renders_normal_scene);
         pet_look_free(g_look);
     } else {
         CHECK(g_look != NULL); /* 合法包解析不出来本身就是一条失败 */

@@ -9,6 +9,7 @@
 
 #include "pet_hal.h"
 #include "pet_keymap.h"
+#include "pet_leisure.h"
 #include "pet_menu.h"
 #include "pet_pomo.h"
 #include "pet_pomo_store.h"
@@ -37,6 +38,20 @@ static pet_mode_t s_mode = PET_MODE_DUTY;
 static pet_menu_t s_menu;
 static bool s_menu_open;
 
+/* M8 增量 1b：休闲 + 背光 */
+#ifndef PET_SKIT_SHOW_MS
+#define PET_SKIT_SHOW_MS 3000u
+#endif
+#ifndef PET_ENGINE_HOUR24
+#define PET_ENGINE_HOUR24 (-1) /* 时间未知 → 不熄屏（增量 2 接 NTP） */
+#endif
+static pet_leisure_t s_leisure;
+static int      s_last_skit = -1;
+static uint32_t s_skit_ms;
+static bool     s_skit_active;
+static uint32_t s_skit_t_ms;
+static bool     s_bl_on = true;
+
 void pet_engine_init(void)
 {
     const pet_hal_t *hal = pet_hal_get();
@@ -58,6 +73,7 @@ void pet_engine_init(void)
     pet_pomo_init(&s_pomo, 0);
     pet_pomo_nvs_load(&s_pomo);
     pet_menu_init(&s_menu);
+    pet_leisure_init(&s_leisure, 0, 20261017u);
 
 #ifndef PET_ENGINE_AUTOSTART_POMO
 #define PET_ENGINE_AUTOSTART_POMO 0
@@ -99,7 +115,11 @@ void pet_engine_redraw(void)
     } else {
         pet_view_t view;
         pet_state_view(s_state, &view);
-        pet_render_scene(&view, s_look, &s_surface); /* 整屏：宠物 + 任务卡 */
+        if (s_skit_active) {
+            pet_render_skit(&s_surface, s_look, &view, s_last_skit, s_skit_t_ms);
+        } else {
+            pet_render_scene(&view, s_look, &s_surface); /* 整屏：宠物 + 任务卡 */
+        }
     }
     hal->present(&s_surface);
 
@@ -135,15 +155,38 @@ static void pet_task(void *arg)
                     }
                     pet_pomo_nvs_save(&s_pomo); /* 统计变更即落盘 */
                 }
+            } else {
+                /* M8：值班模式跑休闲；hour24=-1（未知）→ 不熄屏 */
+                pet_view_t lv;
+                pet_state_view(s_state, &lv);
+                const bool active = (lv.state != PET_STATE_IDLE); /* 含断链/完成/失败 */
+                pet_leisure_tick(&s_leisure, now, active, PET_ENGINE_HOUR24);
+
+                const int skit = pet_leisure_skit(&s_leisure);
+                if (skit != s_last_skit) {
+                    s_last_skit = skit;
+                    s_skit_ms = now;
+                }
+                s_skit_active = (skit >= 0) && (now - s_skit_ms < PET_SKIT_SHOW_MS);
+                s_skit_t_ms = now - s_skit_ms;
+
+                const bool want_bl = !pet_leisure_lights_out(&s_leisure);
+                if (want_bl != s_bl_on) {
+                    s_bl_on = want_bl;
+                    if (hal->set_backlight != NULL) {
+                        hal->set_backlight(want_bl);
+                    }
+                }
             }
             if (now - last_log_ms >= 10000u) {
                 const uint32_t dt = now - last_log_ms;
                 const uint32_t fps = (dt > 0u) ? (frames * 1000u / dt) : 0u;
                 pet_pomo_view_t pv;
                 pet_pomo_view_get(&s_pomo, &pv);
-                ESP_LOGI(TAG, "st: fps=%lu muted=%d phase=%d done=%lu focus_s=%lu",
+                ESP_LOGI(TAG, "st: fps=%lu muted=%d phase=%d done=%lu focus_s=%lu lei=%d skit=%d",
                          (unsigned long)fps, (int)pet_voice_muted(), (int)pv.phase,
-                         (unsigned long)pv.done_count, (unsigned long)pv.focus_seconds);
+                         (unsigned long)pv.done_count, (unsigned long)pv.focus_seconds,
+                         (int)pet_leisure_phase(&s_leisure), pet_leisure_skit(&s_leisure));
                 frames = 0;
                 last_log_ms = now;
             }
@@ -199,6 +242,8 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
     if (ev == PET_KEY_EV_NONE) {
         return;
     }
+    /* M8：任意按键唤醒休闲（复位空闲计时 + 回值班 → 下一帧恢复背光） */
+    pet_leisure_tick(&s_leisure, pet_hal_now_ms(), true, PET_ENGINE_HOUR24);
     if (s_menu_open) {
         const pet_menu_cmd_t cmd = pet_menu_key(&s_menu, key, ev);
         if (cmd == PET_MENU_CMD_TOGGLE_MUTE) {
