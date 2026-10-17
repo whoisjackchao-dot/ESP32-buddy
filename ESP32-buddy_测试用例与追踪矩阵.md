@@ -41,7 +41,7 @@
 | R14 三模式（值班/番茄钟/休闲） | `POMO-*` `LEI-*` | M7/M8 | T | 番茄钟逻辑 `PASS`（M7 增量1）；**模式切换（KEY2）属 M6/H**；休闲 `NOT_RUN`（M8） | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
 | R15 语音：需确认/完成/失败各一次 | `AUD-01`…`AUD-06` | M5 | T+H | `AUD-01..04` `PASS`（逻辑/资产）；**`AUD-05` `PASS`**（2026-10-17 真机听到三句）；`AUD-06`（不阻塞主循环）仍 `NOT_RUN`（未测帧率） | `evidence/M5/2026-10-16-语音逻辑-T.md`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | R16 当日战绩轮播、按日清零、重启不丢 | `POMO-06` `UI-07` | M7 | T | `POMO-06`（按日清零逻辑）`PASS`；轮播 `UI-07`、**重启不丢（持久化）** `NOT_RUN`（M7 增量 2） | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
-| R17 休闲（5/30/90 分钟、关背光） | `LEI-01`…`LEI-05` | M8 | T | `NOT_RUN` | — |
+| R17 休闲（5/30/90 分钟、关背光） | `LEI-01`…`LEI-05` | M8 | T | **`LEI-01..05` `PASS`**（状态机逻辑，M8 增量1）；**小剧美术 / 背光 / NTP 未做** | `evidence/M8/2026-10-17-休闲状态机-T.md` |
 | R18 按键操作 | `BTN-01`…`BTN-06` | M6 | T+H | `BTN-01..04` **`PASS`**（逻辑 + **真机**：切模式 / 番茄钟控制，无误触发）；**`BTN-05`（回窗口）`PASS`**（真机端到端）；`BTN-06`（静音）接线、**听感未验**；菜单未做 | `evidence/M6/2026-10-17-按键逻辑-T.md`、`evidence/M6/2026-10-17-按键-H.md`、`evidence/M6/2026-10-17-回窗口-H.md` |
 | R20 分层（state/render/hal） | —（结构约束） | M1 | D | `PASS`（审查：仅 `pet_hal_sticks3.c` 碰硬件） | `evidence/M1/2026-10-16-固件构建-D.md` §4 |
 | R21 逻辑可 host 测 | 全部 host 单测 | M1/M2/M3 | T | `PASS` | `tests/run.sh` |
@@ -104,6 +104,11 @@
 | `BTN-05` | 回窗口（`Q15`/`B08`）：KEY1 短按 → 设备控制线 → 主机守护 → 激活终端窗口 | C+H | ✅ **PASS**（真机端到端；用户确认；失焦/最小化激活 **5/5**） | `evidence/M6/2026-10-17-回窗口-H.md` |
 | `BTN-06` | `KEY1` 长按静音（不持久化） | T+H | ✅ **PASS**（`muted=1` 时无声、恢复有声；复位回 `muted=0`） | `evidence/2026-10-17-P0收尾-验证.md` |
 | `BTN-07` | 菜单：`KEY2` 长按开/关；`KEY1` 短按移选中；`KEY2` 短按执行（静音切换 / 状态只读关闭） | T+H | ✅ **PASS**（真机；用户"都正常"） | `tests/test_pet_menu.c`、`evidence/M6/2026-10-17-菜单-H.md` |
+| `LEI-01` | 空闲 5 min → BORED（4:59 仍 DUTY） | T | `PASS` | `tests/test_pet_leisure.c` |
+| `LEI-02` | 累计 30 min → SLEEPY | T | `PASS` | 同上 |
+| `LEI-03` | 90 min **且夜间**(23–07) → LIGHTS_OUT；白天不熄 | T | `PASS` | 同上 |
+| `LEI-04` | 小剧：首段 3 s、BORED 20–40 s / SLEEPY 120–300 s、id 轮换、同 seed 确定 | T | `PASS` | 同上 |
+| `LEI-05` | 唤醒：`agent_active` → 立即 DUTY 并重置空闲计时 | T | `PASS` | 同上 |
 | `E2E-02` | 主机入口核心：简式/富式（`tasks[0]` 优先）→ 设备线；`stats` 忽略；title 截 63；heartbeat 无线外字段；**loopback 集成** POST→200 且 sink 收线；**真机端到端**：脚本发事件 → 设备状态/卡/语音生效 | C+H | `PASS`（核心 + 端到端） | `host/tests/test_pet_ingest.py`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | `E2E-03` | 非法输入：方法/路径/content-type/超长/非 JSON/version/event/事件名/类型 → 对应码与 HTTP 状态；**错误不广播**；不崩 | C | `PASS` | 同上 |
 | `SEC-01` | 仅 loopback 绑定（`server_address[0]=="127.0.0.1"`） | C | `PASS`（loopback）；token 待定 | 同上 |

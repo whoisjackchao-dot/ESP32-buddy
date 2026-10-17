@@ -85,4 +85,11 @@ echo "== test_pet_menu =="
     -o "$BUILD/test_pet_menu"
 "$BUILD/test_pet_menu" || status=1
 
+echo "== test_pet_leisure =="
+"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+    tests/test_pet_leisure.c \
+    firmware/components/pet/pet_leisure.c \
+    -o "$BUILD/test_pet_leisure"
+"$BUILD/test_pet_leisure" || status=1
+
 exit "$status"
