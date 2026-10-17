@@ -36,12 +36,13 @@ YELLOW = c(255, 214, 64)
 WHITE = c(255, 255, 255)
 BLUE = c(120, 186, 240)
 ORANGE = c(255, 140, 64)
+HAIR = c(200, 170, 136)  # 浅棕发色（比 INK 浅很多）
 
 PALETTE = [0, CREAM, SHADE, INK, BLUSH, PEACH, GRAY, DGRAY,
-           SCREEN, CYAN, YELLOW, WHITE, BLUE, ORANGE, 0, 0]
+           SCREEN, CYAN, YELLOW, WHITE, BLUE, ORANGE, HAIR, 0]
 assert len(PALETTE) == 16
 
-(T, BODY, SHADOW, OUT, BL, BELLY, LP, LPB, SCR, TXT, SPK, WH, DROP, MK, _u, _v) = range(16)
+(T, BODY, SHADOW, OUT, BL, BELLY, LP, LPB, SCR, TXT, SPK, WH, DROP, MK, HAIR, _v) = range(16)
 
 CX, CY, RX, RY = 24, 32, 21, 23
 
@@ -96,19 +97,23 @@ def fluff_head(g):
 
 
 def hair(g, off):
-    # 头顶一撮毛：下宽上窄，越高摆动越大（off = -1 / +1）
+    # 头顶一撮毛：更长、下宽上窄，越高摆动越大（off = -1 / +1）
     rows = [
         (11, -2, 4),
         (10, -2, 4),
-        (9, -2, 3),
-        (8, -3, 2),
-        (7, -3, 2),
-        (6, -3, 2),
+        (9, -2, 4),
+        (8, -3, 3),
+        (7, -3, 3),
+        (6, -3, 3),
+        (5, -4, 2),
+        (4, -4, 2),
+        (3, -4, 1),
+        (2, -4, 1),
     ]
     for (y, xs, w) in rows:
-        shift = off * ((11 - y) // 2)
+        shift = off * min(3, (11 - y) // 2)
         for k in range(w):
-            setp(g, 24 + xs + k + shift, y, OUT)
+            setp(g, 24 + xs + k + shift, y, HAIR)
 
 
 def disc(g, cx, cy, rx, ry, fill):
