@@ -55,13 +55,18 @@ def setp(g, x, y, col):
 
 
 def in_fluff(x, y, cx, cy, rx, ry):
-    dx = (x + 0.5 - cx) / rx
-    dy = (y + 0.5 - cy) / ry
-    d = math.hypot(dx, dy)
-    if d == 0.0:
+    t = (y + 0.5 - cy) / ry
+    if t < -1.0 or t > 1.0:
+        return False
+    half = math.sqrt(max(0.0, 1.0 - t * t)) * (1.0 + 0.35 * t)  # 梨形：上窄下宽
+    if half <= 0.0:
+        return False
+    u = ((x + 0.5 - cx) / rx) / half
+    r = math.hypot(u, t)
+    if r == 0.0:
         return True
-    ang = math.atan2(dy, dx)
-    return d <= 1.0 + 0.075 * abs(math.sin(4.5 * ang))
+    ang = math.atan2(t, u)
+    return r <= 1.0 + 0.07 * abs(math.sin(4.5 * ang))
 
 
 def fluff_head(g):
@@ -115,37 +120,37 @@ def sparkle(g, cx, cy, col):
 
 def eyes_open(g, dy=0, wide=False):
     for ex in (17, 31):
-        disc(g, ex, 30 + dy, 2.4 if wide else 2.2, 3.4 if wide else 3.2, OUT)
-        setp(g, ex - 1, 28 + dy, WH)
+        disc(g, ex, 32 + dy, 2.4 if wide else 2.2, 3.4 if wide else 3.2, OUT)
+        setp(g, ex - 1, 30 + dy, WH)
 
 
 def eyes_closed(g, dy=0, happy=False):
     for ex in (17, 31):
         if happy:
             for (dx, ddy) in ((-2, 1), (-1, 0), (0, 0), (1, 1)):
-                setp(g, ex + dx, 31 + dy + ddy, OUT)
+                setp(g, ex + dx, 33 + dy + ddy, OUT)
         else:
             for (dx, ddy) in ((-2, 0), (-1, 1), (0, 1), (1, 0)):
-                setp(g, ex + dx, 31 + dy + ddy, OUT)
+                setp(g, ex + dx, 33 + dy + ddy, OUT)
 
 
 def mouth_smile(g, dy=0):
     for (dx, ddy) in ((-2, 0), (-1, 1), (0, 1), (1, 0)):
-        setp(g, 24 + dx, 39 + dy + ddy, OUT)
+        setp(g, 24 + dx, 41 + dy + ddy, OUT)
 
 
 def mouth_line(g, dy=0):
     for dx in (-1, 0, 1):
-        setp(g, 24 + dx, 39 + dy, OUT)
+        setp(g, 24 + dx, 41 + dy, OUT)
 
 
 def mouth_o(g, dy=0):
-    disc(g, 24, 39 + dy, 1.5, 1.5, OUT)
+    disc(g, 24, 41 + dy, 1.5, 1.5, OUT)
 
 
 def blush(g, dy=0):
-    disc(g, 10, 37 + dy, 2.5, 1.5, BL)
-    disc(g, 38, 37 + dy, 2.5, 1.5, BL)
+    disc(g, 10, 39 + dy, 2.5, 1.5, BL)
+    disc(g, 38, 39 + dy, 2.5, 1.5, BL)
 
 
 def frame_idle():
@@ -171,8 +176,8 @@ def frame_happy():
     fluff_head(g)
     eyes_closed(g, happy=True)
     blush(g)
-    disc(g, 24, 39, 2.5, 2, OUT)
-    setp(g, 24, 40, BL)
+    disc(g, 24, 41, 2.5, 2, OUT)
+    setp(g, 24, 42, BL)
     sparkle(g, 2, 13, SPK)
     sparkle(g, 46, 15, SPK)
     return g
@@ -181,15 +186,15 @@ def frame_happy():
 def frame_sad():
     g = blank()
     fluff_head(g)
-    for (x, y) in ((14, 24), (15, 25), (16, 26)):
+    for (x, y) in ((14, 26), (15, 27), (16, 28)):
         setp(g, x, y, OUT)
         setp(g, 47 - x + 1, y, OUT)
     for ex in (17, 31):
-        disc(g, ex, 31, 2, 2.5, OUT)
-        setp(g, ex - 1, 33, WH)
+        disc(g, ex, 33, 2, 2.5, OUT)
+        setp(g, ex - 1, 35, WH)
     blush(g)
     for (dx, ddy) in ((-2, 1), (-1, 0), (0, 1), (1, 0), (2, 1)):
-        setp(g, 24 + dx, 39 + ddy, OUT)
+        setp(g, 24 + dx, 41 + ddy, OUT)
     for (x, y) in ((42, 15), (42, 16), (41, 17), (42, 17), (43, 17), (41, 18), (42, 18), (43, 18)):
         setp(g, x, y, DROP)
     setp(g, 41, 17, WH)
@@ -200,8 +205,8 @@ def frame_working():
     g = blank()
     fluff_head(g)
     for ex in (17, 31):
-        disc(g, ex, 32, 2.2, 1.4, OUT)
-        setp(g, ex - 1, 30, WH)
+        disc(g, ex, 34, 2.2, 1.4, OUT)
+        setp(g, ex - 1, 32, WH)
     mouth_line(g)
     return g
 
