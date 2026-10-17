@@ -12,6 +12,7 @@
 #include "pet_pomo_store.h"
 #include "pet_render.h"
 #include "pet_state.h"
+#include "pet_voice.h"
 
 static const char *TAG = "pet-engine";
 
@@ -86,7 +87,7 @@ void pet_engine_redraw(void)
 
     /* 取走一次性播报（M5 之前 play_sound 是空实现） */
     const pet_sound_t sound = pet_state_take_sound(s_state);
-    if (sound != PET_SOUND_NONE && hal->play_sound != NULL) {
+    if (pet_voice_should_play(sound, pet_voice_muted()) && hal->play_sound != NULL) {
         hal->play_sound(sound);
     }
 }
@@ -100,10 +101,13 @@ static void pet_task(void *arg)
 {
     (void)arg;
     const TickType_t period = pdMS_TO_TICKS(PET_FRAME_MS_DUTY);
+    uint32_t frames = 0;
+    uint32_t last_log_ms = 0;
     for (;;) {
         const pet_hal_t *hal = pet_hal_get();
         if (hal != NULL && hal->now_ms != NULL) {
             const uint32_t now = hal->now_ms();
+            frames++;
             pet_state_tick(s_state, now);
             if (s_mode == PET_MODE_POMO) {
                 pet_pomo_tick(&s_pomo, now);
@@ -113,6 +117,17 @@ static void pet_task(void *arg)
                     }
                     pet_pomo_nvs_save(&s_pomo); /* 统计变更即落盘 */
                 }
+            }
+            if (now - last_log_ms >= 10000u) {
+                const uint32_t dt = now - last_log_ms;
+                const uint32_t fps = (dt > 0u) ? (frames * 1000u / dt) : 0u;
+                pet_pomo_view_t pv;
+                pet_pomo_view_get(&s_pomo, &pv);
+                ESP_LOGI(TAG, "st: fps=%lu muted=%d phase=%d done=%lu focus_s=%lu",
+                         (unsigned long)fps, (int)pet_voice_muted(), (int)pv.phase,
+                         (unsigned long)pv.done_count, (unsigned long)pv.focus_seconds);
+                frames = 0;
+                last_log_ms = now;
             }
         }
         pet_engine_redraw();

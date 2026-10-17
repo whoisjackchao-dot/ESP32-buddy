@@ -50,8 +50,8 @@
 | 通用 | host 单测 `tests/run.sh`（T 类），需要 `cc` | ⚠️ 新机器无系统编译器时，用用户态 `zig cc` 作 `cc`（见 `B15`） |
 
 > `tools/idf-env.sh` 已建立（包装 ESP-IDF 的 venv 与代理）。
-> **换机注意**：新机器缺 `cc`/ESP-IDF/旧项目时，host 单测可用用户态 `zig cc` 复现（**188/0**），
-> 但**固件构建与 H 类证据仍不可**——详见 `evidence/2026-10-16-新机器环境基线.md` 与缺口 `B15`。
+> **换机注意**：新机器无系统 `cc` 时，用 `CC=tools/host-cc.sh bash tests/run.sh`（自动选 `cc` 或用户态 `zig cc`，**370/0**）。
+> 固件构建可用 Windows 侧 ESP-IDF v5.5.4；详见 `evidence/2026-10-16-新机器环境基线.md` 与缺口 `B15`。
 
 ## 5. 许可
 

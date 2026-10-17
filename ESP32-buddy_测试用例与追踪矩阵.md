@@ -82,7 +82,7 @@
 | `AUD-03` | 静音默认关、可开可关（不持久化） | T | `PASS` | 同上 |
 | `AUD-04` | 三段语音 PCM：存在、16-bit 对齐、时长 0.10–3.0s、非静音 | T | `PASS` | 同上 |
 | `AUD-05` | 真机播报（I2S/ES8311）听得到、不爆音、不拉伸 | **H** | ✅ **PASS**（2026-10-17 真机由事件驱动，用户听到三句：需要你确认下 / 做完啦 / 出错了） | `evidence/M4/2026-10-17-传输端到端-H.md` |
-| `AUD-06` | 播报不阻塞主循环（动画不掉帧） | T+H | `NOT_RUN`（**设计为异步队列 + 独立任务**；实机未验） | 同上 |
+| `AUD-06` | 播报不阻塞主循环（动画不掉帧） | T+H | ✅ **PASS**（播放前后 `fps=7` 不变） | `evidence/2026-10-17-P0收尾-验证.md` |
 | `POMO-01` | init → IDLE、remaining==total==FOCUS_MS、计数 0、无铃 | T | `PASS` | `tests/test_pet_pomo.c` |
 | `POMO-02` | SHORT→FOCUS；tick 推进 remaining | T | `PASS` | 同上 |
 | `POMO-03` | 暂停不推进；继续后从暂停点累计 | T | `PASS` | 同上 |
@@ -102,7 +102,7 @@
 | `BTN-03` | 长按阈值 600 ms：<600 短按、≥600 长按只触发一次 | T | `PASS` | 同上 |
 | `BTN-04` | 短按在**松键**时判定 | T | `PASS` | 同上 |
 | `BTN-05` | 回窗口（`Q15`/`B08`）：KEY1 短按 → 设备控制线 → 主机守护 → 激活终端窗口 | C+H | ✅ **PASS**（真机端到端；用户确认；失焦/最小化激活 **5/5**） | `evidence/M6/2026-10-17-回窗口-H.md` |
-| `BTN-06` | `KEY1` 长按静音（不持久化） | T+H | 🟡 接线完成；**听感未验** | `evidence/M6/2026-10-17-按键-H.md` |
+| `BTN-06` | `KEY1` 长按静音（不持久化） | T+H | ✅ **PASS**（`muted=1` 时无声、恢复有声；复位回 `muted=0`） | `evidence/2026-10-17-P0收尾-验证.md` |
 | `E2E-02` | 主机入口核心：简式/富式（`tasks[0]` 优先）→ 设备线；`stats` 忽略；title 截 63；heartbeat 无线外字段；**loopback 集成** POST→200 且 sink 收线；**真机端到端**：脚本发事件 → 设备状态/卡/语音生效 | C+H | `PASS`（核心 + 端到端） | `host/tests/test_pet_ingest.py`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | `E2E-03` | 非法输入：方法/路径/content-type/超长/非 JSON/version/event/事件名/类型 → 对应码与 HTTP 状态；**错误不广播**；不崩 | C | `PASS` | 同上 |
 | `SEC-01` | 仅 loopback 绑定（`server_address[0]=="127.0.0.1"`） | C | `PASS`（loopback）；token 待定 | 同上 |
