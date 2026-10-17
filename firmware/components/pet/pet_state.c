@@ -209,6 +209,12 @@ void pet_state_view(const struct pet_state *s, pet_view_t *out)
     case PET_STATE_OFFLINE:
         out->frame = PET_FRAME_EYES_CLOSED;
         break;
+    case PET_STATE_WORKING:
+        out->frame = PET_FRAME_WORKING;
+        break;
+    case PET_STATE_INPUT_REQUIRED:
+        out->frame = PET_FRAME_INPUT;
+        break;
     case PET_STATE_IDLE:
         out->frame = idle_frame(s->now_ms - s->since_ms);
         break;

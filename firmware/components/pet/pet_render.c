@@ -14,7 +14,7 @@
 #define LOOK_MAGIC      "LOOK"
 #define LOOK_W          48
 #define LOOK_H          64
-#define LOOK_FRAMES     4
+#define LOOK_FRAMES     6
 #define LOOK_COLORS     16
 #define LOOK_FRAME_BYTES (LOOK_W * LOOK_H / 2)
 #define LOOK_HEADER     (8 + LOOK_COLORS * 2)

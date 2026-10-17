@@ -13,12 +13,14 @@ typedef enum {
     PET_STATE_COUNT
 } pet_state_t;
 
-/* 立绘 4 关键帧 */
+/* 立绘 6 关键帧（2026-10-17 由 4 帧扩展，0–3 编号不变；见契约 M1 §10） */
 typedef enum {
     PET_FRAME_NORMAL = 0,
     PET_FRAME_EYES_CLOSED,
     PET_FRAME_HAPPY,
     PET_FRAME_SAD,
+    PET_FRAME_WORKING,
+    PET_FRAME_INPUT,
     PET_FRAME_COUNT
 } pet_frame_t;
 

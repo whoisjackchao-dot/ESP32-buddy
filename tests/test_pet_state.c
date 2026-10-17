@@ -65,7 +65,7 @@ static void task_start_is_working_silent(void)
 {
     apply_kind(PET_EV_TASK_START, 1000);
     CHECK(view_state() == PET_STATE_WORKING);
-    CHECK(view_frame() == PET_FRAME_NORMAL);
+    CHECK(view_frame() == PET_FRAME_WORKING);
     CHECK(pet_state_take_sound(s) == PET_SOUND_NONE);
 }
 
@@ -74,8 +74,34 @@ static void input_required_announces_once(void)
     apply_kind(PET_EV_TASK_START, 1000);
     apply_kind(PET_EV_AGENT_INPUT_REQUIRED, 2000);
     CHECK(view_state() == PET_STATE_INPUT_REQUIRED);
+    CHECK(view_frame() == PET_FRAME_INPUT);
     CHECK(pet_state_take_sound(s) == PET_SOUND_INPUT);
     CHECK(pet_state_take_sound(s) == PET_SOUND_NONE); /* 取走即清 */
+}
+
+/* 2026-10-17 扩帧后：6 态 → 6 个立绘姿态帧的映射 */
+static void six_states_map_to_six_pose_frames(void)
+{
+    apply_kind(PET_EV_AGENT_IDLE, 1000);
+    CHECK(view_frame() == PET_FRAME_NORMAL);          /* IDLE→NORMAL */
+
+    apply_kind(PET_EV_TASK_START, 2000);
+    CHECK(view_frame() == PET_FRAME_WORKING);         /* WORKING→WORKING */
+
+    apply_kind(PET_EV_AGENT_INPUT_REQUIRED, 3000);
+    CHECK(view_frame() == PET_FRAME_INPUT);           /* INPUT_REQUIRED→INPUT */
+
+    apply_kind(PET_EV_TASK_DONE, 4000);
+    CHECK(view_frame() == PET_FRAME_HAPPY);           /* DONE→HAPPY */
+
+    apply_kind(PET_EV_TASK_ERROR, 5000);
+    CHECK(view_frame() == PET_FRAME_SAD);             /* FAILED→SAD */
+
+    apply_kind(PET_EV_LINK_DOWN, 6000);
+    CHECK(view_frame() == PET_FRAME_EYES_CLOSED);     /* OFFLINE→EYES_CLOSED */
+
+    apply_kind(PET_EV_LINK_UP, 7000);                 /* 恢复 FAILED */
+    CHECK(view_frame() == PET_FRAME_SAD);
 }
 
 static void explicit_done_announces_and_is_happy(void)
@@ -228,14 +254,14 @@ static void working_never_blinks(void)
     apply_kind(PET_EV_TASK_START, 1000);
 
     keepalive(1900);
-    pet_state_tick(s, 1900); /* 相位 900：WORKING 不眨眼 */
-    CHECK(view_frame() == PET_FRAME_NORMAL);
+    pet_state_tick(s, 1900); /* 相位 900：WORKING 不眨眼，保持伏案帧 */
+    CHECK(view_frame() == PET_FRAME_WORKING);
 
     keepalive(10000);
     pet_state_tick(s, 10000);
     keepalive(20000);
     pet_state_tick(s, 20000);
-    CHECK(view_frame() == PET_FRAME_NORMAL);
+    CHECK(view_frame() == PET_FRAME_WORKING);
 }
 
 static void done_is_happy_during_dwell(void)
@@ -287,6 +313,10 @@ int main(void)
 
     s = pet_state_create();
     input_required_announces_once();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    six_states_map_to_six_pose_frames();
     pet_state_destroy(s);
 
     s = pet_state_create();

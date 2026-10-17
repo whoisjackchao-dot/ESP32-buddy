@@ -24,7 +24,7 @@
 /* 立绘包格式常量（与 tools/make-look.py 的规格一致；测试侧独立实现） */
 #define LOOK_W 48
 #define LOOK_H 64
-#define LOOK_FRAMES 4
+#define LOOK_FRAMES 6
 #define LOOK_COLORS 16
 #define LOOK_FRAME_BYTES (LOOK_W * LOOK_H / 2)
 #define LOOK_HEADER (8 + LOOK_COLORS * 2)
@@ -56,6 +56,26 @@ static int find_pixel(int frame, int want_transparent, int *px, int *py)
         for (int x = 0; x < LOOK_W; x++) {
             const int transparent = (look_index(g_bytes, frame, x, y) == 0);
             if (transparent == want_transparent) {
+                *px = x;
+                *py = y;
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+/* 找一个以 (ox,oy) 为原点、2× 绘制后仍完整落在画布内的不透明像素
+ * （换美术不挑像素——测试不依赖具体立绘内容） */
+static int find_pixel_visible_at(int frame, int ox, int oy, int *px, int *py)
+{
+    for (int y = 0; y < LOOK_H; y++) {
+        for (int x = 0; x < LOOK_W; x++) {
+            if (look_index(g_bytes, frame, x, y) == 0) {
+                continue;
+            }
+            if (x * 2 + ox >= 0 && y * 2 + oy >= 0 &&
+                x * 2 + ox + 1 < SW && y * 2 + oy + 1 < SH) {
                 *px = x;
                 *py = y;
                 return 1;
@@ -147,6 +167,16 @@ static void parse_accepts_valid_pack(void)
     pet_look_free(l);
 }
 
+/* 立绘 6 帧规格（2026-10-17 扩帧）：尺寸/帧数与 pet_frame_t 对齐 */
+static void parse_pack_is_6_frames_of_expected_size(void)
+{
+    CHECK(g_len == LOOK_BYTES);
+    CHECK(g_bytes[4] == LOOK_W);
+    CHECK(g_bytes[5] == LOOK_H);
+    CHECK(g_bytes[6] == LOOK_FRAMES);
+    CHECK(LOOK_FRAMES == PET_FRAME_COUNT);
+}
+
 /* ---- 绘制类 ---- */
 
 static void draw_paints_opaque_pixel_as_2x_block(void)
@@ -199,7 +229,7 @@ static void draw_clips_at_bottom_edge(void)
 static void draw_clips_on_negative_origin(void)
 {
     int x = 0, y = 0;
-    CHECK(find_pixel(0, 0, &x, &y));
+    CHECK(find_pixel_visible_at(0, -8, -8, &x, &y));
     const uint16_t want = look_palette(g_bytes, look_index(g_bytes, 0, x, y));
 
     arm_guard();
@@ -318,11 +348,13 @@ static uint32_t digest_of(pet_state_t state, pet_frame_t frame, bool gray)
     return h;
 }
 
+/* UI-02：6 态（帧 = pet_state_view 的映射）渲染各不相同。
+ * WORKING/INPUT 既有专属帧又有头顶标记，与 IDLE/NORMAL 的差异来自两者。 */
 static void states_render_differently(void)
 {
     const uint32_t idle = digest_of(PET_STATE_IDLE, PET_FRAME_NORMAL, false);
-    const uint32_t work = digest_of(PET_STATE_WORKING, PET_FRAME_NORMAL, false);
-    const uint32_t input = digest_of(PET_STATE_INPUT_REQUIRED, PET_FRAME_NORMAL, false);
+    const uint32_t work = digest_of(PET_STATE_WORKING, PET_FRAME_WORKING, false);
+    const uint32_t input = digest_of(PET_STATE_INPUT_REQUIRED, PET_FRAME_INPUT, false);
     const uint32_t done = digest_of(PET_STATE_DONE, PET_FRAME_HAPPY, false);
     const uint32_t failed = digest_of(PET_STATE_FAILED, PET_FRAME_SAD, false);
     const uint32_t offline = digest_of(PET_STATE_OFFLINE, PET_FRAME_EYES_CLOSED, true);
@@ -336,6 +368,16 @@ static void states_render_differently(void)
     CHECK(done != work);
     CHECK(failed != done);
     CHECK(offline != work);
+    /* 6 个立绘帧本体也两两不同（帧差异不只靠标记/灰化） */
+    uint32_t frame_digest[PET_FRAME_COUNT];
+    for (int fr = 0; fr < PET_FRAME_COUNT; fr++) {
+        frame_digest[fr] = digest_of(PET_STATE_IDLE, (pet_frame_t)fr, false);
+    }
+    for (int a = 0; a < PET_FRAME_COUNT; a++) {
+        for (int b = a + 1; b < PET_FRAME_COUNT; b++) {
+            CHECK(frame_digest[a] != frame_digest[b]);
+        }
+    }
 }
 
 /* ---- M7 增量 2：番茄钟进度环（POMO-05，契约 M7 §7.1）----
@@ -569,6 +611,7 @@ int main(int argc, char **argv)
     RUN(parse_rejects_bad_magic);
     RUN(parse_rejects_short);
     RUN(parse_accepts_valid_pack);
+    RUN(parse_pack_is_6_frames_of_expected_size);
 
     g_look = pet_look_parse(g_bytes, g_len);
     if (g_look != NULL) {

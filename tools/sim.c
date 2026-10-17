@@ -282,7 +282,7 @@ int main(int argc, char **argv)
         }
     }
 
-    /* 立绘 4 帧单图（验美术） */
+    /* 立绘 6 帧单图（验美术） */
     for (int fr = 0; fr < PET_FRAME_COUNT; fr++) {
         pet_view_t v;
         memset(&v, 0, sizeof v);
