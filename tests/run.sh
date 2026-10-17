@@ -78,4 +78,11 @@ echo "== test_pet_keymap =="
     -o "$BUILD/test_pet_keymap"
 "$BUILD/test_pet_keymap" || status=1
 
+echo "== test_pet_menu =="
+"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+    tests/test_pet_menu.c \
+    firmware/components/pet/pet_menu.c \
+    -o "$BUILD/test_pet_menu"
+"$BUILD/test_pet_menu" || status=1
+
 exit "$status"

@@ -479,6 +479,73 @@ static void pomo_view_break_full_ring_green(void)
     CHECK(get_px(&psurf, 67 - 48, 72) == 0x07E0u);
 }
 
+/* ---- M6 增量 3：菜单整屏（BTN-07 渲染半段，契约 M6 §9.3）---- */
+
+static bool menu_all_bg(void)
+{
+    for (int y = 0; y < PH; y++) {
+        for (int x = 0; x < PW; x++) {
+            if (get_px(&psurf, x, y) != PET_SCENE_BG) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+static void menu_view_null_is_bg_only(void)
+{
+    pomo_fill(SENTINEL);
+    pet_render_menu(&psurf, NULL);
+    CHECK(menu_all_bg());
+}
+
+/* 选中行反色：矩形 y=row_y-3..row_y+10、文字 y=row_y..row_y+7 →
+ * y=row_y-1（带内、文字上方）是纯填充像素，可精确断言白底；
+ * 未选中行同位置必须保持场景底色；标题区有白字。 */
+static void menu_view_inverts_selected_row_and_title_white(void)
+{
+    const pet_menu_view_t v = {
+        .muted = true,
+        .selected = 0,
+        .mode = 0,
+        .phase = PET_POMO_FOCUS,
+        .done_count = 3,
+        .focus_seconds = 1500,
+    };
+    pet_render_menu(&psurf, &v);
+    /* 选中行 0：反色矩形（x=6..128, y=61..74）白底 */
+    CHECK(get_px(&psurf, 20, 62) == 0xFFFFu);
+    CHECK(get_px(&psurf, 120, 73) == 0xFFFFu);
+    /* 未选中行 1：无白填充（带内 y=94 保持底色） */
+    CHECK(get_px(&psurf, 20, 94) == PET_SCENE_BG);
+    /* 标题 MENU：白色文字像素落在 (12..43, 16..23) */
+    bool title_white = false;
+    for (int y = 16; y <= 23 && !title_white; y++) {
+        for (int x = 12; x <= 43; x++) {
+            if (get_px(&psurf, x, y) == 0xFFFFu) {
+                title_white = true;
+                break;
+            }
+        }
+    }
+    CHECK(title_white);
+}
+
+/* 反色跟随 selected 字段：选中行 1 时白底移到行 1，行 0 保持底色 */
+static void menu_view_selected_follows_field(void)
+{
+    const pet_menu_view_t v = {
+        .muted = false,
+        .selected = 1,
+        .mode = 1,
+        .phase = PET_POMO_BREAK,
+    };
+    pet_render_menu(&psurf, &v);
+    CHECK(get_px(&psurf, 20, 94) == 0xFFFFu);
+    CHECK(get_px(&psurf, 20, 62) == PET_SCENE_BG);
+}
+
 int main(int argc, char **argv)
 {
     const char *path = (argc > 1) ? argv[1] : PET_FIXTURE;
@@ -526,6 +593,9 @@ int main(int argc, char **argv)
     RUN(pomo_view_null_is_bg_only);
     RUN(pomo_view_focus_track_ring_and_center_text);
     RUN(pomo_view_break_full_ring_green);
+    RUN(menu_view_null_is_bg_only);
+    RUN(menu_view_inverts_selected_row_and_title_white);
+    RUN(menu_view_selected_follows_field);
 
     free(g_bytes);
     REPORT();

@@ -1,5 +1,6 @@
 #pragma once
 #include <stddef.h>
+#include "pet_menu.h"
 #include "pet_pomo.h"
 #include "pet_types.h"
 
@@ -57,3 +58,8 @@ void pet_render_ring(pet_surface_t *s, int cx, int cy, int r, int t,
                      int progress_permille, uint16_t color, uint16_t track);
 /* 番茄钟整屏视图：环 + 中心剩余时间。 */
 void pet_render_pomo(pet_surface_t *s, const pet_pomo_view_t *v);
+
+/* ---- M6 增量 3：菜单整屏（契约 M6 §9.3）---- */
+
+/* 菜单整屏：全屏底色 + 标题 + 两行（选中行反色）+ 底部统计。 */
+void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v);

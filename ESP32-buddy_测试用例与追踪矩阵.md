@@ -103,6 +103,7 @@
 | `BTN-04` | 短按在**松键**时判定 | T | `PASS` | 同上 |
 | `BTN-05` | 回窗口（`Q15`/`B08`）：KEY1 短按 → 设备控制线 → 主机守护 → 激活终端窗口 | C+H | ✅ **PASS**（真机端到端；用户确认；失焦/最小化激活 **5/5**） | `evidence/M6/2026-10-17-回窗口-H.md` |
 | `BTN-06` | `KEY1` 长按静音（不持久化） | T+H | ✅ **PASS**（`muted=1` 时无声、恢复有声；复位回 `muted=0`） | `evidence/2026-10-17-P0收尾-验证.md` |
+| `BTN-07` | 菜单：`KEY2` 长按开/关；`KEY1` 短按移选中；`KEY2` 短按执行（静音切换 / 状态只读关闭） | T+H | ✅ **PASS**（真机；用户"都正常"） | `tests/test_pet_menu.c`、`evidence/M6/2026-10-17-菜单-H.md` |
 | `E2E-02` | 主机入口核心：简式/富式（`tasks[0]` 优先）→ 设备线；`stats` 忽略；title 截 63；heartbeat 无线外字段；**loopback 集成** POST→200 且 sink 收线；**真机端到端**：脚本发事件 → 设备状态/卡/语音生效 | C+H | `PASS`（核心 + 端到端） | `host/tests/test_pet_ingest.py`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | `E2E-03` | 非法输入：方法/路径/content-type/超长/非 JSON/version/event/事件名/类型 → 对应码与 HTTP 状态；**错误不广播**；不崩 | C | `PASS` | 同上 |
 | `SEC-01` | 仅 loopback 绑定（`server_address[0]=="127.0.0.1"`） | C | `PASS`（loopback）；token 待定 | 同上 |

@@ -8,6 +8,8 @@
 #include "freertos/task.h"
 
 #include "pet_hal.h"
+#include "pet_keymap.h"
+#include "pet_menu.h"
 #include "pet_pomo.h"
 #include "pet_pomo_store.h"
 #include "pet_render.h"
@@ -31,6 +33,10 @@ static pet_surface_t s_surface;
 static pet_pomo_t s_pomo;
 static pet_mode_t s_mode = PET_MODE_DUTY;
 
+/* M6 增量 3：菜单 */
+static pet_menu_t s_menu;
+static bool s_menu_open;
+
 void pet_engine_init(void)
 {
     const pet_hal_t *hal = pet_hal_get();
@@ -51,6 +57,7 @@ void pet_engine_init(void)
 
     pet_pomo_init(&s_pomo, 0);
     pet_pomo_nvs_load(&s_pomo);
+    pet_menu_init(&s_menu);
 
 #ifndef PET_ENGINE_AUTOSTART_POMO
 #define PET_ENGINE_AUTOSTART_POMO 0
@@ -74,7 +81,18 @@ void pet_engine_redraw(void)
     if (s_pixels == NULL || hal == NULL || hal->present == NULL) {
         return;
     }
-    if (s_mode == PET_MODE_POMO) {
+    if (s_menu_open) {
+        pet_pomo_view_t pv;
+        pet_pomo_view_get(&s_pomo, &pv);
+        pet_menu_view_t mv;
+        mv.muted = pet_voice_muted();
+        mv.selected = s_menu.selected;
+        mv.mode = (s_mode == PET_MODE_POMO) ? 1 : 0;
+        mv.phase = (int)pv.phase;
+        mv.done_count = pv.done_count;
+        mv.focus_seconds = pv.focus_seconds;
+        pet_render_menu(&s_surface, &mv);
+    } else if (s_mode == PET_MODE_POMO) {
         pet_pomo_view_t pv;
         pet_pomo_view_get(&s_pomo, &pv);
         pet_render_pomo(&s_surface, &pv);
@@ -174,4 +192,48 @@ void pet_engine_request_back_window(void)
 {
     static const char line[] = "{\"v\":1,\"cmd\":\"back_window\"}\n";
     (void)usb_serial_jtag_write_bytes(line, sizeof line - 1, pdMS_TO_TICKS(50));
+}
+
+void pet_engine_key(pet_key_t key, pet_key_event_t ev)
+{
+    if (ev == PET_KEY_EV_NONE) {
+        return;
+    }
+    if (s_menu_open) {
+        const pet_menu_cmd_t cmd = pet_menu_key(&s_menu, key, ev);
+        if (cmd == PET_MENU_CMD_TOGGLE_MUTE) {
+            pet_voice_set_muted(!pet_voice_muted());
+        } else if (cmd == PET_MENU_CMD_CLOSE) {
+            s_menu_open = false;
+        }
+        return;
+    }
+
+    switch (pet_keymap_action(s_mode, key, ev)) {
+    case PET_ACT_POMO_SHORT:
+        pet_engine_pomo_command(PET_POMO_CMD_SHORT);
+        break;
+    case PET_ACT_POMO_LONG:
+        pet_engine_pomo_command(PET_POMO_CMD_LONG);
+        break;
+    case PET_ACT_MODE_POMO:
+        pet_engine_set_mode(PET_MODE_POMO);
+        break;
+    case PET_ACT_MODE_DUTY:
+        pet_engine_set_mode(PET_MODE_DUTY);
+        break;
+    case PET_ACT_MUTE_TOGGLE:
+        pet_voice_set_muted(!pet_voice_muted());
+        break;
+    case PET_ACT_BACK_WINDOW:
+        pet_engine_request_back_window();
+        break;
+    case PET_ACT_MENU:
+        pet_menu_init(&s_menu);
+        s_menu_open = true;
+        break;
+    case PET_ACT_NONE:
+    default:
+        break;
+    }
 }

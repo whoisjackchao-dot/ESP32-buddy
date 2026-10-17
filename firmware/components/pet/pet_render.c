@@ -343,3 +343,79 @@ void pet_render_pomo(pet_surface_t *s, const pet_pomo_view_t *v)
     (void)pet_text_draw(s, tx, POMO_RING_CY - 4, txt, (int)sizeof txt,
                         POMO_C_TEXT, 1);
 }
+
+/* ---- M6 增量 3：菜单整屏（契约 §9.3）---- */
+
+#define MENU_TEXT_MAX 15
+#define MENU_ROW_X    12
+#define MENU_ROW_W    123 /* 反色矩形宽（x=6 起） */
+#define MENU_ROW_H    14  /* 反色矩形高（y=row_y-3 起） */
+#define MENU_C_TEXT   0xFFFFu /* 白（未选中行文字 / 反色行底） */
+#define MENU_C_INVERT 0x0000u /* 黑（反色行文字；与场景底色同值） */
+
+/* 数值相位 → 短 ASCII 词；未知 → "?" */
+static const char *menu_phase_word(int phase)
+{
+    switch (phase) {
+    case PET_POMO_IDLE:
+        return "IDLE";
+    case PET_POMO_FOCUS:
+        return "FOCUS";
+    case PET_POMO_FOCUS_PAUSED:
+        return "FPAUSE";
+    case PET_POMO_BREAK:
+        return "BREAK";
+    case PET_POMO_BREAK_PAUSED:
+        return "BPAUSE";
+    case PET_POMO_FOCUS_DONE:
+        return "FDONE";
+    case PET_POMO_BREAK_DONE:
+        return "BDONE";
+    default:
+        return "?";
+    }
+}
+
+/* 画一行：选中行反色（白底矩形 + 黑字），未选中行白字 */
+static void menu_draw_row(pet_surface_t *s, int y, const char *text,
+                          bool selected)
+{
+    if (selected) {
+        fill_rect(s, 6, y - 3, 6 + MENU_ROW_W - 1, y - 3 + MENU_ROW_H - 1,
+                  MENU_C_TEXT);
+        (void)pet_text_draw(s, MENU_ROW_X, y, text, MENU_TEXT_MAX,
+                            MENU_C_INVERT, 1);
+    } else {
+        (void)pet_text_draw(s, MENU_ROW_X, y, text, MENU_TEXT_MAX,
+                            MENU_C_TEXT, 1);
+    }
+}
+
+void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v)
+{
+    if (s == NULL || s->pixels == NULL) {
+        return;
+    }
+    for (int y = 0; y < s->height; y++) {
+        for (int x = 0; x < s->width; x++) {
+            put_px(s, x, y, PET_SCENE_BG);
+        }
+    }
+    if (v == NULL) {
+        return;
+    }
+
+    char row[24];
+    (void)pet_text_draw(s, MENU_ROW_X, 16, "MENU", MENU_TEXT_MAX, MENU_C_TEXT, 1);
+
+    snprintf(row, sizeof row, "MUTE: %s", v->muted ? "ON" : "OFF");
+    menu_draw_row(s, 64, row, v->selected == 0);
+
+    snprintf(row, sizeof row, "STATUS: %s %s", (v->mode == 0) ? "DUTY" : "POMO",
+             menu_phase_word(v->phase));
+    menu_draw_row(s, 96, row, v->selected == 1);
+
+    snprintf(row, sizeof row, "done %lu  %lus", (unsigned long)v->done_count,
+             (unsigned long)v->focus_seconds);
+    (void)pet_text_draw(s, MENU_ROW_X, 200, row, MENU_TEXT_MAX, MENU_C_TEXT, 1);
+}
