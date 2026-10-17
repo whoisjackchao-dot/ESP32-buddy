@@ -44,7 +44,7 @@ assert len(PALETTE) == 16
 
 (T, BODY, SHADOW, OUT, BL, BELLY, LP, LPB, SCR, TXT, SPK, WH, DROP, MK, HAIR, _v) = range(16)
 
-CX, CY, RX, RY = 24, 32, 21, 23
+CX, CY, RX, RY = 24, 32, 19, 26
 
 
 def blank():
@@ -60,7 +60,8 @@ def in_fluff(x, y, cx, cy, rx, ry):
     t = (y + 0.5 - cy) / ry
     if t < -1.0 or t > 1.0:
         return False
-    half = math.sqrt(max(0.0, 1.0 - t * t)) * (1.0 + 0.15 * t)  # 近圆、略呈梨形
+    base = (1.0 - abs(t) ** 3) ** (1.0 / 2.5)  # 下巴更饱满/圆润
+    half = base * (1.0 + 0.35 * t)             # 拉长的梨形（下宽上窄）
     if half <= 0.0:
         return False
     u = ((x + 0.5 - cx) / rx) / half
@@ -99,19 +100,17 @@ def fluff_head(g):
 def hair(g, off):
     # 头顶一撮毛：更长、下宽上窄，越高摆动越大（off = -1 / +1）
     rows = [
-        (11, -2, 4),
-        (10, -2, 4),
-        (9, -2, 4),
-        (8, -3, 3),
-        (7, -3, 3),
-        (6, -3, 3),
-        (5, -4, 2),
-        (4, -4, 2),
-        (3, -4, 1),
-        (2, -4, 1),
+        (8, -2, 4),
+        (7, -2, 4),
+        (6, -2, 4),
+        (5, -3, 3),
+        (4, -3, 3),
+        (3, -3, 3),
+        (2, -3, 2),
+        (1, -3, 2),
     ]
     for (y, xs, w) in rows:
-        shift = off * min(3, (11 - y) // 2)
+        shift = off * min(3, (8 - y) // 2)
         for k in range(w):
             setp(g, 24 + xs + k + shift, y, HAIR)
 
