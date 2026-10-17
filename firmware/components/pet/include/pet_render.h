@@ -1,5 +1,6 @@
 #pragma once
 #include <stddef.h>
+#include "pet_pomo.h"
 #include "pet_types.h"
 
 /* 一块 RGB565 little-endian、row-major 的画布；几何与 stride 由调用方给。 */
@@ -48,3 +49,11 @@ void pet_render_pet(const pet_view_t *v, const pet_look_t *look,
 /* 画整屏：宠物固定在宠物区，若有卡则在卡片区画 1 张。 */
 void pet_render_scene(const pet_view_t *v, const pet_look_t *look,
                       pet_surface_t *surface);
+
+/* ---- M7 增量 2：番茄钟视图（契约 M7 §7.1/§7.2）---- */
+
+/* 进度环：外半径 r、环厚 t、进度 0..1000（千分比）、12 点顺时针。 */
+void pet_render_ring(pet_surface_t *s, int cx, int cy, int r, int t,
+                     int progress_permille, uint16_t color, uint16_t track);
+/* 番茄钟整屏视图：环 + 中心剩余时间。 */
+void pet_render_pomo(pet_surface_t *s, const pet_pomo_view_t *v);

@@ -1,6 +1,9 @@
 /* pet_render：立绘解析 + 绘制 + 状态标记。
  * 契约：contracts/M1-渲染分层契约冻结.md（接口/格式）、
- *       contracts/M2-状态机与动画契约清单.md §8（gray / mirror / 头顶标记）。 */
+ *       contracts/M2-状态机与动画契约清单.md §8（gray / mirror / 头顶标记）、
+ *       contracts/M7-番茄钟契约清单.md §7.1/§7.2（进度环 / 番茄钟整屏）。 */
+#include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -246,4 +249,97 @@ void pet_render_scene(const pet_view_t *v, const pet_look_t *look,
     if (v != NULL && v->has_card) {
         draw_card(surface, &v->card);
     }
+}
+
+/* ---- M7 增量 2：番茄钟视图（契约 §7.1/§7.2）---- */
+
+/* 0°=12 点、顺时针（屏幕 y 向下，atan2(dx, -dy) 即给出顺时针角）。
+ * 自定义 PI：-std=c11 严格模式下 M_PI 不保证可见。 */
+#define POMO_PI 3.14159265358979323846
+
+#define POMO_RING_CX 67
+#define POMO_RING_CY 72
+#define POMO_RING_R  48
+#define POMO_RING_T  6
+#define POMO_C_FOCUS 0xFD20u /* 橙 */
+#define POMO_C_BREAK 0x07E0u /* 绿 */
+#define POMO_C_OTHER 0x8410u /* 灰 */
+#define POMO_C_TRACK 0x4208u
+#define POMO_C_TEXT  0xFFFFu /* 白 */
+
+void pet_render_ring(pet_surface_t *s, int cx, int cy, int r, int t,
+                     int progress_permille, uint16_t color, uint16_t track)
+{
+    if (s == NULL || s->pixels == NULL || r <= 0 || t < 0) {
+        return;
+    }
+    if (progress_permille < 0) {
+        progress_permille = 0;
+    } else if (progress_permille > 1000) {
+        progress_permille = 1000;
+    }
+
+    const int inner = (t < r) ? (r - t) : 0; /* 洞半径；t >= r 时退化为实心圆 */
+    for (int dy = -r; dy <= r; dy++) {
+        for (int dx = -r; dx <= r; dx++) {
+            const int d2 = dx * dx + dy * dy;
+            if (d2 > r * r || d2 < inner * inner) {
+                continue; /* 环外 / 洞内 */
+            }
+            double ang = atan2((double)dx, (double)(-dy)) * 180.0 / POMO_PI;
+            if (ang < 0) {
+                ang += 360.0;
+            }
+            const uint16_t c = (ang * 1000.0 <= (double)progress_permille * 360.0)
+                ? color
+                : track;
+            put_px(s, cx + dx, cy + dy, c);
+        }
+    }
+}
+
+static uint16_t pomo_phase_color(pet_pomo_phase_t phase)
+{
+    switch (phase) {
+    case PET_POMO_FOCUS:
+    case PET_POMO_FOCUS_PAUSED:
+        return POMO_C_FOCUS;
+    case PET_POMO_BREAK:
+    case PET_POMO_BREAK_PAUSED:
+        return POMO_C_BREAK;
+    default:
+        return POMO_C_OTHER;
+    }
+}
+
+void pet_render_pomo(pet_surface_t *s, const pet_pomo_view_t *v)
+{
+    if (s == NULL || s->pixels == NULL) {
+        return;
+    }
+    for (int y = 0; y < s->height; y++) {
+        for (int x = 0; x < s->width; x++) {
+            put_px(s, x, y, PET_SCENE_BG);
+        }
+    }
+    if (v == NULL) {
+        return;
+    }
+
+    /* 进度 = elapsed/total 千分比；total==0 → 0 */
+    const uint32_t elapsed = (v->total_ms > 0) ? v->total_ms - v->remaining_ms : 0;
+    const int permille = (v->total_ms > 0)
+        ? (int)((uint32_t)elapsed * 1000u / v->total_ms)
+        : 0;
+    pet_render_ring(s, POMO_RING_CX, POMO_RING_CY, POMO_RING_R, POMO_RING_T,
+                    permille, pomo_phase_color(v->phase), POMO_C_TRACK);
+
+    /* 中心剩余 M:SS，水平居中于环心 */
+    const uint32_t rem_s = v->remaining_ms / 1000u;
+    char txt[16];
+    snprintf(txt, sizeof txt, "%u:%02u", (unsigned)(rem_s / 60u),
+             (unsigned)(rem_s % 60u));
+    const int tx = POMO_RING_CX - (int)strlen(txt) * 8 / 2;
+    (void)pet_text_draw(s, tx, POMO_RING_CY - 4, txt, (int)sizeof txt,
+                        POMO_C_TEXT, 1);
 }

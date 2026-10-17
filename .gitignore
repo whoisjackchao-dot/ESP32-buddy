@@ -21,3 +21,7 @@ dependencies.lock
 .idea/
 *.swp
 .DS_Store
+
+# Python（主机侧入口核心）
+__pycache__/
+*.pyc

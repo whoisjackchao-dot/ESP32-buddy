@@ -1,0 +1,82 @@
+/* M4 增量 2b：设备侧收件（USB-Serial-JTAG → 事件行 → pet_state）。
+ * 契约：contracts/M4-事件入口与OpenCode接入契约清单.md §9.1/§9.2。
+ * 解析失败/超长：记 warn、丢弃、不改状态、不崩。 */
+#include "pet_rx.h"
+
+#include <string.h>
+
+#include "driver/usb_serial_jtag.h"
+#include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+#include "pet_hal.h"
+#include "pet_linebuf.h"
+#include "pet_link.h"
+#include "pet_state.h"
+#include "pet_types.h"
+
+static const char *TAG = "pet-rx";
+
+static struct pet_state *s_state;
+
+static void apply_line(const char *line, size_t len)
+{
+    pet_link_msg_t msg;
+    const pet_link_status_t st = pet_link_parse(line, len, &msg);
+    if (st != PET_LINK_OK) {
+        ESP_LOGW(TAG, "link parse err=%d（已丢弃）", (int)st);
+        return;
+    }
+
+    pet_event_t ev;
+    memset(&ev, 0, sizeof ev);
+    ev.kind = msg.kind;
+    ev.now_ms = pet_hal_now_ms();
+    pet_state_apply(s_state, &ev);
+    if (msg.has_card) {
+        pet_state_set_card(s_state, &msg.card);
+    }
+}
+
+static void rx_task(void *arg)
+{
+    (void)arg;
+    pet_linebuf_t lb;
+    pet_linebuf_init(&lb);
+
+    uint8_t chunk[128];
+    for (;;) {
+        const int n = usb_serial_jtag_read_bytes(chunk, sizeof chunk, pdMS_TO_TICKS(100));
+        if (n <= 0) {
+            continue;
+        }
+        for (int i = 0; i < n; i++) {
+            const pet_line_feed_t r = pet_linebuf_feed(&lb, (char)chunk[i]);
+            if (r == PET_LINE_DROPPED) {
+                ESP_LOGW(TAG, "line too long（已丢弃）");
+            } else if (r == PET_LINE_READY && lb.buf[0] != '\0') {
+                apply_line(lb.buf, lb.len);
+            }
+        }
+    }
+}
+
+void pet_rx_start(struct pet_state *s)
+{
+    s_state = s;
+
+    usb_serial_jtag_driver_config_t cfg = {
+        .tx_buffer_size = 256,
+        .rx_buffer_size = 1024,
+    };
+    const esp_err_t err = usb_serial_jtag_driver_install(&cfg);
+    if (err != ESP_OK && err != ESP_ERR_INVALID_STATE) {
+        ESP_LOGE(TAG, "usb_serial_jtag 驱动安装失败: %d", (int)err);
+        return;
+    }
+
+    if (xTaskCreate(rx_task, "pet-rx", 4096, NULL, 5, NULL) != pdPASS) {
+        ESP_LOGE(TAG, "收件任务创建失败");
+    }
+}

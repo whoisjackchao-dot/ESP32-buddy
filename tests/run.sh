@@ -50,4 +50,32 @@ echo "== test_pet_link =="
     -o "$BUILD/test_pet_link"
 "$BUILD/test_pet_link" || status=1
 
+echo "== test_pet_pomo =="
+"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+    tests/test_pet_pomo.c \
+    firmware/components/pet/pet_pomo.c \
+    -o "$BUILD/test_pet_pomo"
+"$BUILD/test_pet_pomo" || status=1
+
+echo "== test_pet_linebuf =="
+"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+    tests/test_pet_linebuf.c \
+    firmware/components/pet/pet_linebuf.c \
+    -o "$BUILD/test_pet_linebuf"
+"$BUILD/test_pet_linebuf" || status=1
+
+echo "== test_pet_button =="
+"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+    tests/test_pet_button.c \
+    firmware/components/pet/pet_button.c \
+    -o "$BUILD/test_pet_button"
+"$BUILD/test_pet_button" || status=1
+
+echo "== test_pet_keymap =="
+"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+    tests/test_pet_keymap.c \
+    firmware/components/pet/pet_keymap.c \
+    -o "$BUILD/test_pet_keymap"
+"$BUILD/test_pet_keymap" || status=1
+
 exit "$status"

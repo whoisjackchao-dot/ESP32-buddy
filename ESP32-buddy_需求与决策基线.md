@@ -1,7 +1,7 @@
 # ESP32-buddy 需求与决策基线（阶段 0–1）
 
-> 日期：2026-10-16；版本：**v0.2（重新基线）**
-> 状态：**本文不是已实现的软件说明。本轮没有编写代码、没有安装、没有烧录。**
+> 日期：2026-10-16；版本：**v0.3**（v0.2 重新基线 + 2026-10-16 补：新机器环境缺口 `B15`、`B13` 补注）
+> 状态：**本文是阶段 0–1 的基线与决策记录**（编写当轮未编写代码、未安装、未烧录）；**节点/实现状态以 [文档索引](./ESP32-buddy_文档索引.md) 为准**。
 >
 > **结论范围声明**：本文基于 vibebuddy 源码（已 clone）、其 `docs/protocol.md` / `docs/pet.md` / `docs/leisure.md` / `docs/pomodoro.md`、以及 StickS3 硬件知识文档。属**类型/源码级**与**官方文档级**证据，**不是**本项目的实机验收。
 
@@ -83,7 +83,7 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 | Q12 🔴 | **Agent 集合**：**先只做 OpenCode** | ✅ 已批准（2026-10-16） | M4（其余留待 spike） |
 | Q13 🔴 | **本机事件入口**：放**主机层**（Windows 主机开本机入口） | ✅ 已批准（2026-10-16） | M4 |
 | Q14 | **时间源**：设备走 **WiFi/NTP** | ✅ 已批准（2026-10-16） | M8 |
-| Q15 | **回到 Agent 窗口**（Windows） | ⏳ 待批准（**阻塞 M6**；用户暂缓，不影响 M1–M5） | M6 |
+| Q15 🔴 | **回到 Agent 窗口**（Windows）：**采纳方案 B** —— 主机侧 helper 激活"运行 opencode 的终端窗口" | ✅ 已批准（2026-10-16；用户确认 OpenCode 为**终端 TUI**；同时授权限范围 `B08` spike） | M6 |
 | Q16 | **传输**：设备**需要 WiFi** | ✅ 已批准（2026-10-16） | 全案 |
 | **Q17** 🟡 | **WiFi 的角色**：仅**授时(NTP)**？还是也做**设备↔主机传输**？是否做**中继(Relay)**？**BLE 是否保留**？ | ⏳ 待批准（**阻塞 WiFi 节点**） | M4/M5 |
 | **Q18** | **立绘来源**：M1 用**自绘极简占位立绘**（净室原创，`tools/make-look.py` 生成） | ✅ 已批准（2026-10-16） | M1 |
@@ -118,6 +118,11 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 > **B13**（2026-10-16）：用户选择在 WSL 安装 `build-essential` 以恢复 host 单测。**在命令执行成功前，M1 的 T 类证据不成立**；不得以其他方式伪造 RED。
 > **Q09**（2026-10-16）：**已发布**到 GitHub 公开仓库 `whoisjackchao-dot/ESP32-buddy`（用户已备好路径并授权）。发布前做了**隐私清理**：内网代理地址已脱敏；构建产物、`sim/`、`sdkconfig`、`flash/*.bin` **不入库**。本批准**不覆盖**后续是否打 tag / 发 Release（仍需另行授权）。
 
+> **Q15**（2026-10-16，新机器会话）：**采纳 `ADR-01` 方案 B**——"回到 Agent 窗口" = 由**主机侧 helper 激活"运行 opencode 的终端窗口"**（用户确认 OpenCode 以**终端 TUI** 运行，故目标窗口 = 承载它的终端；实测本机为 `WindowsTerminal`，窗口类 `CASCADIA_HOSTING_WINDOW_CLASS`，标题形如 `OC | <会话名>`）。**同时授权**一个**限范围 `B08` spike**验证激活可行性。
+> **本批准不覆盖**：① 任意窗口定位（`B08` 仍不承诺）；② 非 OpenCode 的 Agent（`Q12`）；③ 远程 / SSH / 后台会话（无窗口可回）；④ **具体激活手段**（`SetForegroundWindow` / `AttachThreadInput` / taskbar flash `FlashWindowEx`）——待 `B08` spike 定。
+> **实施前置（门）**：`B08` spike 通过；spike 失败则按 `ADR-01` 切换规则**重评（A / C）并回报用户**，**不静默禁用按键**。
+> **证据**：`evidence/B08-回窗口可行性-spike.md`（实测 + 协议；结论为"条件可行，需 helper 内实现稳健激活例程并真机复测"）。
+
 ## 5. 缺口台账（B）
 
 | ID | 缺口 | 需要的证据 | 当前处理（口径限制） |
@@ -133,8 +138,9 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 | **B10** | 3 卡栈的排序/优先级规则 | 设计评审 | 先 1 卡；多卡规则后定 |
 | **B11** 🟡 | WiFi **配网流程**（SSID/密码怎么给用户配？）与 **NTP 授时**可行性 | M4/M8 实机 | Q16 已定要 WiFi，但配网方式未定；**不承诺**无 App 即可配网 |
 | **B12** | WiFi 与 BLE 并存的功耗/共存（StickS3 电池 250mAh） | M8 实测 | **不承诺**续航数字 |
-| **B13** | **host C 编译器缺失**（**根因已定位**）：WSL 无 `gcc/clang/cc/make`；`sudo apt-get` 失败的原因是 **企业代理未配给 apt**（`sudo` 剥掉 `http_proxy`，apt 直连 → IPv6 不可达 / IPv4 超时） | 给 apt 配 `Acquire::http(s)::Proxy` + `ForceIPv4`（见下），再 `install build-essential` | ✅ 已解决（2026-10-16，`cc 15.2.0` 可用） |
-| **B14** | **设备无法从 WSL 刷写**：设备在 Windows 侧可见（`COM5`, `VID_303A&PID_1001` ✅），但 WSL2 不能用 Windows 的 COM 口。`usbipd-win` 5.3.0 已装、`bind --force` 成功、`vhci_hcd` 已在 WSL 加载，但 **attach 被组策略挡**：WSL 网卡 `vEthernet (WSL (Hyper-V firewall))` **无网络配置文件**（默认按 Public），组策略禁止 Public 入站，TCP 3240 连不上 | ① 试 `Set-NetConnectionProfile ... -NetworkCategory Private`；② 不行则**改在 Windows 侧刷**（装 Python+esptool，直刷 `COM5`，不依赖 3240） | ⏳ 未解决前 M1 的 H 证据不成立；三件套已备至 `ESP32-buddy/flash/` |
+| **B13** | **host C 编译器缺失**（**根因已定位**）：WSL 无 `gcc/clang/cc/make`；`sudo apt-get` 失败的原因是 **企业代理未配给 apt**（`sudo` 剥掉 `http_proxy`，apt 直连 → IPv6 不可达 / IPv4 超时） | 给 apt 配 `Acquire::http(s)::Proxy` + `ForceIPv4`（见下），再 `install build-essential` | ✅ 已解决（2026-10-16，`cc 15.2.0` 可用）**〔补注：仅原开发机成立；换机后见 `B15`〕** |
+| **B14** | **设备无法从 WSL 刷写**：设备在 Windows 侧可见（`COM5`, `VID_303A&PID_1001` ✅），但 WSL2 不能用 Windows 的 COM 口。`usbipd-win` 5.3.0 已装、`bind --force` 成功、`vhci_hcd` 已在 WSL 加载，但 **attach 被组策略挡**：WSL 网卡 `vEthernet (WSL (Hyper-V firewall))` **无网络配置文件**（默认按 Public），组策略禁止 Public 入站，TCP 3240 连不上 | ① 试 `Set-NetConnectionProfile ... -NetworkCategory Private`；② 不行则**改在 Windows 侧刷**（装 Python+esptool，直刷 `COM5`，不依赖 3240） | ✅ **已解除（2026-10-17，改走方案②）**：用 Windows 侧 esptool 刷 `COM5` 成功并运行，见 `evidence/2026-10-17-实机刷机-H.md`；三件套在 `ESP32-buddy/flash/` |
+| **B15** | **环境基线不可复现（新机器，2026-10-16）**：换机后**无系统 C 编译器、无免密 sudo、无 ESP-IDF（`~/esp` 空）、无旧项目（`sticks3-opencode` 空）**；`B13` 的"已解决"仅对**原开发机**成立 | ① **用户态工具链**：`zig cc`（无 root，已实测，见 `evidence/2026-10-16-新机器环境基线.md`）；② 有 sudo 的机器：装 `build-essential` + ESP-IDF；③ **发现 Windows 侧已有 IDF v5.5.4**（`D:\Espressif`） | ✅ host 单测用 `zig cc` 复现；**固件构建已可**（Windows IDF，见 `evidence/2026-10-17-实机刷机-H.md`）；Linux/WSL 侧仍无 IDF；首次需修 venv 的 `esptool`（`~=4.12`） |
 
 ## 6. 验收门槛（G）
 
@@ -160,9 +166,8 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 
 ## 8. 待审定事项
 
-1. **Q11 按键映射**（🔴 阻塞 M6）——StickS3 只有 2 键，产品要 5 种操作。
-2. **Q13 本机事件入口**（🔴 阻塞 M4）——放主机层还是设备层？用什么协议？
-3. **Q12 Agent 集合**（🔴 阻塞 M7）——除 OpenCode 外还要哪些？
-4. Q14 时间源 / Q15 回窗口 / Q16 传输。
-5. Q08 / Q09 / Q10（遗留）。
-6. G1–G7 门槛数值是否认可。
+1. **Q17 WiFi 的角色**（🟡 阻塞 WiFi 节点 / 关联 M4·M8）——仅授时 / 也做传输 / 是否保留 BLE。
+2. **Q10 语义常量终值**（现按提案实现，见 `contracts/参数冻结表.md`）。
+3. **G1–G7 门槛数值**是否认可。
+
+> **已决并归档**（不再重复询问）：`Q01–Q09`（含 `Q09` 已发布）、`Q11–Q16`、`Q18`；`Q15` 于 2026-10-16 采纳 **方案 B**。见 §4 批准记录。

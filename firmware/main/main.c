@@ -4,15 +4,27 @@
 #include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "nvs_flash.h"
 
 #include "pet_engine.h"
 #include "pet_hal_sticks3.h"
+#include "pet_keys.h"
+#include "pet_rx.h"
 
 static const char *TAG = "esp32-buddy";
 
 void app_main(void)
 {
     ESP_LOGI(TAG, "ESP32-buddy M1 启动");
+
+    esp_err_t nv = nvs_flash_init();
+    if (nv == ESP_ERR_NVS_NO_FREE_PAGES || nv == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        (void)nvs_flash_erase();
+        nv = nvs_flash_init();
+    }
+    if (nv != ESP_OK) {
+        ESP_LOGW(TAG, "NVS 初始化失败：%d（番茄钟统计不落盘）", (int)nv);
+    }
 
     if (pet_hal_sticks3_install() != ESP_OK) {
         ESP_LOGE(TAG, "DISPLAY ERROR（硬件层安装失败）");
@@ -24,6 +36,8 @@ void app_main(void)
     pet_engine_init();
     pet_engine_redraw();
     pet_engine_start();
+    pet_rx_start(pet_engine_state());
+    pet_keys_start();
     ESP_LOGI(TAG, "PIXEL CARD READY（宠物已显示，动画节拍启动）");
 
     while (1) {

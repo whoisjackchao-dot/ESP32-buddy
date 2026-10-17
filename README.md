@@ -4,7 +4,7 @@
 >
 > **本仓库是净室重实现（clean-room reimplementation）**：借鉴 [second-state/vibebuddy](https://github.com/second-state/vibebuddy) 的**设计与事件模型**，不搬其 Rust 代码。固件为 **C / ESP-IDF**。
 
-**当前状态：以 [文档索引](./ESP32-buddy_文档索引.md) 为准。** 当前处于 **阶段 2（规划）**，尚未开始编码。
+**当前状态：以 [文档索引](./ESP32-buddy_文档索引.md) 为准。** 当前处于 **阶段 3（开发）**：M1–M5 的 host 侧（T 类）已实现并单测通过，M6–M8 未开工；**全部 H 类（真机）证据待刷机**。
 
 ## 1. 目标与范围
 
@@ -43,12 +43,15 @@
 
 | 项 | 工具 | 状态 |
 | --- | --- | --- |
-| 固件 | ESP-IDF **v5.5.4**（release/v5.5），目标 esp32s3 | ✅ 已装 |
-| 固件 | xtensa-esp-elf 14.2.0 | ✅ |
+| 固件 | ESP-IDF **v5.5.4**（release/v5.5），目标 esp32s3 | ✅ 已装（**原开发机**；新机器未装 → 缺口 `B15`） |
+| 固件 | xtensa-esp-elf 14.2.0 | ✅ 同上 |
 | 构建 | 构建目录必须放 **WSL 原生盘**（`-B ~/esp-build/...`），放 `/mnt/c` 慢约 30 倍 | ⚠️ 已知 |
-| 通用 | 系统 python3 为 3.14，ESP-IDF 需 ≤3.13 → 用 `tools/idf-env.sh` 包装 | ⚠️ 已知 |
+| 通用 | 系统 python3 为 3.14，ESP-IDF 需 ≤3.13 → 用 `tools/idf-env.sh` 包装 | ✅ 已建立 |
+| 通用 | host 单测 `tests/run.sh`（T 类），需要 `cc` | ⚠️ 新机器无系统编译器时，用用户态 `zig cc` 作 `cc`（见 `B15`） |
 
-> 本仓库尚未建立 `tools/idf-env.sh`；M1 开工前从旧项目移植或重建。
+> `tools/idf-env.sh` 已建立（包装 ESP-IDF 的 venv 与代理）。
+> **换机注意**：新机器缺 `cc`/ESP-IDF/旧项目时，host 单测可用用户态 `zig cc` 复现（**188/0**），
+> 但**固件构建与 H 类证据仍不可**——详见 `evidence/2026-10-16-新机器环境基线.md` 与缺口 `B15`。
 
 ## 5. 许可
 

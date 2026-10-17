@@ -338,6 +338,147 @@ static void states_render_differently(void)
     CHECK(offline != work);
 }
 
+/* ---- M7 增量 2：番茄钟进度环（POMO-05，契约 M7 §7.1）----
+ * 小画布 + 哨兵底色：断言只落在 12/3/6/9 点的带上像素与洞内像素。
+ * 角度约定：0°=12 点，顺时针（3 点=90°、6 点=180°、9 点=270°）。 */
+
+#define RW 64
+#define RH 64
+#define RCX 32
+#define RCY 32
+#define RR 20
+#define RT 4
+#define RING_COLOR 0xFD20u /* 橙（=契约 7.1 FOCUS 色） */
+#define RING_TRACK 0x4208u /* 轨道 */
+
+static uint8_t       rfb[RW * RH * 2];
+static pet_surface_t rsurf;
+
+static void ring_fill(uint16_t c)
+{
+    for (int y = 0; y < RH; y++) {
+        for (int x = 0; x < RW; x++) {
+            put_px(&rsurf, x, y, c);
+        }
+    }
+}
+
+static void ring05_progress_zero_is_track(void)
+{
+    ring_fill(SENTINEL);
+    pet_render_ring(&rsurf, RCX, RCY, RR, RT, 0, RING_COLOR, RING_TRACK);
+    /* 3 点 = 90°：90×1000 > 0×360 → 轨道色 */
+    CHECK(get_px(&rsurf, RCX + RR, RCY) == RING_TRACK);
+}
+
+static void ring05_quarter_boundary_is_color_start_not_reached(void)
+{
+    ring_fill(SENTINEL);
+    pet_render_ring(&rsurf, RCX, RCY, RR, RT, 250, RING_COLOR, RING_TRACK);
+    /* 90° 边界含入：90×1000 <= 250×360 → 已填充 */
+    CHECK(get_px(&rsurf, RCX + RR, RCY) == RING_COLOR);
+    /* 270° 尚未填充 */
+    CHECK(get_px(&rsurf, RCX - RR, RCY) == RING_TRACK);
+    /* 12 点 = 0° = 起点，在环带上且从进度一开始就是进度色 */
+    CHECK(get_px(&rsurf, RCX, RCY - RR) == RING_COLOR);
+}
+
+static void ring05_full_covers_cardinals(void)
+{
+    ring_fill(SENTINEL);
+    pet_render_ring(&rsurf, RCX, RCY, RR, RT, 1000, RING_COLOR, RING_TRACK);
+    CHECK(get_px(&rsurf, RCX + RR, RCY) == RING_COLOR); /* 3 点 */
+    CHECK(get_px(&rsurf, RCX, RCY + RR) == RING_COLOR); /* 6 点 */
+    CHECK(get_px(&rsurf, RCX - RR, RCY) == RING_COLOR); /* 9 点 */
+}
+
+static void ring05_hole_inside_untouched(void)
+{
+    ring_fill(SENTINEL);
+    pet_render_ring(&rsurf, RCX, RCY, RR, RT, 1000, RING_COLOR, RING_TRACK);
+    /* 环心 (0 < (R-T)²) 与洞内另一点 (T² < (R-T)²) 必须保持哨兵 */
+    CHECK(get_px(&rsurf, RCX, RCY) == SENTINEL);
+    CHECK(get_px(&rsurf, RCX - RT, RCY) == SENTINEL);
+}
+
+/* ---- M7 增量 2：番茄钟整屏视图（契约 M7 §7.1/§7.2）---- */
+
+#define PW 135
+#define PH 240
+
+static uint8_t       pfb[PW * PH * 2];
+static pet_surface_t psurf;
+
+static void pomo_fill(uint16_t c)
+{
+    for (int y = 0; y < PH; y++) {
+        for (int x = 0; x < PW; x++) {
+            put_px(&psurf, x, y, c);
+        }
+    }
+}
+
+static bool pomo_all_bg(void)
+{
+    for (int y = 0; y < PH; y++) {
+        for (int x = 0; x < PW; x++) {
+            if (get_px(&psurf, x, y) != PET_SCENE_BG) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/* 中心文本区在环洞内（d² <= 27²+4² < 42²），白色只可能来自 M:SS 文本 */
+static bool pomo_center_text_visible(void)
+{
+    for (int y = 68; y < 76; y++) {
+        for (int x = 40; x < 94; x++) {
+            if (get_px(&psurf, x, y) == 0xFFFFu) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+static void pomo_view_null_is_bg_only(void)
+{
+    pomo_fill(SENTINEL);
+    pet_render_pomo(&psurf, NULL);
+    CHECK(pomo_all_bg());
+}
+
+static void pomo_view_focus_track_ring_and_center_text(void)
+{
+    const pet_pomo_view_t v = {
+        .phase = PET_POMO_FOCUS,
+        .remaining_ms = POMO_FOCUS_MS,
+        .total_ms = POMO_FOCUS_MS,
+    };
+    pet_render_pomo(&psurf, &v);
+    /* 进度 0：3 点方向 = 轨道色 */
+    CHECK(get_px(&psurf, 67 + 48, 72) == 0x4208u);
+    /* 12 点起点 = 进度色（FOCUS 橙） */
+    CHECK(get_px(&psurf, 67, 72 - 48) == 0xFD20u);
+    /* 中心剩余 "25:00" 白字 */
+    CHECK(pomo_center_text_visible());
+}
+
+static void pomo_view_break_full_ring_green(void)
+{
+    const pet_pomo_view_t v = {
+        .phase = PET_POMO_BREAK,
+        .remaining_ms = 0,
+        .total_ms = POMO_BREAK_MS,
+    };
+    pet_render_pomo(&psurf, &v);
+    /* 进度 1000‰：整环进度色（BREAK 绿） */
+    CHECK(get_px(&psurf, 67 + 48, 72) == 0x07E0u);
+    CHECK(get_px(&psurf, 67 - 48, 72) == 0x07E0u);
+}
+
 int main(int argc, char **argv)
 {
     const char *path = (argc > 1) ? argv[1] : PET_FIXTURE;
@@ -347,6 +488,16 @@ int main(int argc, char **argv)
     surface.width = SW;
     surface.height = SH;
     surface.stride = SW * 2;
+
+    rsurf.pixels = rfb;
+    rsurf.width = RW;
+    rsurf.height = RH;
+    rsurf.stride = RW * 2;
+
+    psurf.pixels = pfb;
+    psurf.width = PW;
+    psurf.height = PH;
+    psurf.stride = PW * 2;
 
     RUN(parse_rejects_bad_magic);
     RUN(parse_rejects_short);
@@ -367,6 +518,14 @@ int main(int argc, char **argv)
     } else {
         CHECK(g_look != NULL); /* 合法包解析不出来本身就是一条失败 */
     }
+
+    RUN(ring05_progress_zero_is_track);
+    RUN(ring05_quarter_boundary_is_color_start_not_reached);
+    RUN(ring05_full_covers_cardinals);
+    RUN(ring05_hole_inside_untouched);
+    RUN(pomo_view_null_is_bg_only);
+    RUN(pomo_view_focus_track_ring_and_center_text);
+    RUN(pomo_view_break_full_ring_green);
 
     free(g_bytes);
     REPORT();
