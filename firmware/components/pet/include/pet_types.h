@@ -47,6 +47,7 @@ typedef struct {
     pet_frame_t frame;
     bool        mirror;
     bool        gray;
+    bool        hair_right; /* 头顶毛发相位：false=左 / true=右（~1s 与眨眼同频） */
     bool        has_card;
     pet_card_t  card;
 } pet_view_t;

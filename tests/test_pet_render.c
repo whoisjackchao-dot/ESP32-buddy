@@ -24,7 +24,7 @@
 /* 立绘包格式常量（与 tools/make-look.py 的规格一致；测试侧独立实现） */
 #define LOOK_W 48
 #define LOOK_H 64
-#define LOOK_FRAMES 6
+#define LOOK_FRAMES 12 /* 6 态 × 2 毛发相位 */
 #define LOOK_COLORS 16
 #define LOOK_FRAME_BYTES (LOOK_W * LOOK_H / 2)
 #define LOOK_HEADER (8 + LOOK_COLORS * 2)
@@ -167,14 +167,14 @@ static void parse_accepts_valid_pack(void)
     pet_look_free(l);
 }
 
-/* 立绘 6 帧规格（2026-10-17 扩帧）：尺寸/帧数与 pet_frame_t 对齐 */
-static void parse_pack_is_6_frames_of_expected_size(void)
+/* 立绘 12 帧规格（2026-10-17 扩帧+毛发相位）：尺寸/帧数与 pet_frame_t 对齐 */
+static void parse_pack_is_12_frames_of_expected_size(void)
 {
     CHECK(g_len == LOOK_BYTES);
     CHECK(g_bytes[4] == LOOK_W);
     CHECK(g_bytes[5] == LOOK_H);
     CHECK(g_bytes[6] == LOOK_FRAMES);
-    CHECK(LOOK_FRAMES == PET_FRAME_COUNT);
+    CHECK(LOOK_FRAMES == PET_FRAME_COUNT * 2);
 }
 
 /* ---- 绘制类 ---- */
@@ -290,7 +290,7 @@ static uint8_t *make_synthetic(uint8_t idx, int px, int py)
     buf[7] = 0;
     buf[8 + 2 * idx] = 0xE0;
     buf[9 + 2 * idx] = 0x07; /* 0x07E0 绿 */
-    const int at = py * LOOK_W + px;
+    const int at = py * LOOK_W + px; /* 写在帧 0（frame=0, hair_right=false → 0*2+0） */
     uint8_t *cell = &buf[LOOK_HEADER + at / 2];
     *cell |= (uint8_t)((at % 2 == 0) ? idx : (idx << 4));
     return buf;
@@ -611,7 +611,7 @@ int main(int argc, char **argv)
     RUN(parse_rejects_bad_magic);
     RUN(parse_rejects_short);
     RUN(parse_accepts_valid_pack);
-    RUN(parse_pack_is_6_frames_of_expected_size);
+    RUN(parse_pack_is_12_frames_of_expected_size);
 
     g_look = pet_look_parse(g_bytes, g_len);
     if (g_look != NULL) {

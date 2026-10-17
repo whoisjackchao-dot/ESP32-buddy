@@ -14,7 +14,7 @@
 #define LOOK_MAGIC      "LOOK"
 #define LOOK_W          48
 #define LOOK_H          64
-#define LOOK_FRAMES     6
+#define LOOK_FRAMES     12 /* 6 态 × 2 毛发相位 */
 #define LOOK_COLORS     16
 #define LOOK_FRAME_BYTES (LOOK_W * LOOK_H / 2)
 #define LOOK_HEADER     (8 + LOOK_COLORS * 2)
@@ -124,7 +124,7 @@ void pet_render_pet(const pet_view_t *v, const pet_look_t *look,
     if (surface->width <= 0 || surface->height <= 0)
         return;
 
-    int frame = (v != NULL) ? (int)v->frame : (int)PET_FRAME_NORMAL;
+    int frame = (v != NULL) ? ((int)v->frame * 2 + (v->hair_right ? 1 : 0)) : 0;
     if (frame < 0 || frame >= LOOK_FRAMES)
         frame = 0;
     const bool gray = (v != NULL) && v->gray;

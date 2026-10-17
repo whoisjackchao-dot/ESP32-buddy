@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""生成 6 帧原创"毛茸茸头像"立绘（Muse/Jolly 风格**启发**，不复制任何素材）。
+"""生成 12 帧原创"毛茸茸头像"立绘（Muse/Jolly 风格**启发**，不复制任何素材）。
 
-只画**一个蓬松的头**：无身体、无四肢、无耳朵；用蓬松剪影 + 柔和明暗表达"毛茸茸"。
-帧序（与 pet_frame_t 0..5 一致）：
-    0 NORMAL / 1 EYES_CLOSED / 2 HAPPY / 3 SAD / 4 WORKING / 5 INPUT
+只画**一个蓬松的圆头**：无身体、无四肢、无耳朵；顶部有一撮会**左右摆动**的毛。
+12 帧 = 6 态 × 2 个毛发相位（左/右），帧序：
+    0/1 IDLE(L/R)  2/3 CLOSED  4/5 HAPPY  6/7 SAD  8/9 WORKING  10/11 INPUT
+渲染时按 `frame*2 + hair_right` 取帧；相位由 pet_state 按 ~1s 周期切换（与眨眼同频）。
 
 格式（LOOK 包，与固件 pet_render/pet_look_parse 一致）：
-    0 magic "LOOK"；4 u8 w(48) h(64) frames(6) zero；8 u16[16] palette(RGB565 LE)；
+    0 magic "LOOK"；4 u8 w(48) h(64) frames(12) zero；8 u16[16] palette(RGB565 LE)；
    40 frames，4bpp，行优先，左像素在低半字节。
 
 用法：python3 tools/make-look.py > firmware/components/pet/assets/robot.look
@@ -15,7 +16,7 @@ import math
 import struct
 import sys
 
-W, H, FRAMES = 48, 64, 6
+W, H, FRAMES = 48, 64, 12
 
 
 def c(r, g, b):
@@ -58,7 +59,7 @@ def in_fluff(x, y, cx, cy, rx, ry):
     t = (y + 0.5 - cy) / ry
     if t < -1.0 or t > 1.0:
         return False
-    half = math.sqrt(max(0.0, 1.0 - t * t)) * (1.0 + 0.35 * t)  # 梨形：上窄下宽
+    half = math.sqrt(max(0.0, 1.0 - t * t)) * (1.0 + 0.15 * t)  # 近圆、略呈梨形
     if half <= 0.0:
         return False
     u = ((x + 0.5 - cx) / rx) / half
@@ -83,15 +84,31 @@ def fluff_head(g):
                 if not (0 <= nx < W and 0 <= ny < H) or g[ny][nx] == T:
                     g[y][x] = OUT
                     break
+
     def tuft(x, y, col):
         if 0 <= x < W and 0 <= y < H and g[y][x] == BODY:
             g[y][x] = col
 
-    # 顶部左侧高光毛簇 / 底部右侧阴影毛簇（少量，避免噪点）
     for (x, y) in ((9, 16), (11, 13), (14, 11), (18, 10)):
         tuft(x, y, WH)
     for (x, y) in ((9, 46), (13, 50), (18, 53), (24, 54), (30, 53), (35, 50), (39, 46)):
         tuft(x, y, SHADOW)
+
+
+def hair(g, off):
+    # 头顶一撮毛：下宽上窄，越高摆动越大（off = -1 / +1）
+    rows = [
+        (11, -2, 4),
+        (10, -2, 4),
+        (9, -2, 3),
+        (8, -3, 2),
+        (7, -3, 2),
+        (6, -3, 2),
+    ]
+    for (y, xs, w) in rows:
+        shift = off * ((11 - y) // 2)
+        for k in range(w):
+            setp(g, 24 + xs + k + shift, y, OUT)
 
 
 def disc(g, cx, cy, rx, ry, fill):
@@ -118,105 +135,69 @@ def sparkle(g, cx, cy, col):
         setp(g, cx, cy - d, col)
 
 
-def eyes_open(g, dy=0, wide=False):
+def face_idle(g):
     for ex in (17, 31):
-        disc(g, ex, 32 + dy, 2.4 if wide else 2.2, 3.4 if wide else 3.2, OUT)
-        setp(g, ex - 1, 30 + dy, WH)
-
-
-def eyes_closed(g, dy=0, happy=False):
-    for ex in (17, 31):
-        if happy:
-            for (dx, ddy) in ((-2, 1), (-1, 0), (0, 0), (1, 1)):
-                setp(g, ex + dx, 33 + dy + ddy, OUT)
-        else:
-            for (dx, ddy) in ((-2, 0), (-1, 1), (0, 1), (1, 0)):
-                setp(g, ex + dx, 33 + dy + ddy, OUT)
-
-
-def mouth_smile(g, dy=0):
-    for (dx, ddy) in ((-2, 0), (-1, 1), (0, 1), (1, 0)):
-        setp(g, 24 + dx, 41 + dy + ddy, OUT)
-
-
-def mouth_line(g, dy=0):
-    for dx in (-1, 0, 1):
+        disc(g, ex, 32, 2.2, 3.2, OUT)
+        setp(g, ex - 1, 30, WH)
+    disc(g, 10, 39, 2.5, 1.5, BL)
+    disc(g, 38, 39, 2.5, 1.5, BL)
+    for (dx, dy) in ((-2, 0), (-1, 1), (0, 1), (1, 0)):
         setp(g, 24 + dx, 41 + dy, OUT)
 
 
-def mouth_o(g, dy=0):
-    disc(g, 24, 41 + dy, 1.5, 1.5, OUT)
+def face_closed(g):
+    for ex in (17, 31):
+        for (dx, dy) in ((-2, 0), (-1, 1), (0, 1), (1, 0)):
+            setp(g, ex + dx, 33 + dy, OUT)
+    disc(g, 10, 39, 2.5, 1.5, BL)
+    disc(g, 38, 39, 2.5, 1.5, BL)
+    for dx in (-1, 0, 1):
+        setp(g, 24 + dx, 41, OUT)
 
 
-def blush(g, dy=0):
-    disc(g, 10, 39 + dy, 2.5, 1.5, BL)
-    disc(g, 38, 39 + dy, 2.5, 1.5, BL)
-
-
-def frame_idle():
-    g = blank()
-    fluff_head(g)
-    eyes_open(g)
-    blush(g)
-    mouth_smile(g)
-    return g
-
-
-def frame_closed():
-    g = blank()
-    fluff_head(g)
-    eyes_closed(g)
-    blush(g)
-    mouth_line(g)
-    return g
-
-
-def frame_happy():
-    g = blank()
-    fluff_head(g)
-    eyes_closed(g, happy=True)
-    blush(g)
+def face_happy(g):
+    for ex in (17, 31):
+        for (dx, dy) in ((-2, 1), (-1, 0), (0, 0), (1, 1)):
+            setp(g, ex + dx, 33 + dy, OUT)
+    disc(g, 10, 39, 2.5, 1.5, BL)
+    disc(g, 38, 39, 2.5, 1.5, BL)
     disc(g, 24, 41, 2.5, 2, OUT)
     setp(g, 24, 42, BL)
-    sparkle(g, 2, 13, SPK)
-    sparkle(g, 46, 15, SPK)
-    return g
+    sparkle(g, 2, 15, SPK)
+    sparkle(g, 46, 17, SPK)
 
 
-def frame_sad():
-    g = blank()
-    fluff_head(g)
+def face_sad(g):
     for (x, y) in ((14, 26), (15, 27), (16, 28)):
         setp(g, x, y, OUT)
         setp(g, 47 - x + 1, y, OUT)
     for ex in (17, 31):
         disc(g, ex, 33, 2, 2.5, OUT)
         setp(g, ex - 1, 35, WH)
-    blush(g)
-    for (dx, ddy) in ((-2, 1), (-1, 0), (0, 1), (1, 0), (2, 1)):
-        setp(g, 24 + dx, 41 + ddy, OUT)
-    for (x, y) in ((42, 15), (42, 16), (41, 17), (42, 17), (43, 17), (41, 18), (42, 18), (43, 18)):
+    disc(g, 10, 39, 2.5, 1.5, BL)
+    disc(g, 38, 39, 2.5, 1.5, BL)
+    for (dx, dy) in ((-2, 1), (-1, 0), (0, 1), (1, 0), (2, 1)):
+        setp(g, 24 + dx, 41 + dy, OUT)
+    for (x, y) in ((42, 17), (42, 18), (41, 19), (42, 19), (43, 19), (41, 20), (42, 20), (43, 20)):
         setp(g, x, y, DROP)
-    setp(g, 41, 17, WH)
-    return g
+    setp(g, 41, 19, WH)
 
 
-def frame_working():
-    g = blank()
-    fluff_head(g)
+def face_working(g):
     for ex in (17, 31):
         disc(g, ex, 34, 2.2, 1.4, OUT)
         setp(g, ex - 1, 32, WH)
-    mouth_line(g)
-    return g
+    for dx in (-1, 0, 1):
+        setp(g, 24 + dx, 41, OUT)
 
 
-def frame_input():
-    g = blank()
-    fluff_head(g)
-    eyes_open(g, wide=True)
-    blush(g)
-    mouth_o(g)
+def face_input(g):
+    for ex in (17, 31):
+        disc(g, ex, 32, 2.4, 3.4, OUT)
+        setp(g, ex - 1, 30, WH)
+    disc(g, 10, 39, 2.5, 1.5, BL)
+    disc(g, 38, 39, 2.5, 1.5, BL)
+    disc(g, 24, 41, 1.5, 1.5, OUT)
     rect(g, 1, 2, 7, 10, OUT)
     rect(g, 2, 3, 6, 9, WH)
     setp(g, 1, 2, T)
@@ -227,10 +208,20 @@ def frame_input():
     setp(g, 4, 9, MK)
     setp(g, 7, 11, OUT)
     setp(g, 8, 12, OUT)
+
+
+FACES = [face_idle, face_closed, face_happy, face_sad, face_working, face_input]
+
+
+def build(state, off):
+    g = blank()
+    fluff_head(g)
+    FACES[state](g)
+    hair(g, off)
     return g
 
 
-DRAW = [frame_idle, frame_closed, frame_happy, frame_sad, frame_working, frame_input]
+DRAW = [lambda s=s, o=o: build(s, o) for s in range(6) for o in (-1, 1)]
 
 
 def pack_frames():

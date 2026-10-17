@@ -222,6 +222,9 @@ void pet_state_view(const struct pet_state *s, pet_view_t *out)
         out->frame = PET_FRAME_NORMAL;
         break;
     }
+
+    const uint32_t phase = s->now_ms - s->since_ms;
+    out->hair_right = ((phase / 500u) % 2u) != 0u;
 }
 
 pet_sound_t pet_state_take_sound(struct pet_state *s)
