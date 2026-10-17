@@ -12,7 +12,7 @@
 | 待批准 | ⏳ `Q17`（WiFi 角色，关联 M4/M8）、`Q10`（语义常量终值，现按提案实现，见 `contracts/参数冻结表.md`） |
 | 已发布 | ✅ GitHub 公开仓库 `whoisjackchao-dot/ESP32-buddy`（2026-10-16） |
 | 阻塞 | ~~刷写受阻（`B14`）~~ **已解除**；**剩余 H**：`R11` OpenCode 真源（旧项目缺）、多卡、刷新率**数值**、`AUD-06`；**M7 增量 2** 未做；其余无阻塞 |
-| 下一步 | ① **M4 OpenCode 真源 spike**（`R11`：OpenCode 状态从哪来——API/日志/插件）；② M8 休闲·多卡栈（需 `Q17`） |
+| 下一步 | ① **P1-2a OpenCode 轮询器**（SQLite → busy/idle/done/error，`R11`）；② **P1-2b** 用真实 ask 提示验 `waiting`；③ M8（需先定 `Q17`） |
 
 ## 文档地图
 
