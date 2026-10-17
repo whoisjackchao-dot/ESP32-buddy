@@ -41,8 +41,8 @@ struct pet_state {
     uint32_t     pending_done_at; /* 0 = 无待定完成 */
     bool         started;
     pet_sound_t  pending_sound;
-    pet_card_t   card;            /* M4：任务卡 */
-    bool         has_card;
+    pet_card_t   cards[3];        /* M8 §8.2：任务卡栈，cards[0] = 最新（顶部） */
+    int          card_count;      /* 0..3 */
 };
 
 /* 环绕安全的时间差比较：now - then >= ms */
@@ -195,9 +195,13 @@ void pet_state_view(const struct pet_state *s, pet_view_t *out)
     out->state = s->state;
     out->gray = (s->state == PET_STATE_OFFLINE);
     out->mirror = false;
-    out->has_card = s->has_card;
-    if (s->has_card) {
-        out->card = s->card;
+    out->card_count = s->card_count;
+    out->has_card = (s->card_count > 0);
+    for (int i = 0; i < s->card_count; i++) {
+        out->cards[i] = s->cards[i];
+    }
+    if (s->card_count > 0) {
+        out->card = s->cards[0]; /* 顶部卡（兼容旧字段） */
     }
     switch (s->state) {
     case PET_STATE_DONE:
@@ -237,15 +241,48 @@ pet_sound_t pet_state_take_sound(struct pet_state *s)
     return sound;
 }
 
+/* M8 §8.2：入栈/更新——同名卡更新并移到顶部；新卡入栈顶；>3 丢最旧（底部）；
+ * 空 title 的卡忽略；card == NULL 清栈。 */
 void pet_state_set_card(struct pet_state *s, const pet_card_t *card)
 {
     if (s == NULL) {
         return;
     }
     if (card == NULL) {
-        s->has_card = false;
+        s->card_count = 0;
         return;
     }
-    s->card = *card;
-    s->has_card = true;
+    if (card->title[0] == '\0') {
+        return;
+    }
+    int found = -1;
+    for (int i = 0; i < s->card_count; i++) {
+        if (strcmp(s->cards[i].title, card->title) == 0) {
+            found = i;
+            break;
+        }
+    }
+    if (found < 0 && s->card_count < 3) {
+        s->card_count++;
+    }
+    for (int i = (found < 0) ? s->card_count - 1 : found; i > 0; i--) {
+        s->cards[i] = s->cards[i - 1];
+    }
+    s->cards[0] = *card;
+}
+
+/* M8 §8.2：消息卡数组**整体替换**栈内容（top-first 原样入栈，≤3 截断，
+ * 空 title 项跳过；count<=0 不动栈）。 */
+void pet_state_set_cards(struct pet_state *s, const pet_card_t *cards, int count)
+{
+    if (s == NULL || cards == NULL || count <= 0) {
+        return;
+    }
+    s->card_count = 0;
+    for (int i = 0; i < count && s->card_count < 3; i++) {
+        if (cards[i].title[0] == '\0') {
+            continue;
+        }
+        s->cards[s->card_count++] = cards[i];
+    }
 }

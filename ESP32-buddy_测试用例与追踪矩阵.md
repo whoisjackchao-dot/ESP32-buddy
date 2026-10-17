@@ -37,7 +37,7 @@
 | R10 顶层产品目标（6 态/卡/语音/战绩/三模式） | `ST-*` `UI-02` `CARD-*` `AUD-*` `POMO-*` `LEI-*` | M2…M8 | T/H | 部分 `PASS`，其余见各节点 | 见下 |
 | R11 OpenCode 首选接入 | `E2E-01` | M4 | C+H | ✅ **`PASS`**（**真实 OpenCode 真源**：库轮询 busy/idle → 设备 WORKING→DONE+语音，2026-10-17 真机）；`waiting` 未做；桥接为验证脚手架 | `evidence/M4/2026-10-17-OpenCode真源-spike.md`、`evidence/M4/2026-10-17-OpenCode轮询器-T.md`、`evidence/M4/2026-10-17-OpenCode端到端-H.md` |
 | R12 协议不绑定客户端 | `E2E-02`（任意脚本发事件） | M4 | C+H | `PASS`——**端到端**：脚本 → 主机（入口核心 §8 + 传输 §9）→ 设备 → 状态/卡/语音均生效（2026-10-17 真机） | `evidence/M4/2026-10-16-主机入口核心-T.md`、`evidence/M4/2026-10-17-传输端到端-H.md` |
-| R13 任务卡最多 3 张 | `CARD-03` | M8 | T | `NOT_RUN`（M3 只 1 张） | — |
+| R13 任务卡最多 3 张（≤3、新在上） | `CARD-03` | M8 | T | `PASS`（host 589/0；设备版式 `NOT_RUN`） | — |
 | R14 三模式（值班/番茄钟/休闲） | `POMO-*` `LEI-*` | M7/M8 | T | 番茄钟逻辑 `PASS`（M7 增量1）；**模式切换（KEY2）属 M6/H**；休闲 `NOT_RUN`（M8） | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
 | R15 语音：需确认/完成/失败各一次 | `AUD-01`…`AUD-06` | M5 | T+H | `AUD-01..04` `PASS`（逻辑/资产）；**`AUD-05` `PASS`**（2026-10-17 真机听到三句）；`AUD-06`（不阻塞主循环）仍 `NOT_RUN`（未测帧率） | `evidence/M5/2026-10-16-语音逻辑-T.md`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | R16 当日战绩轮播、按日清零、重启不丢 | `POMO-06` `UI-07` | M7 | T | `POMO-06`（按日清零逻辑）`PASS`；轮播 `UI-07`、**重启不丢（持久化）** `NOT_RUN`（M7 增量 2） | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
@@ -74,6 +74,7 @@
 | `UI-03` | 有卡时卡片区有内容；无卡时卡片区**只有场景底色**；宠物区始终有内容 | T | `PASS` | `tests/test_pet_card.c` |
 | `CARD-01` | 超长标题**不越界**（guard 完整、卡片右侧仍是底色） | T | `PASS` | 同上 |
 | `CARD-02` | 时长格式：`0S`/`45S`/`59S`/`1M`/`90S→1M`/`1H`/`2H` | T | `PASS` | 同上 |
+| `CARD-03` | 多卡栈：≤3、新在上、同名更新置顶、第 4 张丢最旧；1 张→大卡、≥2 张→紧凑 3 行不越界 | T | `PASS` | `evidence/M8/2026-10-17-多卡栈-T.md`（host 589/0） |
 | `LINK-04` | 事件线解析：合法（全字段/空格/未知键/换行/超长截断）与非法（非 JSON、缺括号、数组、空串、version 错、缺 event、未知事件、类型不符、超长行）各自的错误码 | T | `PASS` | `tests/test_pet_link.c` |
 | `LINK-05` | 六个事件名 → `pet_event_kind_t`；`device.heartbeat` 只刷新链路不改状态 | T | `PASS` | 同上 |
 | `CARD-04` | 带卡片字段时 `has_card` 且 `card.state` 随事件映射；无字段时不产生卡片 | T | `PASS` | 同上 |

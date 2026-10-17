@@ -237,6 +237,16 @@ static void draw_card_line(pet_surface_t *s, int x, int y, const char *text,
     (void)pet_text_draw(s, x, y, text, max_chars, color, scale);
 }
 
+/* 卡片标题显示文本：空 → "[NO TASK]"；纯非 ASCII（字库画不出）→ "[TASK]" */
+static const char *card_title_text(const pet_card_t *card)
+{
+    const char *title = (card->title[0] != '\0') ? card->title : "[NO TASK]";
+    if (ascii_len(title) == 0) {
+        title = "[TASK]";
+    }
+    return title;
+}
+
 static void draw_card(pet_surface_t *s, const pet_card_t *card)
 {
     const int x0 = PET_CARD_X;
@@ -254,17 +264,49 @@ static void draw_card(pet_surface_t *s, const pet_card_t *card)
     fill_rect(s, x0 + 1, y0 + 1, x0 + CARD_ACCENT_W, y1 - 1, state_accent(card->state));
 
     const int tx = x0 + CARD_ACCENT_W + 4;
-    const char *title = (card->title[0] != '\0') ? card->title : "[NO TASK]";
-    if (ascii_len(title) == 0) {
-        title = "[TASK]"; /* 纯非 ASCII 标题：字库只能显示英文 */
-    }
-    draw_card_line(s, tx, y0 + 4, title, CARD_TITLE, 2);
+    draw_card_line(s, tx, y0 + 4, card_title_text(card), CARD_TITLE, 2);
     if (card->project[0] != '\0') {
         draw_card_line(s, tx, y0 + 24, card->project, CARD_PROJECT, 2);
     }
     char elapsed[16];
     pet_format_elapsed(elapsed, sizeof elapsed, card->elapsed_s);
     draw_card_line(s, tx, y0 + 44, elapsed, CARD_ELAPSED, 1); /* 时长行固定 1× */
+}
+
+/* ---- M8 增量 2：多卡紧凑行（契约 M8 §8.4）---- */
+
+#define STACK_X0        4
+#define STACK_X1        131
+#define STACK_Y0        150
+#define STACK_ROW_H     28
+#define STACK_TEXT_MAX  14
+#define STACK_TEXT_X    (STACK_X0 + CARD_ACCENT_W + 4)
+
+/* 一行紧凑卡：左侧 3px 状态条 + 标题（1×）+ 第二行 project · elapsed（1× 灰） */
+static void draw_card_row(pet_surface_t *s, int y, const pet_card_t *card)
+{
+    fill_rect(s, STACK_X0, y, STACK_X0 + CARD_ACCENT_W - 1, y + STACK_ROW_H - 1,
+              state_accent(card->state));
+    (void)pet_text_draw(s, STACK_TEXT_X, y + 3, card_title_text(card),
+                        STACK_TEXT_MAX, CARD_TITLE, 1);
+    char elapsed[16];
+    pet_format_elapsed(elapsed, sizeof elapsed, card->elapsed_s);
+    char line[PET_PROJECT_MAX + 16];
+    if (card->project[0] != '\0') {
+        snprintf(line, sizeof line, "%s \xc2\xb7 %s", card->project, elapsed);
+    } else {
+        snprintf(line, sizeof line, "%s", elapsed);
+    }
+    (void)pet_text_draw(s, STACK_TEXT_X, y + 15, line, STACK_TEXT_MAX,
+                        CARD_PROJECT, 1);
+}
+
+static void draw_card_stack(pet_surface_t *s, const pet_view_t *v)
+{
+    const int rows = (v->card_count > 3) ? 3 : v->card_count;
+    for (int i = 0; i < rows; i++) {
+        draw_card_row(s, STACK_Y0 + i * STACK_ROW_H, &v->cards[i]);
+    }
 }
 
 void pet_render_scene(const pet_view_t *v, const pet_look_t *look,
@@ -281,8 +323,11 @@ void pet_render_scene(const pet_view_t *v, const pet_look_t *look,
     }
     /* 宠物（固定在宠物区） */
     pet_render_pet(v, look, surface, PET_SCENE_PET_X, PET_SCENE_PET_Y);
-    /* 任务卡（M3 只 1 张） */
-    if (v != NULL && v->has_card) {
+    /* 任务卡：1 张 → 大卡；≥2 张 → 紧凑行（M8 §8.4；card_count==0 但
+     * has_card 的旧式视图按 1 张处理，兼容 M3 行为） */
+    if (v != NULL && v->card_count >= 2) {
+        draw_card_stack(surface, v);
+    } else if (v != NULL && v->has_card) {
         draw_card(surface, &v->card);
     }
 }

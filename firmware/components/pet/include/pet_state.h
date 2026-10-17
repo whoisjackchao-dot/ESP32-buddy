@@ -44,5 +44,9 @@ void pet_state_view(const struct pet_state *s, pet_view_t *out);
 /* 取一次性播报，取走即清。 */
 pet_sound_t pet_state_take_sound(struct pet_state *s);
 
-/* 存/清任务卡（M4）：card 为 NULL 时清除。 */
+/* 存/清任务卡（M4，M8 §8.2 起语义为"入栈/更新"）：card 为 NULL 时清栈。 */
 void pet_state_set_card(struct pet_state *s, const pet_card_t *card);
+
+/* M8 §8.2：一条消息的卡数组**整体替换**栈内容（top-first，≤3 截断，
+ * 空 title 项跳过；count<=0 不动栈）。收件侧在 card_count>0 时用它。 */
+void pet_state_set_cards(struct pet_state *s, const pet_card_t *cards, int count);

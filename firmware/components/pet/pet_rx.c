@@ -34,8 +34,10 @@ static void apply_line(const char *line, size_t len)
     ev.kind = msg.kind;
     ev.now_ms = pet_hal_now_ms();
     pet_state_apply(s_state, &ev);
-    if (msg.has_card) {
-        pet_state_set_card(s_state, &msg.card);
+    if (msg.card_count > 0) {
+        pet_state_set_cards(s_state, msg.cards, msg.card_count); /* M8 §8.2：整栈替换 */
+    } else if (msg.has_card) {
+        pet_state_set_card(s_state, &msg.card); /* 顶层单卡（M4 兼容） */
     }
 }
 

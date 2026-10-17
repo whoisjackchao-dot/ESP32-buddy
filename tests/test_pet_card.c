@@ -1,5 +1,6 @@
 /* M3 T 类：8×8 文本 + 时长格式 + 整屏场景（宠物 + 1 张卡）。
- * 契约：contracts/M3-竖屏版式契约清单.md §5。 */
+ * 契约：contracts/M3-竖屏版式契约清单.md §5；
+ *       contracts/M8-休闲与多卡栈契约清单.md §8.4（≥2 卡紧凑行，M8 扩展）。 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -188,6 +189,81 @@ static void card_long_title_does_not_overflow(void)
     CHECK(count_non(PET_CARD_X + PET_CARD_W, 0, SW - 1, SH - 1, PET_SCENE_BG) == 0);
 }
 
+/* ---- M8 §8.4：≥2 卡紧凑行（x 4..131，y=150 起，每行 28 px） ---- */
+
+#define ROW_Y(i)     (150 + (i) * 28)
+#define ROW_BAND(i)  count_non(4, ROW_Y(i), 131, ROW_Y(i) + 27, PET_SCENE_BG)
+#define STACK_ZONE_Y0 150
+#define STACK_ZONE_Y1 233
+
+static pet_view_t view_with_stack(int n)
+{
+    pet_view_t v = view_no_card();
+    v.has_card = (n > 0);
+    v.card_count = n;
+    static const char *names[3] = { "ALPHA TASK ONE", "BETA", "DELTA-3" };
+    for (int i = 0; i < n && i < 3; i++) {
+        v.cards[i].state = (i == 0) ? PET_STATE_INPUT_REQUIRED : PET_STATE_WORKING;
+        v.cards[i].elapsed_s = 60 * (i + 1);
+        snprintf(v.cards[i].title, sizeof v.cards[i].title, "%s", names[i]);
+        snprintf(v.cards[i].project, sizeof v.cards[i].project, "PRJ%d", i);
+        if (i == 0) {
+            v.card = v.cards[0]; /* 顶部卡同步（pet_state_view 同款语义） */
+        }
+    }
+    return v;
+}
+
+static void two_cards_render_two_compact_rows(void)
+{
+    fill(SENTINEL);
+    arm_guard();
+    pet_view_t v = view_with_stack(2);
+    pet_render_scene(&v, g_look, &surface);
+
+    CHECK(ROW_BAND(0) > 0); /* 行 0：y=150..177 */
+    CHECK(ROW_BAND(1) > 0); /* 行 1：y=178..205 */
+    /* 只 2 行：第 3 行区（y=206..233）必须留空（大卡会越进该区 → RED 可判） */
+    CHECK(count_non(0, 206, SW - 1, STACK_ZONE_Y1, PET_SCENE_BG) == 0);
+    /* 不越界：x>131 与 y>=236 仍是底色 */
+    CHECK(count_non(132, 0, SW - 1, SH - 1, PET_SCENE_BG) == 0);
+    CHECK(count_non(0, 236, SW - 1, SH - 1, PET_SCENE_BG) == 0);
+    CHECK(guard_intact());
+}
+
+static void three_cards_render_three_rows(void)
+{
+    fill(SENTINEL);
+    arm_guard();
+    pet_view_t v = view_with_stack(3);
+    pet_render_scene(&v, g_look, &surface);
+
+    CHECK(ROW_BAND(0) > 0);
+    CHECK(ROW_BAND(1) > 0);
+    CHECK(ROW_BAND(2) > 0); /* 行 2：y=206..233 */
+    /* 第 3 行画到 y=233：大卡下沿只到 219，该带是紧凑行独有 → RED 可判 */
+    CHECK(count_non(4, 220, 131, STACK_ZONE_Y1, PET_SCENE_BG) > 0);
+    CHECK(count_non(0, 236, SW - 1, SH - 1, PET_SCENE_BG) == 0);
+    CHECK(count_non(132, 0, SW - 1, SH - 1, PET_SCENE_BG) == 0);
+    CHECK(guard_intact());
+}
+
+static void single_card_still_uses_big_card(void)
+{
+    fill(SENTINEL);
+    arm_guard();
+    pet_view_t v = view_with_stack(1);
+    pet_render_scene(&v, g_look, &surface);
+
+    CHECK(count_non(PET_CARD_X, PET_CARD_Y, PET_CARD_X + PET_CARD_W - 1,
+                    PET_CARD_Y + PET_CARD_H - 1, PET_SCENE_BG) > 0);
+    /* 大卡特征：卡上沿（156）之上无紧凑行痕迹；下沿（219）之下无第 3 行。
+     * 上沿观察点取 x=4..18（宠物区 x 从 19 起，避免立绘干扰）。 */
+    CHECK(count_non(4, STACK_ZONE_Y0, 18, PET_CARD_Y - 1, PET_SCENE_BG) == 0);
+    CHECK(count_non(0, 220, SW - 1, STACK_ZONE_Y1, PET_SCENE_BG) == 0);
+    CHECK(guard_intact());
+}
+
 int main(int argc, char **argv)
 {
     const char *path = (argc > 1) ? argv[1] : PET_FIXTURE;
@@ -222,6 +298,9 @@ int main(int argc, char **argv)
     RUN(card_zone_has_content_with_card);
     RUN(pet_zone_has_content_either_way);
     RUN(card_long_title_does_not_overflow);
+    RUN(two_cards_render_two_compact_rows);
+    RUN(three_cards_render_three_rows);
+    RUN(single_card_still_uses_big_card);
 
     pet_look_free(g_look);
     free(bytes);

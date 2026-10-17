@@ -1,7 +1,8 @@
 /* M4 增量 1：device 侧事件线解析（NDJSON → 事件 + 卡片）。
- * 契约：contracts/M4-事件入口与OpenCode接入契约清单.md §6。
+ * 契约：contracts/M4-事件入口与OpenCode接入契约清单.md §6；
+ *       contracts/M8-休闲与多卡栈契约清单.md §8.1（tasks[] 多卡，M8 扩展）。
  * 只支持：单层 JSON 对象 + 字符串/非负整数/true/false/null；
- * 嵌套对象与数组**不支持**（返回 JSON 错误；tasks/stats 属 M8）。 */
+ * M8 起 tasks 数组可解析（≤3 卡），其余数组/对象仅作未知键跳过（不再报 JSON 错）。 */
 #include <string.h>
 
 #include "pet_link.h"
@@ -79,14 +80,90 @@ static const char *parse_uint(const char *p, const char *end, long *out)
     return p;
 }
 
-/* 跳过**仅** 字符串/数字/true/false/null 的值；其它（对象/数组）→ NULL */
-static const char *skip_value(const char *p, const char *end)
+/* 未知键值跳过的最大嵌套深度：行输入不可信，且 rx 任务栈仅 4 KB（M4 §4.7 不崩） */
+#define SKIP_MAX_DEPTH 8
+
+/* 跳过任意 JSON 值；M8 起数组/对象也可跳过（未知键不再报 JSON 错） */
+static const char *skip_value(const char *p, const char *end, int depth);
+
+static const char *skip_object(const char *p, const char *end, int depth)
+{
+    if (depth <= 0) {
+        return NULL;
+    }
+    p++; /* '{' 由调用方确认 */
+    p = skip_ws(p, end);
+    if (p < end && *p == '}') {
+        return p + 1;
+    }
+    for (;;) {
+        p = skip_ws(p, end);
+        p = parse_string(p, end, NULL, 0); /* 键 */
+        if (p == NULL) {
+            return NULL;
+        }
+        p = skip_ws(p, end);
+        if (p >= end || *p != ':') {
+            return NULL;
+        }
+        p = skip_value(p + 1, end, depth - 1);
+        if (p == NULL) {
+            return NULL;
+        }
+        p = skip_ws(p, end);
+        if (p < end && *p == ',') {
+            p++;
+            continue;
+        }
+        if (p < end && *p == '}') {
+            return p + 1;
+        }
+        return NULL;
+    }
+}
+
+static const char *skip_array(const char *p, const char *end, int depth)
+{
+    if (depth <= 0) {
+        return NULL;
+    }
+    p++; /* '[' 由调用方确认 */
+    p = skip_ws(p, end);
+    if (p < end && *p == ']') {
+        return p + 1;
+    }
+    for (;;) {
+        p = skip_ws(p, end);
+        p = skip_value(p, end, depth - 1);
+        if (p == NULL) {
+            return NULL;
+        }
+        p = skip_ws(p, end);
+        if (p < end && *p == ',') {
+            p++;
+            continue;
+        }
+        if (p < end && *p == ']') {
+            return p + 1;
+        }
+        return NULL;
+    }
+}
+
+/* 跳过**仅** 字符串/数字/true/false/null/对象/数组 的值 */
+static const char *skip_value(const char *p, const char *end, int depth)
 {
     if (p >= end) {
         return NULL;
     }
     if (*p == '"') {
         return parse_string(p, end, NULL, 0);
+    }
+    if (*p == '{') {
+        return skip_object(p, end, depth);
+    }
+    if (*p == '[') {
+        return skip_array(p, end, depth);
     }
     if (*p == '-' || (*p >= '0' && *p <= '9')) {
         if (*p == '-') {
@@ -143,6 +220,145 @@ static bool map_event(const char *name, pet_event_kind_t *kind, pet_state_t *sta
         return false;
     }
     return true;
+}
+
+/* status 字符串 → 6 态；缺省/working/未知 → WORKING（M8 §8.1） */
+static pet_state_t map_status(const char *s)
+{
+    if (strcmp(s, "input_required") == 0) {
+        return PET_STATE_INPUT_REQUIRED;
+    }
+    if (strcmp(s, "done") == 0) {
+        return PET_STATE_DONE;
+    }
+    if (strcmp(s, "failed") == 0) {
+        return PET_STATE_FAILED;
+    }
+    return PET_STATE_WORKING;
+}
+
+/* 解析 tasks 的一项（'{' 已确认）。返回项 '}' 之后的位置；语法非法 → NULL
+ * （整行按 JSON 错）。字段类型不符 → 仍消费完该对象，但 *ok=false（项忽略）。 */
+static const char *parse_task_item(const char *p, const char *end,
+                                   pet_card_t *card, bool *ok)
+{
+    *ok = false;
+    pet_card_t c;
+    memset(&c, 0, sizeof c);
+    c.state = PET_STATE_WORKING;
+    char status[24] = {0};
+    bool has_status = false;
+    bool type_ok = true;
+
+    p = skip_ws(p + 1, end);
+    if (p < end && *p == '}') {
+        *card = c;
+        *ok = true;
+        return p + 1;
+    }
+    for (;;) {
+        char key[16];
+        p = skip_ws(p, end);
+        const char *q = parse_string(p, end, key, sizeof key);
+        if (q == NULL) {
+            return NULL;
+        }
+        p = skip_ws(q, end);
+        if (p >= end || *p != ':') {
+            return NULL;
+        }
+        p = skip_ws(p + 1, end);
+
+        if (strcmp(key, "title") == 0) {
+            q = parse_string(p, end, c.title, sizeof c.title);
+            if (q == NULL) {
+                type_ok = false;
+                q = skip_value(p, end, SKIP_MAX_DEPTH);
+            }
+        } else if (strcmp(key, "project") == 0) {
+            q = parse_string(p, end, c.project, sizeof c.project);
+            if (q == NULL) {
+                type_ok = false;
+                q = skip_value(p, end, SKIP_MAX_DEPTH);
+            }
+        } else if (strcmp(key, "elapsed_s") == 0) {
+            long elapsed = 0;
+            q = parse_uint(p, end, &elapsed);
+            if (q == NULL) {
+                type_ok = false;
+                q = skip_value(p, end, SKIP_MAX_DEPTH);
+            } else {
+                c.elapsed_s = (int32_t)elapsed;
+            }
+        } else if (strcmp(key, "status") == 0) {
+            q = parse_string(p, end, status, sizeof status);
+            if (q == NULL) {
+                type_ok = false;
+                q = skip_value(p, end, SKIP_MAX_DEPTH);
+            } else {
+                has_status = true;
+            }
+        } else {
+            q = skip_value(p, end, SKIP_MAX_DEPTH); /* 项内未知键 */
+        }
+        if (q == NULL) {
+            return NULL;
+        }
+        p = skip_ws(q, end);
+        if (p < end && *p == ',') {
+            p++;
+            continue;
+        }
+        if (p < end && *p == '}') {
+            p++;
+            break;
+        }
+        return NULL;
+    }
+    if (type_ok) {
+        c.state = has_status ? map_status(status) : PET_STATE_WORKING;
+        *card = c;
+        *ok = true;
+    }
+    return p;
+}
+
+/* 解析 tasks 数组（'[' 已确认）。取前 3 个对象项；非对象项跳过。语法非法 → NULL。 */
+static const char *parse_tasks_array(const char *p, const char *end,
+                                     pet_link_msg_t *out)
+{
+    p = skip_ws(p + 1, end);
+    if (p < end && *p == ']') {
+        return p + 1;
+    }
+    for (;;) {
+        p = skip_ws(p, end);
+        if (p < end && *p == '{') {
+            pet_card_t c;
+            bool ok = false;
+            p = parse_task_item(p, end, &c, &ok);
+            if (p == NULL) {
+                return NULL;
+            }
+            if (ok && out->card_count < 3) {
+                out->cards[out->card_count++] = c;
+            }
+        } else {
+            p = skip_value(p, end, SKIP_MAX_DEPTH); /* 非对象项：跳过 */
+            if (p == NULL) {
+                return NULL;
+            }
+        }
+        p = skip_ws(p, end);
+        if (p < end && *p == ',') {
+            p++;
+            continue;
+        }
+        if (p < end && *p == ']') {
+            return p + 1;
+        }
+        return NULL;
+    }
 }
 
 pet_link_status_t pet_link_parse(const char *line, size_t len, pet_link_msg_t *out)
@@ -230,8 +446,22 @@ pet_link_status_t pet_link_parse(const char *line, size_t len, pet_link_msg_t *o
                 }
                 has_elapsed = true;
                 p = q;
+            } else if (strcmp(key, "tasks") == 0) {
+                p = skip_ws(p, end);
+                if (p < end && *p == '[') {
+                    p = parse_tasks_array(p, end, out);
+                    if (p == NULL) {
+                        return PET_LINK_ERR_JSON; /* 数组语法坏 */
+                    }
+                } else {
+                    q = skip_value(p, end, SKIP_MAX_DEPTH); /* 非数组 → 忽略该键（M8 §8.1） */
+                    if (q == NULL) {
+                        return PET_LINK_ERR_JSON;
+                    }
+                    p = q;
+                }
             } else {
-                q = skip_value(p, end);
+                q = skip_value(p, end, SKIP_MAX_DEPTH);
                 if (q == NULL) {
                     return PET_LINK_ERR_JSON; /* 未知键的嵌套/数组不支持 */
                 }

@@ -27,7 +27,9 @@ typedef enum {
 typedef struct {
     pet_event_kind_t kind;
     bool             has_card;
-    pet_card_t       card; /* has_card 时有效 */
+    pet_card_t       card;      /* has_card 时有效（顶层单卡字段，兼容） */
+    int              card_count; /* M8 §8.1：tasks[] 解析出的卡数 0..3（top-first） */
+    pet_card_t       cards[3];   /* M8 §8.1：cards[0] = tasks 首项 */
 } pet_link_msg_t;
 
 /* 解析一行 NDJSON；line 可带可不带结尾 '\n'。成功时填 out。 */

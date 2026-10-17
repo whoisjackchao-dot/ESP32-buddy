@@ -49,5 +49,7 @@ typedef struct {
     bool        gray;
     bool        hair_right; /* 头顶毛发相位：false=左 / true=右（~1s 与眨眼同频） */
     bool        has_card;
-    pet_card_t  card;
+    pet_card_t  card;      /* 顶部卡（M8 起与 cards[0] 同源，兼容旧代码） */
+    int         card_count; /* M8 §8.3：栈深 0..3 */
+    pet_card_t  cards[3];   /* M8 §8.3：多卡栈，cards[0] = 最新（顶部） */
 } pet_view_t;

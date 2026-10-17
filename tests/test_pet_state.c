@@ -1,6 +1,8 @@
 /* M2 T 类：pet_state 状态机 + done 边沿 + 失联。
  * 断言体现业务规则（显式事件去的态、边沿合成、抖动取消、失联灰化），不是"调用了函数"。
- * 契约：contracts/M2-状态机与动画契约清单.md §7。 */
+ * 契约：contracts/M2-状态机与动画契约清单.md §7；
+ *       contracts/M8-休闲与多卡栈契约清单.md §8.2（多卡栈，M8 扩展）。
+ * 需要 <stdio.h>（mk_card 的 snprintf）——由 harness.h 引入。 */
 #include "harness.h"
 #include "pet_state.h"
 
@@ -301,6 +303,137 @@ static void card_is_exposed_in_view(void)
     CHECK(v.has_card == false);
 }
 
+/* ---- M8 §8.2：多卡栈（≤3，按到达时间，新在上） ---- */
+
+static pet_card_t mk_card(const char *title, pet_state_t st, int32_t elapsed)
+{
+    pet_card_t c;
+    memset(&c, 0, sizeof c);
+    snprintf(c.title, sizeof c.title, "%s", title);
+    snprintf(c.project, sizeof c.project, "P-%s", title);
+    c.state = st;
+    c.elapsed_s = elapsed;
+    return c;
+}
+
+static void set_card_upserts_by_title_new_on_top(void)
+{
+    pet_card_t a = mk_card("A", PET_STATE_WORKING, 1);
+    pet_card_t b = mk_card("B", PET_STATE_DONE, 2);
+    pet_state_set_card(s, &a);
+    pet_state_set_card(s, &b);
+
+    pet_view_t v;
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 2);
+    CHECK(v.has_card);
+    CHECK(strcmp(v.cards[0].title, "B") == 0); /* 新在上 */
+    CHECK(strcmp(v.cards[1].title, "A") == 0);
+    CHECK(strcmp(v.card.title, "B") == 0); /* card = 顶部卡 */
+
+    pet_card_t a2 = mk_card("A", PET_STATE_FAILED, 9);
+    pet_state_set_card(s, &a2); /* 同名 → 更新并移到顶部，不重复 */
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 2);
+    CHECK(strcmp(v.cards[0].title, "A") == 0);
+    CHECK(v.cards[0].state == PET_STATE_FAILED);
+    CHECK(v.cards[0].elapsed_s == 9);
+    CHECK(strcmp(v.cards[0].project, "P-A") == 0);
+    CHECK(strcmp(v.cards[1].title, "B") == 0);
+    CHECK(strcmp(v.card.title, "A") == 0);
+}
+
+static void fourth_card_drops_oldest(void)
+{
+    pet_card_t a = mk_card("A", PET_STATE_WORKING, 1);
+    pet_card_t b = mk_card("B", PET_STATE_WORKING, 2);
+    pet_card_t c = mk_card("C", PET_STATE_WORKING, 3);
+    pet_card_t d = mk_card("D", PET_STATE_WORKING, 4);
+    pet_state_set_card(s, &a);
+    pet_state_set_card(s, &b);
+    pet_state_set_card(s, &c);
+
+    pet_view_t v;
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 3); /* 上限 3 */
+
+    pet_state_set_card(s, &d); /* 第 4 张 → 丢最旧（底部 A） */
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 3);
+    CHECK(strcmp(v.cards[0].title, "D") == 0);
+    CHECK(strcmp(v.cards[1].title, "C") == 0);
+    CHECK(strcmp(v.cards[2].title, "B") == 0);
+}
+
+static void empty_title_ignored_and_null_clears_stack(void)
+{
+    pet_card_t a = mk_card("A", PET_STATE_WORKING, 1);
+    pet_card_t blank = mk_card("", PET_STATE_WORKING, 5);
+    pet_state_set_card(s, &a);
+    pet_state_set_card(s, &blank); /* 空 title 忽略 */
+
+    pet_view_t v;
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 1);
+    CHECK(strcmp(v.cards[0].title, "A") == 0);
+
+    pet_state_set_card(s, NULL); /* 清栈 */
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 0);
+    CHECK(v.has_card == false);
+    CHECK(v.cards[0].title[0] == '\0');
+}
+
+static void set_cards_replaces_stack_top_first(void)
+{
+    pet_card_t x = mk_card("X", PET_STATE_WORKING, 7);
+    pet_state_set_card(s, &x); /* 旧栈残留 */
+
+    pet_card_t b = mk_card("B", PET_STATE_DONE, 2);
+    pet_card_t c = mk_card("C", PET_STATE_FAILED, 3);
+    pet_card_t a = mk_card("A", PET_STATE_WORKING, 1);
+    pet_card_t msg_cards[3] = { b, c, a }; /* 消息序 = top-first */
+    pet_state_set_cards(s, msg_cards, 3);
+
+    pet_view_t v;
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 3);
+    CHECK(strcmp(v.cards[0].title, "B") == 0); /* 原样替换，X 被清掉 */
+    CHECK(v.cards[0].state == PET_STATE_DONE);
+    CHECK(strcmp(v.cards[1].title, "C") == 0);
+    CHECK(strcmp(v.cards[2].title, "A") == 0);
+    CHECK(strcmp(v.card.title, "B") == 0);
+
+    pet_card_t msg2[2] = { a, b };
+    pet_state_set_cards(s, msg2, 2); /* 下一条消息 → 替换而非合并 */
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 2);
+    CHECK(strcmp(v.cards[0].title, "A") == 0);
+    CHECK(strcmp(v.cards[1].title, "B") == 0);
+}
+
+static void set_cards_caps_filters_and_zero_count_noop(void)
+{
+    pet_card_t a = mk_card("A", PET_STATE_WORKING, 1);
+    pet_card_t b = mk_card("B", PET_STATE_WORKING, 2);
+    pet_card_t c = mk_card("C", PET_STATE_WORKING, 3);
+    pet_card_t d = mk_card("D", PET_STATE_WORKING, 4);
+    pet_card_t blank = mk_card("", PET_STATE_WORKING, 5);
+    pet_card_t five[5] = { a, blank, b, c, d };
+    pet_state_set_cards(s, five, 5); /* >3 截断 + 空 title 项跳过 */
+
+    pet_view_t v;
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 3);
+    CHECK(strcmp(v.cards[0].title, "A") == 0);
+    CHECK(strcmp(v.cards[1].title, "B") == 0);
+    CHECK(strcmp(v.cards[2].title, "C") == 0);
+
+    pet_state_set_cards(s, five, 0); /* count<=0：不动栈 */
+    pet_state_view(s, &v);
+    CHECK(v.card_count == 3);
+}
+
 int main(void)
 {
     s = pet_state_create();
@@ -373,6 +506,26 @@ int main(void)
 
     s = pet_state_create();
     card_is_exposed_in_view();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    set_card_upserts_by_title_new_on_top();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    fourth_card_drops_oldest();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    empty_title_ignored_and_null_clears_stack();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    set_cards_replaces_stack_top_first();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    set_cards_caps_filters_and_zero_count_noop();
     pet_state_destroy(s);
 
     REPORT();
