@@ -19,7 +19,17 @@ def _default_sink(line):
 class _EntryHandler(BaseHTTPRequestHandler):
     server_version = "pet-entry/1"
 
+    def _authorized(self):
+        """Optional bearer-style token; absent token means loopback-only mode."""
+        expected = getattr(self.server, "token", None)
+        if not expected:
+            return True
+        return self.headers.get("X-Pet-Token") == expected
+
     def do_POST(self):
+        if not self._authorized():
+            self._respond_text(401, "AUTH")
+            return
         length_header = self.headers.get("Content-Length")
         content_type = self.headers.get("Content-Type")
         if length_header is None:
@@ -75,10 +85,12 @@ class _EntryHandler(BaseHTTPRequestHandler):
         pass
 
 
-def make_server(host="127.0.0.1", port=None, sink=None):
+def make_server(host="127.0.0.1", port=None, sink=None, token=None):
     """Bind host:port (loopback by default, §8.1) and return the server.
 
     port=None -> EVENT_INGEST_PORT, overridable via PET_EVENT_PORT (§8.5).
+    token=None keeps the historical no-auth loopback mode; when set, POST
+    requests must carry the same value in the X-Pet-Token header.
     """
     if port is None:
         port = int(os.environ.get("PET_EVENT_PORT", pet_ingest.EVENT_INGEST_PORT))
@@ -86,4 +98,5 @@ def make_server(host="127.0.0.1", port=None, sink=None):
         sink = _default_sink
     server = ThreadingHTTPServer((host, port), _EntryHandler)
     server.sink = sink
+    server.token = token
     return server

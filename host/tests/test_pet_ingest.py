@@ -174,6 +174,66 @@ class IngestErrors(unittest.TestCase):
         self.assertEqual((r.code, r.http_status), ("TYPE", 400))
 
 
+class TokenAuth(unittest.TestCase):
+    def _post(self, base, token=None):
+        headers = {"Content-Type": "application/json"}
+        if token is not None:
+            headers["X-Pet-Token"] = token
+        req = urllib.request.Request(
+            base + "/v1/events",
+            data=jbody({"version": 1, "event": "task.done"}),
+            headers=headers,
+            method="POST",
+        )
+        return urllib.request.urlopen(req, timeout=5)
+
+    def test_missing_token_401(self):
+        collected = []
+        srv = pet_entry_server.make_server(port=0, sink=collected.append, token="s3cret")
+        thread = threading.Thread(target=srv.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with self.assertRaises(urllib.error.HTTPError) as cm:
+                self._post("http://127.0.0.1:%d" % srv.server_address[1])
+            self.assertEqual(cm.exception.code, 401)
+            cm.exception.close()
+            self.assertEqual(collected, [])
+        finally:
+            srv.shutdown()
+            srv.server_close()
+            thread.join(timeout=5)
+
+    def test_wrong_token_401(self):
+        collected = []
+        srv = pet_entry_server.make_server(port=0, sink=collected.append, token="s3cret")
+        thread = threading.Thread(target=srv.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with self.assertRaises(urllib.error.HTTPError) as cm:
+                self._post("http://127.0.0.1:%d" % srv.server_address[1], "nope")
+            self.assertEqual(cm.exception.code, 401)
+            cm.exception.close()
+            self.assertEqual(collected, [])
+        finally:
+            srv.shutdown()
+            srv.server_close()
+            thread.join(timeout=5)
+
+    def test_correct_token_200(self):
+        collected = []
+        srv = pet_entry_server.make_server(port=0, sink=collected.append, token="s3cret")
+        thread = threading.Thread(target=srv.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with self._post("http://127.0.0.1:%d" % srv.server_address[1], "s3cret") as resp:
+                self.assertEqual(resp.status, 200)
+            self.assertEqual(len(collected), 1)
+        finally:
+            srv.shutdown()
+            srv.server_close()
+            thread.join(timeout=5)
+
+
 class LoopbackServer(unittest.TestCase):
     def test_server_binds_loopback(self):
         srv = pet_entry_server.make_server(port=0, sink=lambda line: None)
