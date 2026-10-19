@@ -37,15 +37,15 @@
 | R10 顶层产品目标（6 态/卡/语音/战绩/三模式） | `ST-*` `UI-02` `CARD-*` `AUD-*` `POMO-*` `LEI-*` | M2…M8 | T/H | 部分 `PASS`，其余见各节点 | 见下 |
 | R11 OpenCode 首选接入 | `E2E-01` | M4 | C+H | ✅ **`PASS`**（**真实 OpenCode 真源**：库轮询 busy/idle → 设备 WORKING→DONE+语音，2026-10-17 真机）；`waiting` 未做；桥接为验证脚手架 | `evidence/M4/2026-10-17-OpenCode真源-spike.md`、`evidence/M4/2026-10-17-OpenCode轮询器-T.md`、`evidence/M4/2026-10-17-OpenCode端到端-H.md` |
 | R12 协议不绑定客户端 | `E2E-02`（任意脚本发事件） | M4 | C+H | `PASS`——**端到端**：脚本 → 主机（入口核心 §8 + 传输 §9）→ 设备 → 状态/卡/语音均生效（2026-10-17 真机） | `evidence/M4/2026-10-16-主机入口核心-T.md`、`evidence/M4/2026-10-17-传输端到端-H.md` |
-| R13 任务卡最多 3 张（≤3、新在上） | `CARD-03` | M8 | T | `PASS`（host 589/0；设备版式 `NOT_RUN`） | — |
+| R13 任务卡最多 3 张（≤3、新在上） | `CARD-03` `LAYOUT-01` | M8 | T | `PASS`（host 599/0；设备版式 `NOT_RUN`） | `evidence/M8/2026-10-17-多卡栈-T.md`、`tests/test_pet_layout.c` |
 | R14 三模式（值班/番茄钟/休闲） | `POMO-*` `LEI-*` | M7/M8 | T | 番茄钟逻辑 `PASS`（M7 增量1）；**模式切换（KEY2）属 M6/H**；休闲 `NOT_RUN`（M8） | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
-| R15 语音：需确认/完成/失败各一次 | `AUD-01`…`AUD-06` | M5 | T+H | `AUD-01..04` `PASS`（逻辑/资产）；**`AUD-05` `PASS`**（2026-10-17 真机听到三句）；`AUD-06`（不阻塞主循环）仍 `NOT_RUN`（未测帧率） | `evidence/M5/2026-10-16-语音逻辑-T.md`、`evidence/M4/2026-10-17-传输端到端-H.md` |
-| R16 当日战绩轮播、按日清零、重启不丢 | `POMO-06` `UI-07` | M7 | T | `POMO-06`（按日清零逻辑）`PASS`；轮播 `UI-07`、**重启不丢（持久化）** `NOT_RUN`（M7 增量 2） | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
-| R17 休闲（5/30/90 分钟、关背光） | `LEI-01`…`LEI-05` | M8 | T | **`LEI-01..05` `PASS`**（状态机逻辑，M8 增量1）；**小剧美术 / 背光 / NTP 未做** | `evidence/M8/2026-10-17-休闲状态机-T.md` |
-| R18 按键操作 | `BTN-01`…`BTN-06` | M6 | T+H | `BTN-01..04` **`PASS`**（逻辑 + **真机**：切模式 / 番茄钟控制，无误触发）；**`BTN-05`（回窗口）`PASS`**（真机端到端）；`BTN-06`（静音）接线、**听感未验**；菜单未做 | `evidence/M6/2026-10-17-按键逻辑-T.md`、`evidence/M6/2026-10-17-按键-H.md`、`evidence/M6/2026-10-17-回窗口-H.md` |
+| R15 语音：需确认/完成/失败各一次 | `AUD-01`…`AUD-06` | M5 | T+H | `AUD-01..04` `PASS`（逻辑/资产）；**`AUD-05` `PASS`**（2026-10-17 真机听到三句）；**`AUD-06` `PASS`**（播放前后 `fps=7` 不变） | `evidence/M5/2026-10-16-语音逻辑-T.md`、`evidence/M4/2026-10-17-传输端到端-H.md`、`evidence/2026-10-17-P0收尾-验证.md` |
+| R16 当日战绩轮播、按日清零、重启不丢 | `POMO-06` `UI-07` | M7 | T | `POMO-06`（按日清零逻辑）`PASS`；**重启不丢（NVS 持久化）`PASS`**（done=13/focus_s=195 跨刷写+复位）；轮播 `UI-07` 见 M8/休闲 | `evidence/M7/2026-10-16-番茄钟逻辑-T.md`、`evidence/2026-10-17-P0收尾-验证.md` |
+| R17 休闲（5/30/90 分钟、关背光） | `LEI-01`…`LEI-05` | M8 | T+H | **`LEI-01..05` `PASS`**（状态机逻辑）；**小剧/背光/唤醒 H `PASS`**（demo 阈值）；NTP/真实夜间时间未做 | `evidence/M8/2026-10-17-休闲状态机-T.md`、`evidence/M8/2026-10-17-小剧与背光-H.md` |
+| R18 按键操作 | `BTN-01`…`BTN-07` | M6 | T+H | `BTN-01..04` **`PASS`**（逻辑 + 真机：切模式/番茄钟控制）；**`BTN-05` 回窗口 `PASS`**；**`BTN-06` 静音 `PASS`**；**`BTN-07` 菜单 `PASS`**（真机） | `evidence/M6/2026-10-17-按键逻辑-T.md`、`evidence/M6/2026-10-17-按键-H.md`、`evidence/M6/2026-10-17-回窗口-H.md`、`evidence/M6/2026-10-17-菜单-H.md`、`evidence/2026-10-17-P0收尾-验证.md` |
 | R20 分层（state/render/hal） | —（结构约束） | M1 | D | `PASS`（审查：仅 `pet_hal_sticks3.c` 碰硬件） | `evidence/M1/2026-10-16-固件构建-D.md` §4 |
 | R21 逻辑可 host 测 | 全部 host 单测 | M1/M2/M3 | T | `PASS` | `tests/run.sh` |
-| R22 复用既有链路 + 事件转换 | `E2E-01` `E2E-03` | M4 | C | `E2E-03`（非法输入：不崩/回错/不广播）`PASS`（M4 增量2a）；`E2E-01` 全链路 `NOT_RUN`（传输未接） | `evidence/M4/2026-10-16-主机入口核心-T.md` |
+| R22 复用既有链路 + 事件转换 | `E2E-01` `E2E-03` | M4 | C | `E2E-03`（非法输入：不崩/回错/不广播）`PASS`；`E2E-01` 全链路 `PASS`（真实 OpenCode + 设备） | `evidence/M4/2026-10-16-主机入口核心-T.md`、`evidence/M4/2026-10-17-OpenCode端到端-H.md` |
 | R23 失联灰化 | `LINK-01` `LINK-02` `UI-05` | M2 | T | `PASS` | `evidence/M2/…pet_state-T…`、`…渲染半段-T…` |
 | R24 番茄钟在设备上跑 | `POMO-01`…`POMO-12` | M7 | T | `PASS`（host 逻辑，M7 增量1）；**真机 H** `NOT_RUN` | `evidence/M7/2026-10-16-番茄钟逻辑-T.md` |
 
@@ -74,7 +74,8 @@
 | `UI-03` | 有卡时卡片区有内容；无卡时卡片区**只有场景底色**；宠物区始终有内容 | T | `PASS` | `tests/test_pet_card.c` |
 | `CARD-01` | 超长标题**不越界**（guard 完整、卡片右侧仍是底色） | T | `PASS` | 同上 |
 | `CARD-02` | 时长格式：`0S`/`45S`/`59S`/`1M`/`90S→1M`/`1H`/`2H` | T | `PASS` | 同上 |
-| `CARD-03` | 多卡栈：≤3、新在上、同名更新置顶、第 4 张丢最旧；1 张→大卡、≥2 张→紧凑 3 行不越界 | T | `PASS` | `evidence/M8/2026-10-17-多卡栈-T.md`（host 589/0） |
+| `CARD-03` | 多卡栈：≤3、新在上、同名更新置顶、第 4 张丢最旧；1 张→大卡、≥2 张→紧凑 3 行不越界 | T | `PASS` | `evidence/M8/2026-10-17-多卡栈-T.md`（host 599/0，2026-10-19 复跑） |
+| `LAYOUT-01` | 3 卡紧凑区：每行 28px、状态条在 x=4..6、左右边界 4..131、最后一行到 233 且 234..239 为底色；长标题/项目不越界 | T | `PASS`（host；**设备 H 仍 `NOT_RUN`**） | `tests/test_pet_layout.c`、`sim/cards-3.bmp` |
 | `LINK-04` | 事件线解析：合法（全字段/空格/未知键/换行/超长截断）与非法（非 JSON、缺括号、数组、空串、version 错、缺 event、未知事件、类型不符、超长行）各自的错误码 | T | `PASS` | `tests/test_pet_link.c` |
 | `LINK-05` | 六个事件名 → `pet_event_kind_t`；`device.heartbeat` 只刷新链路不改状态 | T | `PASS` | 同上 |
 | `CARD-04` | 带卡片字段时 `has_card` 且 `card.state` 随事件映射；无字段时不产生卡片 | T | `PASS` | 同上 |
@@ -113,31 +114,38 @@
 | `LEI-06` | 小剧真机可见（7 种）+ LIGHTS_OUT 关背光 + 按键唤醒亮屏 | H | ✅ **PASS**（demo 阈值） | `evidence/M8/2026-10-17-小剧与背光-H.md` |
 | `E2E-02` | 主机入口核心：简式/富式（`tasks[0]` 优先）→ 设备线；`stats` 忽略；title 截 63；heartbeat 无线外字段；**loopback 集成** POST→200 且 sink 收线；**真机端到端**：脚本发事件 → 设备状态/卡/语音生效 | C+H | `PASS`（核心 + 端到端） | `host/tests/test_pet_ingest.py`、`evidence/M4/2026-10-17-传输端到端-H.md` |
 | `E2E-03` | 非法输入：方法/路径/content-type/超长/非 JSON/version/event/事件名/类型 → 对应码与 HTTP 状态；**错误不广播**；不崩 | C | `PASS` | 同上 |
-| `SEC-01` | 仅 loopback 绑定（`server_address[0]=="127.0.0.1"`） | C | `PASS`（loopback）；token 待定 | 同上 |
+| `SEC-01` | 仅 loopback 绑定（`server_address[0]=="127.0.0.1"`） | C | `PASS`（loopback） | 同上 |
+| `E2E-05` | 统一主机守护：HTTP→队列→串口；OpenCode source→串口；设备控制线→focus；写失败重连；stop 关闭 | C | `PASS`（fake serial/source，无设备） | `host/tests/test_pet_service.py` |
+| `SEC-02` | 可选 `X-Pet-Token`：缺失/错误 → 401 且不广播；正确 → 200 | C | `PASS`（host） | `host/tests/test_pet_ingest.py`（`TokenAuth`）、`test_pet_service.py` |
 
 ## 4. 未覆盖提示（dayu `ids.md` §6：每条 R 至少一个用例）
 
-- `R11`（OpenCode）仍 **`NOT_RUN`**（真源映射未做，旧项目不在本机 → 阻塞）。
-- `R12`/`R22` 的 `E2E-02`/`E2E-03` **主机核心已 `PASS`**（M4 增量2a）；但**端到端（到设备）`NOT_RUN`**（传输未接）→ 节点未验收。
-- R13、R15、R17、R18 的用例多数已登记但 **`NOT_RUN`**（对应节点未开工），**不算已验收**。
-- `R24`（番茄钟逻辑）与 `R16` 的 `POMO-06` 已 **`PASS`**（host 逻辑，M7 增量1）；其**真机（H）与持久化**部分仍未验 → 节点未验收。
-- **H 类：已做（真机）**：2026-10-17 —— ① 刷机运行（`DISPLAY READY M1`/`PIXEL CARD READY`/`AUDIO READY`+心跳）+ 目视 M1 一帧+失联灰化（`evidence/2026-10-17-实机刷机-H.md`）；② **USB-Serial-JTAG 传输**驱动下，**6 态依次可辨、任务卡正确、三句语音听到**（`evidence/M4/2026-10-17-传输端到端-H.md`）。
-- **仍未验**：`R11` OpenCode 真源；多卡（M8）；刷新率/时序**数值**；`AUD-06` 不阻塞主循环。
-- **无变异测试**：尚未验证"注入缺陷能否被测试抓住"（`parameters` 待补）。
+- `R11`（OpenCode）**已 `PASS`**（真实库 busy/idle → 设备 WORKING→DONE+语音；2026-10-17）。
+- `R12`/`R22` 的 `E2E-02`/`E2E-03` **`PASS`**（主机核心 + 真机端到端）；`E2E-05` 覆盖统一守护（host）。
+- R13 多卡 T `PASS`；**设备紧凑版式 H 仍 `NOT_RUN`**，节点未验收。
+- R15/R16/R17/R18 的主要 H 项已 `PASS`（见上表）；仍未验的是刷新率数值、NTP 真实夜间、跨 OS 部署。
+- **H 类：已做（真机）**：2026-10-17 —— ① 刷机运行 + M1 一帧 + 失联灰化；② USB-Serial-JTAG 下 6 态、任务卡、三句语音；③ 按键/回窗口/菜单；④ 圆环/小剧/背光；⑤ 多卡仅 T，**未上屏**。
+- **仍未验**：多卡设备 H；G1–G7 全量；刷新率/时序数值；NTP；`waiting`；除 OpenCode 外 Agent。
+- **无变异测试**：尚未验证“注入缺陷能否被测试抓住”；B2 已补故障注入，但不等于变异测试。
 
 ## 5. 执行记录汇总（最近一次）
 
 | 测试 | 用例数 | 结果 |
 | --- | --- | --- |
-| `tests/test_pet_render.c` | 52 checks | `PASS`（0 failed） |
-| `tests/test_pet_state.c` | 55 checks | `PASS`（0 failed） |
-| `tests/test_pet_card.c` | 21 checks | `PASS`（0 failed） |
-| `tests/test_pet_link.c` | 47 checks | `PASS`（0 failed） |
+| `tests/test_pet_render.c` | 94 checks | `PASS`（0 failed） |
+| `tests/test_pet_state.c` | 99 checks | `PASS`（0 failed） |
+| `tests/test_pet_card.c` | 38 checks | `PASS`（0 failed） |
+| `tests/test_pet_link.c` | 98 checks | `PASS`（0 failed） |
 | `tests/test_pet_voice.c` | 28 checks | `PASS`（0 failed） |
 | `tests/test_pet_pomo.c` | 96 checks | `PASS`（0 failed） |
 | `tests/test_pet_linebuf.c` | 25 checks | `PASS`（0 failed） |
+| `tests/test_pet_button.c` | 34 checks | `PASS`（0 failed） |
+| `tests/test_pet_keymap.c` | 12 checks | `PASS`（0 failed） |
+| `tests/test_pet_menu.c` | 15 checks | `PASS`（0 failed） |
+| `tests/test_pet_leisure.c` | 50 checks | `PASS`（0 failed） |
+| `tests/test_pet_layout.c` | 10 checks | `PASS`（0 failed） |
 
-命令：`tests/run.sh`（退出码 0）。**合计 324 checks。** 证据：`evidence/M1/`…`evidence/M5/`、`evidence/M7/`、`evidence/M4/`。
-（host 运行经用户态 `CC=/tmp/opencode/zb/cc.sh`（zig cc）；见 `evidence/2026-10-16-新机器环境基线.md`。）
+命令：`bash tests/run.sh`（退出码 0）。**合计 599 checks。** CI 同时跑 gcc 与 clang。
+证据：`evidence/M9/2026-10-19-host-acceptance.md`（自动汇总）以及各里程碑 evidence。
 
-**主机侧 Python（M4 增量 2a+2b + M6 回窗口）**：`./host/run-tests.sh` → **55 tests, OK**（`unittest`，仅 stdlib；入口核心 + 传输发送端 + 设备行解析/守护；不开真串口）。证据：`evidence/M4/2026-10-16-主机入口核心-T.md`、`evidence/M4/2026-10-17-传输发送端-T.md`、`evidence/M6/2026-10-17-回窗口-T.md`。
+**主机侧 Python**：`./host/run-tests.sh` → **98 tests, OK**（`unittest`，仅 stdlib；入口核心 + 传输 + OpenCode 轮询 + 回窗口 + 故障注入 + 统一守护；不开真串口）。证据：`evidence/M9/2026-10-19-host-acceptance.md`。

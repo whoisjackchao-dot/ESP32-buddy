@@ -4,7 +4,7 @@
 >
 > **本仓库是净室重实现（clean-room reimplementation）**：借鉴 [second-state/vibebuddy](https://github.com/second-state/vibebuddy) 的**设计与事件模型**，不搬其 Rust 代码。固件为 **C / ESP-IDF**。
 
-**当前状态：以 [文档索引](./ESP32-buddy_文档索引.md) 为准。** 当前处于 **阶段 3（开发）**：M1–M5 的 host 侧（T 类）已实现并单测通过，M6–M8 未开工；**全部 H 类（真机）证据待刷机**。
+**当前状态：以 [文档索引](./ESP32-buddy_文档索引.md) 为准。** 当前处于 **阶段 3（开发）**：M1–M7 与 M8 增量 1/1b/2 已实现并有证据；**M8 多卡紧凑版式的真机 H 待做，M9 验收/交付未开工**。host 侧当前 **C 599/0**、**Python 98/98**，CI 覆盖 gcc/clang、Python、IDF 5.5.4 构建与模拟器；H 类仍以真机记录为准，模拟器不替代 H。
 
 ## 1. 目标与范围
 
@@ -21,10 +21,15 @@
 ├── ESP32-buddy_需求与决策基线.md     # 阶段 0–1：R / G / Q / B
 ├── ESP32-buddy_M0-M9开发计划.md      # 阶段 2：里程碑、DoR、冻结时间表、授权
 ├── contracts/                       # 契约冻结与 ADR
-│   └── M1-渲染分层契约冻结.md
 ├── evidence/                        # 证据日志，按里程碑分目录
-├── NOTICE.md                        # 第三方素材署名与商标边界
-└── LICENSE                          # 代码 MIT（待确认）；立绘 CC BY-SA 4.0
+├── firmware/                        # ESP-IDF 固件（C）
+├── host/                            # 主机侧：入口/传输/OpenCode/统一守护
+├── tests/                           # host C 单测（T 类）
+├── tools/                           # 构建、模拟器、验收、发布脚本
+├── docs/                            # 可复现构建、Q10 决策包、计划
+├── .github/workflows/ci.yml         # gcc/clang + Python + IDF 5.5.4 + sim
+├── NOTICE.md                        # 第三方许可登记与商标边界
+└── LICENSE                          # 代码 MIT；立绘为本项目自绘
 ```
 
 ## 3. 与上游的关系（必读）
@@ -32,7 +37,7 @@
 | 项 | 来源 | 许可 | 说明 |
 |---|---|---|---|
 | 设计 / 事件模型 / 状态机 | vibebuddy（GPL-3.0-or-later） | 只借鉴**设计**，不复制代码 | 净室重实现，本项目代码可保持 MIT |
-| 立绘（机器人 48×64 4bpp） | vibebuddy 仓库 | **CC BY-SA 4.0** | 需署名；**衍生艺术**须同协议开放 |
+| 立绘（机器人 48×64 4bpp，12 帧） | **本项目自绘**（`tools/make-look.py`） | 随项目发布 | 未复制上游美术；设计灵感来自 vibebuddy 的桌面宠物概念 |
 | 名称与角色 | vibebuddy | **保留商标权** | **本项目不得使用 "VibeBuddy" 名称或角色商标**，故取名 ESP32-buddy |
 
 详见 [NOTICE.md](./NOTICE.md)。
@@ -43,15 +48,18 @@
 
 | 项 | 工具 | 状态 |
 | --- | --- | --- |
-| 固件 | ESP-IDF **v5.5.4**（release/v5.5），目标 esp32s3 | ✅ 已装（**原开发机**；新机器未装 → 缺口 `B15`） |
-| 固件 | xtensa-esp-elf 14.2.0 | ✅ 同上 |
-| 构建 | 构建目录必须放 **WSL 原生盘**（`-B ~/esp-build/...`），放 `/mnt/c` 慢约 30 倍 | ⚠️ 已知 |
-| 通用 | 系统 python3 为 3.14，ESP-IDF 需 ≤3.13 → 用 `tools/idf-env.sh` 包装 | ✅ 已建立 |
-| 通用 | host 单测 `tests/run.sh`（T 类），需要 `cc` | ⚠️ 新机器无系统编译器时，用用户态 `zig cc` 作 `cc`（见 `B15`） |
+| 固件 | ESP-IDF **v5.5.4**，目标 esp32s3 | 🟡 CI 用 `espressif/idf:v5.5.4`；本机 `~/esp/esp-idf` 是 5.5.5、`esp-idf-v6` 是 6.0.1 → `tools/build-firmware.sh --check` 会拒绝 |
+| 固件 | xtensa-esp-elf 14.2.0 | ✅ 原开发机 / CI 容器 |
+| 构建 | 构建目录放 **WSL/Linux 原生盘**（`-B ~/esp-build/...`），放 `/mnt/c` 慢约 30 倍 | ⚠️ 已知 |
+| 通用 | 系统 python3 3.14；ESP-IDF 用自带 venv（`tools/idf-env.sh`） | ✅ 已建立 |
+| 通用 | host C 单测 `bash tests/run.sh`（T 类），需要 `cc` + `-lm` | ✅ gcc 15 / clang / CI 均可复现 **599/0** |
+| 通用 | host Python `./host/run-tests.sh`（stdlib） | ✅ **98/98** |
+| 离线视觉 | `bash tools/sim.sh` → `sim/*.bmp` + `sim/MANIFEST.txt` | ✅ 多卡/菜单/番茄钟/小剧场景 |
+| 主机产品化 | `python3 host/pet_service.py --port COM5` | ✅ 单进程 HTTP + OpenCode + 串口；可选 `PET_EVENT_TOKEN` |
 
-> `tools/idf-env.sh` 已建立（包装 ESP-IDF 的 venv 与代理）。
-> **换机注意**：新机器无系统 `cc` 时，用 `CC=tools/host-cc.sh bash tests/run.sh`（自动选 `cc` 或用户态 `zig cc`，**370/0**）。
-> 固件构建可用 Windows 侧 ESP-IDF v5.5.4；详见 `evidence/2026-10-16-新机器环境基线.md` 与缺口 `B15`。
+> 换机无系统 `cc` 时，仍可用 `CC=tools/host-cc.sh bash tests/run.sh`。
+> 固件构建/发布清单见 [`docs/reproducible-build.md`](./docs/reproducible-build.md)；CI 见 `.github/workflows/ci.yml`。
+> 真机验收按 [`tools/acceptance/README.md`](./tools/acceptance/README.md) 执行；**模拟器/BMP 不是 H 证据**。
 
 ## 5. 许可
 
