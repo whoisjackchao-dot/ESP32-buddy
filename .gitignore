@@ -25,3 +25,6 @@ dependencies.lock
 # Python（主机侧入口核心）
 __pycache__/
 *.pyc
+
+# 发布清单由 tools/release-manifest.sh 生成
+flash/MANIFEST.json
