@@ -492,7 +492,9 @@ void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v)
     snprintf(row, sizeof row, "MUTE: %s", v->muted ? "ON" : "OFF");
     menu_draw_row(s, 64, row, v->selected == 0);
 
-    snprintf(row, sizeof row, "STATUS: %s %s", (v->mode == 0) ? "DUTY" : "POMO",
+    /* 15-char budget: "DUTY: IDLE" / "POMO: FPAUSE" 都能完整显示；
+     * 旧的 "STATUS: POMO FOCUS" 会被截成 "STATUS: POMO FO"。 */
+    snprintf(row, sizeof row, "%s: %s", (v->mode == 0) ? "DUTY" : "POMO",
              menu_phase_word(v->phase));
     menu_draw_row(s, 96, row, v->selected == 1);
 
