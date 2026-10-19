@@ -1,0 +1,2 @@
+# Only needed for the real serial port. Tests and --help use stdlib only.
+pyserial>=3.5

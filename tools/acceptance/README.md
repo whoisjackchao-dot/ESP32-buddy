@@ -11,6 +11,12 @@ bash tools/acceptance/run_host_checks.sh   # T/C 预检，生成 host 验收记�
 ```
 
 设备侧：M5StickS3 接 USB-SLAVE 口，确认串口（Windows 常见 `COM5`）。
+主机侧真实串口需要 `pyserial`（仅此一处第三方依赖）：
+
+```bash
+python3 -m pip install -r host/requirements.txt
+```
+
 主机侧单进程启动：
 
 ```bash
