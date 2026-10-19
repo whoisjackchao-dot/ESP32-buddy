@@ -9,7 +9,7 @@ cd "$ROOT"
 INC=firmware/components/pet/include
 mkdir -p sim tests/build
 
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+"$CC" -std=c11 -Wall -Wextra -Werror -Wno-unknown-warning-option -g -I "$INC" \
     -D PET_DONE_DWELL_MS=5000 -D PET_DONE_EDGE_DEBOUNCE_MS=1500 -D PET_LINK_TIMEOUT_MS=15000 \
     tools/sim.c \
     firmware/components/pet/pet_render.c \

@@ -18,8 +18,8 @@ build_and_run() {
     local name="$1"
     shift
     echo "== $name =="
-    if ! "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" "$@" \
-            -o "$BUILD/$name" -lm; then
+    if ! "$CC" -std=c11 -Wall -Wextra -Werror -Wno-unknown-warning-option \
+            -g -I "$INC" "$@" -o "$BUILD/$name" -lm; then
         status=1
         return 0
     fi
