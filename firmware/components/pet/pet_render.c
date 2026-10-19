@@ -291,7 +291,7 @@ static void draw_card_row(pet_surface_t *s, int y, const pet_card_t *card)
                         STACK_TEXT_MAX, CARD_TITLE, 1);
     char elapsed[16];
     pet_format_elapsed(elapsed, sizeof elapsed, card->elapsed_s);
-    char line[PET_PROJECT_MAX + 16];
+    char line[PET_PROJECT_MAX + 24];
     if (card->project[0] != '\0') {
         snprintf(line, sizeof line, "%s \xc2\xb7 %s", card->project, elapsed);
     } else {
@@ -486,7 +486,7 @@ void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v)
         return;
     }
 
-    char row[24];
+    char row[40];
     (void)pet_text_draw(s, MENU_ROW_X, 16, "MENU", MENU_TEXT_MAX, MENU_C_TEXT, 1);
 
     snprintf(row, sizeof row, "MUTE: %s", v->muted ? "ON" : "OFF");

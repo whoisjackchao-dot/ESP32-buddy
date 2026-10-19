@@ -12,84 +12,65 @@ mkdir -p "$BUILD"
 
 status=0
 
-echo "== test_pet_render =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+# Build one test binary; a compile failure is recorded but does not stop the
+# remaining suites. -lm is required by pet_render (atan2/sin/lround).
+build_and_run() {
+    local name="$1"
+    shift
+    echo "== $name =="
+    if ! "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" "$@" \
+            -o "$BUILD/$name" -lm; then
+        status=1
+        return 0
+    fi
+    "$BUILD/$name" || status=1
+}
+
+build_and_run test_pet_render \
     tests/test_pet_render.c \
     firmware/components/pet/pet_render.c \
-    firmware/components/pet/pet_text.c \
-    -o "$BUILD/test_pet_render"
-"$BUILD/test_pet_render" || status=1
+    firmware/components/pet/pet_text.c
 
-echo "== test_pet_state =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_state \
     -D PET_DONE_DWELL_MS=5000 -D PET_DONE_EDGE_DEBOUNCE_MS=1500 -D PET_LINK_TIMEOUT_MS=15000 \
     tests/test_pet_state.c \
-    firmware/components/pet/pet_state.c \
-    -o "$BUILD/test_pet_state"
-"$BUILD/test_pet_state" || status=1
+    firmware/components/pet/pet_state.c
 
-echo "== test_pet_card =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_card \
     tests/test_pet_card.c \
     firmware/components/pet/pet_render.c \
-    firmware/components/pet/pet_text.c \
-    -o "$BUILD/test_pet_card"
-"$BUILD/test_pet_card" || status=1
+    firmware/components/pet/pet_text.c
 
-echo "== test_pet_voice =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_voice \
     tests/test_pet_voice.c \
-    firmware/components/pet/pet_voice.c \
-    -o "$BUILD/test_pet_voice"
-"$BUILD/test_pet_voice" || status=1
+    firmware/components/pet/pet_voice.c
 
-echo "== test_pet_link =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_link \
     tests/test_pet_link.c \
-    firmware/components/pet/pet_link.c \
-    -o "$BUILD/test_pet_link"
-"$BUILD/test_pet_link" || status=1
+    firmware/components/pet/pet_link.c
 
-echo "== test_pet_pomo =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_pomo \
     tests/test_pet_pomo.c \
-    firmware/components/pet/pet_pomo.c \
-    -o "$BUILD/test_pet_pomo"
-"$BUILD/test_pet_pomo" || status=1
+    firmware/components/pet/pet_pomo.c
 
-echo "== test_pet_linebuf =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_linebuf \
     tests/test_pet_linebuf.c \
-    firmware/components/pet/pet_linebuf.c \
-    -o "$BUILD/test_pet_linebuf"
-"$BUILD/test_pet_linebuf" || status=1
+    firmware/components/pet/pet_linebuf.c
 
-echo "== test_pet_button =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_button \
     tests/test_pet_button.c \
-    firmware/components/pet/pet_button.c \
-    -o "$BUILD/test_pet_button"
-"$BUILD/test_pet_button" || status=1
+    firmware/components/pet/pet_button.c
 
-echo "== test_pet_keymap =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_keymap \
     tests/test_pet_keymap.c \
-    firmware/components/pet/pet_keymap.c \
-    -o "$BUILD/test_pet_keymap"
-"$BUILD/test_pet_keymap" || status=1
+    firmware/components/pet/pet_keymap.c
 
-echo "== test_pet_menu =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_menu \
     tests/test_pet_menu.c \
-    firmware/components/pet/pet_menu.c \
-    -o "$BUILD/test_pet_menu"
-"$BUILD/test_pet_menu" || status=1
+    firmware/components/pet/pet_menu.c
 
-echo "== test_pet_leisure =="
-"$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
+build_and_run test_pet_leisure \
     tests/test_pet_leisure.c \
-    firmware/components/pet/pet_leisure.c \
-    -o "$BUILD/test_pet_leisure"
-"$BUILD/test_pet_leisure" || status=1
+    firmware/components/pet/pet_leisure.c
 
 exit "$status"

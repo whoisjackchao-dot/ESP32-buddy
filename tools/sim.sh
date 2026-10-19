@@ -16,6 +16,6 @@ mkdir -p sim tests/build
     firmware/components/pet/pet_text.c \
     firmware/components/pet/pet_link.c \
     firmware/components/pet/pet_state.c \
-    -o tests/build/sim
+    -o tests/build/sim -lm
 
 ./tests/build/sim firmware/components/pet/assets/robot.look
