@@ -1,6 +1,6 @@
 # M9 host 验收记录（自动生成）
 
-> 日期：2026-10-19T17:59:08+08:00；commit：`c3a2ee4`；类别：**T/C（host）**
+> 日期：2026-10-19T18:00:13+08:00；commit：`78b11e1`；类别：**T/C（host）**
 > 本记录**不包含** G1–G7 的真机（H）结论；H 必须另按 runbook 执行。
 
 ## 环境
@@ -258,7 +258,7 @@ test_two_sends_append_two_lines (test_pet_transport.SerialSinkWrites.test_two_se
 test_writes_exactly_ensure_line_bytes (test_pet_transport.SerialSinkWrites.test_writes_exactly_ensure_line_bytes) ... ok
 
 ----------------------------------------------------------------------
-Ran 98 tests in 6.142s
+Ran 98 tests in 6.539s
 
 OK
 PASS: host Python tests
