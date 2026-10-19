@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  host-c:
+    name: host C tests (${{ matrix.cc }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install clang
+        if: matrix.cc == 'clang'
+        run: sudo apt-get update && sudo apt-get install -y clang
+      - name: Compiler version
+        run: ${{ matrix.cc }} --version
+      - name: Run host C tests
+        env:
+          CC: ${{ matrix.cc }}
+        run: bash tests/run.sh
+
+  host-python:
+    name: host Python tests (${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run host Python tests
+        run: bash host/run-tests.sh
+
+  firmware:
+    name: firmware build (ESP-IDF v5.5.4)
+    runs-on: ubuntu-latest
+    container: espressif/idf:v5.5.4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show IDF version
+        run: idf.py --version
+      - name: Build
+        working-directory: firmware
+        run: idf.py -B "$RUNNER_TEMP/esp-build/buddy" build
+
+  simulator:
+    name: simulator scenes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and render scenes
+        run: bash tools/sim.sh
+      - name: Upload scene artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sim-scenes
+          path: sim/
+          if-no-files-found: error
