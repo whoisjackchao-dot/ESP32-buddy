@@ -136,6 +136,35 @@ class IngestErrors(unittest.TestCase):
         r = call(body=jbody({"version": 1, "event": "task.start", "elapsed_s": True}))
         self.assertEqual((r.code, r.http_status), ("TYPE", 400))
 
+    def test_elapsed_over_device_limit_400(self):
+        # Device-side pet_link caps elapsed_s at 1e9 (parse_uint); accepting a
+        # larger value here would build a line the device rejects.
+        r = call(body=jbody({"version": 1, "event": "task.start",
+                             "elapsed_s": 1000000001}))
+        self.assertEqual((r.code, r.http_status), ("TYPE", 400))
+
+    def test_elapsed_at_device_limit_ok(self):
+        r = call(body=jbody({"version": 1, "event": "task.start",
+                             "elapsed_s": 1000000000}))
+        self.assertTrue(r.ok)
+
+    def test_control_char_title_400(self):
+        # \u0001 would be emitted as "\u0001" by json.dumps; the device
+        # parser only supports \" \\ \/ \n \t \r \b \f, so reject it here.
+        r = call(body=jbody({"version": 1, "event": "task.done",
+                             "title": "bad\u0001title"}))
+        self.assertEqual((r.code, r.http_status), ("TYPE", 400))
+
+    def test_control_char_project_400(self):
+        r = call(body=jbody({"version": 1, "event": "task.start",
+                             "project": "bad\u0000project"}))
+        self.assertEqual((r.code, r.http_status), ("TYPE", 400))
+
+    def test_tasks0_control_char_400(self):
+        r = call(body=jbody({"version": 1, "event": "task.start",
+                             "tasks": [{"title": "bad\u0001"}]}))
+        self.assertEqual((r.code, r.http_status), ("TYPE", 400))
+
     def test_tasks_not_list_400(self):
         r = call(body=jbody({"version": 1, "event": "task.start", "tasks": "nope"}))
         self.assertEqual((r.code, r.http_status), ("TYPE", 400))

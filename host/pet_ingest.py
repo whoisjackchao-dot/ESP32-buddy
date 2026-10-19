@@ -11,6 +11,7 @@ VERSION = 1
 MAX_BODY = 512
 TITLE_MAX = 64
 PROJECT_MAX = 64
+ELAPSED_MAX = 1000000000  # device-side pet_link parse_uint cap
 EVENT_INGEST_PORT = 8787
 
 KNOWN_EVENTS = frozenset({
@@ -48,6 +49,16 @@ def _is_json_content_type(content_type):
         return False
     media_type = content_type.split(";", 1)[0].strip().lower()
     return media_type == "application/json"
+
+
+def _text_ok(value):
+    """True when the device can parse/render this string as-is.
+
+    The device parser supports the JSON escapes \\" \\\\ \\/ \\n \\t \\r \\b \\f
+    but not \\uXXXX. json.dumps(ensure_ascii=False) still emits \\uXXXX for
+    control characters (including NUL), so reject them at the entry.
+    """
+    return all(ord(ch) >= 0x20 and ord(ch) != 0x7F for ch in value)
 
 
 def build_line(version, event, title=None, project=None, elapsed_s=None):
@@ -107,19 +118,20 @@ def ingest_request(method, path, content_type, body):
 
     title = src.get("title")
     if title is not None:
-        if not isinstance(title, str):
+        if not isinstance(title, str) or not _text_ok(title):
             return _err("TYPE", 400)
         title = title[:TITLE_MAX - 1]
 
     project = src.get("project")
     if project is not None:
-        if not isinstance(project, str):
+        if not isinstance(project, str) or not _text_ok(project):
             return _err("TYPE", 400)
         project = project[:PROJECT_MAX - 1]
 
     elapsed_s = src.get("elapsed_s")
     if elapsed_s is not None:
-        if isinstance(elapsed_s, bool) or not isinstance(elapsed_s, int) or elapsed_s < 0:
+        if (isinstance(elapsed_s, bool) or not isinstance(elapsed_s, int)
+                or elapsed_s < 0 or elapsed_s > ELAPSED_MAX):
             return _err("TYPE", 400)
 
     # Unknown input keys (e.g. status, stats) are ignored (§8.2, §6.1).
