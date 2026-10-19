@@ -73,4 +73,9 @@ build_and_run test_pet_leisure \
     tests/test_pet_leisure.c \
     firmware/components/pet/pet_leisure.c
 
+build_and_run test_pet_layout \
+    tests/test_pet_layout.c \
+    firmware/components/pet/pet_render.c \
+    firmware/components/pet/pet_text.c
+
 exit "$status"

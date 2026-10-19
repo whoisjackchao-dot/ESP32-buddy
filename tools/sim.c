@@ -17,6 +17,26 @@
 
 static uint8_t g_fb[W * H * 2];
 static pet_surface_t g_surface;
+static FILE *g_manifest;
+
+/* FNV-1a over the RGB bytes: deterministic, dependency-free scene fingerprint. */
+static uint32_t fnv1a(const uint8_t *data, size_t len)
+{
+    uint32_t h = 2166136261u;
+    for (size_t i = 0; i < len; i++) {
+        h ^= data[i];
+        h *= 16777619u;
+    }
+    return h;
+}
+
+static void manifest_add(const char *path, const uint8_t *rgb, int w, int h)
+{
+    if (g_manifest != NULL) {
+        fprintf(g_manifest, "%s fnv1a=%08x\n", path,
+                (unsigned)fnv1a(rgb, (size_t)w * (size_t)h * 3u));
+    }
+}
 
 static void surface_init(void)
 {
@@ -110,6 +130,21 @@ static void surface_to_rgb(uint8_t *rgb)
     }
 }
 
+/* 保存当前整屏并登记哈希（新增场景统一走这里）。 */
+static void save_current(const char *name)
+{
+    char path[256];
+    snprintf(path, sizeof path, "sim/%s.bmp", name);
+    uint8_t *rgb = malloc((size_t)W * H * 3);
+    if (rgb == NULL) {
+        return;
+    }
+    surface_to_rgb(rgb);
+    write_bmp(path, rgb, W, H);
+    manifest_add(path, rgb, W, H);
+    free(rgb);
+}
+
 /* ---- 各状态 ---- */
 
 static void drive(struct pet_state *s, pet_event_kind_t k, uint32_t now)
@@ -142,6 +177,24 @@ static pet_view_t view_for(pet_event_kind_t a, pet_event_kind_t b, uint32_t tick
     return v;
 }
 
+/* M8：构造 2/3 张卡的紧凑栈（最新卡在 cards[0]）。 */
+static pet_view_t view_with_cards(int n)
+{
+    pet_view_t v = view_for(PET_EV_TASK_START, PET_EV_CARD, 0);
+    v.has_card = true;
+    v.card_count = n;
+    for (int i = 0; i < n; i++) {
+        v.cards[i].state = (i == 0) ? PET_STATE_INPUT_REQUIRED : PET_STATE_WORKING;
+        v.cards[i].elapsed_s = 60 * (i + 1);
+        snprintf(v.cards[i].title, sizeof v.cards[i].title,
+                 "TASK %d WITH A LONG TITLE", i + 1);
+        snprintf(v.cards[i].project, sizeof v.cards[i].project,
+                 "ESP32-buddy-project-%d", i + 1);
+    }
+    v.card = v.cards[0];
+    return v;
+}
+
 int main(int argc, char **argv)
 {
     const char *look_path = (argc > 1) ? argv[1]
@@ -166,6 +219,7 @@ int main(int argc, char **argv)
         return 2;
     }
 
+    g_manifest = fopen("sim/MANIFEST.txt", "w");
     surface_init();
 
     /* 状态 → (事件 a, 事件 b, tick)；tick>0 用于 idle 眨眼/发呆 */
@@ -201,6 +255,7 @@ int main(int argc, char **argv)
         uint8_t *rgb = malloc((size_t)W * H * 3);
         surface_to_rgb(rgb);
         write_bmp(path, rgb, W, H);
+        manifest_add(path, rgb, W, H);
         /* 拼到总览（横向排列） */
         for (int y = 0; y < H; y++) {
             memcpy(sheet + (((size_t)y * W * ncases) + (size_t)i * W) * 3,
@@ -211,6 +266,7 @@ int main(int argc, char **argv)
     }
 
     write_bmp("sim/all-states.bmp", sheet, W * ncases, H);
+    manifest_add("sim/all-states.bmp", sheet, W * ncases, H);
 
     /* M3：整屏场景（宠物 + 1 张任务卡） */
     uint8_t *ssheet = calloc((size_t)W * ncases * H * 3, 1);
@@ -229,6 +285,7 @@ int main(int argc, char **argv)
         uint8_t *rgb = malloc((size_t)W * H * 3);
         surface_to_rgb(rgb);
         write_bmp(path, rgb, W, H);
+        manifest_add(path, rgb, W, H);
         if (ssheet != NULL) {
             for (int y = 0; y < H; y++) {
                 memcpy(ssheet + (((size_t)y * W * ncases) + (size_t)i * W) * 3,
@@ -239,6 +296,7 @@ int main(int argc, char **argv)
     }
     if (ssheet != NULL) {
         write_bmp("sim/all-scenes.bmp", ssheet, W * ncases, H);
+        manifest_add("sim/all-scenes.bmp", ssheet, W * ncases, H);
         free(ssheet);
     }
 
@@ -276,6 +334,7 @@ int main(int argc, char **argv)
             uint8_t *rgb = malloc((size_t)W * H * 3);
             surface_to_rgb(rgb);
             write_bmp(path, rgb, W, H);
+            manifest_add(path, rgb, W, H);
             free(rgb);
             printf("wrote %s (kind=%d card=%d title=%s)\n", path, (int)v.state,
                    (int)v.has_card, v.has_card ? v.card.title : "-");
@@ -295,9 +354,78 @@ int main(int argc, char **argv)
         uint8_t *rgb = malloc((size_t)W * H * 3);
         surface_to_rgb(rgb);
         write_bmp(path, rgb, W, H);
+        manifest_add(path, rgb, W, H);
         free(rgb);
     }
 
+    /* M8：多卡紧凑栈（2/3 张） */
+    for (int n = 2; n <= 3; n++) {
+        pet_view_t v = view_with_cards(n);
+        pet_render_scene(&v, look, &g_surface);
+        char name[32];
+        snprintf(name, sizeof name, "cards-%d", n);
+        save_current(name);
+        printf("wrote sim/%s.bmp (card_count=%d)\n", name, v.card_count);
+    }
+
+    /* M6：菜单（静音选中 / 状态选中） */
+    pet_menu_view_t mv;
+    memset(&mv, 0, sizeof mv);
+    mv.muted = true;
+    mv.selected = 0;
+    mv.mode = 1;
+    mv.phase = PET_POMO_FOCUS;
+    mv.done_count = 3;
+    mv.focus_seconds = 4500;
+    pet_render_menu(&g_surface, &mv);
+    save_current("menu-mute");
+    mv.muted = false;
+    mv.selected = 1;
+    mv.phase = PET_POMO_BREAK;
+    pet_render_menu(&g_surface, &mv);
+    save_current("menu-status");
+
+    /* M7：番茄钟环（专注/暂停/休息/到点） */
+    const struct {
+        const char *name;
+        pet_pomo_phase_t phase;
+        uint32_t remaining_ms;
+    } pomos[] = {
+        {"pomo-focus",  PET_POMO_FOCUS,        25u * 60u * 1000u},
+        {"pomo-half",   PET_POMO_FOCUS,        15u * 60u * 1000u},
+        {"pomo-paused", PET_POMO_FOCUS_PAUSED, 10u * 60u * 1000u},
+        {"pomo-break",  PET_POMO_BREAK,         5u * 60u * 1000u},
+        {"pomo-done",   PET_POMO_FOCUS_DONE,         0u},
+    };
+    for (int i = 0; i < (int)(sizeof pomos / sizeof pomos[0]); i++) {
+        pet_pomo_view_t pv;
+        memset(&pv, 0, sizeof pv);
+        pv.phase = pomos[i].phase;
+        pv.remaining_ms = pomos[i].remaining_ms;
+        pv.total_ms = (pomos[i].phase == PET_POMO_BREAK) ? 5u * 60u * 1000u
+                                                        : 25u * 60u * 1000u;
+        pv.done_count = 2;
+        pv.focus_seconds = 3000;
+        pet_render_pomo(&g_surface, &pv);
+        save_current(pomos[i].name);
+    }
+
+    /* M8：7 种小剧 × 2 个时间片 */
+    const pet_view_t idle = view_for(PET_EV_AGENT_IDLE, PET_EV_CARD, 0);
+    for (int id = 0; id < 7; id++) {
+        for (int phase = 0; phase < 2; phase++) {
+            const uint32_t t_ms = (phase == 0) ? 0u : 1000u;
+            pet_render_skit(&g_surface, look, &idle, id, t_ms);
+            char name[32];
+            snprintf(name, sizeof name, "skit-%d-%d", id, phase);
+            save_current(name);
+        }
+    }
+
+    if (g_manifest != NULL) {
+        fclose(g_manifest);
+        g_manifest = NULL;
+    }
     free(sheet);
     pet_look_free(look);
     free(look_bytes);
