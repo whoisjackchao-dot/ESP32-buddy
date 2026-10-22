@@ -57,6 +57,8 @@
   8. 登记 `Q19`–`Q21`（G2 口径 / G4 起算点 / 1s 测法）到基线 §8 与执行清单 §6。
   9. **交付完整性（第二轮，host-only）**：manifest 加 `--build-dir`，登记三个 `.bin` 的偏移/字节/sha256 + chip/target/IDF 版本；`F6-host` 洪泛 200 事件 × 8 线程 **0 丢弃**；新增 `host/pet_bridge.py` **单进程桥**（入口+串口，写失败重连一次、仍失败丢弃并记账）→ `evidence/M9/2026-10-22-交付完整性-T.md`
   10. 记录两处事实偏差：文档写 IDF **v5.5.4**、实际 **v5.5.5**；入口对"未送达"仍回 **200**（G6 必须看屏，不能只看状态码）。
+  11. **修三个可交付性缺陷**：manifest 曾登记 `.gitignore` 排除的 `flash/*.bin`（新 clone 会误报缺文件）→ 只登记仓库内文件、产物走 `build` 段；9 个脚本索引模式是 `100644`（新 clone `./tests/run.sh` 直接 Permission denied）→ 补 `+x`；IDF 版本标注错误 → 从 `esp_idf_version.h` 解析。
+  12. **新 clone 端到端实测通过**：`git clone` → C **589/0**、Python **77 OK**、预检 **3/3**、`manifest --check` 一致（无需任何手工修补）。
 - **上一轮完成（2026-10-16/17）**：
   1. 新机器环境核查：无 `cc`/无免密 sudo/无 ESP-IDF（`~/esp` 空）/无旧项目（`sticks3-opencode` 空）→ 登记缺口 `B15`
   2. 用**用户态 `zig cc 0.14.1`** 复现 host 单测（后并入 M7）：后随 M4 2b 增至 **277 checks / 0 failed** → `evidence/2026-10-16-新机器环境基线.md`
