@@ -17,7 +17,7 @@ echo "== test_pet_render =="
     tests/test_pet_render.c \
     firmware/components/pet/pet_render.c \
     firmware/components/pet/pet_text.c \
-    -o "$BUILD/test_pet_render"
+    -o "$BUILD/test_pet_render" -lm
 "$BUILD/test_pet_render" || status=1
 
 echo "== test_pet_state =="
@@ -25,7 +25,7 @@ echo "== test_pet_state =="
     -D PET_DONE_DWELL_MS=5000 -D PET_DONE_EDGE_DEBOUNCE_MS=1500 -D PET_LINK_TIMEOUT_MS=15000 \
     tests/test_pet_state.c \
     firmware/components/pet/pet_state.c \
-    -o "$BUILD/test_pet_state"
+    -o "$BUILD/test_pet_state" -lm
 "$BUILD/test_pet_state" || status=1
 
 echo "== test_pet_card =="
@@ -33,63 +33,63 @@ echo "== test_pet_card =="
     tests/test_pet_card.c \
     firmware/components/pet/pet_render.c \
     firmware/components/pet/pet_text.c \
-    -o "$BUILD/test_pet_card"
+    -o "$BUILD/test_pet_card" -lm
 "$BUILD/test_pet_card" || status=1
 
 echo "== test_pet_voice =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_voice.c \
     firmware/components/pet/pet_voice.c \
-    -o "$BUILD/test_pet_voice"
+    -o "$BUILD/test_pet_voice" -lm
 "$BUILD/test_pet_voice" || status=1
 
 echo "== test_pet_link =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_link.c \
     firmware/components/pet/pet_link.c \
-    -o "$BUILD/test_pet_link"
+    -o "$BUILD/test_pet_link" -lm
 "$BUILD/test_pet_link" || status=1
 
 echo "== test_pet_pomo =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_pomo.c \
     firmware/components/pet/pet_pomo.c \
-    -o "$BUILD/test_pet_pomo"
+    -o "$BUILD/test_pet_pomo" -lm
 "$BUILD/test_pet_pomo" || status=1
 
 echo "== test_pet_linebuf =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_linebuf.c \
     firmware/components/pet/pet_linebuf.c \
-    -o "$BUILD/test_pet_linebuf"
+    -o "$BUILD/test_pet_linebuf" -lm
 "$BUILD/test_pet_linebuf" || status=1
 
 echo "== test_pet_button =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_button.c \
     firmware/components/pet/pet_button.c \
-    -o "$BUILD/test_pet_button"
+    -o "$BUILD/test_pet_button" -lm
 "$BUILD/test_pet_button" || status=1
 
 echo "== test_pet_keymap =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_keymap.c \
     firmware/components/pet/pet_keymap.c \
-    -o "$BUILD/test_pet_keymap"
+    -o "$BUILD/test_pet_keymap" -lm
 "$BUILD/test_pet_keymap" || status=1
 
 echo "== test_pet_menu =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_menu.c \
     firmware/components/pet/pet_menu.c \
-    -o "$BUILD/test_pet_menu"
+    -o "$BUILD/test_pet_menu" -lm
 "$BUILD/test_pet_menu" || status=1
 
 echo "== test_pet_leisure =="
 "$CC" -std=c11 -Wall -Wextra -Werror -g -I "$INC" \
     tests/test_pet_leisure.c \
     firmware/components/pet/pet_leisure.c \
-    -o "$BUILD/test_pet_leisure"
+    -o "$BUILD/test_pet_leisure" -lm
 "$BUILD/test_pet_leisure" || status=1
 
 exit "$status"
