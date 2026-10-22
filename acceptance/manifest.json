@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-22T10:38:54+08:00",
+  "generated_at": "2026-10-22T10:40:23+08:00",
   "git": {
-    "commit": "c3a2641dfdad39ab6cd9b92a9bcac5a17b05803a",
+    "commit": "3f2f49aca28b715e6994d58eb3708f640d111edc",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 149,
-    "bytes": 871029
+    "bytes": 871982
   },
   "groups": {
     "firmware": [
@@ -440,8 +440,8 @@
       },
       {
         "path": "acceptance/README.md",
-        "bytes": 2939,
-        "sha256": "2d8cdecc48a339114c901e3e8ccb95b8aefc3744341242eacbf44b0a9fd0219a"
+        "bytes": 3053,
+        "sha256": "fa6f5a6781e76d6854aeb9d7bd11ad675869a1db7b77aacfbb8baec5d3cfdc48"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -751,8 +751,8 @@
       },
       {
         "path": "evidence/M9/2026-10-22-交付完整性-T.md",
-        "bytes": 4713,
-        "sha256": "a0d5c952501b3fa12d956e86f2aab9d1188465fab34e10d87da55e8e2049368b"
+        "bytes": 5552,
+        "sha256": "010772227ac2fdd14c290823163fdda9991f81ed3eabd24e19eea9cb0f9a5508"
       },
       {
         "path": "evidence/M9/2026-10-22-验收准备-D.md",

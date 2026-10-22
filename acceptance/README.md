@@ -31,6 +31,7 @@ python3 tools/gate-host-smoke.py          # 无需设备的门槛预检（G6-hos
 | manifest | ✅ 149 文件 / ≈0.87 MB（源码/文档/证据；**构建产物哈希在 `build` 段**），`--check` 通过 |
 | 许可登记 | ✅ 完成（含 NOTICE/README 事实修正） |
 | G6 host 半段 | ✅ 20/20 + 故障 7/7 + F6 洪泛 200/200 |
+| **新 clone 可复现** | ✅ 实测：`git clone` → C 589/0、Python 77 OK、预检 3/3、`--check` 通过 |
 | G1–G7 设备半段 | ⏳ **待设备**（本机无串口） |
 | 门槛口径 `Q19`–`Q21` | ⏳ 待拍板（见执行清单 §6） |
 
