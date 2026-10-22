@@ -100,6 +100,11 @@ def collect():
             rel = _rel(path)
             if rel in seen:
                 continue
+            # flash/*.bin 被 .gitignore 有意排除（不提交二进制）：
+            # 若登记，新 clone 的 --check 会误报"文件消失"。
+            # 产物哈希由 manifest.build 与 flash/MANIFEST.txt 负责。
+            if name == "flash" and rel.endswith(".bin"):
+                continue
             seen.add(rel)
             entries.append({
                 "path": rel,

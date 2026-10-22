@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-22T08:33:27+08:00",
+  "generated_at": "2026-10-22T10:38:54+08:00",
   "git": {
-    "commit": "4d58e2f44139e8c46d2690d5655d20f8102786cb",
+    "commit": "c3a2641dfdad39ab6cd9b92a9bcac5a17b05803a",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 152,
-    "bytes": 1441555
+    "files": 149,
+    "bytes": 871029
   },
   "groups": {
     "firmware": [
@@ -435,13 +435,13 @@
       },
       {
         "path": "acceptance/G1-G7-验收执行清单.md",
-        "bytes": 10314,
-        "sha256": "b8e639ae3dd7e6d667d65283d881d823deb708a7599548dda33e304ddd1ee546"
+        "bytes": 10344,
+        "sha256": "676e9be163438d976258d03015934d53a07de12dbd063a5f0209d398cd76902b"
       },
       {
         "path": "acceptance/README.md",
-        "bytes": 2608,
-        "sha256": "bf658dfd390eb916c01e4426cf944de1e7e8b524aa814428dc76ce8ce4dce7f2"
+        "bytes": 2939,
+        "sha256": "2d8cdecc48a339114c901e3e8ccb95b8aefc3744341242eacbf44b0a9fd0219a"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -521,16 +521,6 @@
         "sha256": "4e31b9422c26341bb4bf6ffd30c4abe49961fb464d74085587400c8d5733c419"
       },
       {
-        "path": "flash/bootloader.bin",
-        "bytes": 20480,
-        "sha256": "c6e1484b3d3320f3d036447d303fb07110604239ea866989d090292750f01920"
-      },
-      {
-        "path": "flash/esp32_buddy.bin",
-        "bytes": 548160,
-        "sha256": "68d10780e3fb31906f73ffc1cf55772d56e6619864edb2e6f6326a9a778f6336"
-      },
-      {
         "path": "flash/flash.ps1",
         "bytes": 305,
         "sha256": "65a6e4b50b5338f40be1d7f96e826b40abd17c7b35e5d4997d2db1fe674d0233"
@@ -539,11 +529,6 @@
         "path": "flash/flash.sh",
         "bytes": 354,
         "sha256": "1b53116c3ddd9e9c0771f9403826dcd2c2570f32e226783b4a7c9c49f0f7329e"
-      },
-      {
-        "path": "flash/partition-table.bin",
-        "bytes": 3072,
-        "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       }
     ],
     "third_party": [
@@ -766,13 +751,13 @@
       },
       {
         "path": "evidence/M9/2026-10-22-交付完整性-T.md",
-        "bytes": 4139,
-        "sha256": "62b0700a70ff6de787b1deafa57d254050a9c9a73851505abb455d1ef5333992"
+        "bytes": 4713,
+        "sha256": "a0d5c952501b3fa12d956e86f2aab9d1188465fab34e10d87da55e8e2049368b"
       },
       {
         "path": "evidence/M9/2026-10-22-验收准备-D.md",
-        "bytes": 4736,
-        "sha256": "5275cfe849bbc1b75350baceeb535cdce560fbf0864c0f1e21d8d4146bcb2625"
+        "bytes": 4987,
+        "sha256": "c7736bef0f8529cb1811c8b0c85a55c5cd34ee09e398174435795510dff6fe3b"
       }
     ],
     "legal": [
