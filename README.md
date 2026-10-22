@@ -26,7 +26,7 @@
 ├── evidence/                        # 证据日志（按里程碑分目录，T/C/H/D 分级）
 ├── acceptance/                      # M9：G1–G7 执行清单 + manifest + 许可登记
 ├── firmware/                        # ESP-IDF 工程（components/pet 为核心）
-├── host/                            # 主机侧：HTTP 入口、串口发送、OpenCode 真源、回窗口
+├── host/                            # 主机侧：HTTP 入口、单进程桥、串口发送、OpenCode 真源、回窗口
 ├── tests/                           # host 单测（C，589 checks）
 ├── tools/                           # 构建/语音/立绘/打包/manifest/门槛预检
 ├── flash/                           # 可直接带走的烧录包
@@ -53,7 +53,7 @@
 | 固件 | xtensa-esp-elf 14.2.0 | ✅ |
 | 构建 | 构建目录必须放 **WSL 原生盘**（`-B ~/esp-build/...`），放 `/mnt/c` 慢约 30 倍 | ⚠️ 已知 |
 | 通用 | 系统 python3 为 3.14，ESP-IDF 需 ≤3.13 → 用 `tools/idf-env.sh` | ✅ |
-| host 单测 | `./tests/run.sh`（C，**589 checks**）+ `./host/run-tests.sh`（Python，**69 tests**） | ✅ |
+| host 单测 | `./tests/run.sh`（C，**589 checks**）+ `./host/run-tests.sh`（Python，**77 tests**） | ✅ |
 | 编译期差异 | gcc 15.2 会因 `-Wformat-truncation` 报错、且需显式 `-lm`；`zig cc` 不会 | ✅ 已修（`96e1bce`） |
 
 > 新机器无系统 `cc` 时：`CC=tools/host-cc.sh bash tests/run.sh`（自动选 `cc` 或用户态 `zig cc`）。
@@ -73,8 +73,12 @@ cd firmware && source ../tools/idf-env.sh && idf.py -B ~/esp-build/buddy build
 # M9 门槛预检（无需设备）
 python3 tools/gate-host-smoke.py
 
-# 交付 manifest
-python3 tools/make-manifest.py && python3 tools/make-manifest.py --check
+# 起单进程桥（HTTP 入口 → 串口）
+python3 host/pet_bridge.py --serial COM5 --port 8765
+
+# 交付 manifest（含构建产物哈希）
+python3 tools/make-manifest.py --build-dir ~/esp-build/buddy
+python3 tools/make-manifest.py --check --build-dir ~/esp-build/buddy
 
 # 主机端预览（6 态 / 场景 / 事件线）
 ./tools/sim.sh

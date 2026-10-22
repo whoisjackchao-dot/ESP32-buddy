@@ -144,9 +144,9 @@
 命令：`tests/run.sh`（退出码 0）。**合计 589 checks。** 证据：`evidence/M1/`…`evidence/M8/`。
 （gcc 15.2 下需 `-lm` 且缓冲区须足够大；已在 `96e1bce` 修正，`zig cc` 无此问题。）
 
-**主机侧 Python**：`./host/run-tests.sh` → **69 tests, OK**（`unittest`，仅 stdlib；入口核心 + 传输发送端 + 设备行解析/守护 + OpenCode 真源；不开真串口）。
+**主机侧 Python**：`./host/run-tests.sh` → **77 tests, OK**（`unittest`，仅 stdlib；入口核心 + 传输发送端 + 设备行解析/守护 + OpenCode 真源 + **单进程桥**；不开真串口）。
 
-**M9 门槛预检（无需设备）**：`python3 tools/gate-host-smoke.py` → **G6-host 20/20**、**故障 7/7**。
+**M9 门槛预检（无需设备）**：`python3 tools/gate-host-smoke.py` → **G6-host 20/20**、**故障 7/7**、**F6-host 200/200（8 线程，0 丢弃）**。
 
 ## 6. M9 验收门槛（G1–G7）
 

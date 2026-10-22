@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-22T08:27:58+08:00",
+  "generated_at": "2026-10-22T08:32:25+08:00",
   "git": {
-    "commit": "1d2f2088beb1fc14d1f5313c03220d190112dd9a",
+    "commit": "49bdb4495747eb65672ea92a8d4e41a858fdb90b",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 149,
-    "bytes": 1374678
+    "files": 152,
+    "bytes": 1389783
   },
   "groups": {
     "firmware": [
@@ -260,6 +260,11 @@
         "sha256": "87ad08ef6525f481bcd2e02e9c9f513e9bf0add166a4d3e3c541a6d514fdbc6b"
       },
       {
+        "path": "host/pet_bridge.py",
+        "bytes": 3795,
+        "sha256": "7b403bdc124fc2d0dea13538b1ef51c40712a3b370dfb0727b8c35f5ed89b17b"
+      },
+      {
         "path": "host/pet_daemon.py",
         "bytes": 2526,
         "sha256": "01c03c4843b69ffd68a21cb2087194266ec9a46e4fa7644ee964214a5c0a9ce6"
@@ -298,6 +303,11 @@
         "path": "host/tests/test_opencode_source.py",
         "bytes": 6797,
         "sha256": "92b4c27c001f2878f57c0f30a99758df01514b4da635667a543bee539943397f"
+      },
+      {
+        "path": "host/tests/test_pet_bridge.py",
+        "bytes": 5463,
+        "sha256": "c35d5b7c0d9863f63a5cc8a765a285c07abc4f20f5b64b5332d172a6334250b9"
       },
       {
         "path": "host/tests/test_pet_daemon.py",
@@ -400,13 +410,13 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 14198,
-        "sha256": "172e4a15e235ed600836574af90d7fa151de840df34cc92ba84069f35158f00e"
+        "bytes": 14694,
+        "sha256": "5834c89e1eee5f0717b089435516482d525708dd9f0e613cee925b0618e2fc9c"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
-        "bytes": 16900,
-        "sha256": "31bfea3cd15e102bae0c25bebdb31e8d5dd817fda78d44b89abce3245f1f1f23"
+        "bytes": 16966,
+        "sha256": "7bdd97f2e9327dc6bf61cf5443e8993a2475c4676db198cc7b42be0a7f1d43c0"
       },
       {
         "path": "ESP32-buddy_需求与决策基线.md",
@@ -420,18 +430,18 @@
       },
       {
         "path": "README.md",
-        "bytes": 5483,
-        "sha256": "96f1c07719adffe4cb3ad89b4a6534a61c0a7705159543faa7638890bb0af643"
+        "bytes": 5682,
+        "sha256": "3a9b6151120c8c057bcf2bfabfeb1afc0b257dbcdd67d49da910e4c7dfb39206"
       },
       {
         "path": "acceptance/G1-G7-验收执行清单.md",
-        "bytes": 9865,
-        "sha256": "f653990fe06caca322f337933ec4983a12c55a58cf45e6229d96d02fd85338f9"
+        "bytes": 10314,
+        "sha256": "b8e639ae3dd7e6d667d65283d881d823deb708a7599548dda33e304ddd1ee546"
       },
       {
         "path": "acceptance/README.md",
-        "bytes": 2110,
-        "sha256": "e7c10d66d1d13231bf22f7fa3dfce13bfa0b08f3892eb0aee0448c4ed6d6ae69"
+        "bytes": 2608,
+        "sha256": "bf658dfd390eb916c01e4426cf944de1e7e8b524aa814428dc76ce8ce4dce7f2"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -755,6 +765,11 @@
         "sha256": "937a82a3f7141afb56ce59c47c41afe5f938c03d988faa223a94f2ab74af43dd"
       },
       {
+        "path": "evidence/M9/2026-10-22-交付完整性-T.md",
+        "bytes": 4139,
+        "sha256": "62b0700a70ff6de787b1deafa57d254050a9c9a73851505abb455d1ef5333992"
+      },
+      {
         "path": "evidence/M9/2026-10-22-验收准备-D.md",
         "bytes": 4736,
         "sha256": "5275cfe849bbc1b75350baceeb535cdce560fbf0864c0f1e21d8d4146bcb2625"
@@ -770,6 +785,38 @@
         "path": "LICENSE",
         "bytes": 1074,
         "sha256": "144fb9095f2865b0568ca14dd3e98feefac647a3f91c95c1e54028f859c2ec07"
+      }
+    ]
+  },
+  "build": {
+    "build_dir": "/home/shiwenc/esp-build/buddy",
+    "target": "esp32s3",
+    "chip": "esp32s3",
+    "project_version": "6d0bdd0-dirty",
+    "idf_version": "v5.5.5",
+    "flash_settings": {
+      "flash_mode": "dio",
+      "flash_size": "8MB",
+      "flash_freq": "80m"
+    },
+    "artifacts": [
+      {
+        "file": "bootloader/bootloader.bin",
+        "offset": "0x0",
+        "bytes": 20480,
+        "sha256": "c6e1484b3d3320f3d036447d303fb07110604239ea866989d090292750f01920"
+      },
+      {
+        "file": "partition_table/partition-table.bin",
+        "offset": "0x8000",
+        "bytes": 3072,
+        "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+      },
+      {
+        "file": "esp32_buddy.bin",
+        "offset": "0x10000",
+        "bytes": 548160,
+        "sha256": "2d6ac072ca924cc1e3f129cc52ca289aab6a00aa6f64b6b433dee1f7958f4276"
       }
     ]
   }

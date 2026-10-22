@@ -21,6 +21,7 @@ import threading
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -114,6 +115,26 @@ def main():
         "id": "FAULT",
         "pass": fault_ok == len(faults) and after == before,
         "detail": f"{fault_ok}/{len(faults)} 按预期拒绝；sink {before}→{after}（应不变）",
+    })
+
+    # --- F6-host：洪泛 200 事件 × 8 线程（设备侧洪泛仍需 H）---
+    n_flood = 200
+    before_flood = len(lines)
+
+    def _one(i):
+        status, _, _ = _post(url, {
+            "version": 1, "event": "task.start", "title": f"flood-{i}",
+        })
+        return status
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        statuses = list(pool.map(_one, range(n_flood)))
+    ok_flood = sum(1 for s in statuses if s == 200)
+    got_flood = len(lines) - before_flood
+    results.append({
+        "id": "F6-host",
+        "pass": ok_flood == n_flood and got_flood == n_flood,
+        "detail": f"{ok_flood}/{n_flood} HTTP 200；sink +{got_flood}（应 +{n_flood}）",
     })
 
     srv.shutdown()
