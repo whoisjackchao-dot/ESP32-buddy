@@ -125,19 +125,39 @@
 - **仍未验**：`R11` OpenCode 真源；多卡（M8）；刷新率/时序**数值**；`AUD-06` 不阻塞主循环。
 - **无变异测试**：尚未验证"注入缺陷能否被测试抓住"（`parameters` 待补）。
 
-## 5. 执行记录汇总（最近一次）
+## 5. 执行记录汇总（最近一次：2026-10-22，gcc 15.2）
 
 | 测试 | 用例数 | 结果 |
 | --- | --- | --- |
-| `tests/test_pet_render.c` | 52 checks | `PASS`（0 failed） |
-| `tests/test_pet_state.c` | 55 checks | `PASS`（0 failed） |
-| `tests/test_pet_card.c` | 21 checks | `PASS`（0 failed） |
-| `tests/test_pet_link.c` | 47 checks | `PASS`（0 failed） |
+| `tests/test_pet_render.c` | 94 checks | `PASS`（0 failed） |
+| `tests/test_pet_state.c` | 99 checks | `PASS`（0 failed） |
+| `tests/test_pet_card.c` | 38 checks | `PASS`（0 failed） |
 | `tests/test_pet_voice.c` | 28 checks | `PASS`（0 failed） |
+| `tests/test_pet_link.c` | 98 checks | `PASS`（0 failed） |
 | `tests/test_pet_pomo.c` | 96 checks | `PASS`（0 failed） |
 | `tests/test_pet_linebuf.c` | 25 checks | `PASS`（0 failed） |
+| `tests/test_pet_button.c` | 34 checks | `PASS`（0 failed） |
+| `tests/test_pet_keymap.c` | 12 checks | `PASS`（0 failed） |
+| `tests/test_pet_menu.c` | 15 checks | `PASS`（0 failed） |
+| `tests/test_pet_leisure.c` | 50 checks | `PASS`（0 failed） |
 
-命令：`tests/run.sh`（退出码 0）。**合计 324 checks。** 证据：`evidence/M1/`…`evidence/M5/`、`evidence/M7/`、`evidence/M4/`。
-（host 运行经用户态 `CC=/tmp/opencode/zb/cc.sh`（zig cc）；见 `evidence/2026-10-16-新机器环境基线.md`。）
+命令：`tests/run.sh`（退出码 0）。**合计 589 checks。** 证据：`evidence/M1/`…`evidence/M8/`。
+（gcc 15.2 下需 `-lm` 且缓冲区须足够大；已在 `96e1bce` 修正，`zig cc` 无此问题。）
 
-**主机侧 Python（M4 增量 2a+2b + M6 回窗口）**：`./host/run-tests.sh` → **55 tests, OK**（`unittest`，仅 stdlib；入口核心 + 传输发送端 + 设备行解析/守护；不开真串口）。证据：`evidence/M4/2026-10-16-主机入口核心-T.md`、`evidence/M4/2026-10-17-传输发送端-T.md`、`evidence/M6/2026-10-17-回窗口-T.md`。
+**主机侧 Python**：`./host/run-tests.sh` → **69 tests, OK**（`unittest`，仅 stdlib；入口核心 + 传输发送端 + 设备行解析/守护 + OpenCode 真源；不开真串口）。
+
+**M9 门槛预检（无需设备）**：`python3 tools/gate-host-smoke.py` → **G6-host 20/20**、**故障 7/7**。
+
+## 6. M9 验收门槛（G1–G7）
+
+| 门槛 | 判定标准（草案） | host 侧 | 设备侧 | 结论 |
+| --- | --- | --- | --- | --- |
+| G1 | 6 态目视可辨；每态进入/退出各 10/10 | 状态机 T 通过 | ⏳ | `NOT_RUN` |
+| G2 | 完成/暂停/放弃各 10/10；重启不丢 10/10 | 逻辑 T 通过 | ⏳ | `NOT_RUN`（口径见 `Q19`） |
+| G3 | 任务卡 20 次 ≤1 s；失败不剔除 | 渲染 T 通过 | ⏳ | `NOT_RUN` |
+| G4 | 失联 ≥19/20 落在 15–17 s | 超时 T 通过 | ⏳ | `NOT_RUN`（口径见 `Q20`） |
+| G5 | 连续 2 h 无死机/无阻塞 | — | ⏳ | `NOT_RUN` |
+| G6 | 任意本机脚本 POST → 1 s 内显示 20/20 | ✅ **host 20/20** | ⏳ | `PARTIAL` |
+| G7 | 三类播报 20 次不重复/不误播 | 映射/去重 T 通过 | ⏳ | `NOT_RUN` |
+
+执行方法见 `acceptance/G1-G7-验收执行清单.md`；证据将归档到 `evidence/M9/`。

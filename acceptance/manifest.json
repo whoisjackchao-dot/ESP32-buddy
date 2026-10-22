@@ -1,0 +1,776 @@
+{
+  "schema": "esp32-buddy-manifest/1",
+  "generated_at": "2026-10-22T08:26:36+08:00",
+  "git": {
+    "commit": "6d0bdd0aeae9bfbbe150bf3e5461d57e2a24fcfd",
+    "branch": "main",
+    "tracked_clean": false
+  },
+  "totals": {
+    "files": 149,
+    "bytes": 1374366
+  },
+  "groups": {
+    "firmware": [
+      {
+        "path": "firmware/components/pet/CMakeLists.txt",
+        "bytes": 852,
+        "sha256": "be5b3d6d82bbc159a9b44cc3528ffcc927ec25ed2a047f34ce833b6a2b2cb1f3"
+      },
+      {
+        "path": "firmware/components/pet/assets/done.pcm",
+        "bytes": 59904,
+        "sha256": "4809a47e298d2557974b0dc3f6d253d9ee4b7a8be54a3cbc50fcd06c414ebd5c"
+      },
+      {
+        "path": "firmware/components/pet/assets/failed.pcm",
+        "bytes": 59904,
+        "sha256": "5098278e57d539cf9738cd466a4285333765516b988bd8ab753f6aa8bb4a34d3"
+      },
+      {
+        "path": "firmware/components/pet/assets/input.pcm",
+        "bytes": 69888,
+        "sha256": "e17e918f7e8d0497497584a7cb88258759e56c41369bd176f766c64ad5b2e690"
+      },
+      {
+        "path": "firmware/components/pet/assets/robot.look",
+        "bytes": 18472,
+        "sha256": "63b2b93f6a359d9d8a51ef4e6998f149d17092032dadb134ea4ed9a27f8e2417"
+      },
+      {
+        "path": "firmware/components/pet/font8x8_basic.h",
+        "bytes": 9646,
+        "sha256": "1710be0100f8147c23a59cc5cf8e982a83f0f2eaf12dac49378a1f12e47cb90d"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_audio.h",
+        "bytes": 801,
+        "sha256": "51648b3aa9de70fea3b1e45e7ca27345d784f8df20a4f8cafa3161b1d560f186"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_button.h",
+        "bytes": 1290,
+        "sha256": "cbe8ba760d2cc79bbc45083cab61a757b5b2d621e040895e7a3216d2ca5c1c04"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_engine.h",
+        "bytes": 1090,
+        "sha256": "e87fdbf703387c0c0fd291fa181710ccd6039703e6c97270e451e479094f1437"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_hal.h",
+        "bytes": 596,
+        "sha256": "0cb2166b6a5528e7b77578b9b006f70780fe316b92c100036420765055278032"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_hal_sticks3.h",
+        "bytes": 238,
+        "sha256": "792db4122353ea1557682c998ced0a35aec356fd29da9573b04e34e0354b02d6"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_keymap.h",
+        "bytes": 899,
+        "sha256": "ab051b10d377ebc2a99798945643b67d64da2257ed4c402ecbc53c37a8891311"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_keys.h",
+        "bytes": 223,
+        "sha256": "7337eb81d71e51ae4f895cf8753d1a0a467731d6bd3212fb862390614964323f"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_leisure.h",
+        "bytes": 2839,
+        "sha256": "7d71f1c4608912942d415c398cc8277507942acaa48f60184ff5b9283f682c1e"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_linebuf.h",
+        "bytes": 1058,
+        "sha256": "c29695371cb0a823034748217dd60958d9650c02d8b0f3b19986ae3f5b54fd0c"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_link.h",
+        "bytes": 1349,
+        "sha256": "68f87734475749dd9932e28fca207429e80cf0f93cbdd3e31f334897607b2264"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_menu.h",
+        "bytes": 1013,
+        "sha256": "f62bfb638c6fbbbf5ed675c0af8ded150a3691b58bf964f1f738b0d1c1dfee71"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_pomo.h",
+        "bytes": 2578,
+        "sha256": "24c087771e2d5f8b7d43532778bb314ab99762ae04972cad920535bd41c103ee"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_pomo_store.h",
+        "bytes": 306,
+        "sha256": "b288514acfcc6b12eb59b3206167cf962f4fac5df24448d91b04efadef7b910e"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_render.h",
+        "bytes": 2574,
+        "sha256": "395d245d5063899391eae4758853ee00f6bb14645c1096f318b21ea953aa35d9"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_rx.h",
+        "bytes": 303,
+        "sha256": "7f282276e058b995e6155c54e3c470594017fcf75c8b6ecccf8d974bcb651afc"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_state.h",
+        "bytes": 1829,
+        "sha256": "cfa164ac06ce517b26f075e127f963796d5fc00dbdf5f0c87f47840d2852fc42"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_text.h",
+        "bytes": 503,
+        "sha256": "1bb85a5f4ec64de5cb95c1734544fb27aacaab07ac0cffda8768382500a71572"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_types.h",
+        "bytes": 1470,
+        "sha256": "9959604a02c141c6c66ea619105da8c0f59e253c11bc6858e00de1bd3acf2b88"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_voice.h",
+        "bytes": 755,
+        "sha256": "a9b42940fa92fa58d6d7d7e7dd54e02f703b7bceaf24013a67faef26cb6d7abc"
+      },
+      {
+        "path": "firmware/components/pet/pet_audio.c",
+        "bytes": 7039,
+        "sha256": "c4f9ea7a887544dd86df74a50e1bf74ca5c495c2e1202fdbb8f72f2d8a22ba69"
+      },
+      {
+        "path": "firmware/components/pet/pet_button.c",
+        "bytes": 1353,
+        "sha256": "032eae758b40c9e8a84e69bedc2de71e7edfc3aadb830e7ee7f65ab42bebc2f4"
+      },
+      {
+        "path": "firmware/components/pet/pet_engine.c",
+        "bytes": 8800,
+        "sha256": "6cf3ec97dcf2893dab84c01ddd38df8300b69880f93d6d44225ff1d4cb8e1bea"
+      },
+      {
+        "path": "firmware/components/pet/pet_hal.c",
+        "bytes": 452,
+        "sha256": "053dea83f229fb643bb9aa8d48226e6801a67c041268b32e21d40af8c48425b7"
+      },
+      {
+        "path": "firmware/components/pet/pet_hal_sticks3.c",
+        "bytes": 6642,
+        "sha256": "47b8846351e4b5698ec8dafc78b0df2242de25d1072d2e494276a00e59952a6f"
+      },
+      {
+        "path": "firmware/components/pet/pet_keymap.c",
+        "bytes": 858,
+        "sha256": "26f780e7dcaf3e7c8f2b522fd554ee19e612880352274dc69bf3273106f13490"
+      },
+      {
+        "path": "firmware/components/pet/pet_keys.c",
+        "bytes": 1762,
+        "sha256": "10c5f0a8c6ae5fa95f87da108b5f1d4dc6d6a73e78a437754622a508ecf56a91"
+      },
+      {
+        "path": "firmware/components/pet/pet_leisure.c",
+        "bytes": 4040,
+        "sha256": "9b4db3d7f90543777474c96e00cbe739a65c48fad6b71e88a0d0dbb97693ce8f"
+      },
+      {
+        "path": "firmware/components/pet/pet_linebuf.c",
+        "bytes": 1194,
+        "sha256": "af0bdb47247ad086f23e0d74ce669490fb6e98788e42a0e28790fba9b8d72271"
+      },
+      {
+        "path": "firmware/components/pet/pet_link.c",
+        "bytes": 15146,
+        "sha256": "4d8de262b87587db4cfea5ebd4045ff7e47861874350b23d766b82043f2e7211"
+      },
+      {
+        "path": "firmware/components/pet/pet_menu.c",
+        "bytes": 918,
+        "sha256": "6e1c225801a19995aa26fb8871053285820813a2d22eb8b906643cce72ccbc68"
+      },
+      {
+        "path": "firmware/components/pet/pet_pomo.c",
+        "bytes": 5438,
+        "sha256": "4d0a4f7dc6d7a044bffcd44078ce2d33fcd54215b9a73731745432402a262665"
+      },
+      {
+        "path": "firmware/components/pet/pet_pomo_store.c",
+        "bytes": 1431,
+        "sha256": "447e06e372ae412317fb3e3478995d7aa25b3bd6141d6bbd97c6e8bebaf050b6"
+      },
+      {
+        "path": "firmware/components/pet/pet_render.c",
+        "bytes": 21343,
+        "sha256": "f528ecdabcb771522b5006202db8ebfb7414935dec73724b26548efb4d24e375"
+      },
+      {
+        "path": "firmware/components/pet/pet_rx.c",
+        "bytes": 2413,
+        "sha256": "cfbeae1e5eaf116d66ce8fee56ce32b23cd22c0c8397afb1632c0e62e4c619a3"
+      },
+      {
+        "path": "firmware/components/pet/pet_state.c",
+        "bytes": 8321,
+        "sha256": "402cf5c67d16c39f7c6dd0d386f4f41d7f4d0144ff7bfaf316a22dd0b9048cd9"
+      },
+      {
+        "path": "firmware/components/pet/pet_text.c",
+        "bytes": 2484,
+        "sha256": "eb8475e7d52bc8d9c41ff16968436fd50fb1b11c39ba788979cb8a4d27f7db4d"
+      },
+      {
+        "path": "firmware/components/pet/pet_voice.c",
+        "bytes": 910,
+        "sha256": "b1a904f1dbb38ec60290873fd2e3285adfc72e82a95e8e68e9054acc4073fea5"
+      },
+      {
+        "path": "firmware/components/pet/pm1.c",
+        "bytes": 5992,
+        "sha256": "a3f410e41fc441b46400ae3151d070729d1e2754f70c3c87aaa91b9e6cc9b689"
+      },
+      {
+        "path": "firmware/components/pet/pm1.h",
+        "bytes": 1496,
+        "sha256": "c56ef71850781841668ccf079b40ce0f43b8b1e9c72c7ee4d33bd529045fbd77"
+      },
+      {
+        "path": "firmware/main/CMakeLists.txt",
+        "bytes": 182,
+        "sha256": "664d5c3c8d0584b09ba05d6b7ce72280cb3e6021cd5c9d1fbf3d314e407dafa3"
+      },
+      {
+        "path": "firmware/main/main.c",
+        "bytes": 1499,
+        "sha256": "3ba1e03efc21b4ba279e866303dac15464c930187c4b3fe7f4132c0d50abcc2b"
+      }
+    ],
+    "host": [
+      {
+        "path": "host/__init__.py",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "host/opencode_source.py",
+        "bytes": 6103,
+        "sha256": "87ad08ef6525f481bcd2e02e9c9f513e9bf0add166a4d3e3c541a6d514fdbc6b"
+      },
+      {
+        "path": "host/pet_daemon.py",
+        "bytes": 2526,
+        "sha256": "01c03c4843b69ffd68a21cb2087194266ec9a46e4fa7644ee964214a5c0a9ce6"
+      },
+      {
+        "path": "host/pet_devio.py",
+        "bytes": 1047,
+        "sha256": "3d737e2c7c96f418a37d1ea81b344c84ce65bd0cea239f661bca9bef49aa1c6c"
+      },
+      {
+        "path": "host/pet_entry_server.py",
+        "bytes": 4223,
+        "sha256": "cbfe04456b1ec2f387e1d1f66327cfa9805d3d39d5ce801643062d887446ded8"
+      },
+      {
+        "path": "host/pet_ingest.py",
+        "bytes": 4098,
+        "sha256": "d9c6921c930b9dc97b86e10afbe86b21db53fe576618820b8f0756e255784631"
+      },
+      {
+        "path": "host/pet_sender.py",
+        "bytes": 2736,
+        "sha256": "b1bc0978fd0e988fb07ebc73c81688f743f47d6c26e1785c5ff741235d928fb7"
+      },
+      {
+        "path": "host/pet_transport.py",
+        "bytes": 2011,
+        "sha256": "9ae6c13a84cbde88bd5d4bdcd3f1b193e9970959f5c4d36bff27aeedbec005c2"
+      },
+      {
+        "path": "host/run-tests.sh",
+        "bytes": 118,
+        "sha256": "3d7ae6cd0d2c742995ac0097e3a51ad75edd177a3758f817e9d064bf21864319"
+      },
+      {
+        "path": "host/tests/test_opencode_source.py",
+        "bytes": 6797,
+        "sha256": "92b4c27c001f2878f57c0f30a99758df01514b4da635667a543bee539943397f"
+      },
+      {
+        "path": "host/tests/test_pet_daemon.py",
+        "bytes": 4527,
+        "sha256": "4c224a5dfef01ad773911bf53be6f6c54a276f60993557af5b0454473ea14b2f"
+      },
+      {
+        "path": "host/tests/test_pet_devio.py",
+        "bytes": 2410,
+        "sha256": "73c2dfa3315a83948b7c5a643f4836bc5eaeaa93e64f55839c33c20c78b6546a"
+      },
+      {
+        "path": "host/tests/test_pet_ingest.py",
+        "bytes": 7935,
+        "sha256": "303675b16d8f0c0a3a69cb569eebfe2307868a51f0e009eb92076fa731746155"
+      },
+      {
+        "path": "host/tests/test_pet_transport.py",
+        "bytes": 4691,
+        "sha256": "368bdd43e867a0d7a8b8e7225deb69f6c6e6faccfed301f1b5c2a7ec6c084785"
+      },
+      {
+        "path": "host/win_focus.py",
+        "bytes": 4406,
+        "sha256": "4988c514051c0bad034b8f58d68698b5968226a8c37e5a4bef6ce698379e64e2"
+      }
+    ],
+    "tests": [
+      {
+        "path": "tests/harness.h",
+        "bytes": 1445,
+        "sha256": "6330cd1fa167b7242fd1ea53213db076325c59ec3596e98fa8101beff41c6d79"
+      },
+      {
+        "path": "tests/run.sh",
+        "bytes": 2900,
+        "sha256": "4b101c004ffe78140fa4bb35f8ade529b95875316d6a7a69a4853f3fa9435cb3"
+      },
+      {
+        "path": "tests/test_pet_button.c",
+        "bytes": 4232,
+        "sha256": "d236a8dfd5219ed4e04aefddc9e9ec96695c9f5cf200eafe6bdbff1cfbac5305"
+      },
+      {
+        "path": "tests/test_pet_card.c",
+        "bytes": 9277,
+        "sha256": "89b0ba4180fb649c5c8e290a576c8e9a10ec307c6060a40d13e3cc19d48b271f"
+      },
+      {
+        "path": "tests/test_pet_keymap.c",
+        "bytes": 1897,
+        "sha256": "3adba4578977907b585678356e052bf07c5afdd87e13a393767b5989845dd677"
+      },
+      {
+        "path": "tests/test_pet_leisure.c",
+        "bytes": 7501,
+        "sha256": "ab6fb2abc5dd01d791b8e985f6cbb0a7c3025fc6d8e14dc89912d0011d57a3f4"
+      },
+      {
+        "path": "tests/test_pet_linebuf.c",
+        "bytes": 2841,
+        "sha256": "c5e92ab4c785085e33738f8a7fc3d82524be3fcb7ce1c7bfd7fee75995be281e"
+      },
+      {
+        "path": "tests/test_pet_link.c",
+        "bytes": 10328,
+        "sha256": "a2b183432b5cf1d83d10d87acf29496334dbb011ad8b2fdedaf8cdb47f4db4f6"
+      },
+      {
+        "path": "tests/test_pet_menu.c",
+        "bytes": 2698,
+        "sha256": "a49a8ae853aab2177582234ecc0818b781ab02f8a04ae24b8822e7e62846e87a"
+      },
+      {
+        "path": "tests/test_pet_pomo.c",
+        "bytes": 10706,
+        "sha256": "23581229bacbd763314d6ee8b5fcebec13a5909d4c906edfce80e9f3d4083b56"
+      },
+      {
+        "path": "tests/test_pet_render.c",
+        "bytes": 23387,
+        "sha256": "95e7f4fa9509b38468ea5e51661fbfd82e1fb6744d943b66b7a4ed0245242bf7"
+      },
+      {
+        "path": "tests/test_pet_state.c",
+        "bytes": 15968,
+        "sha256": "55e81be76c0e4506acff57b2e58bc6c0be18420bdd74973eeab911f8f446a10a"
+      },
+      {
+        "path": "tests/test_pet_voice.c",
+        "bytes": 3210,
+        "sha256": "55352b67637cfc8b41c505959260dfca2698275924c67b0eaae1fe3a5a6de133"
+      }
+    ],
+    "docs": [
+      {
+        "path": "ESP32-buddy_M0-M9开发计划.md",
+        "bytes": 10055,
+        "sha256": "706f03708807ef015556dbe3e36667108d915237f46f81e4d97168bdeb6877d6"
+      },
+      {
+        "path": "ESP32-buddy_文档索引.md",
+        "bytes": 14198,
+        "sha256": "172e4a15e235ed600836574af90d7fa151de840df34cc92ba84069f35158f00e"
+      },
+      {
+        "path": "ESP32-buddy_测试用例与追踪矩阵.md",
+        "bytes": 16900,
+        "sha256": "31bfea3cd15e102bae0c25bebdb31e8d5dd817fda78d44b89abce3245f1f1f23"
+      },
+      {
+        "path": "ESP32-buddy_需求与决策基线.md",
+        "bytes": 16515,
+        "sha256": "d6752cba32e076aff974ffc84a68e535b28c684ec803d1048e0481306f58e339"
+      },
+      {
+        "path": "NOTICE.md",
+        "bytes": 3790,
+        "sha256": "227b533f7c98fea5926d157e9a30c0045c8f0a4928dfc7b50ee26e9f7e3ee8eb"
+      },
+      {
+        "path": "README.md",
+        "bytes": 5483,
+        "sha256": "96f1c07719adffe4cb3ad89b4a6534a61c0a7705159543faa7638890bb0af643"
+      },
+      {
+        "path": "acceptance/G1-G7-验收执行清单.md",
+        "bytes": 9865,
+        "sha256": "f653990fe06caca322f337933ec4983a12c55a58cf45e6229d96d02fd85338f9"
+      },
+      {
+        "path": "acceptance/README.md",
+        "bytes": 1798,
+        "sha256": "02bbb1b533d0ea66d15cb099cb86c9fa8a9f66628026b255670079f219aca742"
+      },
+      {
+        "path": "acceptance/许可证登记.md",
+        "bytes": 3124,
+        "sha256": "ad1b163dbe62f6cdfb3f7c771aa3cda702db57bec02974c71299c3a4b79235b7"
+      },
+      {
+        "path": "contracts/ADR-2026-10-16-01-回窗口实现方式.md",
+        "bytes": 3330,
+        "sha256": "6f33257ba1b195d3536b531d35717e42e7c52019dcac682b29ea778c08bf757f"
+      },
+      {
+        "path": "contracts/ADR-2026-10-16-02-WiFi角色.md",
+        "bytes": 2816,
+        "sha256": "524812cd3b929bf99d68770db49e84e586a663250e6b4a28c827b437a5ee356f"
+      },
+      {
+        "path": "contracts/M1-渲染分层契约冻结.md",
+        "bytes": 11391,
+        "sha256": "2981253f07070f7d1757950aa1f3a534398bbf1d42df926b3fa6cf90d46f62ae"
+      },
+      {
+        "path": "contracts/M2-状态机与动画契约清单.md",
+        "bytes": 8601,
+        "sha256": "bb9eb834c3abac6ba4c78132c67e8989221f98df3e3f647aca762387fac9934c"
+      },
+      {
+        "path": "contracts/M3-竖屏版式契约清单.md",
+        "bytes": 3927,
+        "sha256": "ab894cacab40e0f6de3bae4ceb9112ade0a7eae2d8217bfd6e0dee1ce3e54b38"
+      },
+      {
+        "path": "contracts/M4-事件入口与OpenCode接入契约清单.md",
+        "bytes": 11103,
+        "sha256": "30c9f717803e0beea962738e983ed8c8c3f908059edb42b060383639128946f0"
+      },
+      {
+        "path": "contracts/M5-语音契约清单.md",
+        "bytes": 5048,
+        "sha256": "d28d0242f87f3421146bbc7241e8f3995405c30c70eaf1967dbaebc61fbf901d"
+      },
+      {
+        "path": "contracts/M6-按键映射契约清单.md",
+        "bytes": 9200,
+        "sha256": "47e93fe629953b7a72836af41d263bcc0ebaaa41d828447e5ce831b247c11035"
+      },
+      {
+        "path": "contracts/M7-番茄钟契约清单.md",
+        "bytes": 9671,
+        "sha256": "d8cda218087ff7fc9a6cc8ad82a5955737cdacf3045a5f7a3d154fcccde5fb1e"
+      },
+      {
+        "path": "contracts/M8-休闲与多卡栈契约清单.md",
+        "bytes": 9808,
+        "sha256": "57b4d4b07d65ebfb0e9a3e5096aa707f9f0f4776af91a5c860a5160900748c47"
+      },
+      {
+        "path": "contracts/README.md",
+        "bytes": 2837,
+        "sha256": "587846ff3f7ac3289a5f1b8080101b1cf30bffbdd7b2cc8e5c6eda4663ef9129"
+      },
+      {
+        "path": "contracts/参数冻结表.md",
+        "bytes": 5523,
+        "sha256": "ecf187c3e7b7c388e0f736b8b0d11aff980b84157b4e501d37298045f03e4e8a"
+      }
+    ],
+    "flash": [
+      {
+        "path": "flash/MANIFEST.txt",
+        "bytes": 638,
+        "sha256": "7cf8fcb83fcb9f26cca9e41bf3f28e2e36036b85be0c32741abcaf6eafe9880e"
+      },
+      {
+        "path": "flash/README.md",
+        "bytes": 2067,
+        "sha256": "4e31b9422c26341bb4bf6ffd30c4abe49961fb464d74085587400c8d5733c419"
+      },
+      {
+        "path": "flash/bootloader.bin",
+        "bytes": 20480,
+        "sha256": "c6e1484b3d3320f3d036447d303fb07110604239ea866989d090292750f01920"
+      },
+      {
+        "path": "flash/esp32_buddy.bin",
+        "bytes": 496384,
+        "sha256": "025510b3ecae8131568a191ae4c5a74419a42efbfcfe42b3b76876c53b5b275f"
+      },
+      {
+        "path": "flash/flash.ps1",
+        "bytes": 305,
+        "sha256": "65a6e4b50b5338f40be1d7f96e826b40abd17c7b35e5d4997d2db1fe674d0233"
+      },
+      {
+        "path": "flash/flash.sh",
+        "bytes": 354,
+        "sha256": "1b53116c3ddd9e9c0771f9403826dcd2c2570f32e226783b4a7c9c49f0f7329e"
+      },
+      {
+        "path": "flash/partition-table.bin",
+        "bytes": 3072,
+        "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+      }
+    ],
+    "third_party": [
+      {
+        "path": "firmware/components/es8311/CHECKSUMS.json",
+        "bytes": 926,
+        "sha256": "aa64623aa3a7dd9950fc7cff79c0492145e8ea8584cd9cafe8b9a9f0bfd429ab"
+      },
+      {
+        "path": "firmware/components/es8311/CMakeLists.txt",
+        "bytes": 132,
+        "sha256": "ddcb245892001e5356578e270dad2b2c7f227fa3d5e40468122c31dc7b78010c"
+      },
+      {
+        "path": "firmware/components/es8311/LICENSE",
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "firmware/components/es8311/README.md",
+        "bytes": 1067,
+        "sha256": "acf9f0b62a2612bb9d05d1312c9cae9f7d8ee925f28a5541bca1368548d04a55"
+      },
+      {
+        "path": "firmware/components/es8311/es8311.c",
+        "bytes": 18589,
+        "sha256": "f3371383d1563b61e8704c32b08fcc8a9c19f6a8f9c140ca0a6cd923cc2d67e7"
+      },
+      {
+        "path": "firmware/components/es8311/idf_component.yml",
+        "bytes": 319,
+        "sha256": "999720e7c905ce8de11248b4899a55ab35af734e64d529049dd298bb4059bbdc"
+      },
+      {
+        "path": "firmware/components/es8311/include/es8311.h",
+        "bytes": 6293,
+        "sha256": "e789b9673d1b8f644db4f36d3450085c100eb9e5d198ead7353c149ecbdaee9f"
+      },
+      {
+        "path": "firmware/components/es8311/priv_include/es8311_reg.h",
+        "bytes": 3240,
+        "sha256": "fa76f643f51eb6d6a2079a669d3b9048a4456adf4cc7d9e8f52b80d7ee55d813"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "evidence/2026-10-16-新机器环境基线.md",
+        "bytes": 5083,
+        "sha256": "1e7ba97a7d454f66da77fc8b878704ac13de9e248a1e3e313f0773f69ae4b7e7"
+      },
+      {
+        "path": "evidence/2026-10-17-P0收尾-验证.md",
+        "bytes": 2548,
+        "sha256": "1a38023d4c3c480c4888d1cd398c2e7505507a5a29660b238f96af6ef79de745"
+      },
+      {
+        "path": "evidence/2026-10-17-实机刷机-H.md",
+        "bytes": 6362,
+        "sha256": "d53439bf9867255f111b28e6a7d0fc05d4b411042a7ccc87288ac77d97718dac"
+      },
+      {
+        "path": "evidence/B08-回窗口可行性-spike.md",
+        "bytes": 4762,
+        "sha256": "04aa3e092c6d4a18617541fce571b724bb5536e816436263791dc7956cb70036"
+      },
+      {
+        "path": "evidence/B13-host编译器根因.md",
+        "bytes": 2231,
+        "sha256": "9e9998abe0fb53c0e0c19b2775045b1408f63f376b0f720b0481c0393ed07fa2"
+      },
+      {
+        "path": "evidence/M1/2026-10-16-pet_render-T-RED-GREEN.md",
+        "bytes": 3917,
+        "sha256": "16acd7979bcd976e47a63f62dd360f53de0fb1023593234dce6822f7d0343dd3"
+      },
+      {
+        "path": "evidence/M1/2026-10-16-固件构建-D.md",
+        "bytes": 3384,
+        "sha256": "44cd258b1c3dd9f0dc15b4c642805c89d1a1480f116517fdb87ccc608d8e7945"
+      },
+      {
+        "path": "evidence/M1/2026-10-17-立绘6态升级-D.md",
+        "bytes": 6529,
+        "sha256": "82811ff06d4412182cee82d54254634118ff5c2cf1d7d0a1a0df1a2cddbfd191"
+      },
+      {
+        "path": "evidence/M2/2026-10-16-idle动画-T.md",
+        "bytes": 2944,
+        "sha256": "d2cc8987134626c24cd7fbcf9216ac9cdc44efa8efb930109e59d45dcef27d1d"
+      },
+      {
+        "path": "evidence/M2/2026-10-16-pet_render-渲染半段-T.md",
+        "bytes": 3604,
+        "sha256": "36bd3ffbee84657394e34905261e1a4a09f2dbec24b29a4418398c0f47c25642"
+      },
+      {
+        "path": "evidence/M2/2026-10-16-pet_state-T-RED-GREEN.md",
+        "bytes": 3338,
+        "sha256": "f76e7b8895170d21903a8c1ff8ee353b40cad466b41fa6cd6321f488d89e2b78"
+      },
+      {
+        "path": "evidence/M3/2026-10-16-版式与任务卡-T.md",
+        "bytes": 3562,
+        "sha256": "398b350f81e1131a6e198dabd1f2237659686abd02b5bdb59187598eb4d1ae0e"
+      },
+      {
+        "path": "evidence/M3/2026-10-17-卡片字号与英文显示-D.md",
+        "bytes": 1983,
+        "sha256": "b9f78acdaafd1fbba32c5e916131084a8e8df1deedb3e4a6d9d670a29539ca6b"
+      },
+      {
+        "path": "evidence/M4/2026-10-16-主机入口核心-T.md",
+        "bytes": 5831,
+        "sha256": "2bb58f8b796acc9b5e2c9e33391e837ba56f87f575fc2e9e649376595b29239f"
+      },
+      {
+        "path": "evidence/M4/2026-10-16-事件线解析-T.md",
+        "bytes": 4194,
+        "sha256": "a70450d5cfccdddc1f0fb1b28b5066218c4ad8f267012c8105a8652400de96cc"
+      },
+      {
+        "path": "evidence/M4/2026-10-17-OpenCode真源-spike.md",
+        "bytes": 3581,
+        "sha256": "96d445c23c86d6f9f7fba88486cc8987e69e6165ef4afeb4b0e493134e79c001"
+      },
+      {
+        "path": "evidence/M4/2026-10-17-OpenCode端到端-H.md",
+        "bytes": 2232,
+        "sha256": "98112dbc4acf699c279c33e317b958ca7e352339ad0714a221cbed0f651909f8"
+      },
+      {
+        "path": "evidence/M4/2026-10-17-OpenCode轮询器-T.md",
+        "bytes": 5586,
+        "sha256": "9d9c9b4515efa7455b195bb630e619a77ef7a52638f19e6322bb24b6129918bb"
+      },
+      {
+        "path": "evidence/M4/2026-10-17-传输发送端-T.md",
+        "bytes": 5263,
+        "sha256": "de4ef9d03eee4e776171c5c90a0879ec25deb5eee7960b411c66e6276b751607"
+      },
+      {
+        "path": "evidence/M4/2026-10-17-传输端到端-H.md",
+        "bytes": 3602,
+        "sha256": "ffd33e1942240f375696a90801963f20f3f356e4da2e32fdc28e6ab0b4e00acb"
+      },
+      {
+        "path": "evidence/M5/2026-10-16-设备播放-D.md",
+        "bytes": 2553,
+        "sha256": "8f1cae69a533ee8c53d2ad7a0501dffd3523f133cbd2fce184d951debc29436a"
+      },
+      {
+        "path": "evidence/M5/2026-10-16-语音逻辑-T.md",
+        "bytes": 3549,
+        "sha256": "fa6677aa4490ea95520fd9dd5bc1872a4c231ff5c78af773ab62dce6cf4de249"
+      },
+      {
+        "path": "evidence/M6/2026-10-17-回窗口-H.md",
+        "bytes": 3169,
+        "sha256": "c7e8ceba5e0ed7bae06f46a2fb213d02b4fbd0c8af64d0b328e683b6996145c8"
+      },
+      {
+        "path": "evidence/M6/2026-10-17-回窗口主机-T.md",
+        "bytes": 4259,
+        "sha256": "0f8c9b108ca122139cd2c0c43d1768dbffaed0768c3c8fd4f9c2c55f4abaa050"
+      },
+      {
+        "path": "evidence/M6/2026-10-17-按键-H.md",
+        "bytes": 2346,
+        "sha256": "c0bc8e8d2f8421ae6f1d151fcd1e3032754e0f48a7d12ac062b099cef6b2487b"
+      },
+      {
+        "path": "evidence/M6/2026-10-17-按键逻辑-T.md",
+        "bytes": 4185,
+        "sha256": "7e55b4e829d3d479856c06ff33e6d5b37c5a85b12471188c0ec87456b663d10a"
+      },
+      {
+        "path": "evidence/M6/2026-10-17-菜单-H.md",
+        "bytes": 1758,
+        "sha256": "ca3944d25298020fdbad30b1a1f451c79bb31a11475866144154304e36e5b552"
+      },
+      {
+        "path": "evidence/M6/2026-10-17-菜单-T.md",
+        "bytes": 4249,
+        "sha256": "6feb77c89a316529dfb0ae2a3ae438dc69687a3e35870701060db4e592a428fd"
+      },
+      {
+        "path": "evidence/M7/2026-10-16-番茄钟逻辑-T.md",
+        "bytes": 4891,
+        "sha256": "6e0fb6883a6dce3dea60814e40933811724182ba5f4a8f5ee49605d321fe5245"
+      },
+      {
+        "path": "evidence/M7/2026-10-17-番茄钟视图与持久化-D.md",
+        "bytes": 4058,
+        "sha256": "7481902635fa62d5750b2238ab03a77f2f42f93975f07634cbe44a3ebe6b5307"
+      },
+      {
+        "path": "evidence/M7/2026-10-17-番茄钟视图与持久化-T.md",
+        "bytes": 6103,
+        "sha256": "033ae7db546e1262ca9402ec2252de1f0818f2595a861b60f21f5567f7572888"
+      },
+      {
+        "path": "evidence/M8/2026-10-17-休闲状态机-T.md",
+        "bytes": 6658,
+        "sha256": "529da29a0b3f33591bb0fb26393a7949a8ade4a7f615c743cc32c53c8b9b5c88"
+      },
+      {
+        "path": "evidence/M8/2026-10-17-多卡栈-T.md",
+        "bytes": 8473,
+        "sha256": "699bcbed0b69b3ed10dcf097e32498817b3789c544a94410d1a1682521058b0e"
+      },
+      {
+        "path": "evidence/M8/2026-10-17-小剧与背光-H.md",
+        "bytes": 2599,
+        "sha256": "985878a2b9d2843a7f2643409ada493ddc0b0143ed48ffdfd25cb90c0ecd5c2f"
+      },
+      {
+        "path": "evidence/M8/2026-10-17-小剧渲染-T.md",
+        "bytes": 7778,
+        "sha256": "937a82a3f7141afb56ce59c47c41afe5f938c03d988faa223a94f2ab74af43dd"
+      },
+      {
+        "path": "evidence/M9/2026-10-22-验收准备-D.md",
+        "bytes": 4736,
+        "sha256": "5275cfe849bbc1b75350baceeb535cdce560fbf0864c0f1e21d8d4146bcb2625"
+      }
+    ],
+    "legal": [
+      {
+        "path": ".opencode/skills/dayu/LICENSE",
+        "bytes": 1074,
+        "sha256": "144fb9095f2865b0568ca14dd3e98feefac647a3f91c95c1e54028f859c2ec07"
+      },
+      {
+        "path": "LICENSE",
+        "bytes": 1074,
+        "sha256": "144fb9095f2865b0568ca14dd3e98feefac647a3f91c95c1e54028f859c2ec07"
+      }
+    ]
+  }
+}

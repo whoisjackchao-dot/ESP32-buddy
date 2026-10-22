@@ -13,7 +13,8 @@ import pet_ingest
 
 def _default_sink(line):
     # Placeholder transport: stdout until BLE/serial replaces it (§8.4).
-    print(line, end="")
+    # flush=True：作为 CLI 管道使用时（M9/G6）必须逐行可见。
+    print(line, end="", flush=True)
 
 
 class _EntryHandler(BaseHTTPRequestHandler):
@@ -87,3 +88,35 @@ def make_server(host="127.0.0.1", port=None, sink=None):
     server = ThreadingHTTPServer((host, port), _EntryHandler)
     server.sink = sink
     return server
+
+
+def main(argv=None):
+    """CLI: 起入口服务，合法事件以 NDJSON 打到 stdout（M9/G6 用）。
+
+    用法：python3 host/pet_entry_server.py [--host 127.0.0.1] [--port 8765]
+    """
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        prog="pet_entry_server",
+        description="HTTP 事件入口：POST /v1/events → stdout NDJSON",
+    )
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=None,
+                        help="默认取 PET_EVENT_PORT 或 pet_ingest.EVENT_INGEST_PORT")
+    args = parser.parse_args(argv)
+
+    server = make_server(host=args.host, port=args.port)
+    addr, port = server.server_address[:2]
+    print(f"listening http://{addr}:{port}{pet_ingest.ENTRY_PATH}", flush=True)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
