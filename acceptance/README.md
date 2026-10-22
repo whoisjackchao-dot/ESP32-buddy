@@ -16,6 +16,10 @@ python3 tools/make-manifest.py --check    # 校验仓库是否与 manifest 一�
 python3 tools/gate-host-smoke.py          # 无需设备的门槛预检（G6-host + 故障注入）
 ```
 
+> **关于 `git.commit` 字段**：它是**生成时的 HEAD**，而 `manifest.json` 本身随下一次提交落盘，
+> 因此该字段**总比包含它的那次提交早一代**。交付时应以 **`--check`（内容哈希）** 为准；
+> 若要精确绑定，可在打 tag 后重新生成一次再提交。
+
 ## 当前状态（2026-10-22）
 
 | 项 | 状态 |
