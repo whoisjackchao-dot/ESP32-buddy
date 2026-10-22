@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-22T08:32:25+08:00",
+  "generated_at": "2026-10-22T08:33:27+08:00",
   "git": {
-    "commit": "49bdb4495747eb65672ea92a8d4e41a858fdb90b",
+    "commit": "4d58e2f44139e8c46d2690d5655d20f8102786cb",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 152,
-    "bytes": 1389783
+    "bytes": 1441555
   },
   "groups": {
     "firmware": [
@@ -512,8 +512,8 @@
     "flash": [
       {
         "path": "flash/MANIFEST.txt",
-        "bytes": 638,
-        "sha256": "7cf8fcb83fcb9f26cca9e41bf3f28e2e36036b85be0c32741abcaf6eafe9880e"
+        "bytes": 634,
+        "sha256": "f45b34890e60b42134b6d0df468827d8f7d498fcc2cf4a7727c827fff1a30283"
       },
       {
         "path": "flash/README.md",
@@ -527,8 +527,8 @@
       },
       {
         "path": "flash/esp32_buddy.bin",
-        "bytes": 496384,
-        "sha256": "025510b3ecae8131568a191ae4c5a74419a42efbfcfe42b3b76876c53b5b275f"
+        "bytes": 548160,
+        "sha256": "68d10780e3fb31906f73ffc1cf55772d56e6619864edb2e6f6326a9a778f6336"
       },
       {
         "path": "flash/flash.ps1",
@@ -792,7 +792,7 @@
     "build_dir": "/home/shiwenc/esp-build/buddy",
     "target": "esp32s3",
     "chip": "esp32s3",
-    "project_version": "6d0bdd0-dirty",
+    "project_version": "4d58e2f",
     "idf_version": "v5.5.5",
     "flash_settings": {
       "flash_mode": "dio",
@@ -816,7 +816,7 @@
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
         "bytes": 548160,
-        "sha256": "2d6ac072ca924cc1e3f129cc52ca289aab6a00aa6f64b6b433dee1f7958f4276"
+        "sha256": "68d10780e3fb31906f73ffc1cf55772d56e6619864edb2e6f6326a9a778f6336"
       }
     ]
   }
