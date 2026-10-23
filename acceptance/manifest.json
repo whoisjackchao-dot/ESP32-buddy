@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-22T11:10:34+08:00",
+  "generated_at": "2026-10-24T06:54:29+08:00",
   "git": {
-    "commit": "447cc2c3c8508248d9c022e9883738223ec960c7",
+    "commit": "e3865e206158e62a815a5f9f5ffcfab616a3a1db",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 149,
-    "bytes": 872503
+    "files": 164,
+    "bytes": 945826
   },
   "groups": {
     "firmware": [
@@ -149,8 +149,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 8800,
-        "sha256": "6cf3ec97dcf2893dab84c01ddd38df8300b69880f93d6d44225ff1d4cb8e1bea"
+        "bytes": 10728,
+        "sha256": "5202c30b294f67aca8f76914e9277aa8e87c143f3742077a9e912a0061911c7e"
       },
       {
         "path": "firmware/components/pet/pet_hal.c",
@@ -214,8 +214,8 @@
       },
       {
         "path": "firmware/components/pet/pet_state.c",
-        "bytes": 8321,
-        "sha256": "402cf5c67d16c39f7c6dd0d386f4f41d7f4d0144ff7bfaf316a22dd0b9048cd9"
+        "bytes": 8797,
+        "sha256": "f3a651617e50f6048af25aedb7bbafcb7936ee4639bcddbc79b57c1f11a090cf"
       },
       {
         "path": "firmware/components/pet/pet_text.c",
@@ -393,8 +393,8 @@
       },
       {
         "path": "tests/test_pet_state.c",
-        "bytes": 15968,
-        "sha256": "55e81be76c0e4506acff57b2e58bc6c0be18420bdd74973eeab911f8f446a10a"
+        "bytes": 16575,
+        "sha256": "43f8945fd20dae8767887dc3756fc34324df615c83bd6301660ad004e05c9511"
       },
       {
         "path": "tests/test_pet_voice.c",
@@ -410,18 +410,18 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 15215,
-        "sha256": "963af357f9c17070dc4b9e6f4a5a73bc2653a1b140309833a78a999ebfe02b5b"
+        "bytes": 15111,
+        "sha256": "ae28e9959bac3ff80ccfffa509127fe7acb1a94ae5d23b125fe1ab9238c1004e"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
-        "bytes": 16966,
-        "sha256": "7bdd97f2e9327dc6bf61cf5443e8993a2475c4676db198cc7b42be0a7f1d43c0"
+        "bytes": 17029,
+        "sha256": "cf53fcad3e835f0894d71c1d4bc636878637c84372747bbaf75536b6c56900a6"
       },
       {
         "path": "ESP32-buddy_需求与决策基线.md",
-        "bytes": 16515,
-        "sha256": "d6752cba32e076aff974ffc84a68e535b28c684ec803d1048e0481306f58e339"
+        "bytes": 17212,
+        "sha256": "59346189790147c003258ef959048fe954e8d80a8d0f247e5e915dde4a80fc04"
       },
       {
         "path": "NOTICE.md",
@@ -495,8 +495,13 @@
       },
       {
         "path": "contracts/M8-休闲与多卡栈契约清单.md",
-        "bytes": 9808,
-        "sha256": "57b4d4b07d65ebfb0e9a3e5096aa707f9f0f4776af91a5c860a5160900748c47"
+        "bytes": 9847,
+        "sha256": "39d575703cc6cfba1f7494a62433048f649deefda138699fff64d8f61e1a8658"
+      },
+      {
+        "path": "contracts/M9-验收测量契约.md",
+        "bytes": 3685,
+        "sha256": "bf994855964d212109a3e4b55ff43d7289b0375e95f26f491dbef216f780cf45"
       },
       {
         "path": "contracts/README.md",
@@ -505,8 +510,8 @@
       },
       {
         "path": "contracts/参数冻结表.md",
-        "bytes": 5523,
-        "sha256": "ecf187c3e7b7c388e0f736b8b0d11aff980b84157b4e501d37298045f03e4e8a"
+        "bytes": 5643,
+        "sha256": "3973dff862e6b6b710509723f43bcdf8f417a03e448d27f0ded7e148b9430d47"
       }
     ],
     "flash": [
@@ -750,6 +755,11 @@
         "sha256": "937a82a3f7141afb56ce59c47c41afe5f938c03d988faa223a94f2ab74af43dd"
       },
       {
+        "path": "evidence/M8/2026-10-23-多卡栈-H.md",
+        "bytes": 1319,
+        "sha256": "1005fd83a7a76017e7ef769d9313de43630643aab38508e4da658781348aff55"
+      },
+      {
         "path": "evidence/M9/2026-10-22-交付完整性-T.md",
         "bytes": 5552,
         "sha256": "010772227ac2fdd14c290823163fdda9991f81ed3eabd24e19eea9cb0f9a5508"
@@ -758,6 +768,71 @@
         "path": "evidence/M9/2026-10-22-验收准备-D.md",
         "bytes": 4987,
         "sha256": "c7736bef0f8529cb1811c8b0c85a55c5cd34ee09e398174435795510dff6fe3b"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g3.json",
+        "bytes": 6674,
+        "sha256": "99547f702f3807d95df23b02c9fb571b0d00ac249ae75dc59f6844f68dcdf564"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g3.md",
+        "bytes": 2556,
+        "sha256": "f907e845e4f17e469e9d9fb067e2a85aeaf94e4b15feb79c66999118233f6fe2"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g4.json",
+        "bytes": 5488,
+        "sha256": "6d6fbcaac58760502c32facfca7546ca4679c787d54e17bce61657972491a0a3"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g4.md",
+        "bytes": 1861,
+        "sha256": "0b59fd64f3bbcdf3f3ab49977a1f2dcd1f8171313acf12a4e7cb2ce9eca696d6"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g6-http.json",
+        "bytes": 4309,
+        "sha256": "4f57c383d6ee46e72d59cacbaa907d877d0f605ada0014e5e57049e4d4ab5059"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g6.json",
+        "bytes": 6684,
+        "sha256": "78dfd79405bf96a646249ce93360bc0902c694461213d808de160f5f8eae788e"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g6.md",
+        "bytes": 2562,
+        "sha256": "7ba7189043d411a60328c2c9637c2e3a31eb708eee99bd5193aad4873393e1c8"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g7.json",
+        "bytes": 9948,
+        "sha256": "40c6f7229843f0cece03cbba3358e5bdafc69fa35466042f4cdc05bdca5f4243"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-g7.md",
+        "bytes": 2912,
+        "sha256": "9dd77e602dd6c3049869dba3df836e68f8a7cf6e1ee3191c0ef761bc74f9ed80"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-设备可观测性-D.md",
+        "bytes": 4547,
+        "sha256": "1b0226f7dfef19f6d829b04b06a314f600ef5ed56fbe972581c699ed1c34a59f"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-验收-G3G4G6G7.md",
+        "bytes": 3452,
+        "sha256": "f2b64bb52c4ab470f9875b8e8e86ae92cd2a98abe9f4738959773bc2e34e5b2c"
+      },
+      {
+        "path": "evidence/M9/2026-10-23-验收harness-T.md",
+        "bytes": 11665,
+        "sha256": "8e04f37312f8de8ca8d07cb4cee15c8409c11209b091f9fcbdd5c31a1bbe555c"
+      },
+      {
+        "path": "evidence/M9/2026-10-24-故障注入.md",
+        "bytes": 1835,
+        "sha256": "2598842ad794c76a8a9d75272447041412ef903e7c97aeb460693a0528241061"
       }
     ],
     "legal": [
@@ -770,38 +845,6 @@
         "path": "LICENSE",
         "bytes": 1074,
         "sha256": "144fb9095f2865b0568ca14dd3e98feefac647a3f91c95c1e54028f859c2ec07"
-      }
-    ]
-  },
-  "build": {
-    "build_dir": "/home/shiwenc/esp-build/buddy",
-    "target": "esp32s3",
-    "chip": "esp32s3",
-    "project_version": "4d58e2f",
-    "idf_version": "v5.5.5",
-    "flash_settings": {
-      "flash_mode": "dio",
-      "flash_size": "8MB",
-      "flash_freq": "80m"
-    },
-    "artifacts": [
-      {
-        "file": "bootloader/bootloader.bin",
-        "offset": "0x0",
-        "bytes": 20480,
-        "sha256": "c6e1484b3d3320f3d036447d303fb07110604239ea866989d090292750f01920"
-      },
-      {
-        "file": "partition_table/partition-table.bin",
-        "offset": "0x8000",
-        "bytes": 3072,
-        "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
-      },
-      {
-        "file": "esp32_buddy.bin",
-        "offset": "0x10000",
-        "bytes": 548160,
-        "sha256": "68d10780e3fb31906f73ffc1cf55772d56e6619864edb2e6f6326a9a778f6336"
       }
     ]
   }
