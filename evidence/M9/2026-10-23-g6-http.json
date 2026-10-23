@@ -1,0 +1,176 @@
+{
+  "gate": "g6-http",
+  "mode": "serial+http",
+  "date": "2026-10-23",
+  "port": "COM5",
+  "entry": "pet_entry_server via POST /v1/events",
+  "summary": {
+    "total": 20,
+    "pass": 20,
+    "fail": 0,
+    "timeout": 0
+  },
+  "verdict": "PASS",
+  "rows": [
+    {
+      "i": 0,
+      "title": "G6H0000",
+      "http": 200,
+      "delta_ms": 148.4,
+      "result": "pass",
+      "rf": "I (174995) pet-engine: rf t=174107688 st=1 n=1 top=G6H0000"
+    },
+    {
+      "i": 1,
+      "title": "G6H0001",
+      "http": 200,
+      "delta_ms": 62.9,
+      "result": "pass",
+      "rf": "I (175265) pet-engine: rf t=174377701 st=1 n=2 top=G6H0001"
+    },
+    {
+      "i": 2,
+      "title": "G6H0002",
+      "http": 200,
+      "delta_ms": 57.3,
+      "result": "pass",
+      "rf": "I (175525) pet-engine: rf t=174637703 st=1 n=3 top=G6H0002"
+    },
+    {
+      "i": 3,
+      "title": "G6H0003",
+      "http": 200,
+      "delta_ms": 50.9,
+      "result": "pass",
+      "rf": "I (175785) pet-engine: rf t=174897702 st=1 n=3 top=G6H0003"
+    },
+    {
+      "i": 4,
+      "title": "G6H0004",
+      "http": 200,
+      "delta_ms": 55.3,
+      "result": "pass",
+      "rf": "I (176045) pet-engine: rf t=175157704 st=1 n=3 top=G6H0004"
+    },
+    {
+      "i": 5,
+      "title": "G6H0005",
+      "http": 200,
+      "delta_ms": 50.8,
+      "result": "pass",
+      "rf": "I (176305) pet-engine: rf t=175417701 st=1 n=3 top=G6H0005"
+    },
+    {
+      "i": 6,
+      "title": "G6H0006",
+      "http": 200,
+      "delta_ms": 56.2,
+      "result": "pass",
+      "rf": "I (176565) pet-engine: rf t=175677706 st=1 n=3 top=G6H0006"
+    },
+    {
+      "i": 7,
+      "title": "G6H0007",
+      "http": 200,
+      "delta_ms": 50.7,
+      "result": "pass",
+      "rf": "I (176825) pet-engine: rf t=175937700 st=1 n=3 top=G6H0007"
+    },
+    {
+      "i": 8,
+      "title": "G6H0008",
+      "http": 200,
+      "delta_ms": 57.1,
+      "result": "pass",
+      "rf": "I (177085) pet-engine: rf t=176197704 st=1 n=3 top=G6H0008"
+    },
+    {
+      "i": 9,
+      "title": "G6H0009",
+      "http": 200,
+      "delta_ms": 49.9,
+      "result": "pass",
+      "rf": "I (177345) pet-engine: rf t=176457702 st=1 n=3 top=G6H0009"
+    },
+    {
+      "i": 10,
+      "title": "G6H0010",
+      "http": 200,
+      "delta_ms": 52.3,
+      "result": "pass",
+      "rf": "I (177605) pet-engine: rf t=176717704 st=1 n=3 top=G6H0010"
+    },
+    {
+      "i": 11,
+      "title": "G6H0011",
+      "http": 200,
+      "delta_ms": 59.4,
+      "result": "pass",
+      "rf": "I (177865) pet-engine: rf t=176977701 st=1 n=3 top=G6H0011"
+    },
+    {
+      "i": 12,
+      "title": "G6H0012",
+      "http": 200,
+      "delta_ms": 55.2,
+      "result": "pass",
+      "rf": "I (178125) pet-engine: rf t=177237706 st=1 n=3 top=G6H0012"
+    },
+    {
+      "i": 13,
+      "title": "G6H0013",
+      "http": 200,
+      "delta_ms": 53.5,
+      "result": "pass",
+      "rf": "I (178385) pet-engine: rf t=177497700 st=1 n=3 top=G6H0013"
+    },
+    {
+      "i": 14,
+      "title": "G6H0014",
+      "http": 200,
+      "delta_ms": 59.5,
+      "result": "pass",
+      "rf": "I (178645) pet-engine: rf t=177757704 st=1 n=3 top=G6H0014"
+    },
+    {
+      "i": 15,
+      "title": "G6H0015",
+      "http": 200,
+      "delta_ms": 52.5,
+      "result": "pass",
+      "rf": "I (178905) pet-engine: rf t=178017702 st=1 n=3 top=G6H0015"
+    },
+    {
+      "i": 16,
+      "title": "G6H0016",
+      "http": 200,
+      "delta_ms": 51.9,
+      "result": "pass",
+      "rf": "I (179165) pet-engine: rf t=178277704 st=1 n=3 top=G6H0016"
+    },
+    {
+      "i": 17,
+      "title": "G6H0017",
+      "http": 200,
+      "delta_ms": 57.3,
+      "result": "pass",
+      "rf": "I (179425) pet-engine: rf t=178537701 st=1 n=3 top=G6H0017"
+    },
+    {
+      "i": 18,
+      "title": "G6H0018",
+      "http": 200,
+      "delta_ms": 50.1,
+      "result": "pass",
+      "rf": "I (179685) pet-engine: rf t=178797706 st=1 n=3 top=G6H0018"
+    },
+    {
+      "i": 19,
+      "title": "G6H0019",
+      "http": 200,
+      "delta_ms": 52.6,
+      "result": "pass",
+      "rf": "I (179945) pet-engine: rf t=179057700 st=1 n=3 top=G6H0019"
+    }
+  ]
+}
