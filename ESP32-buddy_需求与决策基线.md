@@ -141,10 +141,12 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 | **B13** | **host C 编译器缺失**（**根因已定位**）：WSL 无 `gcc/clang/cc/make`；`sudo apt-get` 失败的原因是 **企业代理未配给 apt**（`sudo` 剥掉 `http_proxy`，apt 直连 → IPv6 不可达 / IPv4 超时） | 给 apt 配 `Acquire::http(s)::Proxy` + `ForceIPv4`（见下），再 `install build-essential` | ✅ 已解决（2026-10-16，`cc 15.2.0` 可用）**〔补注：仅原开发机成立；换机后见 `B15`〕** |
 | **B14** | **设备无法从 WSL 刷写**：设备在 Windows 侧可见（`COM5`, `VID_303A&PID_1001` ✅），但 WSL2 不能用 Windows 的 COM 口。`usbipd-win` 5.3.0 已装、`bind --force` 成功、`vhci_hcd` 已在 WSL 加载，但 **attach 被组策略挡**：WSL 网卡 `vEthernet (WSL (Hyper-V firewall))` **无网络配置文件**（默认按 Public），组策略禁止 Public 入站，TCP 3240 连不上 | ① 试 `Set-NetConnectionProfile ... -NetworkCategory Private`；② 不行则**改在 Windows 侧刷**（装 Python+esptool，直刷 `COM5`，不依赖 3240） | ✅ **已解除（2026-10-17，改走方案②）**：用 Windows 侧 esptool 刷 `COM5` 成功并运行，见 `evidence/2026-10-17-实机刷机-H.md`；三件套在 `ESP32-buddy/flash/` |
 | **B15** | **环境基线不可复现（新机器，2026-10-16）**：换机后**无系统 C 编译器、无免密 sudo、无 ESP-IDF（`~/esp` 空）、无旧项目（`sticks3-opencode` 空）**；`B13` 的"已解决"仅对**原开发机**成立 | ① **用户态工具链**：`zig cc`（无 root，已实测）；② 有 sudo 的机器：装 `build-essential` + ESP-IDF；③ **发现 Windows 侧已有 IDF v5.5.4**（`D:\Espressif`） | ✅ 已固化 **`tools/host-cc.sh`**（优先系统 `cc`，否则 `zig cc`；`CC=tools/host-cc.sh` → **370/0**）；固件构建已可（Windows IDF）；Linux/WSL 侧仍无 IDF；首次需修 venv 的 `esptool`（`~=4.12`） |
+| **B16** | **固件副本不同步**：`D:\buddy_flash\firmware` 是独立副本，构建/刷机用它但**不自动同步**仓库；2026-10-23 因此刷入多卡前旧固件（`tasks[]` 报 JSON 错、多卡不显示） | 构建前跑 **`tools/sync-fw.sh`**（rsync + 断言 `parse_tasks_array`） | ✅ 脚本已加（2026-10-23）；**流程未强制**（下次构建前必须手动执行） |
+| **B17** | **心跳不恢复 OFFLINE**：`PET_EV_ANNOUNCEMENT` 只刷新 `last_valid_ms`，而 `PET_EV_LINK_UP` 在固件中**无人发出** → 只发心跳的系统失联后**永久灰屏**（M9 `G4` 验收暴露） | 心跳时若 `state == OFFLINE` → 恢复 `prev_state`（M2 §7 语义） | ✅ 已修（2026-10-23，`pet_state.c` + 回归用例 `heartbeat_restores_offline_link`）；**待重新刷机后 G4 复验** |
 
 ## 6. 验收门槛（G）
 
-| 门槛 | 判定标准（草案，待批准） |
+| 门槛 | 判定标准（✅ **已批准 2026-10-23，按现表**） |
 | --- | --- |
 | G1 | 宠物 6 态目视可辨；每态进入/退出各 10/10 正确 |
 | G2 | 番茄钟：完成/暂停/放弃各 10/10；当日统计重启不丢 10/10 |
@@ -164,15 +166,15 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 
 > **设计批准不等于完成实机验证。** 本文未编译、未烧录。
 
-## 8. 待审定事项
+## 8. 待审定事项（✅ **已全部关闭，2026-10-23**）
 
-1. **Q17 WiFi 的角色**（🟡 阻塞 WiFi 节点 / 关联 M4·M8）——仅授时 / 也做传输 / 是否保留 BLE。
-2. **Q10 语义常量终值**（现按提案实现，见 `contracts/参数冻结表.md`）。
-3. **G1–G7 门槛数值**是否认可。
-4. **`Q19` G2 验收口径**：25 min × 10 次 ≈ 4h10m，与 G5 的 2h 预算冲突。
-   建议 A（推荐）：允许**短时长测试构建**（`-DPOMO_FOCUS_MS=30000u`）记 10/10，另加 release 构建 1 次完整 25 min，测试构建哈希入证据；
-   B：只跑 3 次 25 min 并相应修改门槛；C：维持原样分两天做。详见 `acceptance/G1-G7-验收执行清单.md` §6。
-5. **`Q20` G4 起算点**：15–17 s 从哪一刻起算（建议：发送端进程退出时刻）。
-6. **`Q21` G3/G6 的「1 s」测量方式**：建议手机 120 fps 录屏数帧差（±0.1 s）；纯目视记为估测，不算 PASS。
+| 事项 | 结论 |
+| --- | --- |
+| **Q17** WiFi 角色 | 已决 **A**（仅授时 + 保留 BLE）；NTP 用户暂不做 |
+| **Q10** 语义常量终值 | ✅ **已批准（2026-10-23，按提案值）** |
+| **G1–G7** 门槛数值 | ✅ **已批准（2026-10-23，按 §6 现表）** |
+| **Q19** G2 时长口径 | ⏳ **待拍板**（25 min×10 ≈ 4h10m vs G5 2h；见 `acceptance/G1-G7-验收执行清单.md` §6） |
+| **Q20** G4 起算点 | ✅ **定为**：最后一次心跳发送完成 → 收到 `off` 行（harness 仪器法；等价"停发"） |
+| **Q21** G3/G6 的 1 s 测法 | ✅ **定为**：设备 `rf` 日志 + host 接收时间戳（含 USB 链路）；视频法仅作可选交叉验证 |
 
 > **已决并归档**（不再重复询问）：`Q01–Q09`（含 `Q09` 已发布）、`Q11–Q16`、`Q18`；`Q15` 于 2026-10-16 采纳 **方案 B**。见 §4 批准记录。

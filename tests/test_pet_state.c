@@ -106,6 +106,18 @@ static void six_states_map_to_six_pose_frames(void)
     CHECK(view_frame() == PET_FRAME_SAD);
 }
 
+/* M9 验收发现（B17）：心跳是"链路存活"证据；OFFLINE 后只发心跳也应恢复，
+ * 否则只发心跳的系统会永久灰屏（固件里 PET_EV_LINK_UP 无人发出）。 */
+static void heartbeat_restores_offline_link(void)
+{
+    apply_kind(PET_EV_TASK_START, 1000);
+    apply_kind(PET_EV_LINK_DOWN, 2000);
+    CHECK(view_state() == PET_STATE_OFFLINE);
+    apply_kind(PET_EV_ANNOUNCEMENT, 3000);
+    CHECK(view_state() == PET_STATE_WORKING);
+    CHECK(view_frame() == PET_FRAME_WORKING);
+}
+
 static void explicit_done_announces_and_is_happy(void)
 {
     apply_kind(PET_EV_TASK_START, 1000);
@@ -450,6 +462,10 @@ int main(void)
 
     s = pet_state_create();
     six_states_map_to_six_pose_frames();
+    pet_state_destroy(s);
+
+    s = pet_state_create();
+    heartbeat_restores_offline_link();
     pet_state_destroy(s);
 
     s = pet_state_create();

@@ -1,0 +1,238 @@
+{
+  "schema": "M9-acceptance/1",
+  "contract": "M9 §3/§4",
+  "gate": "g6",
+  "mode": "serial",
+  "port": "COM5",
+  "device": null,
+  "started_at": "2026-10-23T23:00:44+08:00",
+  "config": {
+    "trials": 20,
+    "rf_timeout_s": 3.0,
+    "budget_ms": 1000.0,
+    "beat_interval_s": 1.0,
+    "beat_seconds": 5.0,
+    "off_wait_s": 20.0,
+    "off_low_s": 15.0,
+    "off_high_s": 17.0,
+    "g4_min_pass": 19,
+    "settle_s": 1.5,
+    "observe_s": 1.5,
+    "idle_settle_s": 2.5,
+    "control_each": 5,
+    "poll_s": 0.01
+  },
+  "rows": [
+    {
+      "i": 0,
+      "event": "task.start",
+      "title": "G600000",
+      "send_monotonic": 4598.9405474,
+      "recv_monotonic": 4599.0460368,
+      "delta_ms": 105.5,
+      "result": "pass",
+      "evidence": "I (3785) pet-engine: rf t=2897694 st=1 n=1 top=G600000"
+    },
+    {
+      "i": 1,
+      "event": "agent.input_required",
+      "title": "G600001",
+      "send_monotonic": 4599.0557683,
+      "recv_monotonic": 4599.1841059,
+      "delta_ms": 128.3,
+      "result": "pass",
+      "evidence": "I (3925) pet-engine: rf t=3037731 st=2 n=2 top=G600001"
+    },
+    {
+      "i": 2,
+      "event": "task.done",
+      "title": "G600002",
+      "send_monotonic": 4599.1912664,
+      "recv_monotonic": 4599.3132575,
+      "delta_ms": 122.0,
+      "result": "pass",
+      "evidence": "I (4055) pet-engine: rf t=3167707 st=3 n=3 top=G600002"
+    },
+    {
+      "i": 3,
+      "event": "task.error",
+      "title": "G600003",
+      "send_monotonic": 4599.3165153,
+      "recv_monotonic": 4599.4437133,
+      "delta_ms": 127.2,
+      "result": "pass",
+      "evidence": "I (4185) pet-engine: rf t=3297718 st=4 n=3 top=G600003"
+    },
+    {
+      "i": 4,
+      "event": "agent.blocked",
+      "title": "G600004",
+      "send_monotonic": 4599.4537161,
+      "recv_monotonic": 4599.5737063,
+      "delta_ms": 120.0,
+      "result": "pass",
+      "evidence": "I (4315) pet-engine: rf t=3427703 st=4 n=3 top=G600004"
+    },
+    {
+      "i": 5,
+      "event": "task.start",
+      "title": "G600005",
+      "send_monotonic": 4599.5792188,
+      "recv_monotonic": 4599.7033153,
+      "delta_ms": 124.1,
+      "result": "pass",
+      "evidence": "I (4445) pet-engine: rf t=3557696 st=1 n=3 top=G600005"
+    },
+    {
+      "i": 6,
+      "event": "agent.input_required",
+      "title": "G600006",
+      "send_monotonic": 4599.7038354,
+      "recv_monotonic": 4599.8332369,
+      "delta_ms": 129.4,
+      "result": "pass",
+      "evidence": "I (4575) pet-engine: rf t=3687703 st=2 n=3 top=G600006"
+    },
+    {
+      "i": 7,
+      "event": "task.done",
+      "title": "G600007",
+      "send_monotonic": 4599.8390831,
+      "recv_monotonic": 4599.9631884,
+      "delta_ms": 124.1,
+      "result": "pass",
+      "evidence": "I (4705) pet-engine: rf t=3817716 st=3 n=3 top=G600007"
+    },
+    {
+      "i": 8,
+      "event": "task.error",
+      "title": "G600008",
+      "send_monotonic": 4599.9645338,
+      "recv_monotonic": 4600.093178,
+      "delta_ms": 128.6,
+      "result": "pass",
+      "evidence": "I (4835) pet-engine: rf t=3947703 st=4 n=3 top=G600008"
+    },
+    {
+      "i": 9,
+      "event": "agent.blocked",
+      "title": "G600009",
+      "send_monotonic": 4600.1006968,
+      "recv_monotonic": 4600.2233134,
+      "delta_ms": 122.6,
+      "result": "pass",
+      "evidence": "I (4965) pet-engine: rf t=4077717 st=4 n=3 top=G600009"
+    },
+    {
+      "i": 10,
+      "event": "task.start",
+      "title": "G600010",
+      "send_monotonic": 4600.2263081,
+      "recv_monotonic": 4600.3535196,
+      "delta_ms": 127.2,
+      "result": "pass",
+      "evidence": "I (5095) pet-engine: rf t=4207683 st=1 n=3 top=G600010"
+    },
+    {
+      "i": 11,
+      "event": "agent.input_required",
+      "title": "G600011",
+      "send_monotonic": 4600.3623831,
+      "recv_monotonic": 4600.4836191,
+      "delta_ms": 121.2,
+      "result": "pass",
+      "evidence": "I (5225) pet-engine: rf t=4337722 st=2 n=3 top=G600011"
+    },
+    {
+      "i": 12,
+      "event": "task.done",
+      "title": "G600012",
+      "send_monotonic": 4600.4879378,
+      "recv_monotonic": 4600.6132784,
+      "delta_ms": 125.3,
+      "result": "pass",
+      "evidence": "I (5355) pet-engine: rf t=4467701 st=3 n=3 top=G600012"
+    },
+    {
+      "i": 13,
+      "event": "task.error",
+      "title": "G600013",
+      "send_monotonic": 4600.6235625,
+      "recv_monotonic": 4600.7436388,
+      "delta_ms": 120.1,
+      "result": "pass",
+      "evidence": "I (5485) pet-engine: rf t=4597722 st=4 n=3 top=G600013"
+    },
+    {
+      "i": 14,
+      "event": "agent.blocked",
+      "title": "G600014",
+      "send_monotonic": 4600.7488937,
+      "recv_monotonic": 4600.8732816,
+      "delta_ms": 124.4,
+      "result": "pass",
+      "evidence": "I (5615) pet-engine: rf t=4727701 st=4 n=3 top=G600014"
+    },
+    {
+      "i": 15,
+      "event": "task.start",
+      "title": "G600015",
+      "send_monotonic": 4600.8751463,
+      "recv_monotonic": 4601.004283,
+      "delta_ms": 129.1,
+      "result": "pass",
+      "evidence": "I (5745) pet-engine: rf t=4857699 st=1 n=3 top=G600015"
+    },
+    {
+      "i": 16,
+      "event": "agent.input_required",
+      "title": "G600016",
+      "send_monotonic": 4601.0130818,
+      "recv_monotonic": 4601.1332008,
+      "delta_ms": 120.1,
+      "result": "pass",
+      "evidence": "I (5875) pet-engine: rf t=4987700 st=2 n=3 top=G600016"
+    },
+    {
+      "i": 17,
+      "event": "task.done",
+      "title": "G600017",
+      "send_monotonic": 4601.1380225,
+      "recv_monotonic": 4601.2637454,
+      "delta_ms": 125.7,
+      "result": "pass",
+      "evidence": "I (6005) pet-engine: rf t=5117727 st=3 n=3 top=G600017"
+    },
+    {
+      "i": 18,
+      "event": "task.error",
+      "title": "G600018",
+      "send_monotonic": 4601.2734909,
+      "recv_monotonic": 4601.3933551,
+      "delta_ms": 119.9,
+      "result": "pass",
+      "evidence": "I (6135) pet-engine: rf t=5247706 st=4 n=3 top=G600018"
+    },
+    {
+      "i": 19,
+      "event": "agent.blocked",
+      "title": "G600019",
+      "send_monotonic": 4601.399607,
+      "recv_monotonic": 4601.5235778,
+      "delta_ms": 124.0,
+      "result": "pass",
+      "evidence": "I (6265) pet-engine: rf t=5377726 st=4 n=3 top=G600019"
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "pass": 20,
+    "fail": 0,
+    "timeout": 0
+  },
+  "p50_ms": 124.1,
+  "p95_ms": 129.1,
+  "verdict": "PASS",
+  "ended_at": "2026-10-23T23:00:47+08:00",
+  "date": "2026-10-23"
+}

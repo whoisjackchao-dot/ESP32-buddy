@@ -1,0 +1,216 @@
+{
+  "schema": "M9-acceptance/1",
+  "contract": "M9 §3/§4",
+  "gate": "g4",
+  "mode": "serial",
+  "port": "COM5",
+  "device": null,
+  "started_at": "2026-10-23T23:13:04+08:00",
+  "config": {
+    "trials": 20,
+    "rf_timeout_s": 3.0,
+    "budget_ms": 1000.0,
+    "beat_interval_s": 1.0,
+    "beat_seconds": 5.0,
+    "off_wait_s": 20.0,
+    "off_low_s": 15.0,
+    "off_high_s": 17.0,
+    "g4_min_pass": 19,
+    "settle_s": 1.5,
+    "observe_s": 1.5,
+    "idle_settle_s": 2.5,
+    "control_each": 5,
+    "poll_s": 0.01
+  },
+  "rows": [
+    {
+      "i": 0,
+      "beats": 6,
+      "stop_monotonic": 5343.8415632,
+      "recv_monotonic": 5358.8985978,
+      "delta_s": 15.06,
+      "result": "pass",
+      "evidence": "I (24719) pet-engine: off t=23827951"
+    },
+    {
+      "i": 1,
+      "beats": 6,
+      "stop_monotonic": 5363.9102349,
+      "recv_monotonic": 5378.9177243,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (44739) pet-engine: off t=43847944"
+    },
+    {
+      "i": 2,
+      "beats": 6,
+      "stop_monotonic": 5383.9245164,
+      "recv_monotonic": 5398.9375409,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (64759) pet-engine: off t=63867944"
+    },
+    {
+      "i": 3,
+      "beats": 6,
+      "stop_monotonic": 5403.9510003,
+      "recv_monotonic": 5418.9570535,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (84779) pet-engine: off t=83887944"
+    },
+    {
+      "i": 4,
+      "beats": 6,
+      "stop_monotonic": 5423.9641431,
+      "recv_monotonic": 5438.9769269,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (104799) pet-engine: off t=103907949"
+    },
+    {
+      "i": 5,
+      "beats": 6,
+      "stop_monotonic": 5443.9808583,
+      "recv_monotonic": 5458.9973685,
+      "delta_s": 15.02,
+      "result": "pass",
+      "evidence": "I (124819) pet-engine: off t=123927949"
+    },
+    {
+      "i": 6,
+      "beats": 6,
+      "stop_monotonic": 5464.0116689,
+      "recv_monotonic": 5479.0165336,
+      "delta_s": 15.0,
+      "result": "pass",
+      "evidence": "I (144839) pet-engine: off t=143947949"
+    },
+    {
+      "i": 7,
+      "beats": 6,
+      "stop_monotonic": 5484.0219037,
+      "recv_monotonic": 5499.036399,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (164859) pet-engine: off t=163967949"
+    },
+    {
+      "i": 8,
+      "beats": 6,
+      "stop_monotonic": 5504.0457076,
+      "recv_monotonic": 5519.0575596,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (184879) pet-engine: off t=183987949"
+    },
+    {
+      "i": 9,
+      "beats": 6,
+      "stop_monotonic": 5524.0653303,
+      "recv_monotonic": 5539.0759779,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (204899) pet-engine: off t=204007949"
+    },
+    {
+      "i": 10,
+      "beats": 6,
+      "stop_monotonic": 5544.0812349,
+      "recv_monotonic": 5559.0968575,
+      "delta_s": 15.02,
+      "result": "pass",
+      "evidence": "I (224919) pet-engine: off t=224027949"
+    },
+    {
+      "i": 11,
+      "beats": 6,
+      "stop_monotonic": 5564.1033755,
+      "recv_monotonic": 5579.1156075,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (244939) pet-engine: off t=244047949"
+    },
+    {
+      "i": 12,
+      "beats": 6,
+      "stop_monotonic": 5584.1226549,
+      "recv_monotonic": 5599.1355449,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (264959) pet-engine: off t=264067949"
+    },
+    {
+      "i": 13,
+      "beats": 6,
+      "stop_monotonic": 5604.141606,
+      "recv_monotonic": 5619.1553366,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (284979) pet-engine: off t=284087949"
+    },
+    {
+      "i": 14,
+      "beats": 6,
+      "stop_monotonic": 5624.1659933,
+      "recv_monotonic": 5639.1754658,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (304999) pet-engine: off t=304107949"
+    },
+    {
+      "i": 15,
+      "beats": 6,
+      "stop_monotonic": 5644.1855345,
+      "recv_monotonic": 5659.1952259,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (325019) pet-engine: off t=324127949"
+    },
+    {
+      "i": 16,
+      "beats": 6,
+      "stop_monotonic": 5664.1995523,
+      "recv_monotonic": 5679.2147962,
+      "delta_s": 15.02,
+      "result": "pass",
+      "evidence": "I (345039) pet-engine: off t=344147949"
+    },
+    {
+      "i": 17,
+      "beats": 6,
+      "stop_monotonic": 5684.2208739,
+      "recv_monotonic": 5699.2358239,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (365059) pet-engine: off t=364167949"
+    },
+    {
+      "i": 18,
+      "beats": 6,
+      "stop_monotonic": 5704.2488856,
+      "recv_monotonic": 5719.2544083,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (385079) pet-engine: off t=384187949"
+    },
+    {
+      "i": 19,
+      "beats": 6,
+      "stop_monotonic": 5724.2610792,
+      "recv_monotonic": 5739.2744805,
+      "delta_s": 15.01,
+      "result": "pass",
+      "evidence": "I (405099) pet-engine: off t=404207949"
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "pass": 20,
+    "fail": 0,
+    "timeout": 0
+  },
+  "verdict": "PASS",
+  "ended_at": "2026-10-23T23:19:44+08:00",
+  "date": "2026-10-23"
+}

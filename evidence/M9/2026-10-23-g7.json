@@ -1,0 +1,459 @@
+{
+  "schema": "M9-acceptance/1",
+  "contract": "M9 §3/§4",
+  "gate": "g7",
+  "mode": "serial",
+  "port": "COM5",
+  "device": null,
+  "started_at": "2026-10-23T23:19:49+08:00",
+  "config": {
+    "trials": 20,
+    "rf_timeout_s": 3.0,
+    "budget_ms": 1000.0,
+    "beat_interval_s": 1.0,
+    "beat_seconds": 5.0,
+    "off_wait_s": 20.0,
+    "off_low_s": 15.0,
+    "off_high_s": 17.0,
+    "g4_min_pass": 19,
+    "settle_s": 1.5,
+    "observe_s": 1.5,
+    "idle_settle_s": 2.5,
+    "control_each": 5,
+    "poll_s": 0.01
+  },
+  "rows": [
+    {
+      "group": "positive",
+      "i": 0,
+      "kind": "input_required",
+      "expected_voice_id": 1,
+      "voice_ids": [
+        1
+      ],
+      "send_monotonic": 5745.4089445,
+      "result": "pass",
+      "evidence": [
+        "I (6145) pet-engine: voice id=1 t=5265864"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 1,
+      "kind": "done",
+      "expected_voice_id": 2,
+      "voice_ids": [
+        2
+      ],
+      "send_monotonic": 5748.4104404,
+      "result": "pass",
+      "evidence": [
+        "I (9135) pet-engine: voice id=2 t=8256187"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 2,
+      "kind": "failed",
+      "expected_voice_id": 3,
+      "voice_ids": [
+        3
+      ],
+      "send_monotonic": 5751.4123436,
+      "result": "pass",
+      "evidence": [
+        "I (12125) pet-engine: voice id=3 t=11246123"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 3,
+      "kind": "input_required",
+      "expected_voice_id": 1,
+      "voice_ids": [
+        1
+      ],
+      "send_monotonic": 5754.4142344,
+      "result": "pass",
+      "evidence": [
+        "I (15115) pet-engine: voice id=1 t=14236286"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 4,
+      "kind": "done",
+      "expected_voice_id": 2,
+      "voice_ids": [
+        2
+      ],
+      "send_monotonic": 5757.4163576,
+      "result": "pass",
+      "evidence": [
+        "I (18105) pet-engine: voice id=2 t=17226221"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 5,
+      "kind": "failed",
+      "expected_voice_id": 3,
+      "voice_ids": [
+        3
+      ],
+      "send_monotonic": 5760.4173427,
+      "result": "pass",
+      "evidence": [
+        "I (21095) pet-engine: voice id=3 t=20216145"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 6,
+      "kind": "input_required",
+      "expected_voice_id": 1,
+      "voice_ids": [
+        1
+      ],
+      "send_monotonic": 5763.4192118,
+      "result": "pass",
+      "evidence": [
+        "I (24085) pet-engine: voice id=1 t=23206319"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 7,
+      "kind": "done",
+      "expected_voice_id": 2,
+      "voice_ids": [
+        2
+      ],
+      "send_monotonic": 5766.4208595,
+      "result": "pass",
+      "evidence": [
+        "I (27075) pet-engine: voice id=2 t=26196195"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 8,
+      "kind": "failed",
+      "expected_voice_id": 3,
+      "voice_ids": [
+        3
+      ],
+      "send_monotonic": 5769.4222069,
+      "result": "pass",
+      "evidence": [
+        "I (30065) pet-engine: voice id=3 t=29186223"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 9,
+      "kind": "input_required",
+      "expected_voice_id": 1,
+      "voice_ids": [
+        1
+      ],
+      "send_monotonic": 5772.4245713,
+      "result": "pass",
+      "evidence": [
+        "I (33055) pet-engine: voice id=1 t=32175750"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 10,
+      "kind": "done",
+      "expected_voice_id": 2,
+      "voice_ids": [
+        2
+      ],
+      "send_monotonic": 5775.4262523,
+      "result": "pass",
+      "evidence": [
+        "I (36045) pet-engine: voice id=2 t=35165759"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 11,
+      "kind": "failed",
+      "expected_voice_id": 3,
+      "voice_ids": [
+        3
+      ],
+      "send_monotonic": 5778.4281204,
+      "result": "pass",
+      "evidence": [
+        "I (39165) pet-engine: voice id=3 t=38286237"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 12,
+      "kind": "input_required",
+      "expected_voice_id": 1,
+      "voice_ids": [
+        1
+      ],
+      "send_monotonic": 5781.4303557,
+      "result": "pass",
+      "evidence": [
+        "I (42155) pet-engine: voice id=1 t=41276254"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 13,
+      "kind": "done",
+      "expected_voice_id": 2,
+      "voice_ids": [
+        2
+      ],
+      "send_monotonic": 5784.4319772,
+      "result": "pass",
+      "evidence": [
+        "I (45145) pet-engine: voice id=2 t=44266262"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 14,
+      "kind": "failed",
+      "expected_voice_id": 3,
+      "voice_ids": [
+        3
+      ],
+      "send_monotonic": 5787.4336944,
+      "result": "pass",
+      "evidence": [
+        "I (48135) pet-engine: voice id=3 t=47256228"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 15,
+      "kind": "input_required",
+      "expected_voice_id": 1,
+      "voice_ids": [
+        1
+      ],
+      "send_monotonic": 5790.4353807,
+      "result": "pass",
+      "evidence": [
+        "I (51125) pet-engine: voice id=1 t=50246275"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 16,
+      "kind": "done",
+      "expected_voice_id": 2,
+      "voice_ids": [
+        2
+      ],
+      "send_monotonic": 5793.4367568,
+      "result": "pass",
+      "evidence": [
+        "I (54115) pet-engine: voice id=2 t=53236212"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 17,
+      "kind": "failed",
+      "expected_voice_id": 3,
+      "voice_ids": [
+        3
+      ],
+      "send_monotonic": 5796.4388232,
+      "result": "pass",
+      "evidence": [
+        "I (57105) pet-engine: voice id=3 t=56226235"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 18,
+      "kind": "input_required",
+      "expected_voice_id": 1,
+      "voice_ids": [
+        1
+      ],
+      "send_monotonic": 5799.4399816,
+      "result": "pass",
+      "evidence": [
+        "I (60095) pet-engine: voice id=1 t=59216337"
+      ]
+    },
+    {
+      "group": "positive",
+      "i": 19,
+      "kind": "done",
+      "expected_voice_id": 2,
+      "voice_ids": [
+        2
+      ],
+      "send_monotonic": 5802.4409869,
+      "result": "pass",
+      "evidence": [
+        "I (63085) pet-engine: voice id=2 t=62206255"
+      ]
+    },
+    {
+      "group": "control",
+      "i": 0,
+      "kind": "working",
+      "voice_ids": [],
+      "send_monotonic": 5805.4428597,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 1,
+      "kind": "working",
+      "voice_ids": [],
+      "send_monotonic": 5808.4443149,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 2,
+      "kind": "working",
+      "voice_ids": [],
+      "send_monotonic": 5811.445536,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 3,
+      "kind": "working",
+      "voice_ids": [],
+      "send_monotonic": 5814.4468157,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 4,
+      "kind": "working",
+      "voice_ids": [],
+      "send_monotonic": 5817.4481546,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 5,
+      "kind": "idle",
+      "voice_ids": [],
+      "send_monotonic": 5822.9504486,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 6,
+      "kind": "idle",
+      "voice_ids": [],
+      "send_monotonic": 5828.4524433,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 7,
+      "kind": "idle",
+      "voice_ids": [],
+      "send_monotonic": 5833.9543974,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 8,
+      "kind": "idle",
+      "voice_ids": [],
+      "send_monotonic": 5839.4572135,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 9,
+      "kind": "idle",
+      "voice_ids": [],
+      "send_monotonic": 5844.9739939,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 10,
+      "kind": "heartbeat",
+      "voice_ids": [],
+      "send_monotonic": 5847.9760577,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 11,
+      "kind": "heartbeat",
+      "voice_ids": [],
+      "send_monotonic": 5850.9778039,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 12,
+      "kind": "heartbeat",
+      "voice_ids": [],
+      "send_monotonic": 5853.9790883,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 13,
+      "kind": "heartbeat",
+      "voice_ids": [],
+      "send_monotonic": 5856.9803866,
+      "result": "pass",
+      "evidence": []
+    },
+    {
+      "group": "control",
+      "i": 14,
+      "kind": "heartbeat",
+      "voice_ids": [],
+      "send_monotonic": 5859.9817543,
+      "result": "pass",
+      "evidence": []
+    }
+  ],
+  "summary": {
+    "positive": {
+      "total": 20,
+      "pass": 20,
+      "fail": 0,
+      "timeout": 0
+    },
+    "control": {
+      "total": 15,
+      "pass": 15,
+      "fail": 0,
+      "timeout": 0
+    }
+  },
+  "verdict": "PASS",
+  "ended_at": "2026-10-23T23:21:47+08:00",
+  "date": "2026-10-23"
+}

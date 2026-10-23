@@ -1,9 +1,11 @@
 #include "pet_engine.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "driver/usb_serial_jtag.h"
 #include "esp_log.h"
+#include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
@@ -51,6 +53,15 @@ static uint32_t s_skit_ms;
 static bool     s_skit_active;
 static uint32_t s_skit_t_ms;
 static bool     s_bl_on = true;
+
+/* M9 §2：设备侧可观测性（rf/off/on，在 pet_engine_redraw 记录）。
+ * 链路在线 ⇔ 渲染视图 state != PET_STATE_OFFLINE（失联判定在 pet_state，M2）。 */
+static bool        s_rf_valid;   /* 尚无上一帧基线时不打 rf */
+static pet_state_t s_rf_state;
+static int         s_rf_count;
+static char        s_rf_top[PET_TITLE_MAX];
+static bool        s_link_seen;
+static bool        s_link_online = true;
 
 void pet_engine_init(void)
 {
@@ -115,6 +126,36 @@ void pet_engine_redraw(void)
     } else {
         pet_view_t view;
         pet_state_view(s_state, &view);
+
+        /* M9 §2：rf 仅在（状态, 卡数, 顶卡标题）较上一帧变化时、绘制前记录一次 */
+        const char *rf_top = (view.card_count > 0) ? view.cards[0].title : "-";
+        if (!s_rf_valid || view.state != s_rf_state ||
+            view.card_count != s_rf_count ||
+            strncmp(rf_top, s_rf_top, sizeof s_rf_top) != 0) {
+            ESP_LOGI(TAG, "rf t=%lld st=%d n=%d top=%.8s",
+                     (long long)esp_timer_get_time(), (int)view.state,
+                     view.card_count, rf_top);
+            s_rf_valid = true;
+            s_rf_state = view.state;
+            s_rf_count = view.card_count;
+            strncpy(s_rf_top, rf_top, sizeof s_rf_top - 1);
+            s_rf_top[sizeof s_rf_top - 1] = '\0';
+        }
+
+        /* M9 §2：链路只记边沿（off=在线→离线 / on=离线→在线）；首帧仅建基线 */
+        const bool online = (view.state != PET_STATE_OFFLINE);
+        if (!s_link_seen) {
+            s_link_seen = true;
+            s_link_online = online;
+        } else if (online != s_link_online) {
+            s_link_online = online;
+            if (online) {
+                ESP_LOGI(TAG, "on t=%lld", (long long)esp_timer_get_time());
+            } else {
+                ESP_LOGI(TAG, "off t=%lld", (long long)esp_timer_get_time());
+            }
+        }
+
         if (s_skit_active) {
             pet_render_skit(&s_surface, s_look, &view, s_last_skit, s_skit_t_ms);
         } else {
@@ -126,6 +167,7 @@ void pet_engine_redraw(void)
     /* 取走一次性播报（M5 之前 play_sound 是空实现） */
     const pet_sound_t sound = pet_state_take_sound(s_state);
     if (pet_voice_should_play(sound, pet_voice_muted()) && hal->play_sound != NULL) {
+        ESP_LOGI(TAG, "voice id=%d t=%lld", (int)sound, (long long)esp_timer_get_time()); /* M9 §2 G7 */
         hal->play_sound(sound);
     }
 }

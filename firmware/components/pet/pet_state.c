@@ -130,8 +130,17 @@ void pet_state_apply(struct pet_state *s, const pet_event_t *ev)
                   now);
         break;
 
-    case PET_EV_CARD:
     case PET_EV_ANNOUNCEMENT:
+        /* B17（M9 验收发现）：心跳只刷新链路；若已 OFFLINE 应按 M2 §7 的恢复语义
+         * 回到失联前状态，否则"只发心跳"的系统会永久灰屏（LINK_UP 无人发出）。 */
+        if (s->state == PET_STATE_OFFLINE) {
+            set_state(s, (s->prev_state == PET_STATE_OFFLINE) ? PET_STATE_IDLE
+                                                              : s->prev_state,
+                      now);
+        }
+        break;
+
+    case PET_EV_CARD:
     default:
         break; /* M4 */
     }
