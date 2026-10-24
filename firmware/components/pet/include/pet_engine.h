@@ -29,6 +29,10 @@ void pet_engine_request_back_window(void);
 /* M6 增量 3：按键事件入口（菜单优先；否则按 Q11 映射分派）。 */
 void pet_engine_key(pet_key_t key, pet_key_event_t ev);
 
+/* M8 增量 2：运行时注入本地小时 0..23（-1=未知，钳位）；SNTP 同步后由 pet_net 调用。
+ * 未注入时保持 -1，休闲行为与原 PET_ENGINE_HOUR24(-1) 完全一致（不熄屏）。 */
+void pet_engine_set_hour24(int hour);
+
 /* 取引擎持有的状态机句柄（供 pet_rx 把事件喂进来）。 */
 struct pet_state *pet_engine_state(void);
 

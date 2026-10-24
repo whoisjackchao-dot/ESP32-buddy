@@ -44,9 +44,9 @@ static bool s_menu_open;
 #ifndef PET_SKIT_SHOW_MS
 #define PET_SKIT_SHOW_MS 3000u
 #endif
-#ifndef PET_ENGINE_HOUR24
-#define PET_ENGINE_HOUR24 (-1) /* 时间未知 → 不熄屏（增量 2 接 NTP） */
-#endif
+/* M8 增量 2：运行时小时取代编译期 PET_ENGINE_HOUR24；SNTP 同步后由 pet_net 经
+ * pet_engine_set_hour24 注入。默认 -1（未知）→ 与原默认行为一致：不熄屏。 */
+static int s_hour24 = -1;
 static pet_leisure_t s_leisure;
 static int      s_last_skit = -1;
 static uint32_t s_skit_ms;
@@ -202,7 +202,7 @@ static void pet_task(void *arg)
                 pet_view_t lv;
                 pet_state_view(s_state, &lv);
                 const bool active = (lv.state != PET_STATE_IDLE); /* 含断链/完成/失败 */
-                pet_leisure_tick(&s_leisure, now, active, PET_ENGINE_HOUR24);
+                pet_leisure_tick(&s_leisure, now, active, s_hour24);
 
                 const int skit = pet_leisure_skit(&s_leisure);
                 if (skit != s_last_skit) {
@@ -268,6 +268,16 @@ pet_mode_t pet_engine_mode(void)
     return s_mode;
 }
 
+void pet_engine_set_hour24(int hour)
+{
+    if (hour < -1) {
+        hour = -1;
+    } else if (hour > 23) {
+        hour = 23;
+    }
+    s_hour24 = hour;
+}
+
 void pet_engine_pomo_command(pet_pomo_cmd_t cmd)
 {
     pet_pomo_command(&s_pomo, cmd, pet_hal_now_ms());
@@ -285,7 +295,7 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
         return;
     }
     /* M8：任意按键唤醒休闲（复位空闲计时 + 回值班 → 下一帧恢复背光） */
-    pet_leisure_tick(&s_leisure, pet_hal_now_ms(), true, PET_ENGINE_HOUR24);
+    pet_leisure_tick(&s_leisure, pet_hal_now_ms(), true, s_hour24);
     if (s_menu_open) {
         const pet_menu_cmd_t cmd = pet_menu_key(&s_menu, key, ev);
         if (cmd == PET_MENU_CMD_TOGGLE_MUTE) {

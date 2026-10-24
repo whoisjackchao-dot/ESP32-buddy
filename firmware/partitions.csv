@@ -1,0 +1,5 @@
+# Name,   Type, SubType, Offset,  Size, Flags
+# M11：WiFi/lwip 使 app 超过 1MB；factory 扩到 2MB。NVS 偏移/大小保持不变（0x9000/0x6000），统计不丢。
+nvs,      data, nvs,     0x9000,  0x6000,
+phy_init, data, phy,     0xf000,  0x1000,
+factory,  app,  factory, 0x10000, 0x200000,

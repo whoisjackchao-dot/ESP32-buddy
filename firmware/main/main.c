@@ -9,6 +9,7 @@
 #include "pet_engine.h"
 #include "pet_hal_sticks3.h"
 #include "pet_keys.h"
+#include "pet_net.h"
 #include "pet_rx.h"
 
 static const char *TAG = "esp32-buddy";
@@ -25,6 +26,9 @@ void app_main(void)
     if (nv != ESP_OK) {
         ESP_LOGW(TAG, "NVS 初始化失败：%d（番茄钟统计不落盘）", (int)nv);
     }
+
+    /* M8 增量 2：WiFi STA + SNTP（非阻塞；无凭据时行为与此前完全一致） */
+    pet_net_start();
 
     if (pet_hal_sticks3_install() != ESP_OK) {
         ESP_LOGE(TAG, "DISPLAY ERROR（硬件层安装失败）");

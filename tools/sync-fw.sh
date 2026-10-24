@@ -15,9 +15,9 @@ fi
 
 # 只同步源码与工程文件；build 产物、本地 sdkconfig、依赖锁保留原样
 if command -v rsync >/dev/null 2>&1; then
-    rsync -a --exclude build --exclude 'sdkconfig*' --exclude dependencies.lock "$SRC/" "$DST/"
+    rsync -a --exclude build --exclude sdkconfig --exclude sdkconfig.old --exclude dependencies.lock "$SRC/" "$DST/"
 else
-    ( cd "$SRC" && find . -path ./build -prune -o -name 'sdkconfig*' -prune -o -name dependencies.lock -prune -o -type f -print ) |
+    ( cd "$SRC" && find . -path ./build -prune -o -name sdkconfig -prune -o -name dependencies.lock -prune -o -type f -print ) |
     while IFS= read -r f; do
         mkdir -p "$DST/$(dirname "$f")"
         cp -a "$SRC/$f" "$DST/$f"

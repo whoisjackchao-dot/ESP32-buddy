@@ -15,6 +15,7 @@
 #include "pet_linebuf.h"
 #include "pet_engine.h"
 #include "pet_link.h"
+#include "pet_net.h"
 #include "pet_state.h"
 #include "pet_types.h"
 
@@ -41,6 +42,11 @@ static void apply_line(const char *line, size_t len)
         return;
     }
 #endif
+    /* M8 增量 2：产线 cmd 线（wifi.set/status/clear）在事件解析前截获；
+     * 未识别的 cmd 返回 false，继续走原事件解析（照旧拒绝）。 */
+    if (strstr(line, "\"cmd\"") != NULL && pet_net_handle_line(line)) {
+        return;
+    }
     pet_link_msg_t msg;
     const pet_link_status_t st = pet_link_parse(line, len, &msg);
     if (st != PET_LINK_OK) {
