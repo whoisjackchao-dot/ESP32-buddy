@@ -1,21 +1,21 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T09:27:29+08:00",
+  "generated_at": "2026-10-24T10:09:09+08:00",
   "git": {
-    "commit": "d3ad523ba0f2e265c35db9a0c9f16d90bd0b08ae",
+    "commit": "4acabce2c59c046dbb1995ea458444402adfa032",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 169,
-    "bytes": 1070235
+    "files": 170,
+    "bytes": 1072963
   },
   "groups": {
     "firmware": [
       {
         "path": "firmware/components/pet/CMakeLists.txt",
-        "bytes": 852,
-        "sha256": "be5b3d6d82bbc159a9b44cc3528ffcc927ec25ed2a047f34ce833b6a2b2cb1f3"
+        "bytes": 1191,
+        "sha256": "220b39867d792d0b68e45337c544aedc76d6fa3b39a4cb3a6c0a21ce95cfdc4b"
       },
       {
         "path": "firmware/components/pet/assets/done.pcm",
@@ -411,7 +411,7 @@
       {
         "path": "ESP32-buddy_文档索引.md",
         "bytes": 15273,
-        "sha256": "4df4eadd18b429d9d63d0ec80490b0cd3e74957ed2e786fe840fe3065f5c0bbd"
+        "sha256": "a3290b616f6d239f6d5506bcdb9a98d95e4275d59a0cee9a5ca6a56af1f1eef7"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
@@ -420,8 +420,8 @@
       },
       {
         "path": "ESP32-buddy_需求与决策基线.md",
-        "bytes": 17306,
-        "sha256": "18a98df67aca6bd1feb132c528b3d6784457cae744ef48fc8b48bb7b17dea036"
+        "bytes": 17369,
+        "sha256": "9c4c94987177c4e7feae695edf54ca31bc0e914aa37500c09a76c3861d74d396"
       },
       {
         "path": "NOTICE.md",
@@ -435,8 +435,8 @@
       },
       {
         "path": "acceptance/G1-G7-验收执行清单.md",
-        "bytes": 10338,
-        "sha256": "55812702ae35f8407ba293d0198f4578fcf00a32199ac28f720b6ba4bfd69f8f"
+        "bytes": 10448,
+        "sha256": "aabfc01799360b3be0c8b7bb0b054005e2f292492f3c2e781ffaedd434036803"
       },
       {
         "path": "acceptance/README.md",
@@ -500,8 +500,8 @@
       },
       {
         "path": "contracts/M9-验收测量契约.md",
-        "bytes": 3909,
-        "sha256": "7415334d3e8150524a03710fef80c9285e99f706017601cc0054c70d86a672f4"
+        "bytes": 4116,
+        "sha256": "9ff082f58cf0ad1f6a91c600e1722416bdea146435db691fb3c5def55dcdd45e"
       },
       {
         "path": "contracts/README.md",
@@ -821,8 +821,8 @@
       },
       {
         "path": "evidence/M9/2026-10-23-验收-G3G4G6G7.md",
-        "bytes": 3888,
-        "sha256": "06492a315314df6f3d26d1e5723bd8ee91237dedf5cf67655d212ce79c90012c"
+        "bytes": 4106,
+        "sha256": "79c4f774a047142e4b90c5e7ddbd44a2da332e745dd0fc7338db348cee5b1d63"
       },
       {
         "path": "evidence/M9/2026-10-23-验收harness-T.md",
@@ -838,6 +838,11 @@
         "path": "evidence/M9/2026-10-24-g1.md",
         "bytes": 909,
         "sha256": "7e62c9045bf4cf6faa6122c1e258c07f8dd29f6e4caed5c90e374d45c74b06df"
+      },
+      {
+        "path": "evidence/M9/2026-10-24-g2.md",
+        "bytes": 1791,
+        "sha256": "2637e1086fe34926d53dd024d796b28ed44384895b4a3f5262df0bb76b1484d8"
       },
       {
         "path": "evidence/M9/2026-10-24-g5-soak.log",
