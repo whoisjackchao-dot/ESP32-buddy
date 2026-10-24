@@ -26,3 +26,6 @@ bool pet_net_handle_line(const char *line);
 
 /* 菜单“配网模式”：请求进入 AP 配网（断开 STA，开热点+网页）。 */
 void pet_net_request_provision(void);
+
+/* 当前 STA IPv4 字符串（未连接 → 空串）。 */
+void pet_net_get_ip(char *out, size_t len);

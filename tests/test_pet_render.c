@@ -521,6 +521,43 @@ static void pomo_view_break_full_ring_green(void)
     CHECK(get_px(&psurf, 67 - 48, 72) == 0x07E0u);
 }
 
+/* M12：番茄钟页底部 IP（有 IP 显示 / 无 IP 留空） */
+static int pomo_row_nonbg(int y0, int y1)
+{
+    int n = 0;
+    for (int y = y0; y <= y1; y++) {
+        for (int x = 0; x < PW; x++) {
+            if (get_px(&psurf, x, y) != PET_SCENE_BG) {
+                n++;
+            }
+        }
+    }
+    return n;
+}
+
+static void pomo_view_shows_wifi_ip(void)
+{
+    pet_pomo_view_t v;
+    memset(&v, 0, sizeof v);
+    v.phase = PET_POMO_FOCUS;
+    v.remaining_ms = POMO_FOCUS_MS;
+    v.total_ms = POMO_FOCUS_MS;
+    snprintf(v.ip, sizeof v.ip, "%s", "192.168.31.198");
+    pet_render_pomo(&psurf, &v);
+    CHECK(pomo_row_nonbg(184, 207) > 0); /* "WIFI" + IP 行有像素 */
+}
+
+static void pomo_view_no_ip_blank_bottom(void)
+{
+    pet_pomo_view_t v;
+    memset(&v, 0, sizeof v);
+    v.phase = PET_POMO_FOCUS;
+    v.remaining_ms = POMO_FOCUS_MS;
+    v.total_ms = POMO_FOCUS_MS;
+    pet_render_pomo(&psurf, &v);
+    CHECK(pomo_row_nonbg(184, 207) == 0); /* 无 IP → 底部保持底色 */
+}
+
 /* ---- M6 增量 3：菜单整屏（BTN-07 渲染半段，契约 M6 §9.3）---- */
 
 static bool menu_all_bg(void)
@@ -763,6 +800,8 @@ int main(int argc, char **argv)
     RUN(pomo_view_null_is_bg_only);
     RUN(pomo_view_focus_track_ring_and_center_text);
     RUN(pomo_view_break_full_ring_green);
+    RUN(pomo_view_shows_wifi_ip);
+    RUN(pomo_view_no_ip_blank_bottom);
     RUN(menu_view_null_is_bg_only);
     RUN(menu_view_inverts_selected_row_and_title_white);
     RUN(menu_view_selected_follows_field);

@@ -423,6 +423,15 @@ void pet_render_pomo(pet_surface_t *s, const pet_pomo_view_t *v)
     const int tx = POMO_RING_CX - (int)strlen(txt) * 8 / 2;
     (void)pet_text_draw(s, tx, POMO_RING_CY - 4, txt, (int)sizeof txt,
                         POMO_C_TEXT, 1);
+
+    /* M12：拿到 IP 时在底部显示 WiFi 地址（无 IP 不占位） */
+    if (v->ip[0] != '\0') {
+        const int n = (int)strlen(v->ip);
+        (void)pet_text_draw(s, POMO_RING_CX - (4 * 8) / 2, 186, "WIFI", 4,
+                            POMO_C_OTHER, 1);
+        (void)pet_text_draw(s, POMO_RING_CX - (n * 8) / 2, 200, v->ip,
+                            (int)sizeof v->ip, POMO_C_TEXT, 1);
+    }
 }
 
 /* ---- M6 增量 3：菜单整屏（契约 §9.3）---- */

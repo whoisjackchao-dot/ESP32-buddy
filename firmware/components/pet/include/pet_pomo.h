@@ -52,6 +52,7 @@ typedef struct {
     uint32_t done_count;
     uint32_t focus_seconds;
     bool alarm;
+    char     ip[16]; /* M12：WiFi IP（空串=未连接；由引擎从 pet_net 填） */
 } pet_pomo_view_t;
 
 void pet_pomo_init(pet_pomo_t *p, uint32_t now_ms);

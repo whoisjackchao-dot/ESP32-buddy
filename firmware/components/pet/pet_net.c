@@ -483,3 +483,12 @@ bool pet_net_handle_line(const char *line)
     }
     return false; /* 其他 cmd：交给事件解析路径按原样拒绝 */
 }
+
+void pet_net_get_ip(char *out, size_t len)
+{
+    if (out == NULL || len == 0) {
+        return;
+    }
+    strncpy(out, s_ip, len - 1);
+    out[len - 1] = '\0';
+}

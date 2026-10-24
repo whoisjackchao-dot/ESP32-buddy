@@ -123,6 +123,7 @@ void pet_engine_redraw(void)
     } else if (s_mode == PET_MODE_POMO) {
         pet_pomo_view_t pv;
         pet_pomo_view_get(&s_pomo, &pv);
+        pet_net_get_ip(pv.ip, sizeof pv.ip);
         pet_render_pomo(&s_surface, &pv);
     } else {
         pet_view_t view;
