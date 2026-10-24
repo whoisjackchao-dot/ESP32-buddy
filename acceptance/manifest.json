@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T21:18:19+08:00",
+  "generated_at": "2026-10-24T21:48:37+08:00",
   "git": {
-    "commit": "91d111355a40d2b4ea372ad692d670f90afed650",
+    "commit": "1da9d82878b216d95ad0d53fb466a432a2dde5c1",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 182,
-    "bytes": 1150732
+    "bytes": 1163282
   },
   "groups": {
     "firmware": [
@@ -94,13 +94,13 @@
       },
       {
         "path": "firmware/components/pet/include/pet_menu.h",
-        "bytes": 1013,
-        "sha256": "f62bfb638c6fbbbf5ed675c0af8ded150a3691b58bf964f1f738b0d1c1dfee71"
+        "bytes": 1052,
+        "sha256": "90947e59d79bea1f9ae2735c639d930b8857d17da1da550b882203cbea44976e"
       },
       {
         "path": "firmware/components/pet/include/pet_net.h",
-        "bytes": 1330,
-        "sha256": "5b35530a6e3d9b930e77b5677f0d3350b5984907e65a0873e3d7a1952b8fac02"
+        "bytes": 1463,
+        "sha256": "67b7c68a77893e2d4bab25f07294dececf06879d8d4943e761d14760dc9ac0d5"
       },
       {
         "path": "firmware/components/pet/include/pet_pomo.h",
@@ -114,8 +114,8 @@
       },
       {
         "path": "firmware/components/pet/include/pet_prov.h",
-        "bytes": 806,
-        "sha256": "0ea4b64a06655a1771446c643d6e751b4d816cdf76187a2be5eb7a8bb9ffc0c0"
+        "bytes": 936,
+        "sha256": "d01abc5c662d84f05c23e8c1aa796908712dfdb00ef661065f2bac96129f472d"
       },
       {
         "path": "firmware/components/pet/include/pet_render.h",
@@ -159,8 +159,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 11197,
-        "sha256": "ccd646486664f4c40043d9f924fae8a7cae1909a8880fbd1188d3d14f48574e6"
+        "bytes": 11403,
+        "sha256": "804e4fcc48612c54977f6cde4c74af5c66c00f6fb6bfd316ef2f1d2424cbaca1"
       },
       {
         "path": "firmware/components/pet/pet_hal.c",
@@ -199,13 +199,13 @@
       },
       {
         "path": "firmware/components/pet/pet_menu.c",
-        "bytes": 918,
-        "sha256": "6e1c225801a19995aa26fb8871053285820813a2d22eb8b906643cce72ccbc68"
+        "bytes": 1039,
+        "sha256": "6e4686ee12aa1f9eb25e698df0dce218101a14ca7fd088aa337bf12db120f39a"
       },
       {
         "path": "firmware/components/pet/pet_net.c",
-        "bytes": 15024,
-        "sha256": "97eb7037edfc8350755d61453319c3684320ee227792fc6f1facf542bc7f1648"
+        "bytes": 15668,
+        "sha256": "14335a05315572dcdfb93b2174dd410a3323b9fa0c44e3e34fa51e919eb4079c"
       },
       {
         "path": "firmware/components/pet/pet_pomo.c",
@@ -219,13 +219,13 @@
       },
       {
         "path": "firmware/components/pet/pet_prov.c",
-        "bytes": 15488,
-        "sha256": "0360ef4d69513e40dbbe9a600047324dc95185ab55d667ffb39afd3f564f46e2"
+        "bytes": 22526,
+        "sha256": "f2713b8cb8750602166347da7a221d9748df9275af2e43eef669a4ad264cf029"
       },
       {
         "path": "firmware/components/pet/pet_render.c",
-        "bytes": 21422,
-        "sha256": "5a0c9426139dcf04dd13aba6ad9bf5b21a89a6e57188bb0ab33a24a19348523d"
+        "bytes": 21483,
+        "sha256": "52631008cff32f813e0e38e75937b4bf863365f76384e660fb87f72d627180e4"
       },
       {
         "path": "firmware/components/pet/pet_rx.c",
@@ -321,8 +321,8 @@
       },
       {
         "path": "host/pet_supervisor.py",
-        "bytes": 12532,
-        "sha256": "667de873bd96c8489c28bd31311177f42ca272c67028be2a8bb9bf0d3eb23e56"
+        "bytes": 12941,
+        "sha256": "5658294064738ee00b54d7ed01bd7d3dbe5da7d560be5be8e6cfd6027a9d8dde"
       },
       {
         "path": "host/pet_transport.py",
@@ -413,8 +413,8 @@
       },
       {
         "path": "tests/test_pet_menu.c",
-        "bytes": 2698,
-        "sha256": "a49a8ae853aab2177582234ecc0818b781ab02f8a04ae24b8822e7e62846e87a"
+        "bytes": 3313,
+        "sha256": "b274ecf8332f7ace3a17993640080af089c24e1a03009d888936d5caea227207"
       },
       {
         "path": "tests/test_pet_pomo.c",
@@ -480,8 +480,8 @@
       },
       {
         "path": "acceptance/操作与恢复手册.md",
-        "bytes": 6193,
-        "sha256": "c3a56538583de0734a35ffb9f5a05181bff1c5ba861c9463bfb72fda7d963418"
+        "bytes": 6881,
+        "sha256": "7aa7ae5d957639e5fd7e804477319327a6e0412dc8cef87cfab2fb076cf176dd"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -525,8 +525,8 @@
       },
       {
         "path": "contracts/M6-按键映射契约清单.md",
-        "bytes": 9200,
-        "sha256": "47e93fe629953b7a72836af41d263bcc0ebaaa41d828447e5ce831b247c11035"
+        "bytes": 9557,
+        "sha256": "0b4a69b5ceb1a3a50a219b358c3845d43757060383b218775ae3ae70e9dae9c9"
       },
       {
         "path": "contracts/M7-番茄钟契约清单.md",
@@ -636,8 +636,8 @@
       },
       {
         "path": "evidence/2026-10-24-WiFi与NTP-设备.md",
-        "bytes": 6134,
-        "sha256": "9713fbb3f9080f12d4761676a2e19973073796e57d20156c36a49a6a33693493"
+        "bytes": 8243,
+        "sha256": "dd02dc31a458a2d60cc6b8b059ec07dabdf126aae9022b0fb3ce49a7933915b0"
       },
       {
         "path": "evidence/2026-10-24-交付操作验证.md",
@@ -954,7 +954,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "14767fa5956ad901e03fc1b8f88e075696a3fe5609d421893b86f233a7eeffeb"
+        "sha256": "faec1748a9f1733255781ff290549a6413268b91127f44b526f67fe54c15129c"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -965,8 +965,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1134592,
-        "sha256": "f69ee40a4f47e752d622ef99e097c2217e619dd0281884e38cbcaeb3cc167a2f"
+        "bytes": 1142688,
+        "sha256": "5a193a27024883bf9255e71ea54dae19b7910d82f86cef4dfa6b1fd231d064bd"
       }
     ]
   }

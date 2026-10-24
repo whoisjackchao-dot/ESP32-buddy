@@ -1,5 +1,6 @@
-/* AP 配网承载：热点 + 手机网页配置页 + captive-portal DNS 劫持。
+/* AP 配网承载：热点 + 手机网页配置页（扫描列表选网）+ captive-portal DNS 劫持。
  * 由 pet_net 状态机调用（同一任务上下文）；HTTP/DNS 各自任务承载，不阻塞 pet-net。
+ * 配网期间 WiFi 为 APSTA：AP 服务手机，STA 接口仅供 /scan 扫描（无凭据不连接）。
  * 提交的凭据经 pet_net_apply_credentials() 交给 pet_net（存 NVS + 通知状态机切换 STA）。
  * 口令只在内存传递，绝不进日志。契约：evidence/2026-10-24-WiFi与NTP-设备.md */
 #include "pet_prov.h"
@@ -35,7 +36,7 @@ static TaskHandle_t s_dns_task;
 static volatile bool s_dns_run;
 static char s_ap_ssid[20]; /* "ESP32-Buddy-XXXX" + NUL */
 
-/* ---- 配置页（中文标签，内联样式/脚本，无外部资源） ---- */
+/* ---- 配置页（中文标签，内联样式/脚本，无外部资源；默认流程=扫描列表选网，手动输入仅隐藏网络兜底） ---- */
 static const char PAGE_HOME[] =
     "<!doctype html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\">"
     "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
@@ -46,26 +47,73 @@ static const char PAGE_HOME[] =
     "h1{font-size:20px;margin:0 0 12px}"
     "label{display:block;margin:12px 0 4px;font-size:14px;color:#555}"
     "input{width:100%;box-sizing:border-box;padding:10px;font-size:16px;border:1px solid #ccc;border-radius:8px}"
-    "button{width:100%;margin-top:16px;padding:12px;font-size:16px;border:0;border-radius:8px;"
-    "background:#2b7de9;color:#fff}"
+    "button{font-size:16px;border:0;border-radius:8px;background:#2b7de9;color:#fff}"
+    "#rescan{width:100%;margin-top:4px;padding:10px;background:#eef3f9;color:#2b7de9}"
+    ".sb{width:100%;margin-top:16px;padding:12px}"
+    "#list{display:flex;flex-direction:column;gap:8px;margin-top:8px;max-height:260px;overflow-y:auto}"
+    ".net{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;"
+    "padding:12px;background:#f6f8fa;color:#222;border:1px solid #e2e6ea}"
+    ".net.on{background:#e6f0fd;border-color:#2b7de9}"
+    ".sg{color:#2b7de9;letter-spacing:2px}"
+    ".empty{color:#888;font-size:14px;margin:8px 0}"
+    "summary{cursor:pointer;margin-top:14px;font-size:14px;color:#555}"
     "</style></head><body><div class=\"card\">"
     "<h1>ESP32-Buddy 配网</h1>"
     "<p>当前状态：<b id=\"st\">读取中…</b></p>"
-    "<form method=\"POST\" action=\"/save\">"
-    "<label for=\"ssid\">家庭 WiFi 名称</label>"
-    "<input id=\"ssid\" name=\"ssid\" maxlength=\"32\" autocomplete=\"off\" required>"
+    "<button id=\"rescan\" type=\"button\">重新扫描</button>"
+    "<div id=\"list\"><p class=\"empty\">扫描中…</p></div>"
+    "<details><summary>手动输入（隐藏网络）</summary>"
+    "<label for=\"mssid\">网络名称（SSID）</label>"
+    "<input id=\"mssid\" maxlength=\"32\" autocomplete=\"off\">"
+    "</details>"
+    "<form method=\"POST\" action=\"/save\" onsubmit=\"return preSubmit()\">"
+    "<input type=\"hidden\" name=\"ssid\" id=\"ssid\">"
     "<label for=\"password\">密码</label>"
     "<input id=\"password\" name=\"password\" type=\"password\" maxlength=\"64\">"
-    "<button type=\"submit\">保存并连接</button>"
+    "<button type=\"submit\" class=\"sb\">保存并连接</button>"
     "</form></div>"
-    "<script>fetch('/status').then(function(r){return r.json()}).then(function(j){"
+    "<script>var sel='';"
+    "function bars(r){return r>-55?'\\u2582\\u2584\\u2586\\u2588':"
+    "r>-67?'\\u2582\\u2584\\u2586':r>-78?'\\u2582\\u2584':'\\u2582'}"
+    "function showEmpty(t){var l=document.getElementById('list');l.innerHTML='';"
+    "var e=document.createElement('p');e.className='empty';e.textContent=t;l.appendChild(e)}"
+    "function clearSel(){sel='';"
+    "var xs=document.querySelectorAll('.net');"
+    "for(var k=0;k<xs.length;k++){xs[k].classList.remove('on')}}"
+    "function scan(){var rs=document.getElementById('rescan');"
+    "rs.disabled=true;clearSel();showEmpty('扫描中…');"
+    "fetch('/scan').then(function(r){return r.json()}).then(function(j){"
+    "rs.disabled=false;"
+    "if(!j.length){showEmpty('未扫描到网络，可重试或手动输入');return}"
+    "var l=document.getElementById('list');l.innerHTML='';"
+    "j.forEach(function(n){"
+    "var b=document.createElement('button');b.type='button';b.className='net';"
+    "var nm=document.createElement('span');nm.textContent=n.ssid;"
+    "var sg=document.createElement('span');sg.className='sg';sg.textContent=bars(n.rssi);"
+    "b.appendChild(nm);b.appendChild(sg);"
+    "b.onclick=function(){sel=n.ssid;document.getElementById('mssid').value='';"
+    "var xs=document.querySelectorAll('.net');"
+    "for(var k=0;k<xs.length;k++){xs[k].classList.remove('on')}"
+    "b.classList.add('on')};"
+    "l.appendChild(b)})})"
+    ".catch(function(){rs.disabled=false;showEmpty('扫描失败，可重试或手动输入')})}"
+    "document.getElementById('rescan').onclick=scan;"
+    "document.getElementById('mssid').oninput=clearSel;"
+    "function preSubmit(){var m=document.getElementById('mssid');"
+    "if(m.value){document.getElementById('ssid').value=m.value}"
+    "else{document.getElementById('ssid').value=sel}"
+    "if(!document.getElementById('ssid').value){"
+    "alert('请选择一个网络，或在手动输入中填写网络名称');return false}"
+    "return true}"
+    "scan();"
+    "fetch('/status').then(function(r){return r.json()}).then(function(j){"
     "var s=document.getElementById('st');"
     "if(j.hour>=0){s.textContent='时间同步（'+j.hour+' 点）'}"
     "else if(j.state=='sta'&&j.ip){s.textContent='已连接 '+j.ip}"
     "else if(j.state=='ap'&&j.ssid){s.textContent='已保存，正在连接'}"
     "else{s.textContent='未配置'}})"
-    ".catch(function(){document.getElementById('st').textContent='未配置'});</script>"
-    "</body></html>";
+    ".catch(function(){document.getElementById('st').textContent='未配置'});"
+    "</script></body></html>";
 
 static const char PAGE_SAVED[] =
     "<!doctype html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\">"
@@ -129,6 +177,100 @@ static esp_err_t h_status(httpd_req_t *req)
              state, essid, ip, hour);
     httpd_resp_set_type(req, "application/json");
     return httpd_resp_send(req, out, HTTPD_RESP_USE_STRLEN);
+}
+
+/* ---- GET /scan：APSTA 阻塞扫描周围网络 → JSON 数组，RSSI 降序，同名去重留最强，≤20 个 ---- */
+#define PROV_SCAN_MAX 30u /* 原始抓取上限（超出部分丢弃，输出上限 20 用不满） */
+#define PROV_SCAN_OUT 20u /* 返回给页面的条数上限 */
+
+typedef struct {
+    char ssid[33]; /* SSID ≤32 字节 + NUL */
+    int8_t rssi;
+    uint8_t auth; /* wifi_auth_mode_t 原值 */
+} prov_net_t;
+
+static wifi_ap_record_t s_scan_recs[PROV_SCAN_MAX];
+static prov_net_t s_scan_nets[PROV_SCAN_MAX];
+
+static size_t prov_scan_collect(uint16_t num)
+{
+    size_t n = 0;
+    for (uint16_t i = 0; i < num; i++) {
+        const wifi_ap_record_t *r = &s_scan_recs[i];
+        if (r->ssid[0] == '\0') {
+            continue; /* 空 / 隐藏 SSID 跳过（show_hidden=false 已滤一层） */
+        }
+        size_t j = 0;
+        while (j < n && strncmp(s_scan_nets[j].ssid, (const char *)r->ssid,
+                                sizeof s_scan_nets[j].ssid) != 0) {
+            j++;
+        }
+        if (j < n) { /* 同名：留最强 RSSI */
+            if (r->rssi > s_scan_nets[j].rssi) {
+                s_scan_nets[j].rssi = r->rssi;
+                s_scan_nets[j].auth = (uint8_t)r->authmode;
+            }
+            continue;
+        }
+        if (n >= PROV_SCAN_MAX) {
+            continue;
+        }
+        strncpy(s_scan_nets[j].ssid, (const char *)r->ssid, sizeof s_scan_nets[j].ssid - 1);
+        s_scan_nets[j].ssid[sizeof s_scan_nets[j].ssid - 1] = '\0';
+        s_scan_nets[j].rssi = r->rssi;
+        s_scan_nets[j].auth = (uint8_t)r->authmode;
+        n++;
+    }
+    /* RSSI 降序（n ≤ 30，选择排序足够） */
+    for (size_t a = 0; a + 1 < n; a++) {
+        size_t best = a;
+        for (size_t b = a + 1; b < n; b++) {
+            if (s_scan_nets[b].rssi > s_scan_nets[best].rssi) {
+                best = b;
+            }
+        }
+        if (best != a) {
+            const prov_net_t t = s_scan_nets[a];
+            s_scan_nets[a] = s_scan_nets[best];
+            s_scan_nets[best] = t;
+        }
+    }
+    return n;
+}
+
+static esp_err_t h_scan(httpd_req_t *req)
+{
+    /* 阻塞式主动扫描：默认信道集 + 默认 dwell（≈2–3 s，<6 s 处理上限）。
+     * APSTA 下 AP 照常广播，已关联手机不掉线（个别信道驻留期间略有延迟）。 */
+    httpd_resp_set_type(req, "application/json");
+    wifi_scan_config_t scfg = { 0 };
+    scfg.show_hidden = false;
+    if (esp_wifi_scan_start(&scfg, true) != ESP_OK) {
+        return httpd_resp_send(req, "[]", 2); /* 失败/超时/正在扫描 → 空数组 + 200 */
+    }
+    uint16_t num = (uint16_t)PROV_SCAN_MAX;
+    if (esp_wifi_scan_get_ap_records(&num, s_scan_recs) != ESP_OK || num == 0) {
+        return httpd_resp_send(req, "[]", 2);
+    }
+    const size_t n = prov_scan_collect(num);
+    esp_err_t err = httpd_resp_send_chunk(req, "[", 1);
+    for (size_t i = 0; err == ESP_OK && i < n && i < PROV_SCAN_OUT; i++) {
+        char essid[200]; /* 32 字节 SSID 全控制字符转义最坏 192 字节 */
+        char item[256];
+        json_escape(s_scan_nets[i].ssid, essid, sizeof essid);
+        snprintf(item, sizeof item, "%s{\"ssid\":\"%s\",\"rssi\":%d,\"auth\":%u}",
+                 i == 0 ? "" : ",", essid, (int)s_scan_nets[i].rssi,
+                 (unsigned)s_scan_nets[i].auth);
+        err = httpd_resp_send_chunk(req, item, HTTPD_RESP_USE_STRLEN);
+    }
+    if (err != ESP_OK) {
+        return err; /* 手机端提前断开等：中止即可 */
+    }
+    err = httpd_resp_send_chunk(req, "]", 1);
+    if (err != ESP_OK) {
+        return err;
+    }
+    return httpd_resp_send_chunk(req, NULL, 0); /* 收尾 0 长度块 */
 }
 
 /* ---- 表单解析：键值定位 + URL 解码（'+'→空格，%XX） ---- */
@@ -240,6 +382,7 @@ static esp_err_t h_save(httpd_req_t *req)
 }
 
 static const httpd_uri_t URI_ROOT = { .uri = "/", .method = HTTP_GET, .handler = h_root };
+static const httpd_uri_t URI_SCAN = { .uri = "/scan", .method = HTTP_GET, .handler = h_scan };
 static const httpd_uri_t URI_STATUS = { .uri = "/status", .method = HTTP_GET, .handler = h_status };
 static const httpd_uri_t URI_SAVE = { .uri = "/save", .method = HTTP_POST, .handler = h_save };
 
@@ -357,7 +500,8 @@ esp_err_t pet_prov_start(void)
     esp_read_mac(mac, ESP_MAC_WIFI_SOFTAP);
     snprintf(s_ap_ssid, sizeof s_ap_ssid, "ESP32-Buddy-%02X%02X", mac[4], mac[5]);
 
-    if (esp_wifi_set_mode(WIFI_MODE_AP) != ESP_OK) {
+    if (esp_wifi_set_mode(WIFI_MODE_APSTA) != ESP_OK) {
+        /* APSTA：AP 热点服务手机的同时，STA 接口可扫描（/scan）；STA 无凭据不连接 */
         ESP_LOGE(TAG, "prov: set mode failed");
         return ESP_FAIL;
     }
@@ -381,6 +525,7 @@ esp_err_t pet_prov_start(void)
     hcfg.stack_size = 6144; /* /save 栈上表单缓冲需要余量 */
     if (httpd_start(&s_server, &hcfg) != ESP_OK ||
         httpd_register_uri_handler(s_server, &URI_ROOT) != ESP_OK ||
+        httpd_register_uri_handler(s_server, &URI_SCAN) != ESP_OK ||
         httpd_register_uri_handler(s_server, &URI_STATUS) != ESP_OK ||
         httpd_register_uri_handler(s_server, &URI_SAVE) != ESP_OK) {
         ESP_LOGE(TAG, "prov: http start failed");

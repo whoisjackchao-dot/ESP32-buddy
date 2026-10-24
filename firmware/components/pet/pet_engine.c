@@ -13,6 +13,7 @@
 #include "pet_keymap.h"
 #include "pet_leisure.h"
 #include "pet_menu.h"
+#include "pet_net.h"
 #include "pet_pomo.h"
 #include "pet_pomo_store.h"
 #include "pet_render.h"
@@ -298,7 +299,11 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
     pet_leisure_tick(&s_leisure, pet_hal_now_ms(), true, s_hour24);
     if (s_menu_open) {
         const pet_menu_cmd_t cmd = pet_menu_key(&s_menu, key, ev);
-        if (cmd == PET_MENU_CMD_TOGGLE_MUTE) {
+        if (cmd == PET_MENU_CMD_PROVISION) {
+            s_menu_open = false;
+            pet_net_request_provision();
+            ESP_LOGI(TAG, "menu: provisioning requested");
+        } else if (cmd == PET_MENU_CMD_TOGGLE_MUTE) {
             pet_voice_set_muted(!pet_voice_muted());
         } else if (cmd == PET_MENU_CMD_CLOSE) {
             s_menu_open = false;

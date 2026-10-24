@@ -195,7 +195,12 @@ static void sntp_setup(void)
 /* ---- 事件：断开只置标志（重连由网络任务退避执行），拿到 IP 才算连上 ---- */
 static void net_event_handler(void *arg, esp_event_base_t base, int32_t id, void *data)
 {
-    if (base == WIFI_EVENT && id == WIFI_EVENT_STA_DISCONNECTED) {
+    if (base == WIFI_EVENT && id == WIFI_EVENT_STA_START) {
+        (void)esp_wifi_connect(); /* esp_wifi_start() 不会自动连接 */
+    } else if (base == WIFI_EVENT && id == WIFI_EVENT_STA_DISCONNECTED) {
+        const wifi_event_sta_disconnected_t *d =
+            (const wifi_event_sta_disconnected_t *)data;
+        ESP_LOGW(TAG, "net: sta disconnected reason=%d", d != NULL ? (int)d->reason : -1);
         if (s_wifi_run) {
             s_ip[0] = '\0';
             s_reconnect_req = true;
@@ -280,6 +285,8 @@ static bool net_bring_up(void)
             return false;
         }
         s_wifi_started = true;
+        ESP_LOGI(TAG, "net: connecting");
+        (void)esp_wifi_connect(); /* 显式发起首次连接（start 不会自动连） */
     } else {
         /* 已在网：换凭据 → 断开事件触发任务用新配置重连 */
         (void)esp_wifi_disconnect();
@@ -417,6 +424,12 @@ static void net_notify(uint32_t bits)
     if (s_task != NULL) {
         xTaskNotify(s_task, bits, eSetBits);
     }
+}
+
+/* 菜单“配网模式”：请求进入 AP 配网（断开 STA → 热点 + 网页）。 */
+void pet_net_request_provision(void)
+{
+    net_notify(NET_NOTIFY_PROV);
 }
 
 /* 配网页 POST /save 落点：校验 → 存 NVS → 通知状态机切换 STA。口令绝不入日志。 */

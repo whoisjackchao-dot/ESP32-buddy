@@ -9,7 +9,7 @@
  * 契约：contracts/M6-按键映射契约清单.md §9（2026-10-17 冻结）。
  * 只认键事件（pet_button 层的产物）；打开菜单属设备侧（KEY2 长按 → MENU 动作）。 */
 
-#define PET_MENU_ITEMS 2 /* 0=静音, 1=状态 */
+#define PET_MENU_ITEMS 3 /* 0=静音, 1=状态, 2=配网 */
 
 typedef struct {
     int selected; /* 0..PET_MENU_ITEMS-1 */
@@ -18,7 +18,8 @@ typedef struct {
 typedef enum {
     PET_MENU_CMD_NONE = 0,
     PET_MENU_CMD_TOGGLE_MUTE,
-    PET_MENU_CMD_CLOSE
+    PET_MENU_CMD_CLOSE,
+    PET_MENU_CMD_PROVISION
 } pet_menu_cmd_t;
 
 void           pet_menu_init(pet_menu_t *m);
@@ -27,7 +28,7 @@ pet_menu_cmd_t pet_menu_key(pet_menu_t *m, pet_key_t key, pet_key_event_t ev);
 /* §9.3 菜单整屏视图（渲染输入；pet_render_menu 消费） */
 typedef struct {
     bool     muted;
-    int      selected;    /* 0/1 */
+    int      selected;    /* 0..2 */
     int      mode;        /* 0=DUTY, 1=POMO */
     int      phase;       /* pet_pomo_phase_t */
     uint32_t done_count;

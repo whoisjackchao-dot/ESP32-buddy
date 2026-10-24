@@ -23,3 +23,6 @@ void pet_net_read_status(char *state, size_t state_sz, char *ssid, size_t ssid_s
 
 /* 设备侧产线 cmd 行（wifi.provision / wifi.status / wifi.clear）；命中并处理返回 true。 */
 bool pet_net_handle_line(const char *line);
+
+/* 菜单“配网模式”：请求进入 AP 配网（断开 STA，开热点+网页）。 */
+void pet_net_request_provision(void);
