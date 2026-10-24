@@ -15,6 +15,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -142,17 +143,20 @@ def _idf_version(idf_path):
         return txt
     header = _read_text(os.path.join(
         idf_path, "components", "esp_common", "include", "esp_idf_version.h"))
-    if not header:
-        return ""
-    parts = {}
-    for line in header.splitlines():
-        line = line.strip()
-        if line.startswith("#define ESP_IDF_VERSION_"):
-            fields = line.split()
-            if len(fields) >= 3:
-                parts[fields[1].rsplit("_", 1)[-1]] = fields[2]
-    if all(k in parts for k in ("MAJOR", "MINOR", "PATCH")):
-        return f"v{parts['MAJOR']}.{parts['MINOR']}.{parts['PATCH']}"
+    if header:
+        parts = {}
+        for line in header.splitlines():
+            line = line.strip()
+            if line.startswith("#define ESP_IDF_VERSION_"):
+                fields = line.split()
+                if len(fields) >= 3:
+                    parts[fields[1].rsplit("_", 1)[-1]] = fields[2]
+        if all(k in parts for k in ("MAJOR", "MINOR", "PATCH")):
+            return f"v{parts['MAJOR']}.{parts['MINOR']}.{parts['PATCH']}"
+    # Windows 路径（如 D:/Espressif/frameworks/esp-idf-v5.5.4）在 WSL 下不可读：
+    # 回退到目录名中的版本号，仍可追溯构建用的 IDF 版本。
+    m = re.search(r"v(\d+\.\d+(?:\.\d+)?)$", os.path.basename(os.path.normpath(idf_path)))
+    return ("v" + m.group(1)) if m else ""
     return ""
 
 

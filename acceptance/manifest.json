@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T11:09:58+08:00",
+  "generated_at": "2026-10-24T11:14:09+08:00",
   "git": {
-    "commit": "48508d05e729d593d9bdc7903ccf86cc17d9b60c",
+    "commit": "763386dda62bae18907e835ecbd682fc3656457a",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 171,
-    "bytes": 1077812
+    "files": 172,
+    "bytes": 1082526
   },
   "groups": {
     "firmware": [
@@ -444,6 +444,11 @@
         "sha256": "ede49e0d80ea85888d5f8fce8aa976f752a2909f8e0fae89225b206935022d39"
       },
       {
+        "path": "acceptance/操作与恢复手册.md",
+        "bytes": 4424,
+        "sha256": "fe81c495f8fabf45cc485db5600ea6c82ef454c03bc7c589453ec4b665b3d51e"
+      },
+      {
         "path": "acceptance/许可证登记.md",
         "bytes": 3124,
         "sha256": "ad1b163dbe62f6cdfb3f7c771aa3cda702db57bec02974c71299c3a4b79235b7"
@@ -821,8 +826,8 @@
       },
       {
         "path": "evidence/M9/2026-10-23-验收-G3G4G6G7.md",
-        "bytes": 4128,
-        "sha256": "b656ca546f1b04eeaea5a821daf53ae8583b5062cabdfb8a084a698429e275e3"
+        "bytes": 4418,
+        "sha256": "45cc7883b6c41cd3ac324bc38e814975a645c27ae5c4bd28fca81965e9a1da9c"
       },
       {
         "path": "evidence/M9/2026-10-23-验收harness-T.md",
@@ -880,6 +885,38 @@
         "path": "LICENSE",
         "bytes": 1074,
         "sha256": "144fb9095f2865b0568ca14dd3e98feefac647a3f91c95c1e54028f859c2ec07"
+      }
+    ]
+  },
+  "build": {
+    "build_dir": "/mnt/d/buddy_flash/firmware/build",
+    "target": "esp32s3",
+    "chip": "esp32s3",
+    "project_version": "1",
+    "idf_version": "v5.5.4",
+    "flash_settings": {
+      "flash_mode": "dio",
+      "flash_size": "8MB",
+      "flash_freq": "80m"
+    },
+    "artifacts": [
+      {
+        "file": "bootloader/bootloader.bin",
+        "offset": "0x0",
+        "bytes": 20832,
+        "sha256": "3b8d36034ef7e8508acd43754bf5db92bcf5d75747c14a53b4414b490e1d2164"
+      },
+      {
+        "file": "partition_table/partition-table.bin",
+        "offset": "0x8000",
+        "bytes": 3072,
+        "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+      },
+      {
+        "file": "esp32_buddy.bin",
+        "offset": "0x10000",
+        "bytes": 544240,
+        "sha256": "6d3de4f3824c8ba4d8636a0963c7e4c46be30dcdfee5cfca96f179df43e8b4f0"
       }
     ]
   }
