@@ -11,7 +11,8 @@
 | 已冻结 | M1 契约（含缺陷修订）；M2 §7 状态机 + §8 渲染半段 + §9 动画节拍；M3 §5 版式/任务卡；M4 §6 增量1 事件线格式 + §8 增量2a 主机入口核心 + §9 增量2b 传输；M5 §5 增量1 语音逻辑/资产；M7 §6 增量1 番茄钟逻辑 + §7 增量2 番茄钟视图/落盘；M8 §6/§7/§8；**M9 测量契约** |
 | 待批准 | ⏳ **`Q19`**（G2 时长口径：25 min×10 ≈ 4h10m vs G5 2h）；`Q20`/`Q21` 已由 M9 测量契约定为**仪器法**；`Q10` 已批准 |
 | 已发布 | ✅ 仓库公开（2026-10-16）；✅ **Release `v1.0.0`**（2026-10-24，用户授权）：tag + 4 资产（bootloader/partition/app/MANIFEST）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.0.0
-✅ **Release `v1.1.0`**（2026-10-24）：WiFi/NTP + 入口守护 + `/esp32-buddy` → https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.1.0 |
+✅ **Release `v1.1.0`**（2026-10-24）：WiFi/NTP + 入口守护 + `/esp32-buddy` → https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.1.0
+✅ **Release `v1.2.0`**（2026-10-24）：热点配网（扫描列表）+ 菜单配网 + SNTP → https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.2.0 |
 | 阻塞 | ~~刷写受阻（`B14`）~~ **已解除**；**剩余**：**G1/G2/G5 + 故障注入 + manifest 合并**；`Q19`；**暂缓**：`waiting`、**NTP**、刷新率数值 |
 | 下一步 | ① ✅ 已发布 `v1.0.0`（tag + Release 资产）；② 后续增量（NTP、多 Agent 源）另立项；③ 观察期问题按 `操作与恢复手册` 处理 |
 
