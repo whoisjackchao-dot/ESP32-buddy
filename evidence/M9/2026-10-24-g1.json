@@ -1,0 +1,151 @@
+{
+  "schema": "esp32-buddy-g1-drive/1",
+  "date": "2026-10-24",
+  "port": "COM5",
+  "steps": [
+    {
+      "step": 1,
+      "expect": "WORKING",
+      "sent": "task.start",
+      "at": "2026-10-24T09:25:35",
+      "t_rel_s": 2.0
+    },
+    {
+      "step": 2,
+      "expect": "INPUT",
+      "sent": "agent.input_required",
+      "at": "2026-10-24T09:25:37",
+      "t_rel_s": 4.0
+    },
+    {
+      "step": 3,
+      "expect": "FAILED",
+      "sent": "task.error",
+      "at": "2026-10-24T09:25:39",
+      "t_rel_s": 6.0
+    },
+    {
+      "step": 4,
+      "expect": "IDLE",
+      "sent": "agent.idle",
+      "at": "2026-10-24T09:25:41",
+      "t_rel_s": 8.0
+    },
+    {
+      "step": 5,
+      "expect": "DONE",
+      "sent": "task.done",
+      "at": "2026-10-24T09:25:43",
+      "t_rel_s": 10.0
+    },
+    {
+      "step": 6,
+      "expect": "IDLE",
+      "sent": null,
+      "at": "2026-10-24T09:25:45",
+      "t_rel_s": 16.5
+    },
+    {
+      "step": 7,
+      "expect": "WORKING",
+      "sent": "task.start",
+      "at": "2026-10-24T09:25:51",
+      "t_rel_s": 18.5
+    },
+    {
+      "step": 8,
+      "expect": "INPUT",
+      "sent": "agent.input_required",
+      "at": "2026-10-24T09:25:53",
+      "t_rel_s": 20.5
+    },
+    {
+      "step": 9,
+      "expect": "FAILED",
+      "sent": "task.error",
+      "at": "2026-10-24T09:25:55",
+      "t_rel_s": 22.5
+    },
+    {
+      "step": 10,
+      "expect": "IDLE",
+      "sent": "agent.idle",
+      "at": "2026-10-24T09:25:57",
+      "t_rel_s": 24.5
+    },
+    {
+      "step": 11,
+      "expect": "DONE",
+      "sent": "task.done",
+      "at": "2026-10-24T09:25:59",
+      "t_rel_s": 26.5
+    },
+    {
+      "step": 12,
+      "expect": "IDLE",
+      "sent": null,
+      "at": "2026-10-24T09:26:01",
+      "t_rel_s": 33.0
+    },
+    {
+      "step": 13,
+      "expect": "WORKING",
+      "sent": "task.start",
+      "at": "2026-10-24T09:26:08",
+      "t_rel_s": 35.0
+    },
+    {
+      "step": 14,
+      "expect": "INPUT",
+      "sent": "agent.input_required",
+      "at": "2026-10-24T09:26:10",
+      "t_rel_s": 37.0
+    },
+    {
+      "step": 15,
+      "expect": "FAILED",
+      "sent": "task.error",
+      "at": "2026-10-24T09:26:12",
+      "t_rel_s": 39.0
+    },
+    {
+      "step": 16,
+      "expect": "IDLE",
+      "sent": "agent.idle",
+      "at": "2026-10-24T09:26:14",
+      "t_rel_s": 41.0
+    },
+    {
+      "step": 17,
+      "expect": "OFFLINE",
+      "sent": null,
+      "at": "2026-10-24T09:26:16",
+      "t_rel_s": 57.5
+    },
+    {
+      "step": 18,
+      "expect": "WORKING",
+      "sent": "task.start",
+      "at": "2026-10-24T09:26:32",
+      "t_rel_s": 59.5
+    },
+    {
+      "step": 19,
+      "expect": "OFFLINE",
+      "sent": null,
+      "at": "2026-10-24T09:26:34",
+      "t_rel_s": 76.0
+    },
+    {
+      "step": 20,
+      "expect": "DONE",
+      "sent": "task.done",
+      "at": "2026-10-24T09:26:51",
+      "t_rel_s": 78.0
+    }
+  ],
+  "operator_verdict": "20/20 PASS（用户 2026-10-24 目视确认）",
+  "note": "operator must record 20/20 or failing steps",
+  "gate": "G1",
+  "contract": "M9 §3 G1（20 次观测，用户 2026-10-24 缩减口径）"
+}

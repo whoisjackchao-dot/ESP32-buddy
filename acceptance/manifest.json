@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T08:54:51+08:00",
+  "generated_at": "2026-10-24T09:27:29+08:00",
   "git": {
-    "commit": "0a8c5762b3c5ff7c618e5471e1fbe9bb08d40893",
+    "commit": "d3ad523ba0f2e265c35db9a0c9f16d90bd0b08ae",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 167,
-    "bytes": 1066104
+    "files": 169,
+    "bytes": 1070235
   },
   "groups": {
     "firmware": [
@@ -821,13 +821,23 @@
       },
       {
         "path": "evidence/M9/2026-10-23-验收-G3G4G6G7.md",
-        "bytes": 3797,
-        "sha256": "eb732be9f0f1f354968a6da83f69671ffe386f30808156aab53251d8a918e313"
+        "bytes": 3888,
+        "sha256": "06492a315314df6f3d26d1e5723bd8ee91237dedf5cf67655d212ce79c90012c"
       },
       {
         "path": "evidence/M9/2026-10-23-验收harness-T.md",
         "bytes": 11665,
         "sha256": "8e04f37312f8de8ca8d07cb4cee15c8409c11209b091f9fcbdd5c31a1bbe555c"
+      },
+      {
+        "path": "evidence/M9/2026-10-24-g1.json",
+        "bytes": 3131,
+        "sha256": "f4a66ac6f0c87b178bfe949684aa2c1be50da34e4ad3d8a6dace438adcfe34ad"
+      },
+      {
+        "path": "evidence/M9/2026-10-24-g1.md",
+        "bytes": 909,
+        "sha256": "7e62c9045bf4cf6faa6122c1e258c07f8dd29f6e4caed5c90e374d45c74b06df"
       },
       {
         "path": "evidence/M9/2026-10-24-g5-soak.log",
