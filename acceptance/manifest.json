@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T06:54:29+08:00",
+  "generated_at": "2026-10-24T08:01:37+08:00",
   "git": {
-    "commit": "e3865e206158e62a815a5f9f5ffcfab616a3a1db",
+    "commit": "aad33d89366c5c7c8d01e183d4fa23dacc610602",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 164,
-    "bytes": 945826
+    "bytes": 946265
   },
   "groups": {
     "firmware": [
@@ -204,8 +204,8 @@
       },
       {
         "path": "firmware/components/pet/pet_render.c",
-        "bytes": 21343,
-        "sha256": "f528ecdabcb771522b5006202db8ebfb7414935dec73724b26548efb4d24e375"
+        "bytes": 21422,
+        "sha256": "5a0c9426139dcf04dd13aba6ad9bf5b21a89a6e57188bb0ab33a24a19348523d"
       },
       {
         "path": "firmware/components/pet/pet_rx.c",
@@ -410,8 +410,8 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 15111,
-        "sha256": "ae28e9959bac3ff80ccfffa509127fe7acb1a94ae5d23b125fe1ab9238c1004e"
+        "bytes": 15273,
+        "sha256": "4df4eadd18b429d9d63d0ec80490b0cd3e74957ed2e786fe840fe3065f5c0bbd"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
@@ -500,8 +500,8 @@
       },
       {
         "path": "contracts/M9-验收测量契约.md",
-        "bytes": 3685,
-        "sha256": "bf994855964d212109a3e4b55ff43d7289b0375e95f26f491dbef216f780cf45"
+        "bytes": 3751,
+        "sha256": "934d938abfe237a0eea27124a1369fa4e614fec81aa0b216df7ee6139188fd29"
       },
       {
         "path": "contracts/README.md",
@@ -821,8 +821,8 @@
       },
       {
         "path": "evidence/M9/2026-10-23-验收-G3G4G6G7.md",
-        "bytes": 3452,
-        "sha256": "f2b64bb52c4ab470f9875b8e8e86ae92cd2a98abe9f4738959773bc2e34e5b2c"
+        "bytes": 3584,
+        "sha256": "0dbae18eef80636d07c6d11163dabaa8d8ed66da72c2b895a964c605dc91b71d"
       },
       {
         "path": "evidence/M9/2026-10-23-验收harness-T.md",

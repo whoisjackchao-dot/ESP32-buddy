@@ -291,7 +291,7 @@ static void draw_card_row(pet_surface_t *s, int y, const pet_card_t *card)
                         STACK_TEXT_MAX, CARD_TITLE, 1);
     char elapsed[16];
     pet_format_elapsed(elapsed, sizeof elapsed, card->elapsed_s);
-    char line[PET_PROJECT_MAX + 32];
+    char line[PET_PROJECT_MAX + 24]; /* 63 + " · "(4) + elapsed(15) + NUL，留足不触发 -Wformat-truncation */
     if (card->project[0] != '\0') {
         snprintf(line, sizeof line, "%s \xc2\xb7 %s", card->project, elapsed);
     } else {
