@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T10:09:09+08:00",
+  "generated_at": "2026-10-24T10:16:30+08:00",
   "git": {
-    "commit": "4acabce2c59c046dbb1995ea458444402adfa032",
+    "commit": "2e1d96ce7a8143cbcf2ccf81002311d73dcf3d8d",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 170,
-    "bytes": 1072963
+    "bytes": 1073438
   },
   "groups": {
     "firmware": [
@@ -440,8 +440,8 @@
       },
       {
         "path": "acceptance/README.md",
-        "bytes": 3053,
-        "sha256": "fa6f5a6781e76d6854aeb9d7bd11ad675869a1db7b77aacfbb8baec5d3cfdc48"
+        "bytes": 3528,
+        "sha256": "ede49e0d80ea85888d5f8fce8aa976f752a2909f8e0fae89225b206935022d39"
       },
       {
         "path": "acceptance/许可证登记.md",
