@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T21:59:07+08:00",
+  "generated_at": "2026-10-24T22:06:20+08:00",
   "git": {
-    "commit": "0afd3f66711a5722366458f31deea6912e8992cc",
+    "commit": "4a67eed73b0fd7dbcb73d1dd05d36b8e70a017a6",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 182,
-    "bytes": 1165562
+    "bytes": 1166008
   },
   "groups": {
     "firmware": [
@@ -445,8 +445,8 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 15738,
-        "sha256": "bbe5384df183d4bf2eca5b0aaf7561c5d78508cae8a64e86da2f007775747292"
+        "bytes": 16200,
+        "sha256": "405d698dad1b48411911dc127a30ed3599e321bc15200dbdd16da05b618371f6"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
@@ -455,8 +455,8 @@
       },
       {
         "path": "ESP32-buddy_需求与决策基线.md",
-        "bytes": 17369,
-        "sha256": "9c4c94987177c4e7feae695edf54ca31bc0e914aa37500c09a76c3861d74d396"
+        "bytes": 17353,
+        "sha256": "aa372a4e278814379d8b26ea57f0404fbefb090d626cd701dfeae2c8c9162849"
       },
       {
         "path": "NOTICE.md",
@@ -558,7 +558,7 @@
       {
         "path": "flash/MANIFEST.txt",
         "bytes": 638,
-        "sha256": "8932a1d3137f5a53281506c614d301ffa796ab1a0c21c78c0863117ae4b23530"
+        "sha256": "4018ceb82f368f605d6fbe22fb9439f46379f5070287cbcf1b226a5bbccffd88"
       },
       {
         "path": "flash/README.md",

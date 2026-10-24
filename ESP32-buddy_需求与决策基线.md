@@ -78,7 +78,7 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 | Q07 | 刷机/实机授权（M5StickS3） | ✅ 已批准（2026-10-16） | 实机节点 |
 | Q08 | 代码许可：**MIT** | ✅ 已批准（2026-10-16） | `LICENSE` |
 | Q09 | 仓库托管：**已发布到 GitHub 公开仓库** `whoisjackchao-dot/ESP32-buddy` | ✅ 已批准并执行（2026-10-16） | 交付 |
-| Q10 | 五个语义常量最终值 | ⏳ 待批准（**按提案值实现**；M2 前定稿） | M2/M4 |
+| Q10 | 五个语义常量最终值 | ✅ 已批准（2026-10-23，按提案值） | M2/M4 |
 | Q11 🔴 | **按键方案**：2 键 + 短/长按映射 | ✅ 已批准（2026-10-16，采纳提案，见 §4.2） | M6 |
 | Q12 🔴 | **Agent 集合**：**先只做 OpenCode** | ✅ 已批准（2026-10-16） | M4（其余留待 spike） |
 | Q13 🔴 | **本机事件入口**：放**主机层**（Windows 主机开本机入口） | ✅ 已批准（2026-10-16） | M4 |
@@ -136,7 +136,7 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 | **B08** | Windows 上"回到 Agent 窗口"的可行性与边界 | 以旧项目 `launcher/tray` 评估 + 实机 | **不承诺**任意窗口定位 |
 | **B09** | 多 Agent 事件源（除 OpenCode 外）在 Windows/WSL 的实际可得性 | 每个 Agent 单独 spike | 未验证前不进需求实现 |
 | **B10** | 3 卡栈的排序/优先级规则 | 设计评审 | 先 1 卡；多卡规则后定 |
-| **B11** 🟡 | WiFi **配网流程**（SSID/密码怎么给用户配？）与 **NTP 授时**可行性 | M4/M8 实机 | Q16 已定要 WiFi，但配网方式未定；**不承诺**无 App 即可配网 |
+| **B11** | WiFi 配网流程 + NTP | 设备 AP 热点 + 手机网页（扫描列表选网） | ✅ **已落地（2026-10-24）**：`ESP32-Buddy-XXXX` 热点 + `192.168.4.1` + `/scan`；真机 ip/hour 同步 |
 | **B12** | WiFi 与 BLE 并存的功耗/共存（StickS3 电池 250mAh） | M8 实测 | **不承诺**续航数字 |
 | **B13** | **host C 编译器缺失**（**根因已定位**）：WSL 无 `gcc/clang/cc/make`；`sudo apt-get` 失败的原因是 **企业代理未配给 apt**（`sudo` 剥掉 `http_proxy`，apt 直连 → IPv6 不可达 / IPv4 超时） | 给 apt 配 `Acquire::http(s)::Proxy` + `ForceIPv4`（见下），再 `install build-essential` | ✅ 已解决（2026-10-16，`cc 15.2.0` 可用）**〔补注：仅原开发机成立；换机后见 `B15`〕** |
 | **B14** | **设备无法从 WSL 刷写**：设备在 Windows 侧可见（`COM5`, `VID_303A&PID_1001` ✅），但 WSL2 不能用 Windows 的 COM 口。`usbipd-win` 5.3.0 已装、`bind --force` 成功、`vhci_hcd` 已在 WSL 加载，但 **attach 被组策略挡**：WSL 网卡 `vEthernet (WSL (Hyper-V firewall))` **无网络配置文件**（默认按 Public），组策略禁止 Public 入站，TCP 3240 连不上 | ① 试 `Set-NetConnectionProfile ... -NetworkCategory Private`；② 不行则**改在 Windows 侧刷**（装 Python+esptool，直刷 `COM5`，不依赖 3240） | ✅ **已解除（2026-10-17，改走方案②）**：用 Windows 侧 esptool 刷 `COM5` 成功并运行，见 `evidence/2026-10-17-实机刷机-H.md`；三件套在 `ESP32-buddy/flash/` |
@@ -173,7 +173,7 @@ ESP32-buddy 是给 AI 编程 Agent 配的**桌面宠物**：一个 ESP32-S3 小�
 | **Q17** WiFi 角色 | 已决 **A**（仅授时 + 保留 BLE）；NTP 用户暂不做 |
 | **Q10** 语义常量终值 | ✅ **已批准（2026-10-23，按提案值）** |
 | **G1–G7** 门槛数值 | ✅ **已批准（2026-10-23，按 §6 现表）** |
-| **Q19** G2 时长口径 | ⏳ **待拍板**（25 min×10 ≈ 4h10m vs G5 2h；见 `acceptance/G1-G7-验收执行清单.md` §6） |
+| **Q19** G2 时长口径 | ✅ **A：短时长测试构建**（30s/10s）+ release 1 次 25 min（用户 2026-10-24） |
 | **Q20** G4 起算点 | ✅ **定为**：最后一次心跳发送完成 → 收到 `off` 行（harness 仪器法；等价"停发"） |
 | **Q21** G3/G6 的 1 s 测法 | ✅ **定为**：设备 `rf` 日志 + host 接收时间戳（含 USB 链路）；视频法仅作可选交叉验证 |
 
