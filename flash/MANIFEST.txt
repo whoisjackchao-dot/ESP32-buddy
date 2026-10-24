@@ -1,5 +1,5 @@
 ESP32-buddy 烧录包
-生成时间: 2026-10-24T11:34:43+08:00
+生成时间: 2026-10-24T12:19:37+08:00
 构建目录: /mnt/d/buddy_flash/firmware/build
 芯片: esp32s3    flash: 8MB  模式: dio  频率: 80m
 
@@ -9,6 +9,6 @@ ESP32-buddy 烧录包
   esp32_buddy.bin       @ 0x10000
 
 文件（大小 / sha256）:
-  bootloader.bin          20832  3b8d36034ef7e8508acd43754bf5db92bcf5d75747c14a53b4414b490e1d2164
-  partition-table.bin      3072  7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820
-  esp32_buddy.bin        544240  6d3de4f3824c8ba4d8636a0963c7e4c46be30dcdfee5cfca96f179df43e8b4f0
+  bootloader.bin          20832  83ceb784c230528ee697140241e464d04bcf951dbc2d097fadf14ec8e12f4d07
+  partition-table.bin      3072  5e71c3c890e04714daa03b21a0d23953a2dadf9fdf15eec02b886f7b6e9f8c81
+  esp32_buddy.bin       1083232  b587b48155072978d3fe32fe822a9a2a1141ede48e944492daa936326eebcdab
