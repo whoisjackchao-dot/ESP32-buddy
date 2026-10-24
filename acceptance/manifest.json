@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T11:14:09+08:00",
+  "generated_at": "2026-10-24T11:20:32+08:00",
   "git": {
-    "commit": "763386dda62bae18907e835ecbd682fc3656457a",
+    "commit": "0b2dc029e716007a749a95b094144e0bf23c1dc3",
     "branch": "main",
-    "tracked_clean": false
+    "tracked_clean": true
   },
   "totals": {
-    "files": 172,
-    "bytes": 1082526
+    "files": 173,
+    "bytes": 1084477
   },
   "groups": {
     "firmware": [
@@ -598,6 +598,11 @@
         "path": "evidence/2026-10-17-实机刷机-H.md",
         "bytes": 6362,
         "sha256": "d53439bf9867255f111b28e6a7d0fc05d4b411042a7ccc87288ac77d97718dac"
+      },
+      {
+        "path": "evidence/2026-10-24-交付操作验证.md",
+        "bytes": 1951,
+        "sha256": "9a2cc2b80ef58d2fd2db33219a834f8627c11cfd04b5e7f171e32a984df99354"
       },
       {
         "path": "evidence/B08-回窗口可行性-spike.md",
