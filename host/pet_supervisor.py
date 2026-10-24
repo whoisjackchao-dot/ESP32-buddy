@@ -212,6 +212,15 @@ class Supervisor:
     def run(self, stop_after=None):
         deadline = (self._clock() + stop_after
                     if stop_after is not None else None)
+        # 清掉上次关停留下的停止文件，否则桥一启动就退出
+        for slot in self.slots:
+            joined = " ".join(str(a) for a in (getattr(slot, "argv", None) or []))
+            m = re.search(r"--stop-file '?([^'\s]+)'?", joined)
+            if m:
+                try:
+                    os.remove(win_to_wsl(m.group(1)))
+                except OSError:
+                    pass
         try:
             while not self._stop:
                 now = self._clock()
