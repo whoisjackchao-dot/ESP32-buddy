@@ -1,12 +1,25 @@
 #pragma once
 
+#include <stddef.h>
+
 #include <stdbool.h>
 
-/* M8 增量 2：WiFi STA + SNTP 授时（Q17=A 仅授时）。
- * 非阻塞：pet_net_start 只建任务；无凭据 / WiFi 失败时设备行为与此前完全一致。 */
+/* WiFi 状态机（idle/sta/ap）+ SNTP 授时 + AP 配网（热点/网页/DNS 在 pet_prov）。
+ * 非阻塞：pet_net_start 只建任务；配网/连不上时显示、按键、宠物行为与无网时完全一致。
+ * 契约：evidence/2026-10-24-WiFi与NTP-设备.md */
 
-/* 启动网络任务：读 NVS 凭据，有则连 WiFi + SNTP；无则打 "net: no credentials" 停车。 */
+/* 启动网络任务：读 NVS 凭据，有则连 WiFi + SNTP；无则开配网热点（ESP32-Buddy-XXXX）。
+ * STA 连不上（约 2 min）自动回落热点；绝不阻塞启动。 */
 void pet_net_start(void);
 
-/* 设备侧产线 cmd 行（wifi.set / wifi.status / wifi.clear）；命中并处理返回 true。 */
+/* 配网页 POST /save 落点：校验并保存凭据到 NVS（namespace petnet），通知状态机切 STA。
+ * 只在 pet_prov 的 httpd 上下文调用；ssid 1..32 字节、pass 0..64 字节，非法仅记日志丢弃。 */
+void pet_net_apply_credentials(const char *ssid, const char *pass);
+
+/* 配网页 GET /status 数据源：state 为 "ap|sta|idle"，ssid/ip 无值为空串，hour 未同步为 -1。
+ * 无口令。任意任务上下文可调用（无锁快照）。 */
+void pet_net_read_status(char *state, size_t state_sz, char *ssid, size_t ssid_sz,
+                         char *ip, size_t ip_sz, int *hour);
+
+/* 设备侧产线 cmd 行（wifi.provision / wifi.status / wifi.clear）；命中并处理返回 true。 */
 bool pet_net_handle_line(const char *line);

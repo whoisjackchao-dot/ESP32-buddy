@@ -61,11 +61,12 @@ def build_children(out=DEFAULT_OUT, win_python=None, host_dir=None,
     host_dir = host_dir or os.path.dirname(os.path.abspath(__file__))
     poll = [sys.executable, os.path.join(host_dir, "oc_poll.py"),
             "--out", out]
-    ps = "& '%s' '%s' --log '%s' --port %s" % (
+    ps = "& '%s' '%s' --log '%s' --port %s --stop-file '%s'" % (
         win_python,
         wsl_to_win(os.path.join(host_dir, "file_to_serial.py")),
         wsl_to_win(out),
-        port)
+        port,
+        wsl_to_win(out) + ".stop")
     bridge = ["powershell.exe", "-NoProfile", "-Command", ps]
     return [poll, bridge]
 
@@ -171,6 +172,15 @@ class Supervisor:
         self._write_state()
 
     def _terminate_all(self):
+        # 先写停止文件：Windows 桥是 powershell 的孙进程，SIGTERM 杀不到
+        for slot in self.slots:
+            joined = " ".join(str(a) for a in (getattr(slot, "argv", None) or []))
+            m = re.search(r"--stop-file '?([^'\s]+)'?", joined)
+            if m:
+                try:
+                    open(win_to_wsl(m.group(1)), "w").close()
+                except OSError:
+                    pass
         for slot in self.slots:
             if slot.proc is not None and slot.proc.poll() is None:
                 try:

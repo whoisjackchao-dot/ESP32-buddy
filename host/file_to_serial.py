@@ -56,6 +56,8 @@ def build_parser():
                         help="serial port (default: %(default)s)")
     parser.add_argument("--interval", type=float, default=0.5,
                         help="tail cadence seconds (default: %(default)s)")
+    parser.add_argument("--stop-file", default="",
+                        help="exit when this file appears (supervisor shutdown)")
     return parser
 
 
@@ -75,6 +77,8 @@ def main(argv=None, serial_factory=None, sleep_fn=time.sleep,
     start = clock()
     try:
         while stop_after is None or clock() - start < stop_after:
+            if args.stop_file and os.path.exists(args.stop_file):
+                break  # cooperative shutdown (Windows child cannot be killed via SIGTERM)
             data, pos = tail(args.log, pos)
             if data:
                 if ser is None:

@@ -111,7 +111,8 @@ class TestBuildChildren(unittest.TestCase):
         cmd = kids[1][3]
         self.assertTrue(cmd.startswith("& '%s' '" % WIN_PY), cmd)
         self.assertTrue(cmd.endswith("' --log 'D:\\buddy_flash\\oc_events.log'"
-                                     " --port COM5"), cmd)
+                                     " --port COM5 --stop-file"
+                                     " 'D:\\buddy_flash\\oc_events.log.stop'"), cmd)
 
     def test_win_python_env_override(self):
         old = os.environ.get("BUDDY_WIN_PYTHON")
@@ -129,7 +130,8 @@ class TestBuildChildren(unittest.TestCase):
         kids = pet_supervisor.build_children(
             out="/mnt/d/b/x.log", win_python=WIN_PY,
             host_dir="/repo/host", port="COM7")
-        self.assertTrue(kids[1][3].endswith("--port COM7"))
+        self.assertIn("--port COM7", kids[1][3])
+        self.assertTrue(kids[1][3].endswith("--stop-file 'D:\\b\\x.log.stop'"))
 
 
 # ---------------------------------------------------------------------------
