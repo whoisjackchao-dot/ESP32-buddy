@@ -26,3 +26,11 @@ idf_component_register(
                 "assets/done.pcm"
                 "assets/failed.pcm"
 )
+
+# 验收用测试构建（Q19=A）：idf.py -DPOMO_FOCUS_MS=30000u -DPOMO_BREAK_MS=10000u
+if(DEFINED POMO_FOCUS_MS)
+    target_compile_definitions(${COMPONENT_LIB} PRIVATE "POMO_FOCUS_MS=${POMO_FOCUS_MS}")
+endif()
+if(DEFINED POMO_BREAK_MS)
+    target_compile_definitions(${COMPONENT_LIB} PRIVATE "POMO_BREAK_MS=${POMO_BREAK_MS}")
+endif()
