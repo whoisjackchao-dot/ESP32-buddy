@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T12:19:16+08:00",
+  "generated_at": "2026-10-24T12:20:02+08:00",
   "git": {
-    "commit": "a9e4a450a92b6457abd98e7436e6c37fbed8ae33",
+    "commit": "c26e566f63fa380fa0db68413bf7a9d0a37a4a22",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 180,
-    "bytes": 1126397
+    "bytes": 1127984
   },
   "groups": {
     "firmware": [
@@ -435,8 +435,8 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 15413,
-        "sha256": "1201298f4611574314eb5cd5c0069f4c0714f8234e6e33145d9cd04fd94fd1b5"
+        "bytes": 15570,
+        "sha256": "4ed026d41bdd09c8bf508e4d45393609db42d7733f7e4225bd32859e82d6f351"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
@@ -470,8 +470,8 @@
       },
       {
         "path": "acceptance/操作与恢复手册.md",
-        "bytes": 4562,
-        "sha256": "8af09450c4018502cfcb0bc32ce9b67e1dc5f498a7e8dbdc24f1fa837864ef97"
+        "bytes": 5992,
+        "sha256": "0c58eba1f8fd3fae04a60f2072781415cceef56ce3ed56bdbb56b343aab7e27e"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -548,7 +548,7 @@
       {
         "path": "flash/MANIFEST.txt",
         "bytes": 638,
-        "sha256": "6e014a8e86b5079dfced1c9f46f8d3deee07930f2610aa14ac024fb42b4188c0"
+        "sha256": "456685f74e4f67bcc3286b914c77fd0c44965d93540d36f101489e4fbf512e18"
       },
       {
         "path": "flash/README.md",
