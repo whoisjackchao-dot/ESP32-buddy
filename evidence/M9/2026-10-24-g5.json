@@ -1,0 +1,24 @@
+{
+  "schema": "esp32-buddy-g5-report/1",
+  "log": "/mnt/d/buddy_flash/g5_soak.log",
+  "started_at": "2026-10-24T06:53:43",
+  "ended_at": "2026-10-24T08:54:00",
+  "running": false,
+  "reboots_after_start": 0,
+  "boot_lines": [],
+  "event_count": 240,
+  "event_gap_max_s": 31.0,
+  "st_samples": 718,
+  "st_max_gap_s": 10.0,
+  "fps_values": [
+    7
+  ],
+  "link_events": 477,
+  "checks": {
+    "no_reboot": true,
+    "no_block": true,
+    "fps_stable": true,
+    "events_delivered": true
+  },
+  "verdict": "PASS"
+}

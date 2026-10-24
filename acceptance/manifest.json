@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T08:01:37+08:00",
+  "generated_at": "2026-10-24T08:54:51+08:00",
   "git": {
-    "commit": "aad33d89366c5c7c8d01e183d4fa23dacc610602",
+    "commit": "0a8c5762b3c5ff7c618e5471e1fbe9bb08d40893",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 164,
-    "bytes": 946265
+    "files": 167,
+    "bytes": 1066104
   },
   "groups": {
     "firmware": [
@@ -420,8 +420,8 @@
       },
       {
         "path": "ESP32-buddy_需求与决策基线.md",
-        "bytes": 17212,
-        "sha256": "59346189790147c003258ef959048fe954e8d80a8d0f247e5e915dde4a80fc04"
+        "bytes": 17306,
+        "sha256": "18a98df67aca6bd1feb132c528b3d6784457cae744ef48fc8b48bb7b17dea036"
       },
       {
         "path": "NOTICE.md",
@@ -435,8 +435,8 @@
       },
       {
         "path": "acceptance/G1-G7-验收执行清单.md",
-        "bytes": 10344,
-        "sha256": "676e9be163438d976258d03015934d53a07de12dbd063a5f0209d398cd76902b"
+        "bytes": 10338,
+        "sha256": "55812702ae35f8407ba293d0198f4578fcf00a32199ac28f720b6ba4bfd69f8f"
       },
       {
         "path": "acceptance/README.md",
@@ -500,8 +500,8 @@
       },
       {
         "path": "contracts/M9-验收测量契约.md",
-        "bytes": 3751,
-        "sha256": "934d938abfe237a0eea27124a1369fa4e614fec81aa0b216df7ee6139188fd29"
+        "bytes": 3909,
+        "sha256": "7415334d3e8150524a03710fef80c9285e99f706017601cc0054c70d86a672f4"
       },
       {
         "path": "contracts/README.md",
@@ -821,13 +821,28 @@
       },
       {
         "path": "evidence/M9/2026-10-23-验收-G3G4G6G7.md",
-        "bytes": 3584,
-        "sha256": "0dbae18eef80636d07c6d11163dabaa8d8ed66da72c2b895a964c605dc91b71d"
+        "bytes": 3797,
+        "sha256": "eb732be9f0f1f354968a6da83f69671ffe386f30808156aab53251d8a918e313"
       },
       {
         "path": "evidence/M9/2026-10-23-验收harness-T.md",
         "bytes": 11665,
         "sha256": "8e04f37312f8de8ca8d07cb4cee15c8409c11209b091f9fcbdd5c31a1bbe555c"
+      },
+      {
+        "path": "evidence/M9/2026-10-24-g5-soak.log",
+        "bytes": 118314,
+        "sha256": "a4470f58ef387ceea3f7deddd38cc42d5139c8f3876e14beed70d5978bda414b"
+      },
+      {
+        "path": "evidence/M9/2026-10-24-g5.json",
+        "bytes": 512,
+        "sha256": "d35b0ea6bc00f9e10223016f86b4d7302f4f4e349329822820de605b60c90c79"
+      },
+      {
+        "path": "evidence/M9/2026-10-24-g5.md",
+        "bytes": 554,
+        "sha256": "1377591a4a9d2033ad036ab206fe65e64cd20c2ed97bdcb20dd94f72e267d0b1"
       },
       {
         "path": "evidence/M9/2026-10-24-故障注入.md",

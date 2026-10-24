@@ -1,0 +1,1437 @@
+2026-10-24T06:53:43 SOAK START
+2026-10-24T06:53:43 EV 0 task.done
+2026-10-24T06:54:13 ST I (10945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:54:13 ST I (20975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:54:13 LINK I (23585) pet-engine: off t=22698004
+2026-10-24T06:54:13 ST I (31005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:54:13 EV 1 agent.idle
+2026-10-24T06:54:43 LINK I (38705) pet-engine: on t=37818099
+2026-10-24T06:54:43 ST I (41045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:54:43 ST I (51055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:54:43 LINK I (53655) pet-engine: off t=52767998
+2026-10-24T06:54:43 ST I (61065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:54:43 EV 2 agent.idle
+2026-10-24T06:55:13 LINK I (68735) pet-engine: on t=67848058
+2026-10-24T06:55:13 ST I (71075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:55:13 ST I (81085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:55:13 LINK I (83685) pet-engine: off t=82798011
+2026-10-24T06:55:13 ST I (91095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:55:13 EV 3 agent.idle
+2026-10-24T06:55:43 LINK I (98765) pet-engine: on t=97878076
+2026-10-24T06:55:43 ST I (101105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:55:43 ST I (111115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:55:43 LINK I (113845) pet-engine: off t=112958015
+2026-10-24T06:55:43 ST I (121125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:55:43 EV 4 agent.idle
+2026-10-24T06:56:13 LINK I (128925) pet-engine: on t=128038083
+2026-10-24T06:56:13 ST I (131135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:56:13 ST I (141145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:56:13 LINK I (143875) pet-engine: off t=142987999
+2026-10-24T06:56:13 ST I (151155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:56:13 EV 5 agent.idle
+2026-10-24T06:56:43 LINK I (158955) pet-engine: on t=158068064
+2026-10-24T06:56:43 ST I (161165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:56:43 ST I (171175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:56:43 LINK I (173905) pet-engine: off t=173018015
+2026-10-24T06:56:43 ST I (181185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:56:43 EV 6 agent.idle
+2026-10-24T06:57:13 LINK I (188985) pet-engine: on t=188098088
+2026-10-24T06:57:13 ST I (191195) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:57:13 ST I (201205) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:57:13 LINK I (204065) pet-engine: off t=203178016
+2026-10-24T06:57:13 ST I (211215) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:57:13 EV 7 agent.idle
+2026-10-24T06:57:43 LINK I (219145) pet-engine: on t=218258104
+2026-10-24T06:57:43 ST I (221225) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:57:43 ST I (231235) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:57:43 LINK I (234095) pet-engine: off t=233207999
+2026-10-24T06:57:43 ST I (241245) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:57:43 EV 8 agent.idle
+2026-10-24T06:58:13 LINK I (249175) pet-engine: on t=248288065
+2026-10-24T06:58:13 ST I (251255) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:58:13 ST I (261265) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:58:13 LINK I (264255) pet-engine: off t=263367999
+2026-10-24T06:58:13 ST I (271275) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:58:14 EV 9 agent.idle
+2026-10-24T06:58:44 LINK I (279205) pet-engine: on t=278318088
+2026-10-24T06:58:44 ST I (281285) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:58:44 ST I (291295) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:58:44 LINK I (294285) pet-engine: off t=293398017
+2026-10-24T06:58:44 ST I (301305) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:58:44 EV 10 task.done
+2026-10-24T06:59:14 LINK I (309365) pet-engine: on t=308478092
+2026-10-24T06:59:14 ST I (311315) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:59:14 ST I (321325) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:59:14 LINK I (324315) pet-engine: off t=323428013
+2026-10-24T06:59:14 ST I (331335) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:59:14 EV 11 agent.idle
+2026-10-24T06:59:44 LINK I (339395) pet-engine: on t=338508105
+2026-10-24T06:59:44 ST I (341345) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:59:44 ST I (351355) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:59:44 LINK I (354345) pet-engine: off t=353458022
+2026-10-24T06:59:44 ST I (361365) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T06:59:44 EV 12 agent.idle
+2026-10-24T07:00:14 LINK I (369425) pet-engine: on t=368538117
+2026-10-24T07:00:14 ST I (371375) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:00:14 ST I (381385) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:00:14 LINK I (384505) pet-engine: off t=383618038
+2026-10-24T07:00:14 ST I (391395) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:00:14 EV 13 agent.idle
+2026-10-24T07:00:44 LINK I (399585) pet-engine: on t=398698107
+2026-10-24T07:00:44 ST I (401405) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:00:44 ST I (411415) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:00:44 LINK I (414535) pet-engine: off t=413648003
+2026-10-24T07:00:44 ST I (421425) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:00:44 EV 14 agent.idle
+2026-10-24T07:01:14 LINK I (429615) pet-engine: on t=428728087
+2026-10-24T07:01:14 ST I (431435) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:01:14 ST I (441445) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:01:14 LINK I (444565) pet-engine: off t=443678019
+2026-10-24T07:01:14 ST I (451455) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:01:14 EV 15 agent.idle
+2026-10-24T07:01:44 LINK I (459645) pet-engine: on t=458758110
+2026-10-24T07:01:44 ST I (461465) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:01:44 ST I (471475) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:01:44 LINK I (474725) pet-engine: off t=473838040
+2026-10-24T07:01:44 ST I (481485) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:01:44 EV 16 agent.idle
+2026-10-24T07:02:14 LINK I (489805) pet-engine: on t=488918107
+2026-10-24T07:02:14 ST I (491495) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:02:14 ST I (501505) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:02:14 LINK I (504755) pet-engine: off t=503868003
+2026-10-24T07:02:14 ST I (511515) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:02:14 EV 17 agent.idle
+2026-10-24T07:02:44 LINK I (519835) pet-engine: on t=518948087
+2026-10-24T07:02:44 ST I (521525) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:02:44 ST I (531535) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:02:44 LINK I (534785) pet-engine: off t=533898021
+2026-10-24T07:02:44 ST I (541545) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:02:44 EV 18 agent.idle
+2026-10-24T07:03:14 LINK I (549865) pet-engine: on t=548978105
+2026-10-24T07:03:14 ST I (551555) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:03:14 ST I (561565) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:03:14 LINK I (564945) pet-engine: off t=564058021
+2026-10-24T07:03:14 ST I (571575) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:03:14 EV 19 agent.idle
+2026-10-24T07:03:44 LINK I (580025) pet-engine: on t=579138109
+2026-10-24T07:03:44 ST I (581585) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:03:44 ST I (591595) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:03:44 LINK I (594975) pet-engine: off t=594088003
+2026-10-24T07:03:44 ST I (601605) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:03:44 EV 20 task.done
+2026-10-24T07:04:14 LINK I (610055) pet-engine: on t=609168076
+2026-10-24T07:04:14 ST I (611615) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:04:14 ST I (621625) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:04:14 LINK I (625005) pet-engine: off t=624118026
+2026-10-24T07:04:14 ST I (631635) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:04:14 EV 21 agent.idle
+2026-10-24T07:04:44 LINK I (640085) pet-engine: on t=639198126
+2026-10-24T07:04:44 ST I (641645) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:04:44 ST I (651655) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:04:44 LINK I (655165) pet-engine: off t=654278023
+2026-10-24T07:04:44 ST I (661665) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:04:44 EV 22 agent.idle
+2026-10-24T07:05:14 LINK I (670115) pet-engine: on t=669228102
+2026-10-24T07:05:14 ST I (671675) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:05:14 ST I (681685) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:05:14 LINK I (685195) pet-engine: off t=684308007
+2026-10-24T07:05:14 ST I (691695) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:05:15 EV 23 agent.idle
+2026-10-24T07:05:45 LINK I (700275) pet-engine: on t=699388118
+2026-10-24T07:05:45 ST I (701705) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:05:45 ST I (711715) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:05:45 LINK I (715225) pet-engine: off t=714338023
+2026-10-24T07:05:45 ST I (721725) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:05:45 EV 24 agent.idle
+2026-10-24T07:06:15 LINK I (730305) pet-engine: on t=729418110
+2026-10-24T07:06:15 ST I (731735) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:06:15 ST I (741745) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:06:15 LINK I (745255) pet-engine: off t=744368007
+2026-10-24T07:06:15 ST I (751755) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:06:15 EV 25 agent.idle
+2026-10-24T07:06:45 LINK I (760335) pet-engine: on t=759448093
+2026-10-24T07:06:45 ST I (761765) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:06:45 ST I (771775) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:06:45 LINK I (775415) pet-engine: off t=774528007
+2026-10-24T07:06:45 ST I (781785) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:06:45 EV 26 agent.idle
+2026-10-24T07:07:15 LINK I (790495) pet-engine: on t=789608116
+2026-10-24T07:07:15 ST I (791795) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:07:15 ST I (801805) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:07:15 LINK I (805445) pet-engine: off t=804558024
+2026-10-24T07:07:15 ST I (811815) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:07:15 EV 27 agent.idle
+2026-10-24T07:07:45 LINK I (820525) pet-engine: on t=819638111
+2026-10-24T07:07:45 ST I (821825) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:07:45 ST I (831835) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:07:45 LINK I (835475) pet-engine: off t=834588007
+2026-10-24T07:07:45 ST I (841845) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:07:45 EV 28 agent.idle
+2026-10-24T07:08:15 LINK I (850555) pet-engine: on t=849668093
+2026-10-24T07:08:15 ST I (851855) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:08:15 ST I (861865) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:08:15 LINK I (865635) pet-engine: off t=864748026
+2026-10-24T07:08:15 ST I (871875) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:08:15 EV 29 agent.idle
+2026-10-24T07:08:45 LINK I (880715) pet-engine: on t=879828096
+2026-10-24T07:08:45 ST I (881885) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:08:45 ST I (891895) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:08:45 LINK I (895665) pet-engine: off t=894778024
+2026-10-24T07:08:45 ST I (901905) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:08:45 EV 30 task.done
+2026-10-24T07:09:15 LINK I (910745) pet-engine: on t=909858095
+2026-10-24T07:09:15 ST I (911915) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:09:15 ST I (921925) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:09:15 LINK I (925695) pet-engine: off t=924808009
+2026-10-24T07:09:15 ST I (931935) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:09:15 EV 31 agent.idle
+2026-10-24T07:09:45 LINK I (940775) pet-engine: on t=939888109
+2026-10-24T07:09:45 ST I (941945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:09:45 ST I (951955) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:09:45 LINK I (955855) pet-engine: off t=954968026
+2026-10-24T07:09:45 ST I (961965) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:09:45 EV 32 agent.idle
+2026-10-24T07:10:15 LINK I (970935) pet-engine: on t=970048102
+2026-10-24T07:10:15 ST I (971975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:10:15 ST I (981985) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:10:15 LINK I (985885) pet-engine: off t=984998023
+2026-10-24T07:10:15 ST I (991995) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:10:15 EV 33 agent.idle
+2026-10-24T07:10:45 LINK I (1000965) pet-engine: on t=1000078116
+2026-10-24T07:10:45 ST I (1002005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:10:45 ST I (1012015) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:10:45 LINK I (1015915) pet-engine: off t=1015028012
+2026-10-24T07:10:45 ST I (1022025) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:10:45 EV 34 agent.idle
+2026-10-24T07:11:15 LINK I (1030995) pet-engine: on t=1030108099
+2026-10-24T07:11:15 ST I (1032035) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:11:15 ST I (1042045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:11:15 LINK I (1046075) pet-engine: off t=1045188012
+2026-10-24T07:11:15 ST I (1052055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:11:15 EV 35 agent.idle
+2026-10-24T07:11:45 LINK I (1061155) pet-engine: on t=1060268100
+2026-10-24T07:11:45 ST I (1062065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:11:45 ST I (1072075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:11:45 LINK I (1076105) pet-engine: off t=1075218030
+2026-10-24T07:11:45 ST I (1082085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:11:45 EV 36 agent.idle
+2026-10-24T07:12:15 LINK I (1091185) pet-engine: on t=1090298116
+2026-10-24T07:12:15 ST I (1092095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:12:15 ST I (1102105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:12:15 LINK I (1106135) pet-engine: off t=1105248012
+2026-10-24T07:12:15 ST I (1112115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:12:16 EV 37 agent.idle
+2026-10-24T07:12:46 LINK I (1121215) pet-engine: on t=1120328099
+2026-10-24T07:12:46 ST I (1122125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:12:46 ST I (1132135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:12:46 LINK I (1136295) pet-engine: off t=1135408012
+2026-10-24T07:12:46 ST I (1142145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:12:46 EV 38 agent.idle
+2026-10-24T07:13:16 LINK I (1151245) pet-engine: on t=1150358123
+2026-10-24T07:13:16 ST I (1152155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:13:16 ST I (1162165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:13:16 LINK I (1166325) pet-engine: off t=1165438030
+2026-10-24T07:13:16 ST I (1172175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:13:16 EV 39 agent.idle
+2026-10-24T07:13:46 LINK I (1181405) pet-engine: on t=1180518141
+2026-10-24T07:13:46 ST I (1182185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:13:46 ST I (1192195) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:13:46 LINK I (1196355) pet-engine: off t=1195468012
+2026-10-24T07:13:46 ST I (1202205) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:13:46 EV 40 task.done
+2026-10-24T07:14:16 LINK I (1211435) pet-engine: on t=1210548083
+2026-10-24T07:14:16 ST I (1212215) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:14:16 ST I (1222225) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:14:16 LINK I (1226385) pet-engine: off t=1225498032
+2026-10-24T07:14:16 ST I (1232235) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:14:16 EV 41 agent.idle
+2026-10-24T07:14:46 LINK I (1241465) pet-engine: on t=1240578142
+2026-10-24T07:14:46 ST I (1242245) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:14:46 ST I (1252255) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:14:46 LINK I (1256545) pet-engine: off t=1255658028
+2026-10-24T07:14:46 ST I (1262265) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:14:46 EV 42 agent.idle
+2026-10-24T07:15:16 LINK I (1271625) pet-engine: on t=1270738151
+2026-10-24T07:15:16 ST I (1272275) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:15:16 ST I (1282285) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:15:16 LINK I (1286575) pet-engine: off t=1285688012
+2026-10-24T07:15:16 ST I (1292295) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:15:16 EV 43 agent.idle
+2026-10-24T07:15:46 LINK I (1301655) pet-engine: on t=1300768103
+2026-10-24T07:15:46 ST I (1302305) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:15:46 ST I (1312315) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:15:46 LINK I (1316605) pet-engine: off t=1315718028
+2026-10-24T07:15:46 ST I (1322325) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:15:46 EV 44 agent.idle
+2026-10-24T07:16:16 LINK I (1331685) pet-engine: on t=1330798120
+2026-10-24T07:16:16 ST I (1332335) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:16:16 ST I (1342345) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:16:16 LINK I (1346765) pet-engine: off t=1345878030
+2026-10-24T07:16:16 ST I (1352355) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:16:16 EV 45 agent.idle
+2026-10-24T07:16:46 LINK I (1361845) pet-engine: on t=1360958125
+2026-10-24T07:16:46 ST I (1362365) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:16:46 ST I (1372375) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:16:46 LINK I (1376795) pet-engine: off t=1375908012
+2026-10-24T07:16:46 ST I (1382385) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:16:46 EV 46 agent.idle
+2026-10-24T07:17:16 LINK I (1391875) pet-engine: on t=1390988103
+2026-10-24T07:17:16 ST I (1392395) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:17:16 ST I (1402405) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:17:16 LINK I (1406825) pet-engine: off t=1405938030
+2026-10-24T07:17:16 ST I (1412415) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:17:16 EV 47 agent.idle
+2026-10-24T07:17:46 LINK I (1421905) pet-engine: on t=1421018121
+2026-10-24T07:17:46 ST I (1422425) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:17:46 ST I (1432435) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:17:46 LINK I (1436985) pet-engine: off t=1436098030
+2026-10-24T07:17:46 ST I (1442445) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:17:46 EV 48 agent.idle
+2026-10-24T07:18:16 LINK I (1452065) pet-engine: on t=1451178124
+2026-10-24T07:18:16 ST I (1452455) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:18:16 ST I (1462465) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:18:16 LINK I (1467015) pet-engine: off t=1466128012
+2026-10-24T07:18:16 ST I (1472475) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:18:16 EV 49 agent.idle
+2026-10-24T07:18:46 LINK I (1482095) pet-engine: on t=1481208103
+2026-10-24T07:18:46 ST I (1482485) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:18:46 ST I (1492495) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:18:46 LINK I (1497045) pet-engine: off t=1496158030
+2026-10-24T07:18:46 ST I (1502505) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:18:46 EV 50 task.done
+2026-10-24T07:19:16 LINK I (1512125) pet-engine: on t=1511238105
+2026-10-24T07:19:16 ST I (1512515) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:19:16 ST I (1522525) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:19:16 LINK I (1527205) pet-engine: off t=1526318030
+2026-10-24T07:19:16 ST I (1532535) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:19:17 EV 51 agent.idle
+2026-10-24T07:19:47 LINK I (1542285) pet-engine: on t=1541398140
+2026-10-24T07:19:47 ST I (1542545) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:19:47 ST I (1552555) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:19:47 LINK I (1557235) pet-engine: off t=1556348012
+2026-10-24T07:19:47 ST I (1562565) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:19:47 EV 52 agent.idle
+2026-10-24T07:20:17 LINK I (1572315) pet-engine: on t=1571428109
+2026-10-24T07:20:17 ST I (1572575) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:20:17 ST I (1582585) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:20:17 LINK I (1587265) pet-engine: off t=1586378028
+2026-10-24T07:20:17 ST I (1592595) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:20:17 EV 53 agent.idle
+2026-10-24T07:20:47 LINK I (1602345) pet-engine: on t=1601458120
+2026-10-24T07:20:47 ST I (1602605) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:20:47 ST I (1612615) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:20:47 LINK I (1617425) pet-engine: off t=1616538030
+2026-10-24T07:20:47 ST I (1622625) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:20:47 EV 54 agent.idle
+2026-10-24T07:21:17 LINK I (1632375) pet-engine: on t=1631488107
+2026-10-24T07:21:17 ST I (1632635) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:21:17 ST I (1642645) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:21:17 LINK I (1647455) pet-engine: off t=1646568012
+2026-10-24T07:21:17 ST I (1652655) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:21:17 EV 55 agent.idle
+2026-10-24T07:21:47 LINK I (1662535) pet-engine: on t=1661648103
+2026-10-24T07:21:47 ST I (1662665) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:21:47 ST I (1672675) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:21:47 LINK I (1677485) pet-engine: off t=1676598030
+2026-10-24T07:21:47 ST I (1682685) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:21:47 EV 56 agent.idle
+2026-10-24T07:22:17 LINK I (1692565) pet-engine: on t=1691678120
+2026-10-24T07:22:17 ST I (1692695) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:22:17 ST I (1702705) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:22:17 LINK I (1707645) pet-engine: off t=1706758030
+2026-10-24T07:22:17 ST I (1712715) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:22:17 EV 57 agent.idle
+2026-10-24T07:22:47 LINK I (1722595) pet-engine: on t=1721708103
+2026-10-24T07:22:47 ST I (1722725) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:22:47 ST I (1732735) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:22:47 LINK I (1737675) pet-engine: off t=1736788032
+2026-10-24T07:22:47 ST I (1742745) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:22:47 EV 58 agent.idle
+2026-10-24T07:23:17 ST I (1752755) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:23:17 LINK I (1752755) pet-engine: on t=1751868409
+2026-10-24T07:23:17 ST I (1762765) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:23:17 LINK I (1767705) pet-engine: off t=1766818032
+2026-10-24T07:23:17 ST I (1772775) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:23:17 EV 59 agent.idle
+2026-10-24T07:23:47 ST I (1782785) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:23:47 LINK I (1782785) pet-engine: on t=1781898432
+2026-10-24T07:23:47 ST I (1792795) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:23:47 LINK I (1797735) pet-engine: off t=1796848014
+2026-10-24T07:23:47 ST I (1802805) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:23:47 EV 60 task.done
+2026-10-24T07:24:17 ST I (1812815) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:24:17 LINK I (1812815) pet-engine: on t=1811928400
+2026-10-24T07:24:17 ST I (1822825) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:24:17 LINK I (1827895) pet-engine: off t=1827008039
+2026-10-24T07:24:17 ST I (1832835) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:24:17 ST I (1842845) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:24:17 EV 61 agent.idle
+2026-10-24T07:24:47 LINK I (1842975) pet-engine: on t=1842088143
+2026-10-24T07:24:47 ST I (1852855) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:24:47 LINK I (1857925) pet-engine: off t=1857038029
+2026-10-24T07:24:47 ST I (1862865) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:24:47 ST I (1872875) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:24:47 EV 62 agent.idle
+2026-10-24T07:25:17 LINK I (1873005) pet-engine: on t=1872118143
+2026-10-24T07:25:17 ST I (1882885) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:25:17 LINK I (1888085) pet-engine: off t=1887198017
+2026-10-24T07:25:17 ST I (1892895) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:25:17 ST I (1902905) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:25:17 EV 63 agent.idle
+2026-10-24T07:25:47 LINK I (1903165) pet-engine: on t=1902278014
+2026-10-24T07:25:47 ST I (1912915) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:25:47 LINK I (1918115) pet-engine: off t=1917228007
+2026-10-24T07:25:47 ST I (1922925) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:25:47 ST I (1932935) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:25:48 EV 64 agent.idle
+2026-10-24T07:26:18 LINK I (1933195) pet-engine: on t=1932308074
+2026-10-24T07:26:18 ST I (1942945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:26:18 LINK I (1948145) pet-engine: off t=1947258038
+2026-10-24T07:26:18 ST I (1952955) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:26:18 ST I (1962965) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:26:18 EV 65 agent.idle
+2026-10-24T07:26:48 LINK I (1963225) pet-engine: on t=1962338097
+2026-10-24T07:26:48 ST I (1972975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:26:48 LINK I (1978305) pet-engine: off t=1977418057
+2026-10-24T07:26:48 ST I (1982985) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:26:48 ST I (1992995) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:26:48 EV 66 agent.idle
+2026-10-24T07:27:18 LINK I (1993385) pet-engine: on t=1992498131
+2026-10-24T07:27:18 ST I (2003005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:27:18 LINK I (2008335) pet-engine: off t=2007448020
+2026-10-24T07:27:18 ST I (2013015) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:27:18 ST I (2023025) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:27:18 EV 67 agent.idle
+2026-10-24T07:27:48 LINK I (2023415) pet-engine: on t=2022528117
+2026-10-24T07:27:48 ST I (2033035) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:27:48 LINK I (2038365) pet-engine: off t=2037478032
+2026-10-24T07:27:48 ST I (2043045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:27:48 ST I (2053055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:27:48 EV 68 agent.idle
+2026-10-24T07:28:18 LINK I (2053445) pet-engine: on t=2052558128
+2026-10-24T07:28:18 ST I (2063065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:28:18 LINK I (2068525) pet-engine: off t=2067638036
+2026-10-24T07:28:18 ST I (2073075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:28:18 ST I (2083085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:28:18 EV 69 agent.idle
+2026-10-24T07:28:48 LINK I (2083605) pet-engine: on t=2082718122
+2026-10-24T07:28:48 ST I (2093095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:28:48 LINK I (2098555) pet-engine: off t=2097668014
+2026-10-24T07:28:48 ST I (2103105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:28:48 ST I (2113115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:28:48 EV 70 task.done
+2026-10-24T07:29:18 LINK I (2113635) pet-engine: on t=2112748085
+2026-10-24T07:29:18 ST I (2123125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:29:18 LINK I (2128585) pet-engine: off t=2127698041
+2026-10-24T07:29:18 ST I (2133135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:29:18 ST I (2143145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:29:18 EV 71 agent.idle
+2026-10-24T07:29:48 LINK I (2143665) pet-engine: on t=2142778135
+2026-10-24T07:29:48 ST I (2153155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:29:48 LINK I (2158745) pet-engine: off t=2157858035
+2026-10-24T07:29:48 ST I (2163165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:29:48 ST I (2173175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:29:48 EV 72 agent.idle
+2026-10-24T07:30:18 LINK I (2173825) pet-engine: on t=2172938127
+2026-10-24T07:30:18 ST I (2183185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:30:18 LINK I (2188775) pet-engine: off t=2187888014
+2026-10-24T07:30:18 ST I (2193195) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:30:18 ST I (2203205) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:30:18 EV 73 agent.idle
+2026-10-24T07:30:48 LINK I (2203855) pet-engine: on t=2202968101
+2026-10-24T07:30:48 ST I (2213215) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:30:48 LINK I (2218805) pet-engine: off t=2217918032
+2026-10-24T07:30:48 ST I (2223225) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:30:48 ST I (2233235) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:30:48 EV 74 agent.idle
+2026-10-24T07:31:18 LINK I (2233885) pet-engine: on t=2232998120
+2026-10-24T07:31:18 ST I (2243245) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:31:18 LINK I (2248965) pet-engine: off t=2248078032
+2026-10-24T07:31:18 ST I (2253255) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:31:18 ST I (2263265) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:31:18 EV 75 agent.idle
+2026-10-24T07:31:48 LINK I (2264045) pet-engine: on t=2263158141
+2026-10-24T07:31:48 ST I (2273275) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:31:48 LINK I (2278995) pet-engine: off t=2278108014
+2026-10-24T07:31:48 ST I (2283285) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:31:48 ST I (2293295) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:31:48 EV 76 agent.idle
+2026-10-24T07:32:18 LINK I (2294075) pet-engine: on t=2293188101
+2026-10-24T07:32:18 ST I (2303305) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:32:18 LINK I (2309025) pet-engine: off t=2308138032
+2026-10-24T07:32:18 ST I (2313315) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:32:18 ST I (2323325) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:32:19 EV 77 agent.idle
+2026-10-24T07:32:49 LINK I (2324105) pet-engine: on t=2323218120
+2026-10-24T07:32:49 ST I (2333335) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:32:49 LINK I (2339185) pet-engine: off t=2338298030
+2026-10-24T07:32:49 ST I (2343345) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:32:49 ST I (2353355) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:32:49 EV 78 agent.idle
+2026-10-24T07:33:19 LINK I (2354265) pet-engine: on t=2353378118
+2026-10-24T07:33:19 ST I (2363365) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:33:19 LINK I (2369215) pet-engine: off t=2368328014
+2026-10-24T07:33:19 ST I (2373375) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:33:19 ST I (2383385) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:33:19 EV 79 agent.idle
+2026-10-24T07:33:49 LINK I (2384295) pet-engine: on t=2383408101
+2026-10-24T07:33:49 ST I (2393395) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:33:49 LINK I (2399245) pet-engine: off t=2398358030
+2026-10-24T07:33:49 ST I (2403405) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:33:49 ST I (2413415) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:33:49 EV 80 task.done
+2026-10-24T07:34:19 LINK I (2414325) pet-engine: on t=2413438104
+2026-10-24T07:34:19 ST I (2423425) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:34:19 LINK I (2429405) pet-engine: off t=2428518062
+2026-10-24T07:34:19 ST I (2433435) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:34:19 ST I (2443445) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:34:19 EV 81 agent.idle
+2026-10-24T07:34:49 LINK I (2444485) pet-engine: on t=2443598158
+2026-10-24T07:34:49 ST I (2453455) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:34:49 LINK I (2459435) pet-engine: off t=2458548017
+2026-10-24T07:34:49 ST I (2463465) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:34:49 ST I (2473475) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:34:49 EV 82 agent.idle
+2026-10-24T07:35:19 LINK I (2474515) pet-engine: on t=2473628107
+2026-10-24T07:35:19 ST I (2483485) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:35:19 LINK I (2489465) pet-engine: off t=2488578032
+2026-10-24T07:35:19 ST I (2493495) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:35:19 ST I (2503505) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:35:19 EV 83 agent.idle
+2026-10-24T07:35:49 LINK I (2504545) pet-engine: on t=2503658118
+2026-10-24T07:35:49 ST I (2513515) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:35:49 LINK I (2519625) pet-engine: off t=2518738032
+2026-10-24T07:35:49 ST I (2523525) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:35:49 ST I (2533535) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:35:49 EV 84 agent.idle
+2026-10-24T07:36:19 LINK I (2534705) pet-engine: on t=2533818133
+2026-10-24T07:36:19 ST I (2543545) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:36:19 LINK I (2549655) pet-engine: off t=2548768014
+2026-10-24T07:36:19 ST I (2553555) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:36:19 ST I (2563565) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:36:19 EV 85 agent.idle
+2026-10-24T07:36:49 LINK I (2564735) pet-engine: on t=2563848101
+2026-10-24T07:36:49 ST I (2573575) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:36:49 LINK I (2579685) pet-engine: off t=2578798032
+2026-10-24T07:36:49 ST I (2583585) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:36:49 ST I (2593595) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:36:49 EV 86 agent.idle
+2026-10-24T07:37:19 LINK I (2594765) pet-engine: on t=2593878118
+2026-10-24T07:37:19 ST I (2603605) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:37:19 LINK I (2609845) pet-engine: off t=2608958030
+2026-10-24T07:37:19 ST I (2613615) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:37:19 ST I (2623625) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:37:19 EV 87 agent.idle
+2026-10-24T07:37:49 LINK I (2624925) pet-engine: on t=2624038136
+2026-10-24T07:37:49 ST I (2633635) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:37:49 LINK I (2639875) pet-engine: off t=2638988014
+2026-10-24T07:37:49 ST I (2643645) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:37:49 ST I (2653655) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:37:49 EV 88 agent.idle
+2026-10-24T07:38:19 LINK I (2654955) pet-engine: on t=2654068121
+2026-10-24T07:38:19 ST I (2663665) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:38:19 LINK I (2669905) pet-engine: off t=2669018030
+2026-10-24T07:38:19 ST I (2673675) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:38:19 ST I (2683685) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:38:19 EV 89 agent.idle
+2026-10-24T07:38:49 LINK I (2684985) pet-engine: on t=2684098116
+2026-10-24T07:38:49 ST I (2693695) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:38:49 LINK I (2700065) pet-engine: off t=2699178032
+2026-10-24T07:38:49 ST I (2703705) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:38:49 ST I (2713715) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:38:49 EV 90 task.done
+2026-10-24T07:39:19 LINK I (2715015) pet-engine: on t=2714128081
+2026-10-24T07:39:19 ST I (2723725) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:39:19 LINK I (2730095) pet-engine: off t=2729208045
+2026-10-24T07:39:19 ST I (2733735) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:39:19 ST I (2743745) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:39:19 EV 91 agent.idle
+2026-10-24T07:39:49 LINK I (2745175) pet-engine: on t=2744288120
+2026-10-24T07:39:49 ST I (2753755) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:39:49 LINK I (2760125) pet-engine: off t=2759238035
+2026-10-24T07:39:49 ST I (2763765) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:39:49 ST I (2773775) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:39:50 EV 92 agent.idle
+2026-10-24T07:40:20 LINK I (2775205) pet-engine: on t=2774318124
+2026-10-24T07:40:20 ST I (2783785) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:40:20 LINK I (2790155) pet-engine: off t=2789268014
+2026-10-24T07:40:20 ST I (2793795) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:40:20 ST I (2803805) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:40:20 EV 93 agent.idle
+2026-10-24T07:40:50 LINK I (2805235) pet-engine: on t=2804348101
+2026-10-24T07:40:50 ST I (2813815) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:40:50 LINK I (2820315) pet-engine: off t=2819428014
+2026-10-24T07:40:50 ST I (2823825) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:40:50 ST I (2833835) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:40:50 EV 94 agent.idle
+2026-10-24T07:41:20 LINK I (2835395) pet-engine: on t=2834508117
+2026-10-24T07:41:20 ST I (2843845) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:41:20 LINK I (2850345) pet-engine: off t=2849458032
+2026-10-24T07:41:20 ST I (2853855) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:41:20 ST I (2863865) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:41:20 EV 95 agent.idle
+2026-10-24T07:41:50 LINK I (2865425) pet-engine: on t=2864538141
+2026-10-24T07:41:50 ST I (2873875) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:41:50 LINK I (2880375) pet-engine: off t=2879488014
+2026-10-24T07:41:50 ST I (2883885) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:41:50 ST I (2893895) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:41:50 EV 96 agent.idle
+2026-10-24T07:42:20 LINK I (2895455) pet-engine: on t=2894568103
+2026-10-24T07:42:20 ST I (2903905) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:42:20 LINK I (2910535) pet-engine: off t=2909648014
+2026-10-24T07:42:20 ST I (2913915) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:42:20 ST I (2923925) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:42:20 EV 97 agent.idle
+2026-10-24T07:42:50 LINK I (2925485) pet-engine: on t=2924598127
+2026-10-24T07:42:50 ST I (2933935) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:42:50 LINK I (2940565) pet-engine: off t=2939678030
+2026-10-24T07:42:50 ST I (2943945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:42:50 ST I (2953955) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:42:50 EV 98 agent.idle
+2026-10-24T07:43:20 LINK I (2955645) pet-engine: on t=2954758120
+2026-10-24T07:43:20 ST I (2963965) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:43:20 LINK I (2970595) pet-engine: off t=2969708014
+2026-10-24T07:43:20 ST I (2973975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:43:20 ST I (2983985) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:43:20 EV 99 agent.idle
+2026-10-24T07:43:50 LINK I (2985675) pet-engine: on t=2984788103
+2026-10-24T07:43:50 ST I (2993995) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:43:50 LINK I (3000755) pet-engine: off t=2999868014
+2026-10-24T07:43:50 ST I (3004005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:43:50 ST I (3014015) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:43:50 EV 100 task.done
+2026-10-24T07:44:20 LINK I (3015705) pet-engine: on t=3014818110
+2026-10-24T07:44:20 ST I (3024025) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:44:20 LINK I (3030785) pet-engine: off t=3029898045
+2026-10-24T07:44:20 ST I (3034035) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:44:20 ST I (3044045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:44:20 EV 101 agent.idle
+2026-10-24T07:44:50 LINK I (3045865) pet-engine: on t=3044978137
+2026-10-24T07:44:50 ST I (3054055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:44:50 LINK I (3060815) pet-engine: off t=3059928019
+2026-10-24T07:44:50 ST I (3064065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:44:50 ST I (3074075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:44:50 EV 102 agent.idle
+2026-10-24T07:45:20 LINK I (3075895) pet-engine: on t=3075008109
+2026-10-24T07:45:20 ST I (3084085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:45:20 LINK I (3090845) pet-engine: off t=3089958033
+2026-10-24T07:45:20 ST I (3094095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:45:20 ST I (3104105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:45:20 EV 103 agent.idle
+2026-10-24T07:45:50 LINK I (3105925) pet-engine: on t=3105038126
+2026-10-24T07:45:50 ST I (3114115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:45:50 LINK I (3121005) pet-engine: off t=3120118033
+2026-10-24T07:45:50 ST I (3124125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:45:50 ST I (3134135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:45:50 EV 104 agent.idle
+2026-10-24T07:46:20 LINK I (3136085) pet-engine: on t=3135198120
+2026-10-24T07:46:20 ST I (3144145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:46:20 LINK I (3151035) pet-engine: off t=3150148016
+2026-10-24T07:46:20 ST I (3154155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:46:20 ST I (3164165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:46:20 EV 105 agent.idle
+2026-10-24T07:46:51 LINK I (3166115) pet-engine: on t=3165228103
+2026-10-24T07:46:51 ST I (3174175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:46:51 LINK I (3181195) pet-engine: off t=3180308016
+2026-10-24T07:46:51 ST I (3184185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:46:51 ST I (3194195) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:46:51 EV 106 agent.idle
+2026-10-24T07:47:21 LINK I (3196145) pet-engine: on t=3195258127
+2026-10-24T07:47:21 ST I (3204205) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:47:21 LINK I (3211225) pet-engine: off t=3210338032
+2026-10-24T07:47:21 ST I (3214215) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:47:21 ST I (3224225) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:47:21 EV 107 agent.idle
+2026-10-24T07:47:51 LINK I (3226305) pet-engine: on t=3225418120
+2026-10-24T07:47:51 ST I (3234235) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:47:51 LINK I (3241255) pet-engine: off t=3240368016
+2026-10-24T07:47:51 ST I (3244245) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:47:51 ST I (3254255) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:47:51 EV 108 agent.idle
+2026-10-24T07:48:21 LINK I (3256335) pet-engine: on t=3255448103
+2026-10-24T07:48:21 ST I (3264265) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:48:21 LINK I (3271415) pet-engine: off t=3270528016
+2026-10-24T07:48:21 ST I (3274275) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:48:21 ST I (3284285) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:48:21 EV 109 agent.idle
+2026-10-24T07:48:51 LINK I (3286365) pet-engine: on t=3285478127
+2026-10-24T07:48:51 ST I (3294295) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:48:51 LINK I (3301445) pet-engine: off t=3300558033
+2026-10-24T07:48:51 ST I (3304305) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:48:51 ST I (3314315) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:48:51 EV 110 task.done
+2026-10-24T07:49:21 LINK I (3316525) pet-engine: on t=3315638123
+2026-10-24T07:49:21 ST I (3324325) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:49:21 LINK I (3331475) pet-engine: off t=3330588027
+2026-10-24T07:49:21 ST I (3334335) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:49:21 ST I (3344345) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:49:21 EV 111 agent.idle
+2026-10-24T07:49:51 LINK I (3346555) pet-engine: on t=3345668120
+2026-10-24T07:49:51 ST I (3354355) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:49:51 LINK I (3361505) pet-engine: off t=3360618037
+2026-10-24T07:49:51 ST I (3364365) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:49:51 ST I (3374375) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:49:51 EV 112 agent.idle
+2026-10-24T07:50:21 LINK I (3376585) pet-engine: on t=3375698132
+2026-10-24T07:50:21 ST I (3384385) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:50:21 LINK I (3391665) pet-engine: off t=3390778053
+2026-10-24T07:50:21 ST I (3394395) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:50:21 ST I (3404405) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:50:21 EV 113 agent.idle
+2026-10-24T07:50:51 LINK I (3406745) pet-engine: on t=3405858122
+2026-10-24T07:50:51 ST I (3414415) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:50:51 LINK I (3421695) pet-engine: off t=3420808016
+2026-10-24T07:50:51 ST I (3424425) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:50:51 ST I (3434435) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:50:51 EV 114 agent.idle
+2026-10-24T07:51:21 LINK I (3436775) pet-engine: on t=3435888101
+2026-10-24T07:51:21 ST I (3444445) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:51:21 LINK I (3451725) pet-engine: off t=3450838033
+2026-10-24T07:51:21 ST I (3454455) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:51:21 ST I (3464465) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:51:21 EV 115 agent.idle
+2026-10-24T07:51:51 LINK I (3466805) pet-engine: on t=3465918127
+2026-10-24T07:51:51 ST I (3474475) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:51:51 LINK I (3481885) pet-engine: off t=3480998051
+2026-10-24T07:51:51 ST I (3484485) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:51:51 ST I (3494495) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:51:51 EV 116 agent.idle
+2026-10-24T07:52:21 LINK I (3496965) pet-engine: on t=3496078123
+2026-10-24T07:52:21 ST I (3504505) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:52:21 LINK I (3511915) pet-engine: off t=3511028016
+2026-10-24T07:52:21 ST I (3514515) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:52:21 ST I (3524525) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:52:21 EV 117 agent.idle
+2026-10-24T07:52:51 LINK I (3526995) pet-engine: on t=3526108103
+2026-10-24T07:52:51 ST I (3534535) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:52:51 LINK I (3541945) pet-engine: off t=3541058032
+2026-10-24T07:52:51 ST I (3544545) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:52:51 ST I (3554555) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:52:51 EV 118 agent.idle
+2026-10-24T07:53:21 LINK I (3557025) pet-engine: on t=3556138126
+2026-10-24T07:53:21 ST I (3564565) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:53:21 LINK I (3572105) pet-engine: off t=3571218053
+2026-10-24T07:53:21 ST I (3574575) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:53:21 ST I (3584585) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:53:22 EV 119 agent.idle
+2026-10-24T07:53:52 LINK I (3587185) pet-engine: on t=3586298122
+2026-10-24T07:53:52 ST I (3594595) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:53:52 LINK I (3602135) pet-engine: off t=3601248016
+2026-10-24T07:53:52 ST I (3604605) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:53:52 ST I (3614615) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:53:52 EV 120 task.done
+2026-10-24T07:54:22 LINK I (3617215) pet-engine: on t=3616328085
+2026-10-24T07:54:22 ST I (3624625) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:54:22 LINK I (3632165) pet-engine: off t=3631278045
+2026-10-24T07:54:22 ST I (3634635) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:54:22 ST I (3644645) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:54:22 EV 121 agent.idle
+2026-10-24T07:54:52 LINK I (3647245) pet-engine: on t=3646358143
+2026-10-24T07:54:52 ST I (3654655) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:54:52 LINK I (3662325) pet-engine: off t=3661438056
+2026-10-24T07:54:52 ST I (3664665) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:54:52 ST I (3674675) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:54:52 EV 122 agent.idle
+2026-10-24T07:55:22 LINK I (3677405) pet-engine: on t=3676518128
+2026-10-24T07:55:22 ST I (3684685) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:55:22 LINK I (3692355) pet-engine: off t=3691468016
+2026-10-24T07:55:22 ST I (3694695) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:55:22 ST I (3704705) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:55:22 EV 123 agent.idle
+2026-10-24T07:55:52 LINK I (3707435) pet-engine: on t=3706548103
+2026-10-24T07:55:52 ST I (3714715) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:55:52 LINK I (3722385) pet-engine: off t=3721498033
+2026-10-24T07:55:52 ST I (3724725) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:55:52 ST I (3734735) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:55:52 EV 124 agent.idle
+2026-10-24T07:56:22 LINK I (3737465) pet-engine: on t=3736578127
+2026-10-24T07:56:22 ST I (3744745) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:56:22 LINK I (3752545) pet-engine: off t=3751658051
+2026-10-24T07:56:22 ST I (3754755) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:56:22 ST I (3764765) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:56:22 EV 125 agent.idle
+2026-10-24T07:56:52 LINK I (3767625) pet-engine: on t=3766738143
+2026-10-24T07:56:52 ST I (3774775) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:56:52 LINK I (3782575) pet-engine: off t=3781688016
+2026-10-24T07:56:52 ST I (3784785) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:56:52 ST I (3794795) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:56:52 EV 126 agent.idle
+2026-10-24T07:57:22 LINK I (3797655) pet-engine: on t=3796768103
+2026-10-24T07:57:22 ST I (3804805) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:57:22 LINK I (3812605) pet-engine: off t=3811718032
+2026-10-24T07:57:22 ST I (3814815) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:57:22 ST I (3824825) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:57:22 EV 127 agent.idle
+2026-10-24T07:57:52 LINK I (3827685) pet-engine: on t=3826798127
+2026-10-24T07:57:52 ST I (3834835) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:57:52 LINK I (3842765) pet-engine: off t=3841878053
+2026-10-24T07:57:52 ST I (3844845) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:57:52 ST I (3854855) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:57:52 EV 128 agent.idle
+2026-10-24T07:58:22 LINK I (3857845) pet-engine: on t=3856958123
+2026-10-24T07:58:22 ST I (3864865) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:58:22 LINK I (3872795) pet-engine: off t=3871908016
+2026-10-24T07:58:22 ST I (3874875) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:58:22 ST I (3884885) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:58:22 EV 129 agent.idle
+2026-10-24T07:58:52 LINK I (3887875) pet-engine: on t=3886988103
+2026-10-24T07:58:52 ST I (3894895) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:58:52 LINK I (3902825) pet-engine: off t=3901938033
+2026-10-24T07:58:52 ST I (3904905) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:58:52 ST I (3914915) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:58:52 EV 130 task.done
+2026-10-24T07:59:22 LINK I (3917905) pet-engine: on t=3917018108
+2026-10-24T07:59:22 ST I (3924925) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:59:22 LINK I (3932985) pet-engine: off t=3932098045
+2026-10-24T07:59:22 ST I (3934935) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:59:22 ST I (3944945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:59:22 EV 131 agent.idle
+2026-10-24T07:59:52 LINK I (3948065) pet-engine: on t=3947178160
+2026-10-24T07:59:52 ST I (3954955) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:59:52 LINK I (3963015) pet-engine: off t=3962128019
+2026-10-24T07:59:52 ST I (3964965) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:59:52 ST I (3974975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T07:59:52 EV 132 agent.idle
+2026-10-24T08:00:22 LINK I (3978095) pet-engine: on t=3977208109
+2026-10-24T08:00:22 ST I (3984985) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:00:22 LINK I (3993045) pet-engine: off t=3992158033
+2026-10-24T08:00:23 ST I (3994995) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:00:23 ST I (4005005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:00:23 EV 133 agent.idle
+2026-10-24T08:00:53 LINK I (4008125) pet-engine: on t=4007238127
+2026-10-24T08:00:53 ST I (4015015) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:00:53 LINK I (4023205) pet-engine: off t=4022318032
+2026-10-24T08:00:53 ST I (4025025) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:00:53 ST I (4035035) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:00:53 EV 134 agent.idle
+2026-10-24T08:01:23 LINK I (4038285) pet-engine: on t=4037398120
+2026-10-24T08:01:23 ST I (4045045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:01:23 LINK I (4053235) pet-engine: off t=4052348016
+2026-10-24T08:01:23 ST I (4055055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:01:23 ST I (4065065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:01:23 EV 135 agent.idle
+2026-10-24T08:01:53 LINK I (4068315) pet-engine: on t=4067428103
+2026-10-24T08:01:53 ST I (4075075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:01:53 LINK I (4083395) pet-engine: off t=4082508016
+2026-10-24T08:01:53 ST I (4085085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:01:53 ST I (4095095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:01:53 EV 136 agent.idle
+2026-10-24T08:02:23 LINK I (4098345) pet-engine: on t=4097458126
+2026-10-24T08:02:23 ST I (4105105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:02:23 LINK I (4113425) pet-engine: off t=4112538034
+2026-10-24T08:02:23 ST I (4115115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:02:23 ST I (4125125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:02:23 EV 137 agent.idle
+2026-10-24T08:02:53 LINK I (4128505) pet-engine: on t=4127618120
+2026-10-24T08:02:53 ST I (4135135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:02:53 LINK I (4143455) pet-engine: off t=4142568016
+2026-10-24T08:02:53 ST I (4145145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:02:53 ST I (4155155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:02:53 EV 138 agent.idle
+2026-10-24T08:03:23 LINK I (4158535) pet-engine: on t=4157648103
+2026-10-24T08:03:23 ST I (4165165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:03:23 LINK I (4173615) pet-engine: off t=4172728016
+2026-10-24T08:03:23 ST I (4175175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:03:23 ST I (4185185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:03:23 EV 139 agent.idle
+2026-10-24T08:03:53 LINK I (4188695) pet-engine: on t=4187808117
+2026-10-24T08:03:53 ST I (4195195) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:03:53 LINK I (4203645) pet-engine: off t=4202758034
+2026-10-24T08:03:53 ST I (4205205) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:03:53 ST I (4215215) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:03:53 EV 140 task.done
+2026-10-24T08:04:23 LINK I (4218725) pet-engine: on t=4217838102
+2026-10-24T08:04:23 ST I (4225225) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:04:23 LINK I (4233675) pet-engine: off t=4232788027
+2026-10-24T08:04:23 ST I (4235235) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:04:23 ST I (4245245) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:04:23 EV 141 agent.idle
+2026-10-24T08:04:53 LINK I (4248755) pet-engine: on t=4247868118
+2026-10-24T08:04:53 ST I (4255255) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:04:53 LINK I (4263835) pet-engine: off t=4262948019
+2026-10-24T08:04:53 ST I (4265265) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:04:53 ST I (4275275) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:04:53 EV 142 agent.idle
+2026-10-24T08:05:23 LINK I (4278785) pet-engine: on t=4277898133
+2026-10-24T08:05:23 ST I (4285285) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:05:23 LINK I (4293865) pet-engine: off t=4292978032
+2026-10-24T08:05:23 ST I (4295295) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:05:23 ST I (4305305) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:05:23 EV 143 agent.idle
+2026-10-24T08:05:53 LINK I (4308945) pet-engine: on t=4308058120
+2026-10-24T08:05:53 ST I (4315315) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:05:53 LINK I (4323895) pet-engine: off t=4323008016
+2026-10-24T08:05:53 ST I (4325325) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:05:53 ST I (4335335) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:05:53 EV 144 agent.idle
+2026-10-24T08:06:23 LINK I (4338975) pet-engine: on t=4338088103
+2026-10-24T08:06:23 ST I (4345345) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:06:23 LINK I (4354055) pet-engine: off t=4353168016
+2026-10-24T08:06:23 ST I (4355355) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:06:23 ST I (4365365) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:06:23 EV 145 agent.idle
+2026-10-24T08:06:53 LINK I (4369005) pet-engine: on t=4368118126
+2026-10-24T08:06:53 ST I (4375375) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:06:53 LINK I (4384085) pet-engine: off t=4383198034
+2026-10-24T08:06:53 ST I (4385385) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:06:53 ST I (4395395) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:06:54 EV 146 agent.idle
+2026-10-24T08:07:24 LINK I (4399165) pet-engine: on t=4398278141
+2026-10-24T08:07:24 ST I (4405405) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:07:24 LINK I (4414115) pet-engine: off t=4413228016
+2026-10-24T08:07:24 ST I (4415415) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:07:24 ST I (4425425) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:07:24 EV 147 agent.idle
+2026-10-24T08:07:54 LINK I (4429195) pet-engine: on t=4428308103
+2026-10-24T08:07:54 ST I (4435435) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:07:54 LINK I (4444275) pet-engine: off t=4443388016
+2026-10-24T08:07:54 ST I (4445445) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:07:54 ST I (4455455) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:07:54 EV 148 agent.idle
+2026-10-24T08:08:24 LINK I (4459225) pet-engine: on t=4458338126
+2026-10-24T08:08:24 ST I (4465465) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:08:24 LINK I (4474305) pet-engine: off t=4473418034
+2026-10-24T08:08:24 ST I (4475475) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:08:24 ST I (4485485) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:08:24 EV 149 agent.idle
+2026-10-24T08:08:54 LINK I (4489385) pet-engine: on t=4488498143
+2026-10-24T08:08:54 ST I (4495495) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:08:54 LINK I (4504335) pet-engine: off t=4503448016
+2026-10-24T08:08:54 ST I (4505505) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:08:54 ST I (4515515) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:08:54 EV 150 task.done
+2026-10-24T08:09:24 LINK I (4519415) pet-engine: on t=4518528085
+2026-10-24T08:09:24 ST I (4525525) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:09:24 LINK I (4534365) pet-engine: off t=4533478045
+2026-10-24T08:09:24 ST I (4535535) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:09:24 ST I (4545545) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:09:24 EV 151 agent.idle
+2026-10-24T08:09:54 LINK I (4549445) pet-engine: on t=4548558143
+2026-10-24T08:09:54 ST I (4555555) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:09:54 LINK I (4564525) pet-engine: off t=4563638054
+2026-10-24T08:09:54 ST I (4565565) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:09:54 ST I (4575575) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:09:54 EV 152 agent.idle
+2026-10-24T08:10:24 LINK I (4579605) pet-engine: on t=4578718128
+2026-10-24T08:10:24 ST I (4585585) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:10:24 LINK I (4594555) pet-engine: off t=4593668016
+2026-10-24T08:10:24 ST I (4595595) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:10:24 ST I (4605605) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:10:24 EV 153 agent.idle
+2026-10-24T08:10:54 LINK I (4609635) pet-engine: on t=4608748103
+2026-10-24T08:10:54 ST I (4615615) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:10:54 LINK I (4624585) pet-engine: off t=4623698032
+2026-10-24T08:10:54 ST I (4625625) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:10:54 ST I (4635635) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:10:54 EV 154 agent.idle
+2026-10-24T08:11:24 LINK I (4639665) pet-engine: on t=4638778121
+2026-10-24T08:11:24 ST I (4645645) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:11:24 LINK I (4654745) pet-engine: off t=4653858034
+2026-10-24T08:11:24 ST I (4655655) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:11:24 ST I (4665665) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:11:24 EV 155 agent.idle
+2026-10-24T08:11:54 LINK I (4669825) pet-engine: on t=4668938122
+2026-10-24T08:11:54 ST I (4675675) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:11:54 LINK I (4684775) pet-engine: off t=4683888016
+2026-10-24T08:11:54 ST I (4685685) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:11:54 ST I (4695695) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:11:54 EV 156 agent.idle
+2026-10-24T08:12:24 LINK I (4699855) pet-engine: on t=4698968103
+2026-10-24T08:12:24 ST I (4705705) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:12:24 LINK I (4714805) pet-engine: off t=4713918034
+2026-10-24T08:12:24 ST I (4715715) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:12:24 ST I (4725725) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:12:24 EV 157 agent.idle
+2026-10-24T08:12:54 LINK I (4729885) pet-engine: on t=4728998120
+2026-10-24T08:12:54 ST I (4735735) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:12:54 LINK I (4744965) pet-engine: off t=4744078034
+2026-10-24T08:12:54 ST I (4745745) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:12:54 ST I (4755755) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:12:54 EV 158 agent.idle
+2026-10-24T08:13:24 LINK I (4760045) pet-engine: on t=4759158134
+2026-10-24T08:13:24 ST I (4765765) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:13:24 LINK I (4774995) pet-engine: off t=4774108016
+2026-10-24T08:13:24 ST I (4775775) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:13:24 ST I (4785785) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:13:24 EV 159 agent.idle
+2026-10-24T08:13:54 LINK I (4790075) pet-engine: on t=4789188103
+2026-10-24T08:13:54 ST I (4795795) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:13:54 LINK I (4805025) pet-engine: off t=4804138034
+2026-10-24T08:13:54 ST I (4805805) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:13:54 ST I (4815815) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:13:55 EV 160 task.done
+2026-10-24T08:14:25 LINK I (4820105) pet-engine: on t=4819218102
+2026-10-24T08:14:25 ST I (4825825) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:14:25 LINK I (4835185) pet-engine: off t=4834298043
+2026-10-24T08:14:25 ST I (4835835) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:14:25 ST I (4845845) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:14:25 EV 161 agent.idle
+2026-10-24T08:14:55 LINK I (4850265) pet-engine: on t=4849378139
+2026-10-24T08:14:55 ST I (4855855) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:14:55 LINK I (4865215) pet-engine: off t=4864328019
+2026-10-24T08:14:55 ST I (4865865) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:14:55 ST I (4875875) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:14:55 EV 162 agent.idle
+2026-10-24T08:15:25 LINK I (4880295) pet-engine: on t=4879408109
+2026-10-24T08:15:25 ST I (4885885) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:15:25 LINK I (4895245) pet-engine: off t=4894358032
+2026-10-24T08:15:25 ST I (4895895) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:15:25 ST I (4905905) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:15:25 EV 163 agent.idle
+2026-10-24T08:15:55 LINK I (4910325) pet-engine: on t=4909438120
+2026-10-24T08:15:55 ST I (4915915) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:15:55 LINK I (4925405) pet-engine: off t=4924518034
+2026-10-24T08:15:55 ST I (4925925) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:15:55 ST I (4935935) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:15:55 EV 164 agent.idle
+2026-10-24T08:16:25 LINK I (4940355) pet-engine: on t=4939468105
+2026-10-24T08:16:25 ST I (4945945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:16:25 LINK I (4955435) pet-engine: off t=4954548016
+2026-10-24T08:16:25 ST I (4955955) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:16:25 ST I (4965965) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:16:25 EV 165 agent.idle
+2026-10-24T08:16:55 LINK I (4970515) pet-engine: on t=4969628103
+2026-10-24T08:16:55 ST I (4975975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:16:55 LINK I (4985465) pet-engine: off t=4984578034
+2026-10-24T08:16:55 ST I (4985985) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:16:55 ST I (4995995) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:16:55 EV 166 agent.idle
+2026-10-24T08:17:25 LINK I (5000545) pet-engine: on t=4999658120
+2026-10-24T08:17:25 ST I (5006005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:17:25 LINK I (5015625) pet-engine: off t=5014738034
+2026-10-24T08:17:25 ST I (5016015) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:17:25 ST I (5026025) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:17:25 EV 167 agent.idle
+2026-10-24T08:17:55 LINK I (5030575) pet-engine: on t=5029688106
+2026-10-24T08:17:55 ST I (5036035) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:17:55 LINK I (5045655) pet-engine: off t=5044768016
+2026-10-24T08:17:55 ST I (5046045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:17:55 ST I (5056055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:17:55 EV 168 agent.idle
+2026-10-24T08:18:25 LINK I (5060735) pet-engine: on t=5059848126
+2026-10-24T08:18:25 ST I (5066065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:18:25 LINK I (5075685) pet-engine: off t=5074798034
+2026-10-24T08:18:25 ST I (5076075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:18:25 ST I (5086085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:18:25 EV 169 agent.idle
+2026-10-24T08:18:55 LINK I (5090765) pet-engine: on t=5089878120
+2026-10-24T08:18:55 ST I (5096095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:18:55 LINK I (5105715) pet-engine: off t=5104828016
+2026-10-24T08:18:55 ST I (5106105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:18:55 ST I (5116115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:18:55 EV 170 task.done
+2026-10-24T08:19:25 LINK I (5120795) pet-engine: on t=5119908085
+2026-10-24T08:19:25 ST I (5126125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:19:25 LINK I (5135875) pet-engine: off t=5134988028
+2026-10-24T08:19:25 ST I (5136135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:19:25 ST I (5146145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:19:25 EV 171 agent.idle
+2026-10-24T08:19:55 LINK I (5150955) pet-engine: on t=5150068122
+2026-10-24T08:19:55 ST I (5156155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:19:55 LINK I (5165905) pet-engine: off t=5165018035
+2026-10-24T08:19:55 ST I (5166165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:19:55 ST I (5176175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:19:55 EV 172 agent.idle
+2026-10-24T08:20:25 LINK I (5180985) pet-engine: on t=5180098126
+2026-10-24T08:20:25 ST I (5186185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:20:25 LINK I (5195935) pet-engine: off t=5195048016
+2026-10-24T08:20:25 ST I (5196195) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:20:25 ST I (5206205) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:20:25 EV 173 agent.idle
+2026-10-24T08:20:55 LINK I (5211015) pet-engine: on t=5210128103
+2026-10-24T08:20:55 ST I (5216215) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:20:55 LINK I (5226095) pet-engine: off t=5225208016
+2026-10-24T08:20:55 ST I (5226225) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:20:55 ST I (5236235) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:20:56 EV 174 agent.idle
+2026-10-24T08:21:26 LINK I (5241045) pet-engine: on t=5240158123
+2026-10-24T08:21:26 ST I (5246245) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:21:26 LINK I (5256125) pet-engine: off t=5255238034
+2026-10-24T08:21:26 ST I (5256255) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:21:26 ST I (5266265) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:21:26 EV 175 agent.idle
+2026-10-24T08:21:56 LINK I (5271205) pet-engine: on t=5270318120
+2026-10-24T08:21:56 ST I (5276275) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:21:56 LINK I (5286155) pet-engine: off t=5285268016
+2026-10-24T08:21:56 ST I (5286285) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:21:56 ST I (5296295) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:21:56 EV 176 agent.idle
+2026-10-24T08:22:26 LINK I (5301235) pet-engine: on t=5300348103
+2026-10-24T08:22:26 ST I (5306305) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:22:26 ST I (5316315) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:22:26 LINK I (5316315) pet-engine: off t=5315428315
+2026-10-24T08:22:26 ST I (5326325) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:22:26 EV 177 agent.idle
+2026-10-24T08:22:56 LINK I (5331265) pet-engine: on t=5330378122
+2026-10-24T08:22:56 ST I (5336335) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:22:56 ST I (5346345) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:22:56 LINK I (5346345) pet-engine: off t=5345458344
+2026-10-24T08:22:56 ST I (5356355) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:22:56 EV 178 agent.idle
+2026-10-24T08:23:26 LINK I (5361425) pet-engine: on t=5360538143
+2026-10-24T08:23:26 ST I (5366365) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:23:26 ST I (5376375) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:23:26 LINK I (5376375) pet-engine: off t=5375488321
+2026-10-24T08:23:26 ST I (5386385) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:23:26 EV 179 agent.idle
+2026-10-24T08:23:56 LINK I (5391455) pet-engine: on t=5390568103
+2026-10-24T08:23:56 ST I (5396395) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:23:56 ST I (5406405) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:23:56 LINK I (5406535) pet-engine: off t=5405648026
+2026-10-24T08:23:56 ST I (5416415) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:23:56 EV 180 task.done
+2026-10-24T08:24:26 LINK I (5421485) pet-engine: on t=5420598097
+2026-10-24T08:24:26 ST I (5426425) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:24:26 ST I (5436435) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:24:26 LINK I (5436565) pet-engine: off t=5435678040
+2026-10-24T08:24:26 ST I (5446445) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:24:26 EV 181 agent.idle
+2026-10-24T08:24:56 LINK I (5451645) pet-engine: on t=5450758146
+2026-10-24T08:24:56 ST I (5456455) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:24:56 ST I (5466465) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:24:56 LINK I (5466595) pet-engine: off t=5465708023
+2026-10-24T08:24:56 ST I (5476475) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:24:56 EV 182 agent.idle
+2026-10-24T08:25:26 LINK I (5481675) pet-engine: on t=5480788096
+2026-10-24T08:25:26 ST I (5486485) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:25:26 ST I (5496495) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:25:26 LINK I (5496625) pet-engine: off t=5495738047
+2026-10-24T08:25:26 ST I (5506505) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:25:26 EV 183 agent.idle
+2026-10-24T08:25:56 LINK I (5511705) pet-engine: on t=5510818112
+2026-10-24T08:25:56 ST I (5516515) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:25:56 ST I (5526525) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:25:56 LINK I (5526785) pet-engine: off t=5525897949
+2026-10-24T08:25:56 ST I (5536535) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:25:56 EV 184 agent.idle
+2026-10-24T08:26:26 LINK I (5541865) pet-engine: on t=5540978115
+2026-10-24T08:26:26 ST I (5546545) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:26:26 ST I (5556555) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:26:26 LINK I (5556815) pet-engine: off t=5555927909
+2026-10-24T08:26:26 ST I (5566565) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:26:26 EV 185 agent.idle
+2026-10-24T08:26:56 LINK I (5571895) pet-engine: on t=5571008095
+2026-10-24T08:26:56 ST I (5576575) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:26:56 ST I (5586585) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:26:56 LINK I (5586845) pet-engine: off t=5585957940
+2026-10-24T08:26:56 ST I (5596595) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:26:56 EV 186 agent.idle
+2026-10-24T08:27:26 LINK I (5601925) pet-engine: on t=5601038112
+2026-10-24T08:27:26 ST I (5606605) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:27:26 ST I (5616615) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:27:26 LINK I (5617005) pet-engine: off t=5616118040
+2026-10-24T08:27:26 ST I (5626625) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:27:26 EV 187 agent.idle
+2026-10-24T08:27:56 LINK I (5632085) pet-engine: on t=5631198133
+2026-10-24T08:27:56 ST I (5636635) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:27:56 ST I (5646645) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:27:56 LINK I (5647035) pet-engine: off t=5646148026
+2026-10-24T08:27:56 ST I (5656655) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:27:56 EV 188 agent.idle
+2026-10-24T08:28:26 LINK I (5662115) pet-engine: on t=5661228116
+2026-10-24T08:28:26 ST I (5666665) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:28:26 ST I (5676675) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:28:26 LINK I (5677065) pet-engine: off t=5676178041
+2026-10-24T08:28:26 ST I (5686685) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:28:27 EV 189 agent.idle
+2026-10-24T08:28:57 LINK I (5692145) pet-engine: on t=5691258108
+2026-10-24T08:28:57 ST I (5696695) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:28:57 ST I (5706705) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:28:57 LINK I (5707225) pet-engine: off t=5706338026
+2026-10-24T08:28:57 ST I (5716715) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:28:57 EV 190 task.done
+2026-10-24T08:29:27 LINK I (5722305) pet-engine: on t=5721418078
+2026-10-24T08:29:27 ST I (5726725) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:29:27 ST I (5736735) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:29:27 LINK I (5737255) pet-engine: off t=5736368024
+2026-10-24T08:29:27 ST I (5746745) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:29:27 EV 191 agent.idle
+2026-10-24T08:29:57 LINK I (5752335) pet-engine: on t=5751448076
+2026-10-24T08:29:57 ST I (5756755) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:29:57 ST I (5766765) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:29:57 LINK I (5767285) pet-engine: off t=5766398034
+2026-10-24T08:29:57 ST I (5776775) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:29:57 EV 192 agent.idle
+2026-10-24T08:30:27 LINK I (5782365) pet-engine: on t=5781478091
+2026-10-24T08:30:27 ST I (5786785) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:30:27 ST I (5796795) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:30:27 LINK I (5797445) pet-engine: off t=5796558032
+2026-10-24T08:30:27 ST I (5806805) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:30:27 EV 193 agent.idle
+2026-10-24T08:30:57 LINK I (5812525) pet-engine: on t=5811638132
+2026-10-24T08:30:57 ST I (5816815) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:30:57 ST I (5826825) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:30:57 LINK I (5827475) pet-engine: off t=5826588018
+2026-10-24T08:30:57 ST I (5836835) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:30:57 EV 194 agent.idle
+2026-10-24T08:31:27 LINK I (5842555) pet-engine: on t=5841668085
+2026-10-24T08:31:27 ST I (5846845) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:31:27 ST I (5856855) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:31:27 LINK I (5857505) pet-engine: off t=5856618034
+2026-10-24T08:31:27 ST I (5866865) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:31:27 EV 195 agent.idle
+2026-10-24T08:31:57 LINK I (5872585) pet-engine: on t=5871698101
+2026-10-24T08:31:57 ST I (5876875) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:31:57 ST I (5886885) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:31:57 LINK I (5887665) pet-engine: off t=5886778032
+2026-10-24T08:31:57 ST I (5896895) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:31:57 EV 196 agent.idle
+2026-10-24T08:32:27 LINK I (5902745) pet-engine: on t=5901858119
+2026-10-24T08:32:27 ST I (5906905) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:32:27 ST I (5916915) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:32:27 LINK I (5917695) pet-engine: off t=5916808014
+2026-10-24T08:32:27 ST I (5926925) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:32:27 EV 197 agent.idle
+2026-10-24T08:32:57 LINK I (5932775) pet-engine: on t=5931888090
+2026-10-24T08:32:57 ST I (5936935) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:32:57 ST I (5946945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:32:57 LINK I (5947725) pet-engine: off t=5946838032
+2026-10-24T08:32:57 ST I (5956955) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:32:57 EV 198 agent.idle
+2026-10-24T08:33:27 LINK I (5962805) pet-engine: on t=5961918108
+2026-10-24T08:33:27 ST I (5966965) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:33:27 ST I (5976975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:33:27 LINK I (5977885) pet-engine: off t=5976998030
+2026-10-24T08:33:27 ST I (5986985) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:33:27 EV 199 agent.idle
+2026-10-24T08:33:57 LINK I (5992965) pet-engine: on t=5992078132
+2026-10-24T08:33:57 ST I (5996995) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:33:57 ST I (6007005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:33:57 LINK I (6007915) pet-engine: off t=6007028018
+2026-10-24T08:33:57 ST I (6017015) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:33:57 EV 200 task.done
+2026-10-24T08:34:27 LINK I (6022995) pet-engine: on t=6022108081
+2026-10-24T08:34:27 ST I (6027025) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:34:27 ST I (6037035) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:34:27 LINK I (6037945) pet-engine: off t=6037058032
+2026-10-24T08:34:27 ST I (6047045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:34:27 EV 201 agent.idle
+2026-10-24T08:34:57 LINK I (6053025) pet-engine: on t=6052138132
+2026-10-24T08:34:57 ST I (6057055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:34:57 ST I (6067065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:34:57 LINK I (6068105) pet-engine: off t=6067218051
+2026-10-24T08:34:57 ST I (6077075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:34:58 EV 202 agent.idle
+2026-10-24T08:35:28 LINK I (6083185) pet-engine: on t=6082298119
+2026-10-24T08:35:28 ST I (6087085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:35:28 ST I (6097095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:35:28 LINK I (6098135) pet-engine: off t=6097248014
+2026-10-24T08:35:28 ST I (6107105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:35:28 EV 203 agent.idle
+2026-10-24T08:35:58 LINK I (6113215) pet-engine: on t=6112328090
+2026-10-24T08:35:58 ST I (6117115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:35:58 ST I (6127125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:35:58 LINK I (6128165) pet-engine: off t=6127278032
+2026-10-24T08:35:58 ST I (6137135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:35:58 EV 204 agent.idle
+2026-10-24T08:36:28 LINK I (6143245) pet-engine: on t=6142358115
+2026-10-24T08:36:28 ST I (6147145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:36:28 ST I (6157155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:36:28 LINK I (6158325) pet-engine: off t=6157438051
+2026-10-24T08:36:28 ST I (6167165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:36:28 EV 205 agent.idle
+2026-10-24T08:36:58 LINK I (6173405) pet-engine: on t=6172518112
+2026-10-24T08:36:58 ST I (6177175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:36:58 ST I (6187185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:36:58 LINK I (6188355) pet-engine: off t=6187468014
+2026-10-24T08:36:58 ST I (6197195) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:36:58 EV 206 agent.idle
+2026-10-24T08:37:28 LINK I (6203435) pet-engine: on t=6202548090
+2026-10-24T08:37:28 ST I (6207205) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:37:28 ST I (6217215) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:37:28 LINK I (6218385) pet-engine: off t=6217498032
+2026-10-24T08:37:28 ST I (6227225) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:37:28 EV 207 agent.idle
+2026-10-24T08:37:58 LINK I (6233465) pet-engine: on t=6232578114
+2026-10-24T08:37:58 ST I (6237235) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:37:58 ST I (6247245) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:37:58 LINK I (6248545) pet-engine: off t=6247658050
+2026-10-24T08:37:58 ST I (6257255) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:37:58 EV 208 agent.idle
+2026-10-24T08:38:28 LINK I (6263625) pet-engine: on t=6262738130
+2026-10-24T08:38:28 ST I (6267265) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:38:28 ST I (6277275) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:38:28 LINK I (6278575) pet-engine: off t=6277688014
+2026-10-24T08:38:28 ST I (6287285) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:38:28 EV 209 agent.idle
+2026-10-24T08:38:58 LINK I (6293655) pet-engine: on t=6292768092
+2026-10-24T08:38:58 ST I (6297295) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:38:58 ST I (6307305) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:38:58 LINK I (6308735) pet-engine: off t=6307848014
+2026-10-24T08:38:58 ST I (6317315) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:38:58 EV 210 task.done
+2026-10-24T08:39:28 LINK I (6323815) pet-engine: on t=6322928061
+2026-10-24T08:39:28 ST I (6327325) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:39:28 ST I (6337335) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:39:28 LINK I (6338765) pet-engine: off t=6337878042
+2026-10-24T08:39:28 ST I (6347345) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:39:28 EV 211 agent.idle
+2026-10-24T08:39:58 LINK I (6353845) pet-engine: on t=6352958108
+2026-10-24T08:39:58 ST I (6357355) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:39:58 ST I (6367365) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:39:58 LINK I (6368795) pet-engine: off t=6367908016
+2026-10-24T08:39:58 ST I (6377375) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:39:58 EV 212 agent.idle
+2026-10-24T08:40:28 LINK I (6383875) pet-engine: on t=6382988074
+2026-10-24T08:40:28 ST I (6387385) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:40:28 ST I (6397395) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:40:28 LINK I (6398955) pet-engine: off t=6398068014
+2026-10-24T08:40:28 ST I (6407405) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:40:28 EV 213 agent.idle
+2026-10-24T08:40:58 LINK I (6414035) pet-engine: on t=6413148119
+2026-10-24T08:40:58 ST I (6417415) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:40:58 ST I (6427425) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:40:58 LINK I (6428985) pet-engine: off t=6428098036
+2026-10-24T08:40:58 ST I (6437435) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:40:58 EV 214 agent.idle
+2026-10-24T08:41:28 LINK I (6444065) pet-engine: on t=6443178103
+2026-10-24T08:41:28 ST I (6447445) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:41:28 ST I (6457455) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:41:28 LINK I (6459015) pet-engine: off t=6458128016
+2026-10-24T08:41:28 ST I (6467465) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:41:29 EV 215 agent.idle
+2026-10-24T08:41:59 LINK I (6474095) pet-engine: on t=6473208083
+2026-10-24T08:41:59 ST I (6477475) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:41:59 ST I (6487485) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:41:59 LINK I (6489175) pet-engine: off t=6488288014
+2026-10-24T08:41:59 ST I (6497495) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:41:59 EV 216 agent.idle
+2026-10-24T08:42:29 LINK I (6504125) pet-engine: on t=6503238107
+2026-10-24T08:42:29 ST I (6507505) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:42:29 ST I (6517515) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:42:29 LINK I (6519205) pet-engine: off t=6518318030
+2026-10-24T08:42:29 ST I (6527525) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:42:29 EV 217 agent.idle
+2026-10-24T08:42:59 LINK I (6534285) pet-engine: on t=6533398123
+2026-10-24T08:42:59 ST I (6537535) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:42:59 ST I (6547545) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:42:59 LINK I (6549235) pet-engine: off t=6548348014
+2026-10-24T08:42:59 ST I (6557555) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:42:59 EV 218 agent.idle
+2026-10-24T08:43:29 LINK I (6564315) pet-engine: on t=6563428083
+2026-10-24T08:43:29 ST I (6567565) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:43:29 ST I (6577575) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:43:29 LINK I (6579265) pet-engine: off t=6578378030
+2026-10-24T08:43:29 ST I (6587585) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:43:29 EV 219 agent.idle
+2026-10-24T08:43:59 LINK I (6594345) pet-engine: on t=6593458108
+2026-10-24T08:43:59 ST I (6597595) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:43:59 ST I (6607605) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:43:59 LINK I (6609425) pet-engine: off t=6608538032
+2026-10-24T08:43:59 ST I (6617615) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:43:59 EV 220 task.done
+2026-10-24T08:44:29 LINK I (6624505) pet-engine: on t=6623618091
+2026-10-24T08:44:29 ST I (6627625) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:44:29 ST I (6637635) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:44:29 LINK I (6639455) pet-engine: off t=6638568015
+2026-10-24T08:44:29 ST I (6647645) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:44:29 EV 221 agent.idle
+2026-10-24T08:44:59 LINK I (6654535) pet-engine: on t=6653648098
+2026-10-24T08:44:59 ST I (6657655) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:44:59 ST I (6667665) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:44:59 LINK I (6669485) pet-engine: off t=6668598030
+2026-10-24T08:44:59 ST I (6677675) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:44:59 EV 222 agent.idle
+2026-10-24T08:45:29 LINK I (6684565) pet-engine: on t=6683678109
+2026-10-24T08:45:29 ST I (6687685) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:45:29 ST I (6697695) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:45:29 LINK I (6699645) pet-engine: off t=6698758048
+2026-10-24T08:45:29 ST I (6707705) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:45:29 EV 223 agent.idle
+2026-10-24T08:45:59 LINK I (6714725) pet-engine: on t=6713838120
+2026-10-24T08:45:59 ST I (6717715) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:45:59 ST I (6727725) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:45:59 LINK I (6729675) pet-engine: off t=6728788011
+2026-10-24T08:45:59 ST I (6737735) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:45:59 EV 224 agent.idle
+2026-10-24T08:46:29 LINK I (6744755) pet-engine: on t=6743868080
+2026-10-24T08:46:29 ST I (6747745) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:46:29 ST I (6757755) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:46:29 LINK I (6759705) pet-engine: off t=6758818028
+2026-10-24T08:46:29 ST I (6767765) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:46:29 EV 225 agent.idle
+2026-10-24T08:46:59 LINK I (6774785) pet-engine: on t=6773898104
+2026-10-24T08:46:59 ST I (6777775) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:46:59 ST I (6787785) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:46:59 LINK I (6789865) pet-engine: off t=6788978046
+2026-10-24T08:46:59 ST I (6797795) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:46:59 EV 226 agent.idle
+2026-10-24T08:47:29 LINK I (6804945) pet-engine: on t=6804058101
+2026-10-24T08:47:29 ST I (6807805) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:47:29 ST I (6817815) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:47:29 LINK I (6819895) pet-engine: off t=6819008011
+2026-10-24T08:47:29 ST I (6827825) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:47:29 EV 227 agent.idle
+2026-10-24T08:47:59 LINK I (6834975) pet-engine: on t=6834088080
+2026-10-24T08:47:59 ST I (6837835) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:47:59 ST I (6847845) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:47:59 LINK I (6849925) pet-engine: off t=6849038027
+2026-10-24T08:47:59 ST I (6857855) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:47:59 EV 228 agent.idle
+2026-10-24T08:48:29 LINK I (6865005) pet-engine: on t=6864118103
+2026-10-24T08:48:29 ST I (6867865) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:48:29 ST I (6877875) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:48:29 LINK I (6880085) pet-engine: off t=6879198048
+2026-10-24T08:48:29 ST I (6887885) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:48:30 EV 229 agent.idle
+2026-10-24T08:49:00 LINK I (6895165) pet-engine: on t=6894278101
+2026-10-24T08:49:00 ST I (6897895) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:49:00 ST I (6907905) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:49:00 LINK I (6910115) pet-engine: off t=6909228011
+2026-10-24T08:49:00 ST I (6917915) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:49:00 EV 230 task.done
+2026-10-24T08:49:30 LINK I (6925195) pet-engine: on t=6924308068
+2026-10-24T08:49:30 ST I (6927925) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:49:30 ST I (6937935) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:49:30 LINK I (6940145) pet-engine: off t=6939258032
+2026-10-24T08:49:30 ST I (6947945) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:49:30 EV 231 agent.idle
+2026-10-24T08:50:00 LINK I (6955225) pet-engine: on t=6954338116
+2026-10-24T08:50:00 ST I (6957955) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:50:00 ST I (6967965) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:50:00 LINK I (6970305) pet-engine: off t=6969418030
+2026-10-24T08:50:00 ST I (6977975) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:50:00 EV 232 agent.idle
+2026-10-24T08:50:30 LINK I (6985385) pet-engine: on t=6984498108
+2026-10-24T08:50:30 ST I (6987985) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:50:30 ST I (6997995) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:50:30 LINK I (7000335) pet-engine: off t=6999448011
+2026-10-24T08:50:30 ST I (7008005) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:50:30 EV 233 agent.idle
+2026-10-24T08:51:00 LINK I (7015415) pet-engine: on t=7014528080
+2026-10-24T08:51:00 ST I (7018015) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:51:00 ST I (7028025) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:51:00 LINK I (7030365) pet-engine: off t=7029478028
+2026-10-24T08:51:00 ST I (7038035) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:51:00 EV 234 agent.idle
+2026-10-24T08:51:30 LINK I (7045445) pet-engine: on t=7044558098
+2026-10-24T08:51:30 ST I (7048045) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:51:30 ST I (7058055) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:51:30 LINK I (7060525) pet-engine: off t=7059638027
+2026-10-24T08:51:30 ST I (7068065) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:51:30 EV 235 agent.idle
+2026-10-24T08:52:00 LINK I (7075605) pet-engine: on t=7074718107
+2026-10-24T08:52:00 ST I (7078075) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:52:00 ST I (7088085) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:52:00 LINK I (7090555) pet-engine: off t=7089668011
+2026-10-24T08:52:00 ST I (7098095) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:52:00 EV 236 agent.idle
+2026-10-24T08:52:30 LINK I (7105635) pet-engine: on t=7104748080
+2026-10-24T08:52:30 ST I (7108105) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:52:30 ST I (7118115) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:52:30 LINK I (7120585) pet-engine: off t=7119698027
+2026-10-24T08:52:30 ST I (7128125) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:52:30 EV 237 agent.idle
+2026-10-24T08:53:00 LINK I (7135665) pet-engine: on t=7134778097
+2026-10-24T08:53:00 ST I (7138135) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:53:00 ST I (7148145) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:53:00 LINK I (7150745) pet-engine: off t=7149858028
+2026-10-24T08:53:00 ST I (7158155) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:53:00 EV 238 agent.idle
+2026-10-24T08:53:30 LINK I (7165825) pet-engine: on t=7164938128
+2026-10-24T08:53:30 ST I (7168165) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:53:30 ST I (7178175) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:53:30 LINK I (7180775) pet-engine: off t=7179888015
+2026-10-24T08:53:30 ST I (7188185) pet-engine: st: fps=7 muted=0 phase=0 done=13 focus_s=195 lei=0 skit=-1
+2026-10-24T08:53:30 EV 239 agent.idle
+2026-10-24T08:54:00 SOAK END events=240
