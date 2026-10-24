@@ -3,6 +3,7 @@
  * 解析失败/超长：记 warn、丢弃、不改状态、不崩。 */
 #include "pet_rx.h"
 
+#include <stdlib.h>
 #include <string.h>
 
 #include "driver/usb_serial_jtag.h"
@@ -12,6 +13,7 @@
 
 #include "pet_hal.h"
 #include "pet_linebuf.h"
+#include "pet_engine.h"
 #include "pet_link.h"
 #include "pet_state.h"
 #include "pet_types.h"
@@ -22,6 +24,23 @@ static struct pet_state *s_state;
 
 static void apply_line(const char *line, size_t len)
 {
+#ifdef PET_TEST_CLOCK
+    /* F8：测试构建专用时钟注入（设备侧时间回拨验证，不进入发布固件） */
+    if (strstr(line, "\"device.test.pomo\"") != NULL) {
+        const char *p = strstr(line, "\"cmd\":");
+        if (p != NULL) {
+            pet_engine_test_pomo((int)strtol(p + 6, NULL, 10));
+        }
+        return;
+    }
+    if (strstr(line, "\"device.test.clock\"") != NULL) {
+        const char *p = strstr(line, "\"offset_ms\":");
+        if (p != NULL) {
+            pet_hal_test_set_offset_ms((int32_t)strtol(p + 12, NULL, 10));
+        }
+        return;
+    }
+#endif
     pet_link_msg_t msg;
     const pet_link_status_t st = pet_link_parse(line, len, &msg);
     if (st != PET_LINK_OK) {

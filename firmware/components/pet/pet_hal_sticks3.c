@@ -52,9 +52,21 @@ static pet_hal_t s_hal;
 
 /* ---- pet_hal 实现 ---- */
 
+#ifdef PET_TEST_CLOCK
+static int32_t s_test_offset_ms; /* F8 故障注入：仅测试构建 */
+void pet_hal_test_set_offset_ms(int32_t ms)
+{
+    s_test_offset_ms = ms;
+}
+#endif
+
 static uint32_t sticks3_now_ms(void)
 {
+#ifdef PET_TEST_CLOCK
+    return (uint32_t)(esp_timer_get_time() / 1000) + (uint32_t)s_test_offset_ms;
+#else
     return (uint32_t)(esp_timer_get_time() / 1000);
+#endif
 }
 
 static void sticks3_present(const pet_surface_t *surface)

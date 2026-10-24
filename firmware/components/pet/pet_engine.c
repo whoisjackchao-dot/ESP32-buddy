@@ -324,3 +324,11 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
         break;
     }
 }
+
+#ifdef PET_TEST_CLOCK
+void pet_engine_test_pomo(int cmd)
+{
+    s_mode = PET_MODE_POMO; /* 测试：切到番茄钟模式，tick 才会推进 */
+    pet_pomo_command(&s_pomo, (pet_pomo_cmd_t)cmd, pet_hal_now_ms());
+}
+#endif

@@ -77,7 +77,12 @@ void pet_pomo_tick(pet_pomo_t *p, uint32_t now_ms)
     if (p->phase != PET_POMO_FOCUS && p->phase != PET_POMO_BREAK) {
         return;
     }
-    p->elapsed_ms += now_ms - p->since_ms;
+    const int32_t dt = (int32_t)(now_ms - p->since_ms);
+    if (dt <= 0) {
+        p->since_ms = now_ms; /* 时间回拨/停滞：不推进，重置起点（F8，M9 故障注入） */
+        return;
+    }
+    p->elapsed_ms += (uint32_t)dt;
     p->since_ms = now_ms;
 
     /* §6.2：elapsed_ms == total 即视为到点（>=） */

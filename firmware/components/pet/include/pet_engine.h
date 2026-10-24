@@ -31,3 +31,7 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev);
 
 /* 取引擎持有的状态机句柄（供 pet_rx 把事件喂进来）。 */
 struct pet_state *pet_engine_state(void);
+
+#ifdef PET_TEST_CLOCK
+void pet_engine_test_pomo(int cmd); /* F8 测试构建专用 */
+#endif

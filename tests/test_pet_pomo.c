@@ -312,6 +312,24 @@ static void pomo13_encode_short_cap_returns_zero(void)
     CHECK(buf[0] == 0xAA && buf[15] == 0xAA); /* 短 cap 不写 buf */
 }
 
+/* F8（M9 故障注入）：时间回拨不得误判完成/计数；恢复后继续正常推进 */
+static void pomo14_rewind_no_false_done(void)
+{
+    pet_pomo_t p;
+    pet_pomo_init(&p, 1000);
+    pet_pomo_command(&p, PET_POMO_CMD_SHORT, 1000); /* FOCUS */
+    pet_pomo_tick(&p, 11000);                      /* +10 s */
+    CHECK(p.elapsed_ms == 10000);
+    const uint32_t rewound = 11000u - 30000u;      /* 回拨 30 s（uint32 回绕） */
+    pet_pomo_tick(&p, rewound);
+    CHECK(p.phase == PET_POMO_FOCUS);
+    CHECK(p.done_count == 0);
+    CHECK(p.elapsed_ms == 10000);
+    pet_pomo_tick(&p, rewound + 1000u);            /* 恢复后 +1 s */
+    CHECK(p.elapsed_ms == 11000);
+    CHECK(p.phase == PET_POMO_FOCUS);
+}
+
 int main(void)
 {
     RUN(pomo01_init_defaults);
@@ -329,6 +347,7 @@ int main(void)
     RUN(pomo13_encode_layout_is_le_with_magic);
     RUN(pomo13_roundtrip_restores_stats_only);
     RUN(pomo13_decode_rejects_and_leaves_struct);
+    RUN(pomo14_rewind_no_false_done);
     RUN(pomo13_encode_short_cap_returns_zero);
     REPORT();
 }

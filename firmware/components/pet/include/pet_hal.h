@@ -18,3 +18,7 @@ typedef struct {
 void              pet_hal_install(const pet_hal_t *hal);
 uint32_t          pet_hal_now_ms(void);
 const pet_hal_t  *pet_hal_get(void);
+
+#ifdef PET_TEST_CLOCK
+void pet_hal_test_set_offset_ms(int32_t ms); /* F8 测试构建专用 */
+#endif

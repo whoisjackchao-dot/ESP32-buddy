@@ -1,21 +1,21 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-24T10:16:30+08:00",
+  "generated_at": "2026-10-24T11:09:58+08:00",
   "git": {
-    "commit": "2e1d96ce7a8143cbcf2ccf81002311d73dcf3d8d",
+    "commit": "48508d05e729d593d9bdc7903ccf86cc17d9b60c",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 170,
-    "bytes": 1073438
+    "files": 171,
+    "bytes": 1077812
   },
   "groups": {
     "firmware": [
       {
         "path": "firmware/components/pet/CMakeLists.txt",
-        "bytes": 1191,
-        "sha256": "220b39867d792d0b68e45337c544aedc76d6fa3b39a4cb3a6c0a21ce95cfdc4b"
+        "bytes": 1318,
+        "sha256": "db875ac3abe9f5bcbea29e3eb3ab200c7571db3ca7dc9ff093d83b1743634f72"
       },
       {
         "path": "firmware/components/pet/assets/done.pcm",
@@ -54,13 +54,13 @@
       },
       {
         "path": "firmware/components/pet/include/pet_engine.h",
-        "bytes": 1090,
-        "sha256": "e87fdbf703387c0c0fd291fa181710ccd6039703e6c97270e451e479094f1437"
+        "bytes": 1184,
+        "sha256": "15d0e78329fa8f88d513ad22ebd35457c630c1cc8781724f3b074b806eaef8fd"
       },
       {
         "path": "firmware/components/pet/include/pet_hal.h",
-        "bytes": 596,
-        "sha256": "0cb2166b6a5528e7b77578b9b006f70780fe316b92c100036420765055278032"
+        "bytes": 699,
+        "sha256": "d67cca4f5695bec511d8059868e1083a0bf3a3d895062eb15e921099174dd190"
       },
       {
         "path": "firmware/components/pet/include/pet_hal_sticks3.h",
@@ -149,8 +149,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 10728,
-        "sha256": "5202c30b294f67aca8f76914e9277aa8e87c143f3742077a9e912a0061911c7e"
+        "bytes": 10952,
+        "sha256": "08b7ead9f157fa4d1881c26d2283b1c0016bc514eda24bf15ab490a557da2b2b"
       },
       {
         "path": "firmware/components/pet/pet_hal.c",
@@ -159,8 +159,8 @@
       },
       {
         "path": "firmware/components/pet/pet_hal_sticks3.c",
-        "bytes": 6642,
-        "sha256": "47b8846351e4b5698ec8dafc78b0df2242de25d1072d2e494276a00e59952a6f"
+        "bytes": 6936,
+        "sha256": "7dde4448e5ae8e02f1b4b7320ee5db5f0ba3d61e84b1ddc408ddb27921db03be"
       },
       {
         "path": "firmware/components/pet/pet_keymap.c",
@@ -194,8 +194,8 @@
       },
       {
         "path": "firmware/components/pet/pet_pomo.c",
-        "bytes": 5438,
-        "sha256": "4d0a4f7dc6d7a044bffcd44078ce2d33fcd54215b9a73731745432402a262665"
+        "bytes": 5636,
+        "sha256": "1dae74af0ea5ad689fa3857781e6f99d0b93958f80d0bb548c63374e94861183"
       },
       {
         "path": "firmware/components/pet/pet_pomo_store.c",
@@ -209,8 +209,8 @@
       },
       {
         "path": "firmware/components/pet/pet_rx.c",
-        "bytes": 2413,
-        "sha256": "cfbeae1e5eaf116d66ce8fee56ce32b23cd22c0c8397afb1632c0e62e4c619a3"
+        "bytes": 3061,
+        "sha256": "7864351a3a6a39ec1f5b4e0bdf828308d9c5170aafc9438dd8047d6e804a40b1"
       },
       {
         "path": "firmware/components/pet/pet_state.c",
@@ -383,8 +383,8 @@
       },
       {
         "path": "tests/test_pet_pomo.c",
-        "bytes": 10706,
-        "sha256": "23581229bacbd763314d6ee8b5fcebec13a5909d4c906edfce80e9f3d4083b56"
+        "bytes": 11469,
+        "sha256": "eaa58126aa753d28aab1fa8f8cce11e1f946f2c130fffa8ea004f2c071baa064"
       },
       {
         "path": "tests/test_pet_render.c",
@@ -410,8 +410,8 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 15273,
-        "sha256": "a3290b616f6d239f6d5506bcdb9a98d95e4275d59a0cee9a5ca6a56af1f1eef7"
+        "bytes": 15279,
+        "sha256": "a7378cdc8820ceaff95829a7ac0a09b272673f5f9413ab1f470378d476863e35"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
@@ -435,8 +435,8 @@
       },
       {
         "path": "acceptance/G1-G7-验收执行清单.md",
-        "bytes": 10448,
-        "sha256": "aabfc01799360b3be0c8b7bb0b054005e2f292492f3c2e781ffaedd434036803"
+        "bytes": 10523,
+        "sha256": "b00e96345ef74206396c8a933fda9380a95a061d5d426fd0edc0ec28a3d3c86f"
       },
       {
         "path": "acceptance/README.md",
@@ -821,8 +821,8 @@
       },
       {
         "path": "evidence/M9/2026-10-23-验收-G3G4G6G7.md",
-        "bytes": 4106,
-        "sha256": "79c4f774a047142e4b90c5e7ddbd44a2da332e745dd0fc7338db348cee5b1d63"
+        "bytes": 4128,
+        "sha256": "b656ca546f1b04eeaea5a821daf53ae8583b5062cabdfb8a084a698429e275e3"
       },
       {
         "path": "evidence/M9/2026-10-23-验收harness-T.md",
@@ -860,9 +860,14 @@
         "sha256": "1377591a4a9d2033ad036ab206fe65e64cd20c2ed97bdcb20dd94f72e267d0b1"
       },
       {
+        "path": "evidence/M9/2026-10-24-故障注入-F8-设备.md",
+        "bytes": 1756,
+        "sha256": "4050e13835c1368c3fba65861099b8cb9bcc261fb8d5179fc73e39727df6d7c8"
+      },
+      {
         "path": "evidence/M9/2026-10-24-故障注入.md",
-        "bytes": 1835,
-        "sha256": "2598842ad794c76a8a9d75272447041412ef903e7c97aeb460693a0528241061"
+        "bytes": 1899,
+        "sha256": "37aab58d6ca2e2c405276b2218d2652d2ae16cf91b89f84c0db4477fa4c3a8aa"
       }
     ],
     "legal": [
