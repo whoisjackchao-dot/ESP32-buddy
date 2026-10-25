@@ -21,8 +21,15 @@ void pet_net_apply_credentials(const char *ssid, const char *pass);
 void pet_net_read_status(char *state, size_t state_sz, char *ssid, size_t ssid_sz,
                          char *ip, size_t ip_sz, int *hour);
 
-/* 设备侧产线 cmd 行（wifi.provision / wifi.status / wifi.clear）；命中并处理返回 true。 */
+/* 设备侧产线 cmd 行（wifi.provision / wifi.status / wifi.clear / host.addr）；
+ * 命中并处理返回 true。 */
 bool pet_net_handle_line(const char *line);
+
+/* 设备→主机控制线（引擎产物 voice.text / send 等经 WiFi TCP 镜像发往主机，
+ * 主机地址由 host.addr 命令下发并持久化在 NVS）。只拷贝入队即返回（引擎
+ * 循环零阻塞）；未配置主机 / 无 WiFi 时由发送任务静默丢弃，队列满时限频
+ * 日志丢弃。USB 路径不受影响（双路并行，主机侧去重）。 */
+void pet_net_send_control_line(const char *line);
 
 /* 菜单“配网模式”：请求进入 AP 配网（断开 STA，开热点+网页）。 */
 void pet_net_request_provision(void);

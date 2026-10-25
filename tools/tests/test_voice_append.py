@@ -12,6 +12,8 @@ device, or a real OpenCode instance.
 
 import json
 import os
+import shutil
+import tempfile
 import sys
 import threading
 import unittest
@@ -242,7 +244,8 @@ class TestCli(unittest.TestCase):
                          "http://127.0.0.1:9999/v1/draft/append")
 
     def test_main_no_voice_disables_reader_posting(self):
-        log = os.path.join(ROOT, "tmp-voice-cli.log")
+        tmpdir = tempfile.mkdtemp(prefix="voice-cli-")
+        log = os.path.join(tmpdir, "voice.log")
         try:
             with open(log, "wb") as f:
                 f.write(b'{"event":"a"}\n')
@@ -267,11 +270,11 @@ class TestCli(unittest.TestCase):
             self.assertEqual(rc, 0)
             self.assertEqual(posts, [])
         finally:
-            if os.path.exists(log):
-                os.unlink(log)
+            shutil.rmtree(tmpdir, ignore_errors=True)
 
     def test_main_posts_voice_line(self):
-        log = os.path.join(ROOT, "tmp-voice-cli.log")
+        tmpdir = tempfile.mkdtemp(prefix="voice-cli-")
+        log = os.path.join(tmpdir, "voice.log")
         try:
             with open(log, "wb") as f:
                 f.write(b'{"event":"a"}\n')

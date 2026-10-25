@@ -6,6 +6,7 @@
  * 契约：evidence/2026-10-24-WiFi与NTP-设备.md */
 #include "pet_net.h"
 
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -18,7 +19,10 @@
 #include "esp_timer.h"
 #include "esp_wifi.h"
 #include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
 #include "freertos/task.h"
+#include "lwip/inet.h"
+#include "lwip/sockets.h"
 #include "nvs.h"
 
 #include "pet_engine.h"
@@ -34,6 +38,16 @@ static const char *TAG = "pet-net";
 #define NET_RESYNC_US 3600000000LL /* 每小时重算本地小时 */
 #define NET_STA_FAIL_MAX 5  /* 连续 5 个连接周期无 IP → 回落配网热点 */
 #define NET_APPLY_GRACE_MS 1500 /* POST /save 应答落地后再拆热点 */
+
+/* 设备→主机控制通道（host.addr 下发地址；引擎控制行 WiFi 镜像）
+ * 契约：evidence/2026-10-25-WiFi控制通道-T.md */
+#define HOST_NVS_NS "pethost"
+#define HOST_ADDR_MAX 64u      /* 主机地址 ≤63 字节 + NUL */
+#define CTL_QUEUE_DEPTH 4      /* 控制行队列深度（满即丢 + 限频日志） */
+#define CTL_LINE_MAX 256u      /* 入队行上限（不含换行）；超长整行丢弃 */
+#define CTL_CONNECT_TIMEOUT_MS 300 /* TCP connect 预算（不拖住控制任务） */
+#define CTL_SEND_TIMEOUT_MS 500    /* SO_SNDTIMEO：正文 ≤256B 一次写完 */
+#define CTL_WARN_PERIOD_US 2000000LL /* 限频告警周期 2 s */
 
 /* 任务通知位：clear/provision/apply（apply 最后处理，"先清后存"以最新保存为准） */
 #define NET_NOTIFY_CLEAR 0x01u
@@ -59,6 +73,12 @@ static volatile bool s_reconnect_req;
 static volatile uint32_t s_fails;   /* 连续失败次数 → 重试退避 / 回落热点 */
 static volatile int s_hour_synced = -1;
 static int s_last_push = -1;
+
+/* 控制通道状态：host/port 由 rx 任务写（host.addr）、ctl 任务读（快照后使用，
+ * 竞态最坏一次发到旧地址，无害）；s_ctl_q 在 net 任务建好后不再变化。 */
+static char s_ctl_host[HOST_ADDR_MAX];
+static int s_ctl_port;
+static QueueHandle_t s_ctl_q;
 
 static esp_event_handler_instance_t s_ev_wifi;
 static esp_event_handler_instance_t s_ev_ip;
@@ -107,6 +127,57 @@ static bool json_string(const char *line, const char *key, char *out, size_t out
     return true;
 }
 
+/* ---- 极简 JSON 数值取值：找 "key" 后取 ':' 后的十进制整数（host.addr port） ---- */
+static bool json_int(const char *line, const char *key, long *out)
+{
+    char pat[32];
+    if (snprintf(pat, sizeof pat, "\"%s\"", key) >= (int)sizeof pat) {
+        return false;
+    }
+    const char *p = strstr(line, pat);
+    if (p == NULL) {
+        return false;
+    }
+    p += strlen(pat);
+    while (*p == ' ' || *p == '\t') {
+        p++;
+    }
+    if (*p != ':') {
+        return false;
+    }
+    p++;
+    while (*p == ' ' || *p == '\t') {
+        p++;
+    }
+    const bool neg = (*p == '-');
+    if (neg) {
+        p++;
+    }
+    if (*p < '0' || *p > '9') {
+        return false;
+    }
+    long v = 0;
+    while (*p >= '0' && *p <= '9') {
+        v = v * 10 + (*p - '0');
+        if (v > 9999999L) {
+            return false; /* 端口上限远小于此：超长即拒，不溢出 */
+        }
+        p++;
+    }
+    *out = neg ? -v : v;
+    return true;
+}
+
+/* ---- 限频告警（只用于可刷屏的丢弃类日志；竞态最坏多打一条，无害） ---- */
+static void warn_throttled(const char *msg, int64_t *last_us)
+{
+    const int64_t now = esp_timer_get_time();
+    if (now - *last_us >= CTL_WARN_PERIOD_US) {
+        ESP_LOGW(TAG, "%s", msg);
+        *last_us = now;
+    }
+}
+
 /* ---- NVS 凭据（namespace petnet：ssid / pass） ---- */
 static bool nvs_load_creds(char *ssid, size_t ssid_sz, char *pass, size_t pass_sz)
 {
@@ -144,6 +215,164 @@ static void nvs_clear_creds(void)
     (void)nvs_erase_all(h);
     (void)nvs_commit(h);
     nvs_close(h);
+}
+
+/* ---- 控制通道主机地址（namespace pethost：host / port） ---- */
+static void ctl_host_load(void)
+{
+    nvs_handle_t h;
+    if (nvs_open(HOST_NVS_NS, NVS_READONLY, &h) != ESP_OK) {
+        return; /* 尚未配置过：保持空 → 控制行只走 USB */
+    }
+    size_t len = sizeof s_ctl_host;
+    const esp_err_t e1 = nvs_get_str(h, "host", s_ctl_host, &len);
+    uint32_t port = 0;
+    const esp_err_t e2 = nvs_get_u32(h, "port", &port);
+    nvs_close(h);
+    if (e1 == ESP_OK && e2 == ESP_OK && s_ctl_host[0] != '\0' &&
+        port >= 1u && port <= 65535u) {
+        s_ctl_port = (int)port;
+        ESP_LOGI(TAG, "net: host addr=%s:%d", s_ctl_host, s_ctl_port);
+    } else {
+        s_ctl_host[0] = '\0';
+        s_ctl_port = 0;
+    }
+}
+
+static void ctl_host_save(const char *host, int port)
+{
+    nvs_handle_t h;
+    if (nvs_open(HOST_NVS_NS, NVS_READWRITE, &h) != ESP_OK) {
+        ESP_LOGE(TAG, "net: nvs open failed");
+        return;
+    }
+    (void)nvs_set_str(h, "host", host);
+    (void)nvs_set_u32(h, "port", (uint32_t)port);
+    (void)nvs_commit(h);
+    nvs_close(h);
+}
+
+/* ---- 控制行发送任务：出队 → best-effort TCP（connect 300ms 预算） ---- */
+typedef struct {
+    size_t len;
+    char   line[CTL_LINE_MAX];
+} ctl_msg_t;
+
+static bool ctl_target_ready(char *host, size_t host_sz, int *port)
+{
+    if (s_ctl_host[0] == '\0' || s_ctl_port <= 0 ||
+        s_state != NET_ST_STA || s_ip[0] == '\0') {
+        return false; /* 未配置主机 / STA 未连接：静默丢（USB 仍在线） */
+    }
+    snprintf(host, host_sz, "%s", s_ctl_host); /* 快照，竞态最坏发旧地址 */
+    *port = s_ctl_port;
+    return true;
+}
+
+static bool ctl_send_all(int fd, const char *data, size_t len)
+{
+    size_t off = 0;
+    while (off < len) {
+        const int n = lwip_send(fd, data + off, len - off, 0);
+        if (n <= 0) {
+            return false;
+        }
+        off += (size_t)n;
+    }
+    return true;
+}
+
+static void ctl_send_one(const char *line, size_t len)
+{
+    static int64_t conn_log_us;
+    static int64_t send_log_us;
+
+    char host[HOST_ADDR_MAX];
+    int port;
+    if (!ctl_target_ready(host, sizeof host, &port)) {
+        return;
+    }
+
+    struct sockaddr_in dst;
+    memset(&dst, 0, sizeof dst);
+    dst.sin_family = AF_INET;
+    dst.sin_port = lwip_htons((uint16_t)port);
+    if (inet_aton(host, &dst.sin_addr) == 0) {
+        warn_throttled("net: ctl host invalid", &conn_log_us);
+        return;
+    }
+
+    const int fd = lwip_socket(AF_INET, SOCK_STREAM, 0);
+    if (fd < 0) {
+        warn_throttled("net: ctl socket failed", &conn_log_us);
+        return;
+    }
+
+    bool ok = false;
+    (void)lwip_fcntl(fd, F_SETFL, O_NONBLOCK); /* connect 带 300ms 预算 */
+    const int crc = lwip_connect(fd, (struct sockaddr *)&dst, sizeof dst);
+    if (crc == 0) {
+        ok = true;
+    } else if (errno == EINPROGRESS || errno == EAGAIN ||
+               errno == EWOULDBLOCK) {
+        fd_set wfds;
+        FD_ZERO(&wfds);
+        FD_SET(fd, &wfds);
+        struct timeval tv = {
+            .tv_sec = 0,
+            .tv_usec = CTL_CONNECT_TIMEOUT_MS * 1000,
+        };
+        int soerr = 0;
+        socklen_t slen = sizeof soerr;
+        if (lwip_select(fd + 1, NULL, &wfds, NULL, &tv) <= 0 ||
+            lwip_getsockopt(fd, SOL_SOCKET, SO_ERROR, &soerr, &slen) < 0 ||
+            soerr != 0) {
+            warn_throttled("net: ctl connect timeout", &conn_log_us);
+        } else {
+            ok = true;
+        }
+    } else {
+        warn_throttled("net: ctl connect refused", &conn_log_us);
+    }
+
+    if (ok) {
+        (void)lwip_fcntl(fd, F_SETFL, 0); /* 恢复阻塞：正文一次写完 */
+        const int snd_ms = CTL_SEND_TIMEOUT_MS;
+        (void)lwip_setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO,
+                              &snd_ms, sizeof snd_ms);
+        ok = ctl_send_all(fd, line, len) && ctl_send_all(fd, "\n", 1);
+        if (!ok) {
+            warn_throttled("net: ctl send failed", &send_log_us);
+        }
+    }
+    (void)lwip_close(fd);
+}
+
+static void ctl_task(void *arg)
+{
+    (void)arg;
+    ctl_msg_t m;
+    for (;;) {
+        if (xQueueReceive(s_ctl_q, &m, portMAX_DELAY) != pdTRUE) {
+            continue;
+        }
+        ctl_send_one(m.line, m.len);
+    }
+}
+
+/* 队列 + 发送任务 + NVS 主机地址（net 任务启动时一次；失败只丢 WiFi 控制路径） */
+static void ctl_start(void)
+{
+    ctl_host_load();
+    s_ctl_q = xQueueCreate(CTL_QUEUE_DEPTH, sizeof(ctl_msg_t));
+    if (s_ctl_q == NULL) {
+        ESP_LOGE(TAG, "net: ctl queue create failed");
+        return;
+    }
+    if (xTaskCreate(ctl_task, "pet-ctl", 4096, NULL, 3, NULL) != pdPASS) {
+        ESP_LOGE(TAG, "net: ctl task create failed");
+        s_ctl_q = NULL;
+    }
 }
 
 /* ---- SNTP：时区 CST-8，同步回调推本地小时给引擎 ---- */
@@ -344,6 +573,8 @@ static void net_task(void *arg)
     int64_t last_retry = 0;
     int64_t last_push = 0;
 
+    ctl_start(); /* 控制通道：加载主机地址 + 发送任务（失败只丢 WiFi 镜像） */
+
     s_state = NET_ST_IDLE;
     if (have) {
         creds_set(ssid, pass);
@@ -504,6 +735,23 @@ bool pet_net_handle_line(const char *line)
         pet_ptt_key_clear();
         return true;
     }
+    /* host.addr：主机控制通道地址（存 NVS pethost，重启保留；设备据此把
+     * 控制行 WiFi 镜像回主机）。host ≤63 字节、port 1..65535，非法整条拒。 */
+    if (strcmp(cmd, "host.addr") == 0) {
+        char host[HOST_ADDR_MAX];
+        long port = 0;
+        if (json_string(line, "host", host, sizeof host) &&
+            json_int(line, "port", &port) &&
+            host[0] != '\0' && port >= 1 && port <= 65535) {
+            snprintf(s_ctl_host, sizeof s_ctl_host, "%s", host);
+            s_ctl_port = (int)port;
+            ctl_host_save(host, (int)port);
+            ESP_LOGI(TAG, "net: host addr=%s:%d", host, (int)port);
+        } else {
+            ESP_LOGW(TAG, "net: host addr invalid");
+        }
+        return true;
+    }
     return false; /* 其他 cmd：交给事件解析路径按原样拒绝 */
 }
 
@@ -514,4 +762,28 @@ void pet_net_get_ip(char *out, size_t len)
     }
     strncpy(out, s_ip, len - 1);
     out[len - 1] = '\0';
+}
+
+/* 引擎侧行自带 '\n'：入队前去掉行尾换行，WiFi 侧发送时统一补一个。 */
+void pet_net_send_control_line(const char *line)
+{
+    static int64_t drop_log_us; /* 引擎循环等多个生产者共用（竞态最坏多一条日志） */
+    if (line == NULL || s_ctl_q == NULL) {
+        return;
+    }
+    size_t len = strlen(line);
+    while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r')) {
+        len--;
+    }
+    if (len == 0 || len >= CTL_LINE_MAX) {
+        warn_throttled("net: ctl line dropped (size)", &drop_log_us);
+        return;
+    }
+    ctl_msg_t m;
+    memcpy(m.line, line, len);
+    m.line[len] = '\0';
+    m.len = len;
+    if (xQueueSend(s_ctl_q, &m, 0) != pdTRUE) {
+        warn_throttled("net: ctl queue full (dropped)", &drop_log_us);
+    }
 }

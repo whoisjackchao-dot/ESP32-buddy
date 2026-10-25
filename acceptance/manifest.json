@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T11:49:36+08:00",
+  "generated_at": "2026-10-25T12:46:20+08:00",
   "git": {
-    "commit": "bf38a63aa52d355c66e7b92a2e1bb5b3ea48064b",
+    "commit": "63c052cedf5bf6e114eb5b9f395075f61a6399ca",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 195,
-    "bytes": 2851887
+    "files": 197,
+    "bytes": 2887971
   },
   "groups": {
     "firmware": [
@@ -109,8 +109,8 @@
       },
       {
         "path": "firmware/components/pet/include/pet_net.h",
-        "bytes": 1569,
-        "sha256": "32e87dfef41290470218503e40f3389ab2c25114cace90a01766f2e3e06d66be"
+        "bytes": 2021,
+        "sha256": "4f82ac4236ff5fda6d9bbc9df649f336563719beccbdec78a050d7b1d40c2ae4"
       },
       {
         "path": "firmware/components/pet/include/pet_pomo.h",
@@ -174,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 15211,
-        "sha256": "09c37dc7150992ab2e8ab1897303495728644daedcb1f67ee483ae3f54d3b581"
+        "bytes": 15306,
+        "sha256": "0f8d29d3616977d77faa2977046595787a4222d354f65a2e8263d7f1aa1222bd"
       },
       {
         "path": "firmware/components/pet/pet_evt_tcp.c",
@@ -224,8 +224,8 @@
       },
       {
         "path": "firmware/components/pet/pet_net.c",
-        "bytes": 16746,
-        "sha256": "b5079fcd975628e130956f933004070298ccfc490aba55f835f2c533ed3312dd"
+        "bytes": 25536,
+        "sha256": "16ce957306f10e996cd852d99001c6e25b87de4ed78c46801d7d00f949e894c3"
       },
       {
         "path": "firmware/components/pet/pet_pomo.c",
@@ -301,13 +301,13 @@
       },
       {
         "path": "host/file_to_serial.py",
-        "bytes": 12090,
-        "sha256": "d259c9abc58a7b98f0cb6c5881c3e5e3a00d9ca070255919ba2cc2d794a416cb"
+        "bytes": 21732,
+        "sha256": "69f39b245aee3ebd20457345a9d3913d8c07aa3a0cb0e3a0a7cc54608d2b033e"
       },
       {
         "path": "host/oc_poll.py",
-        "bytes": 7270,
-        "sha256": "03d138145b43e77317779eac8450de04045cad0bcc661aaed9c56719c8d4f708"
+        "bytes": 9867,
+        "sha256": "0565563b6c64807c878e043adc0623fe3def8756520c274fc34726e792fd9e22"
       },
       {
         "path": "host/opencode_source.py",
@@ -489,6 +489,11 @@
         "sha256": "cf53fcad3e835f0894d71c1d4bc636878637c84372747bbaf75536b6c56900a6"
       },
       {
+        "path": "ESP32-buddy_系统架构图.md",
+        "bytes": 8370,
+        "sha256": "57d9e4cee46dbe92f1f13968e52c025fc8041633769c5a4e8b85355afd9f94b2"
+      },
+      {
         "path": "ESP32-buddy_需求与决策基线.md",
         "bytes": 17353,
         "sha256": "aa372a4e278814379d8b26ea57f0404fbefb090d626cd701dfeae2c8c9162849"
@@ -515,8 +520,8 @@
       },
       {
         "path": "acceptance/操作与恢复手册.md",
-        "bytes": 7993,
-        "sha256": "13835baec058063bf624b4dded30f1a2a190e56840ad1a858c8cf32dadb5a859"
+        "bytes": 8237,
+        "sha256": "9033153fd43267150efa9cae1518f74a87c0fd26c04cce30cfbacf4ebed0dd68"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -693,6 +698,11 @@
         "path": "evidence/2026-10-25-BLE-WiFi共存可行性.md",
         "bytes": 2944,
         "sha256": "bf79df10947c9cf73b0337649956584232fb793186b84c68c75273e3fe0258ba"
+      },
+      {
+        "path": "evidence/2026-10-25-WiFi控制通道-T.md",
+        "bytes": 5894,
+        "sha256": "116928ac742cc817913fa59f6152e546f58546a28bef31119085df2e48c618ea"
       },
       {
         "path": "evidence/2026-10-25-中文点阵字库-T.md",
@@ -1019,7 +1029,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "97f4066c3b1222e925a5dc88412a7f15413afb367308a63a37a516904cc3e392"
+        "sha256": "4b6d960c5d19835456c8715943694214beae8135f851d165ece5eea382dfae8b"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1030,8 +1040,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1568880,
-        "sha256": "3b829c8dc9f76fe1f0bf2819b20e0c7f4e927b4c1a69783bf32ca5318aaa77f5"
+        "bytes": 1570864,
+        "sha256": "0c51ce48596604cf8f6aa9dc08269f7b607f8a9307ff0b9fd7759b8c3d6e1065"
       }
     ]
   }

@@ -14,6 +14,12 @@ skips TCP entirely (USB path untouched). A TCP failure only logs a
 rate-limited warning - it never crashes the poller nor delays it more
 than ~2 s, and dedup is the device's job (same line on both paths).
 
+Control channel announcement: the device learns the host's LAN address
+only if we tell it, so every ~10 s (and once at start) the sink also
+sends {"version":1,"cmd":"host.addr","host":<ip>,"port":<control-port>}
+to the same TCP target. The IP comes from <out>.hostaddr (written by the
+bridge at startup); a missing file/IP skips silently.
+
 The sink stays injectable for tests: main(argv, sink_factory) forwards
 to opencode_source.main, whose sink_factory contract is
 `sink_factory(port, baud) -> callable(obj_dict)`; DualSink's tcp_send
@@ -21,6 +27,7 @@ is injectable the same way.
 """
 
 import argparse
+import json
 import os
 import socket
 import sys
@@ -33,8 +40,10 @@ import opencode_source
 # Windows-side bridge tails this via D:\buddy_flash (mounted at /mnt/d).
 DEFAULT_OUT = "/mnt/d/buddy_flash/oc_events.log"
 DEFAULT_TCP_PORT = 8766   # device listens here (NDJSON, one line per conn)
+CONTROL_PORT_DEFAULT = 8767  # host control listener the device sends to
 TCP_TIMEOUT = 1.0         # connect/send cap; worst case ~2 s per line
 WARN_INTERVAL = 30.0      # rate limit for TCP-failure warnings
+ANNOUNCE_INTERVAL_S = 10.0  # host.addr re-announcement cadence
 
 
 class FileSink:
@@ -99,6 +108,18 @@ def tcp_send_line(target, line, timeout=TCP_TIMEOUT):
         s.sendall(line)
 
 
+def build_hostaddr_line(ip, port=CONTROL_PORT_DEFAULT):
+    """host.addr control line bytes for the device, or None without an IP.
+
+    The device stores this (NVS pethost) and uses it as the target for
+    its control-line TCP sends (voice.text / send mirroring).
+    """
+    if not ip:
+        return None
+    return ('{"version":1,"cmd":"host.addr","host":"%s","port":%d}\n'
+            % (ip, port)).encode("utf-8")
+
+
 class DualSink:
     """FileSink (USB path) + best-effort TCP fan-out of the same line.
 
@@ -106,26 +127,28 @@ class DualSink:
     framed_line_bytes); the default is tcp_send_line. Any send failure
     is swallowed with a rate-limited stderr warning (injectable clock),
     after the file write, so the USB path is never disturbed.
+
+    control_port > 0 additionally announces the host's LAN address to
+    the device every ANNOUNCE_INTERVAL_S (and once at start), reading
+    the IP from <out>.hostaddr; a missing file/IP skips silently.
     """
 
     def __init__(self, out_path, tcp=None, ip_file=None, tcp_send=None,
-                 clock=time.monotonic):
+                 clock=time.monotonic, control_port=0):
         self._file = FileSink(out_path)
         self._tcp = tcp
         self._ip_file = ip_file
         self._tcp_send = tcp_send
         self._clock = clock
         self._next_warn = 0.0
+        self._control_port = control_port
+        self._hostaddr_path = out_path + ".hostaddr"
+        self._next_announce = None
 
     def resolve_target(self):
         return resolve_tcp_target(self._tcp, self._ip_file)
 
-    def __call__(self, obj_or_str):
-        line = pet_transport.ensure_line(obj_or_str)
-        self._file.write_line(line)
-        target = self.resolve_target()
-        if target is None:
-            return
+    def _send_best_effort(self, target, line, what):
         try:
             if self._tcp_send is not None:
                 self._tcp_send(target, line)
@@ -134,18 +157,46 @@ class DualSink:
         except Exception as exc:  # best-effort: never crash the poller
             now = self._clock()
             if now >= self._next_warn:
-                print("oc_poll: tcp send to %s failed: %s" % (target, exc),
-                      file=sys.stderr, flush=True)
+                print("oc_poll: %s tcp send to %s failed: %s"
+                      % (what, target, exc), file=sys.stderr, flush=True)
                 self._next_warn = now + WARN_INTERVAL
+
+    def maybe_announce_hostaddr(self):
+        """Send host.addr to the event target, at most every ~10 s."""
+        if self._control_port <= 0:
+            return
+        now = self._clock()
+        if self._next_announce is not None and now < self._next_announce:
+            return
+        self._next_announce = now + ANNOUNCE_INTERVAL_S
+        target = self.resolve_target()
+        if target is None:
+            return
+        ip = first_nonempty_line(self._hostaddr_path)
+        line = build_hostaddr_line(ip, self._control_port)
+        if line is None:
+            return  # bridge has not published its IP (yet): skip silently
+        self._send_best_effort(target, line, what="hostaddr")
+
+    def __call__(self, obj_or_str):
+        line = pet_transport.ensure_line(obj_or_str)
+        self._file.write_line(line)
+        self.maybe_announce_hostaddr()
+        target = self.resolve_target()
+        if target is None:
+            return
+        self._send_best_effort(target, line, what="event")
 
     def close(self):
         self._file.close()
 
 
-def make_sink_factory(out_path, tcp=None, ip_file=None, tcp_send=None):
+def make_sink_factory(out_path, tcp=None, ip_file=None, tcp_send=None,
+                      control_port=0):
     """sink_factory(port, baud) -> DualSink(out_path, ...); port/baud ignored."""
     def factory(port, baud):
-        return DualSink(out_path, tcp=tcp, ip_file=ip_file, tcp_send=tcp_send)
+        return DualSink(out_path, tcp=tcp, ip_file=ip_file, tcp_send=tcp_send,
+                        control_port=control_port)
     return factory
 
 
@@ -171,6 +222,11 @@ def build_parser():
     parser.add_argument("--ip-file", default=None,
                         help="device IP file for --tcp auto"
                              " (default: <out>.ip)")
+    parser.add_argument("--control-port", type=int,
+                        default=CONTROL_PORT_DEFAULT,
+                        help="announce this host control listener port to"
+                             " the device (host.addr, every ~10 s over the"
+                             " event TCP); 0 disables (default: %(default)s)")
     parser.add_argument("--once", action="store_true",
                         help="poll once and exit")
     return parser
@@ -181,7 +237,8 @@ def main(argv=None, sink_factory=None):
     if sink_factory is None:
         sink_factory = make_sink_factory(
             args.out, tcp=args.tcp,
-            ip_file=args.ip_file if args.ip_file else args.out + ".ip")
+            ip_file=args.ip_file if args.ip_file else args.out + ".ip",
+            control_port=args.control_port)
     src_argv = ["--db", args.db,
                 "--interval", str(args.interval),
                 "--heartbeat", str(args.heartbeat)]
