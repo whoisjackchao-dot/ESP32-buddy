@@ -10,7 +10,8 @@
 | 文档版本 | **v0.20（2026-10-24；M9 全门槛 + WiFi 热点配网 + 入口守护 + v1.3.0）** |
 | 已冻结 | M1 契约（含缺陷修订）；M2 §7 状态机 + §8 渲染半段 + §9 动画节拍；M3 §5 版式/任务卡；M4 §6 增量1 事件线格式 + §8 增量2a 主机入口核心 + §9 增量2b 传输；M5 §5 增量1 语音逻辑/资产；M7 §6 增量1 番茄钟逻辑 + §7 增量2 番茄钟视图/落盘；M8 §6/§7/§8；**M9 测量契约** |
 | 待批准 | ✅ **无**（`Q10` 2026-10-23 按提案值批准；`Q19=A` 2026-10-24；`Q20/Q21` 定为仪器法；`Q17` 已决 A） |
-| 已发布 | ✅ 仓库公开（2026-10-16）；**Releases**：`v1.0.0`（M9 验收）/ `v1.1.0`（WiFi/NTP + 守护 + `/esp32-buddy`）/ `v1.2.0`（热点配网 + 菜单配网 + SNTP）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases ；**`v1.3.0`**（番茄钟页 IP）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.3.0 |
+| 已发布 | ✅ 仓库公开（2026-10-16）；**Releases**：`v1.0.0`（M9 验收）/ `v1.1.0`（WiFi/NTP + 守护 + `/esp32-buddy`）/ `v1.2.0`（热点配网 + 菜单配网 + SNTP）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases ；**`v1.3.0`**（番茄钟页 IP）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.3.0
+✅ **Release `v1.4.0`**（2026-10-25）：**语音闭环**（聆听中/理解你的意思/中文文本/自动填入/短按发送）+ 事件双通道 + GB2312 全集字库 → https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.4.0 |
 | 阻塞 | ✅ **无**（B14 已解除；B16/B17 已修；B11 配网已落地）；**仅剩**：`v1.3.0` 已推送并发布；`B09` 多 Agent 源属范围外；未验证项见下 |
 | 下一步 | ① 网络恢复后 `git push --tags` + 建 `v1.3.0` Release；② 可选复验：DNS 自动弹窗 / STA 失败 ≈2 min 回落；③ 后续增量（B09 多 Agent、RLCD）另立项 |
 
