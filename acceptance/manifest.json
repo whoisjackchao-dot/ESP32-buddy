@@ -1,10 +1,10 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T09:58:37+08:00",
+  "generated_at": "2026-10-25T09:59:30+08:00",
   "git": {
-    "commit": "da4ee4b52711cb4a821fec30eb45b1440bcf865c",
+    "commit": "d22bc6bf9b344bfaabf583a1ba2bf1b0e0b99c36",
     "branch": "main",
-    "tracked_clean": false
+    "tracked_clean": true
   },
   "totals": {
     "files": 191,
