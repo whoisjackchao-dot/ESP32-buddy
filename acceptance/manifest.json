@@ -1,21 +1,21 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T15:01:33+08:00",
+  "generated_at": "2026-10-25T15:16:18+08:00",
   "git": {
-    "commit": "2d6eebafbc0c23a0d5e6e855f809f485803101ab",
+    "commit": "442775ea4ee6d7f28662b9305d6ed505a1f8cc56",
     "branch": "main",
-    "tracked_clean": true
+    "tracked_clean": false
   },
   "totals": {
-    "files": 199,
-    "bytes": 2897255
+    "files": 202,
+    "bytes": 2903231
   },
   "groups": {
     "firmware": [
       {
         "path": "firmware/components/pet/CMakeLists.txt",
-        "bytes": 1489,
-        "sha256": "8ca13557a4367a9a403d46d1c4b172f9576a04e1342168ca8ed170d63f00b5a5"
+        "bytes": 1513,
+        "sha256": "9ea0a9fc67a487a7091501e4e3ec707759cf19a08e33da39bd11c7db085116e7"
       },
       {
         "path": "firmware/components/pet/assets/cjk16.h",
@@ -51,6 +51,11 @@
         "path": "firmware/components/pet/include/pet_audio.h",
         "bytes": 1498,
         "sha256": "5c7984d1e3dd7b2b73a3b24a09c7983cc869807800575967f1daec318293b70e"
+      },
+      {
+        "path": "firmware/components/pet/include/pet_ble.h",
+        "bytes": 346,
+        "sha256": "219784c322a2741f68050a759989358b512d93b0e6a9a5547c395acc1c1d33f1"
       },
       {
         "path": "firmware/components/pet/include/pet_button.h",
@@ -168,14 +173,19 @@
         "sha256": "7b6140e4343c473246b7dc5626c686cd2e459078dfe77ff86fd55b0eb93c4d86"
       },
       {
+        "path": "firmware/components/pet/pet_ble.c",
+        "bytes": 2696,
+        "sha256": "7872f7a75d8c1f4411f0b457dce8d8a614ece9f94a39c4db3dd17d2a43eda7e4"
+      },
+      {
         "path": "firmware/components/pet/pet_button.c",
         "bytes": 3040,
         "sha256": "f8acf42552a90858b39ddd69d00527e1e381594139ea1975332b7272b9aef21e"
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 16055,
-        "sha256": "80d004534cccf9905ccadf119677c2db7cdbe7a0066ebe0daf72b96a33d40b69"
+        "bytes": 17572,
+        "sha256": "e6f63a844e783f48b7835ed833be63a43510bd25f7e296d7252a980b7d554fdf"
       },
       {
         "path": "firmware/components/pet/pet_evt_tcp.c",
@@ -289,8 +299,8 @@
       },
       {
         "path": "firmware/main/main.c",
-        "bytes": 1639,
-        "sha256": "3bb00763037c82d812c5d3512340d9e4361b3f742839fb8ed7f0016ac52d73ba"
+        "bytes": 1728,
+        "sha256": "10b8e71457f7833f6520f5469b66f4a6367a0f48b3d2d63807ff74c54ad3d9ee"
       }
     ],
     "host": [
@@ -705,6 +715,11 @@
         "sha256": "bf79df10947c9cf73b0337649956584232fb793186b84c68c75273e3fe0258ba"
       },
       {
+        "path": "evidence/2026-10-25-BLE广播基线-B1.md",
+        "bytes": 1304,
+        "sha256": "4e93327edb49d51509b76951dfc918034e721700e3274baa32dad7aa768fe092"
+      },
+      {
         "path": "evidence/2026-10-25-BLE配对与WiFi双连接.md",
         "bytes": 3508,
         "sha256": "7e52b078eb51bf380a26775c70bee6de40505378bea33a8532a72c392476d939"
@@ -1039,7 +1054,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "b76b9f9c287e9636fb1323f7fa391ace1cfcab296beaa8e4ee00e0aea95c181d"
+        "sha256": "848e2a3dc2bf394ef7005d3f88fabd1ed0a1ff8523b979d52b5bdd17c5401961"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1050,8 +1065,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1571008,
-        "sha256": "02c7b703cdd145e6bb28a08ab206a4665b446089961557747f02b0bce0e81b4d"
+        "bytes": 1777120,
+        "sha256": "b6c113e86dd6ed30f8f358c9e3170db4d1f2197fcc1e421cff3ae44763bc5baa"
       }
     ]
   }

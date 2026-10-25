@@ -6,6 +6,7 @@
 #include "freertos/task.h"
 #include "nvs_flash.h"
 
+#include "pet_ble.h"
 #include "pet_engine.h"
 #include "pet_hal_sticks3.h"
 #include "pet_keys.h"
@@ -29,6 +30,7 @@ void app_main(void)
 
     /* M8 增量 2：WiFi STA + SNTP（非阻塞；无凭据时行为与此前完全一致） */
     pet_net_start();
+    pet_ble_start(); /* M16 B1：BLE 广播基线（仅广播） */
 
     if (pet_hal_sticks3_install() != ESP_OK) {
         ESP_LOGE(TAG, "DISPLAY ERROR（硬件层安装失败）");

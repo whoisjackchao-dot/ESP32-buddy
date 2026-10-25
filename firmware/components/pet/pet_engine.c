@@ -14,6 +14,7 @@
 #include "pet_keymap.h"
 #include "pet_leisure.h"
 #include "pet_menu.h"
+#include "pm1.h"
 #include "pet_net.h"
 #include "pet_ptt.h"
 #include "pet_pomo.h"
@@ -91,12 +92,58 @@ static void draw_net_badge(pet_surface_t *s)
             voice_put_px(s, w - 6 + dx, y + 3 + dy, dot);
         }
     }
-    if (ip[0] != '\0') {
-        const int n = (int)strlen(ip);
-        (void)pet_text_draw(s, w - 8 - n * 8, y, ip, (int)sizeof ip, 0xFFFFu, 1);
-    } else {
-        (void)pet_text_draw(s, w - 8 - 7 * 8, y, "OFFLINE", 8, 0xF800u, 1);
+    (void)ip; /* 第一页只显示状态点；IP 在番茄钟页显示 */
+}
+
+/* 番茄钟页右上：电池图标 + 百分比（10s 缓存，避免每帧 I2C） */
+static int      s_bat_pct = -1;
+static bool     s_bat_chg;
+static uint32_t s_bat_next_ms;
+
+static void battery_update(uint32_t now_ms)
+{
+    if (s_bat_pct >= 0 && (int32_t)(now_ms - s_bat_next_ms) < 0) {
+        return;
     }
+    uint16_t mv = 0;
+    int pct = 0;
+    bool chg = false;
+    if (pm1_battery(&mv, &pct, &chg) == ESP_OK) {
+        s_bat_pct = pct;
+        s_bat_chg = chg;
+    }
+    s_bat_next_ms = now_ms + 10000u;
+}
+
+static void draw_battery_badge(pet_surface_t *s)
+{
+    if (s_bat_pct < 0) {
+        return;
+    }
+    const int w = s->width;
+    const int x0 = w - 22, y0 = 2, bw = 16, bh = 9;
+    for (int x = x0; x < x0 + bw; x++) {
+        voice_put_px(s, x, y0, 0xFFFFu);
+        voice_put_px(s, x, y0 + bh - 1, 0xFFFFu);
+    }
+    for (int y = y0; y < y0 + bh; y++) {
+        voice_put_px(s, x0, y, 0xFFFFu);
+        voice_put_px(s, x0 + bw - 1, y, 0xFFFFu);
+    }
+    for (int y = y0 + 3; y < y0 + 6; y++) {
+        voice_put_px(s, x0 + bw, y, 0xFFFFu);
+    }
+    const int fill = (bw - 4) * s_bat_pct / 100;
+    const uint16_t col = (s_bat_chg || s_bat_pct >= 50) ? 0x07E0u
+                       : (s_bat_pct >= 20) ? 0xFFE0u : 0xF800u;
+    for (int x = x0 + 2; x < x0 + 2 + fill; x++) {
+        for (int y = y0 + 2; y < y0 + bh - 2; y++) {
+            voice_put_px(s, x, y, col);
+        }
+    }
+    char pct[8];
+    snprintf(pct, sizeof pct, "%d%%", s_bat_pct);
+    (void)pet_text_draw(s, x0 - (int)strlen(pct) * 8 - 3, y0, pct, 8, 0xFFFFu, 1);
 }
 
 static void draw_voice_overlay(pet_surface_t *s)
@@ -229,6 +276,8 @@ void pet_engine_redraw(void)
         pet_pomo_view_get(&s_pomo, &pv);
         pet_net_get_ip(pv.ip, sizeof pv.ip);
         pet_render_pomo(&s_surface, &pv);
+        battery_update((uint32_t)(esp_timer_get_time() / 1000));
+        draw_battery_badge(&s_surface);
         draw_voice_overlay(&s_surface);
     } else {
         pet_view_t view;
