@@ -9,7 +9,7 @@
 static void k01_duty_key1(void)
 {
     CHECK(pet_keymap_action(PET_MODE_DUTY, PET_KEY1, PET_KEY_EV_SHORT) ==
-          PET_ACT_BACK_WINDOW);
+          PET_ACT_SEND);
     CHECK(pet_keymap_action(PET_MODE_DUTY, PET_KEY1, PET_KEY_EV_LONG) ==
           PET_ACT_NONE);
 }

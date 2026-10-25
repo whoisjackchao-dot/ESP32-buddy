@@ -19,7 +19,10 @@ pet_menu_cmd_t pet_menu_key(pet_menu_t *m, pet_key_t key, pet_key_event_t ev)
             if (m->selected == 0) {
                 return PET_MENU_CMD_TOGGLE_MUTE;
             }
-            return (m->selected == 2) ? PET_MENU_CMD_PROVISION
+            if (m->selected == 2) {
+                return PET_MENU_CMD_PROVISION;
+            }
+            return (m->selected == 3) ? PET_MENU_CMD_BACK_WINDOW
                                       : PET_MENU_CMD_CLOSE;
         }
     } else if (ev == PET_KEY_EV_LONG && key == PET_KEY2) {

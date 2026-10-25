@@ -402,7 +402,11 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
 
     if (s_menu_open) {
         const pet_menu_cmd_t cmd = pet_menu_key(&s_menu, key, ev);
-        if (cmd == PET_MENU_CMD_PROVISION) {
+        if (cmd == PET_MENU_CMD_BACK_WINDOW) {
+            s_menu_open = false;
+            pet_engine_request_back_window();
+            ESP_LOGI(TAG, "menu: back window");
+        } else if (cmd == PET_MENU_CMD_PROVISION) {
             s_menu_open = false;
             pet_net_request_provision();
             ESP_LOGI(TAG, "menu: provisioning requested");
@@ -429,6 +433,10 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
         break;
     case PET_ACT_MUTE_TOGGLE:
         pet_voice_set_muted(!pet_voice_muted());
+        break;
+    case PET_ACT_SEND:
+        pet_engine_send_line("{\"v\":1,\"cmd\":\"send\"}\n");
+        ESP_LOGI(TAG, "key: send");
         break;
     case PET_ACT_BACK_WINDOW:
         pet_engine_request_back_window();

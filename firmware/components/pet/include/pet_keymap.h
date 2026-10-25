@@ -13,7 +13,8 @@ typedef enum {
     PET_ACT_MODE_POMO,   /* 值班 KEY2 短：切到番茄钟 */
     PET_ACT_MODE_DUTY,   /* 番茄钟 KEY2 短：切回值班 */
     PET_ACT_MUTE_TOGGLE, /* （保留枚举位）静音已收敛到菜单，键表不再产生 */
-    PET_ACT_BACK_WINDOW, /* 值班 KEY1 短：回 Agent 窗口 */
+    PET_ACT_BACK_WINDOW, /* （保留枚举位）回窗口已挪到菜单，键表不再产生 */
+    PET_ACT_SEND,        /* 值班 KEY1 短：发送（回车） */
     PET_ACT_MENU         /* KEY2 长：打开菜单 */
 } pet_action_t;
 

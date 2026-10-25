@@ -15,7 +15,7 @@ static void m01_init_selects_zero(void)
     CHECK(m.selected == 0);
 }
 
-/* BTN-07：KEY1 短按在三行间循环切换 0→1→2→0 */
+/* BTN-07：KEY1 短按在四行间循环切换 0→1→2→3→0 */
 static void m02_key1_short_toggles_selection(void)
 {
     pet_menu_t m;
@@ -25,7 +25,22 @@ static void m02_key1_short_toggles_selection(void)
     CHECK(pet_menu_key(&m, PET_KEY1, PET_KEY_EV_SHORT) == PET_MENU_CMD_NONE);
     CHECK(m.selected == 2);
     CHECK(pet_menu_key(&m, PET_KEY1, PET_KEY_EV_SHORT) == PET_MENU_CMD_NONE);
+    CHECK(m.selected == 3);
+    CHECK(pet_menu_key(&m, PET_KEY1, PET_KEY_EV_SHORT) == PET_MENU_CMD_NONE);
     CHECK(m.selected == 0);
+}
+
+/* BTN-07：选中回窗口（3）时 KEY2 短按 → 回窗口命令 */
+static void m08_key2_short_on_back_window(void)
+{
+    pet_menu_t m;
+    pet_menu_init(&m);
+    for (int i = 0; i < 3; i++) {
+        (void)pet_menu_key(&m, PET_KEY1, PET_KEY_EV_SHORT);
+    }
+    CHECK(m.selected == 3);
+    CHECK(pet_menu_key(&m, PET_KEY2, PET_KEY_EV_SHORT) == PET_MENU_CMD_BACK_WINDOW);
+    CHECK(m.selected == 3);
 }
 
 /* BTN-07：选中配网（2）时 KEY2 短按 → 产出配网命令（菜单由引擎关闭） */
@@ -94,6 +109,7 @@ int main(void)
     RUN(m05_key2_long_closes);
     RUN(m06_key1_long_none);
     RUN(m07_key2_short_on_provision_requests_ap);
+    RUN(m08_key2_short_on_back_window);
     RUN(m07_ev_none_none);
     REPORT();
 }

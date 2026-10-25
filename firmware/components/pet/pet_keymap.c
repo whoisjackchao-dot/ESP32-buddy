@@ -11,7 +11,7 @@ pet_action_t pet_keymap_action(pet_mode_t mode, pet_key_t key, pet_key_event_t e
     }
     if (mode == PET_MODE_DUTY) {
         if (key == PET_KEY1) {
-            return (ev == PET_KEY_EV_SHORT) ? PET_ACT_BACK_WINDOW : PET_ACT_NONE;
+            return (ev == PET_KEY_EV_SHORT) ? PET_ACT_SEND : PET_ACT_NONE;
         }
         return (ev == PET_KEY_EV_SHORT) ? PET_ACT_MODE_POMO : PET_ACT_MENU;
     }

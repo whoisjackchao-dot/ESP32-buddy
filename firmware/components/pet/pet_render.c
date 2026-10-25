@@ -506,6 +506,7 @@ void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v)
     menu_draw_row(s, 96, row, v->selected == 1);
 
     menu_draw_row(s, 128, "WIFI: SETUP", v->selected == 2);
+    menu_draw_row(s, 160, "BACK: WINDOW", v->selected == 3);
 
     snprintf(row, sizeof row, "done %lu  %lus", (unsigned long)v->done_count,
              (unsigned long)v->focus_seconds);

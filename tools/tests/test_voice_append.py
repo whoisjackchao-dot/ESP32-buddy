@@ -302,3 +302,11 @@ class TestCli(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class TestSendCmd(unittest.TestCase):
+    def test_extract_send_cmd(self):
+        self.assertTrue(file_to_serial.extract_send_cmd(b'{"v":1,"cmd":"send"}\n'))
+        self.assertTrue(file_to_serial.extract_send_cmd(b'{"cmd": "send"}'))
+        self.assertFalse(file_to_serial.extract_send_cmd(b'{"cmd":"voice.text","text":"x"}'))
+        self.assertFalse(file_to_serial.extract_send_cmd(b'{oops'))
+        self.assertFalse(file_to_serial.extract_send_cmd(b''))

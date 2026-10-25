@@ -160,9 +160,54 @@ def copy_to_clipboard(text):
         return False
 
 
+def extract_send_cmd(raw_line):
+    """True for a `{"cmd":"send"}` console line (KEY1 short = submit)."""
+    try:
+        obj = json.loads(raw_line.decode("utf-8", "replace"))
+    except ValueError:
+        return False
+    return isinstance(obj, dict) and obj.get("cmd") == "send"
+
+
+def _focus_opencode():
+    try:
+        import win_focus
+        return bool(win_focus.focus_opencode_window())
+    except Exception:
+        return False
+
+
+def focus_and_ctrl_v():
+    """Focus the OpenCode window and paste the clipboard into its input box."""
+    _focus_opencode()
+    try:
+        import win_keys
+        return bool(win_keys.send_ctrl_v())
+    except Exception:
+        return False
+
+
+def focus_and_enter():
+    """Focus the OpenCode window and submit (Enter)."""
+    _focus_opencode()
+    try:
+        import win_keys
+        return bool(win_keys.send_enter())
+    except Exception:
+        return False
+
+
+def voice_clipboard_sink(text, auto_paste=True):
+    """Copy the transcript, then (default) focus + Ctrl+V into the prompt."""
+    ok = copy_to_clipboard(text)
+    if ok and auto_paste:
+        focus_and_ctrl_v()
+    return ok
+
+
 def console_reader(ser, ip_file, stop_event,
                    voice_url=VOICE_DEFAULT_URL, voice_post=None,
-                   voice_enabled=True):
+                   voice_enabled=True, auto_paste=True, send_action=None):
     """Reader-thread body: scan console lines for the wifi IP announcement
     and the device's voice.text transcript.
 
@@ -173,7 +218,8 @@ def console_reader(ser, ip_file, stop_event,
     """
     if voice_post is None:
         voice_post = (post_voice_text if voice_url
-                      else (lambda url, text, timeout: copy_to_clipboard(text)))
+                      else (lambda url, text, timeout:
+                            voice_clipboard_sink(text, auto_paste)))
     while not stop_event.is_set():
         try:
             raw = ser.readline()
@@ -187,12 +233,16 @@ def console_reader(ser, ip_file, stop_event,
                 write_ip_file(ip_file, ip)
             except OSError:
                 pass
-        if not voice_enabled:
-            continue
-        text = extract_voice_text(raw)
-        if text:
+        if voice_enabled:
+            text = extract_voice_text(raw)
+            if text:
+                try:
+                    voice_post(voice_url, text, VOICE_POST_TIMEOUT)
+                except Exception:
+                    pass
+        if extract_send_cmd(raw):
             try:
-                voice_post(voice_url, text, VOICE_POST_TIMEOUT)
+                (send_action or focus_and_enter)()
             except Exception:
                 pass
 
@@ -218,11 +268,14 @@ def build_parser():
                              " voice.text lines (default: %(default)s)")
     parser.add_argument("--no-voice", action="store_true",
                         help="do not forward voice.text lines to the plugin")
+    parser.add_argument("--no-auto-paste", action="store_true",
+                        help="copy the transcript but do not focus+Ctrl+V it")
     return parser
 
 
 def main(argv=None, serial_factory=None, sleep_fn=time.sleep,
-         stop_after=None, clock=time.monotonic, voice_post=None):
+         stop_after=None, clock=time.monotonic, voice_post=None,
+         send_action=None):
     args = build_parser().parse_args(argv)
     ip_file = args.ip_file if args.ip_file else args.log + ".ip"
     print("[file_to_serial] pid=%d log=%s port=%s interval=%ss ip-file=%s"
@@ -258,7 +311,9 @@ def main(argv=None, serial_factory=None, sleep_fn=time.sleep,
                         args=(ser, ip_file, stop_reader),
                         kwargs={"voice_url": args.voice_url,
                                 "voice_enabled": not args.no_voice,
-                                "voice_post": voice_post},
+                                "voice_post": voice_post,
+                                "auto_paste": not args.no_auto_paste,
+                                "send_action": send_action},
                         daemon=True)
                     reader.start()
                 ser.write(data)
