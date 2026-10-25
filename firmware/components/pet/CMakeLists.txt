@@ -7,6 +7,7 @@ idf_component_register(
          "pet_linebuf.c"
          "pet_rx.c"
          "pet_net.c"
+         "pet_evt_tcp.c"
          "pet_prov.c"
          "pet_pomo.c"
          "pet_pomo_store.c"

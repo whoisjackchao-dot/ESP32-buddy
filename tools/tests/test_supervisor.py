@@ -112,7 +112,9 @@ class TestBuildChildren(unittest.TestCase):
         self.assertTrue(cmd.startswith("& '%s' '" % WIN_PY), cmd)
         self.assertTrue(cmd.endswith("' --log 'D:\\buddy_flash\\oc_events.log'"
                                      " --port COM5 --stop-file"
-                                     " 'D:\\buddy_flash\\oc_events.log.stop'"), cmd)
+                                     " 'D:\\buddy_flash\\oc_events.log.stop'"
+                                     " --ip-file"
+                                     " 'D:\\buddy_flash\\oc_events.log.ip'"), cmd)
 
     def test_win_python_env_override(self):
         old = os.environ.get("BUDDY_WIN_PYTHON")
@@ -131,7 +133,8 @@ class TestBuildChildren(unittest.TestCase):
             out="/mnt/d/b/x.log", win_python=WIN_PY,
             host_dir="/repo/host", port="COM7")
         self.assertIn("--port COM7", kids[1][3])
-        self.assertTrue(kids[1][3].endswith("--stop-file 'D:\\b\\x.log.stop'"))
+        self.assertIn("--stop-file 'D:\\b\\x.log.stop'", kids[1][3])
+        self.assertTrue(kids[1][3].endswith("--ip-file 'D:\\b\\x.log.ip'"))
 
 
 # ---------------------------------------------------------------------------
@@ -395,6 +398,9 @@ class TestFileToSerialMain(unittest.TestCase):
             def write(self, b):
                 got.append(b)
 
+            def readline(self):
+                return b""  # console reader: silence, no wifi line
+
             def close(self):
                 pass
 
@@ -409,7 +415,9 @@ class TestFileToSerialMain(unittest.TestCase):
             sleep_fn=fake_sleep,
             stop_after=0.3)
         self.assertEqual(rc, 0)
-        self.assertEqual(got, ["COM5", b'{"event":"b"}\n'])
+        # 桥启动时会先发一条 wifi.status 查询以发现设备 IP，然后才是转发的事件行
+        self.assertEqual(got, ["COM5", b'{"version":1,"cmd":"wifi.status"}\n',
+                               b'{"event":"b"}\n'])
 
     def test_banner_is_single_line(self):
         import contextlib

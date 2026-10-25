@@ -56,17 +56,23 @@ def win_to_wsl(path):
 
 def build_children(out=DEFAULT_OUT, win_python=None, host_dir=None,
                    port=DEFAULT_PORT):
-    """Default child commands as argv lists (pure data, nothing spawned)."""
+    """Default child commands as argv lists (pure data, nothing spawned).
+
+    Dual transport: the poller mirrors every line to the device over
+    WiFi TCP (--tcp auto: host from <out>.ip, port 8766) while the file
+    bridge records the device IP announced on the console (<out>.ip).
+    """
     win_python = win_python or default_win_python()
     host_dir = host_dir or os.path.dirname(os.path.abspath(__file__))
     poll = [sys.executable, os.path.join(host_dir, "oc_poll.py"),
-            "--out", out]
-    ps = "& '%s' '%s' --log '%s' --port %s --stop-file '%s'" % (
+            "--out", out, "--tcp", "auto", "--ip-file", out + ".ip"]
+    ps = "& '%s' '%s' --log '%s' --port %s --stop-file '%s' --ip-file '%s'" % (
         win_python,
         wsl_to_win(os.path.join(host_dir, "file_to_serial.py")),
         wsl_to_win(out),
         port,
-        wsl_to_win(out) + ".stop")
+        wsl_to_win(out) + ".stop",
+        wsl_to_win(out) + ".ip")
     bridge = ["powershell.exe", "-NoProfile", "-Command", ps]
     return [poll, bridge]
 

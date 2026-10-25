@@ -22,6 +22,7 @@
 #include "nvs.h"
 
 #include "pet_engine.h"
+#include "pet_evt_tcp.h"
 #include "pet_prov.h"
 
 static const char *TAG = "pet-net";
@@ -205,12 +206,14 @@ static void net_event_handler(void *arg, esp_event_base_t base, int32_t id, void
             s_ip[0] = '\0';
             s_reconnect_req = true;
         }
+        pet_evt_tcp_stop(); /* M13：STA 断开即停 :8766（幂等；任务自查后自行关套接字） */
     } else if (base == IP_EVENT && id == IP_EVENT_STA_GOT_IP) {
         const ip_event_got_ip_t *ev = (const ip_event_got_ip_t *)data;
         snprintf(s_ip, sizeof s_ip, IPSTR, IP2STR(&ev->ip_info.ip));
         s_reconnect_req = false;
         s_fails = 0;
         ESP_LOGI(TAG, "net: wifi connected ip=%s", s_ip);
+        pet_evt_tcp_start(); /* M13：拿到 IP 即开事件通道 tcp://<ip>:8766（幂等） */
     }
 }
 
@@ -299,6 +302,7 @@ static void sta_stop_radio(void)
 {
     s_wifi_run = false; /* 先关重连开关，断开事件才不会置 retry 标志 */
     s_reconnect_req = false;
+    pet_evt_tcp_stop(); /* M13：转热点/清场前停 :8766（幂等） */
     if (s_wifi_started) {
         if (esp_sntp_enabled()) {
             esp_sntp_stop();
