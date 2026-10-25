@@ -9,6 +9,10 @@
  * still presses Enter. The host bridge (host/file_to_serial.py) detects the
  * device's voice.text console line and POSTs here (best-effort).
  *
+ * 兼容性警告：本机 OpenCode 1.19.4 的 session_prompt 槽为"追加"语义，加载后会出现
+ * 两个输入框 → 已停用（未注册）；语音文本改走主机剪贴板（file_to_serial 默认）。
+ * 以下说明保留给 1.18.x 或后续修复参考。
+ *
  * Loading (per reference spike/FINDINGS.md, OpenCode 1.18.31/32 evidence):
  * TUI plugins are NOT loaded from opencode.json `plugin` (that key is for
  * server plugins and rejects TUI modules with "must default export an object
@@ -29,6 +33,17 @@
 interface VoicePromptRef {
     current: { input: string; parts: unknown[] } & Record<string, unknown>;
     set: (next: Record<string, unknown>) => void;
+}
+
+import { appendFileSync } from "node:fs";
+
+const DBG_LOG = "/tmp/voice-draft.log"; /* 诊断：slot 渲染/append 路径 */
+function dbg(msg: string): void {
+    try {
+        appendFileSync(DBG_LOG, `${new Date().toISOString()} ${msg}\n`);
+    } catch {
+        /* best-effort */
+    }
 }
 
 const PLUGIN_ID = "esp32-buddy-voice-draft";
@@ -92,6 +107,7 @@ export default {
                 session_prompt: (context: unknown, data: any) => {
                     void context;
                     const props = (data ?? {}) as Record<string, any>;
+                    dbg(`render session=${props.session_id ?? "-"} visible=${props.visible} disabled=${props.disabled}`);
                     return api.ui.Prompt({
                         sessionID: props.session_id,
                         visible: props.visible,
@@ -145,12 +161,16 @@ export default {
             // Reference index.ts binding(): refuse cross-session writes.
             const sessionID = currentSessionID();
             const ref = sessionID ? refs.get(sessionID) : undefined;
+            dbg(`append route=${sessionID ?? "-"} refs=[${[...refs.keys()].join(",")}] hasRef=${!!ref}`);
             if (!ref) {
                 // Not in a session (or prompt unmounted): nothing to fill.
                 json(res, 200, { status: "uncertain", reason: "no_prompt_ref" });
                 return;
             }
-            json(res, 200, { status: appendToRef(ref, text) });
+            const before = ref.current?.input?.length ?? -1;
+            const result = appendToRef(ref, text);
+            dbg(`append result=${result} inputBefore=${before} inputAfter=${ref.current?.input?.length ?? -1}`);
+            json(res, 200, { status: result });
         }
 
         // node:http so the file also runs under a plain Node/Bun runtime;
@@ -171,6 +191,15 @@ export default {
                         return;
                     }
                     const path = (req.url ?? "").split("?")[0];
+                    if (path === "/v1/debug") {
+                        json(res, 200, {
+                            plugin: PLUGIN_ID,
+                            route: currentSessionID() ?? null,
+                            routeName: api.route?.current?.name ?? null,
+                            refs: [...refs.keys()],
+                        });
+                        return;
+                    }
                     if (path === "/v1/health") {
                         if (req.method !== "GET") {
                             json(res, 405, { error: { code: "method_not_allowed" } });

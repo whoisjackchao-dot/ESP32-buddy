@@ -41,7 +41,7 @@ import urllib.request
 BAUD = 115200
 
 # OpenCode draft-append plugin endpoint (esp32-s3-m5 adapted contract).
-VOICE_DEFAULT_URL = "http://127.0.0.1:8790/v1/draft/append"
+VOICE_DEFAULT_URL = ""  # 空 = 写入 Windows 剪贴板（OpenCode 1.19 槽语义不兼容后的方案）
 VOICE_POST_TIMEOUT = 1.0
 
 # Console line announcing the station IP (firmware net bring-up log).
@@ -133,6 +133,33 @@ def post_voice_text(url, text, timeout=VOICE_POST_TIMEOUT, post_fn=None):
         return False
 
 
+def copy_to_clipboard(text):
+    """Best-effort: put text on the Windows clipboard (PowerShell Set-Clipboard).
+
+    WSL/Non-Windows returns False without raising. Used as the default voice
+    sink: the user presses Ctrl+V in the OpenCode prompt (no submit).
+    """
+    import subprocess
+    import tempfile
+    try:
+        fd, path = tempfile.mkstemp(prefix="buddy_voice_", suffix=".txt")
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(text)
+        try:
+            subprocess.run(
+                ["powershell.exe", "-NoProfile", "-Command",
+                 "Set-Clipboard -Value (Get-Content -Raw -Encoding UTF8 '%s')" % path],
+                timeout=VOICE_POST_TIMEOUT, check=False)
+        finally:
+            try:
+                os.unlink(path)
+            except OSError:
+                pass
+        return True
+    except Exception:
+        return False
+
+
 def console_reader(ser, ip_file, stop_event,
                    voice_url=VOICE_DEFAULT_URL, voice_post=None,
                    voice_enabled=True):
@@ -145,7 +172,8 @@ def console_reader(ser, ip_file, stop_event,
     never raises). Reads only - the main thread keeps sole write access.
     """
     if voice_post is None:
-        voice_post = post_voice_text
+        voice_post = (post_voice_text if voice_url
+                      else (lambda url, text, timeout: copy_to_clipboard(text)))
     while not stop_event.is_set():
         try:
             raw = ser.readline()
@@ -199,7 +227,7 @@ def main(argv=None, serial_factory=None, sleep_fn=time.sleep,
     ip_file = args.ip_file if args.ip_file else args.log + ".ip"
     print("[file_to_serial] pid=%d log=%s port=%s interval=%ss ip-file=%s"
           " voice=%s" % (os.getpid(), args.log, args.port, args.interval,
-                         ip_file, "off" if args.no_voice else args.voice_url),
+                         ip_file, "off" if args.no_voice else (args.voice_url or "clipboard")),
           flush=True)
     # Skip history: only bytes arriving after startup go to the device.
     try:

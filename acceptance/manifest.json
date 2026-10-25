@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T11:07:29+08:00",
+  "generated_at": "2026-10-25T11:16:53+08:00",
   "git": {
-    "commit": "44090c216d6e165290872cc292bbb73f9656af57",
+    "commit": "e753a8892f39c9df25b58abd73d601ab8f5d4264",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 194,
-    "bytes": 2846074
+    "bytes": 2847204
   },
   "groups": {
     "firmware": [
@@ -301,8 +301,8 @@
       },
       {
         "path": "host/file_to_serial.py",
-        "bytes": 9359,
-        "sha256": "db66fab4646488836febe6a695629b6bc66c60de85a16b3ce9216ad07d133ae7"
+        "bytes": 10419,
+        "sha256": "14edb60205dff467a7b0c376b8dce18770cda466450419f4f5b527b9f471d4d0"
       },
       {
         "path": "host/oc_poll.py",
@@ -510,8 +510,8 @@
       },
       {
         "path": "acceptance/操作与恢复手册.md",
-        "bytes": 7830,
-        "sha256": "f06b69c91063db2ea097986714635c3ca008c13a186ad17622170ecdc590f20d"
+        "bytes": 7900,
+        "sha256": "286a271163639ce33a74b8320b12a753ac0ebcfc779dea9805ef75b8b8bc450c"
       },
       {
         "path": "acceptance/许可证登记.md",

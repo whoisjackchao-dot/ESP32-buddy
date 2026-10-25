@@ -229,8 +229,8 @@ class TestConsoleReaderVoice(unittest.TestCase):
 class TestCli(unittest.TestCase):
     def test_voice_url_default(self):
         args = file_to_serial.build_parser().parse_args(["--log", "/x/y.log"])
-        self.assertEqual(args.voice_url,
-                         "http://127.0.0.1:8790/v1/draft/append")
+        # 默认空 = 写剪贴板（OpenCode 1.19 插件槽不兼容后的方案）
+        self.assertEqual(args.voice_url, "")
         self.assertFalse(args.no_voice)
 
     def test_voice_flags(self):
