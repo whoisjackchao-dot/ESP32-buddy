@@ -12,7 +12,7 @@
     sha256 a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da
     许可   https://github.com/google/fonts/raw/main/ofl/notosanssc/OFL.txt
   许可登记见 NOTICE.md；OFL 要求保留版权行，本脚本把它写进生成头文件。
-- 覆盖：ASCII 0x20..0x7E（95）+ GB2312 一级汉字（3755）+ 常用中文标点（12）
+- 覆盖：ASCII 0x20..0x7E（95）+ GB2312 全集汉字（6763）+ 常用中文标点（12）
   = 3862 字。一级汉字 = 分区 16..55（首字节 B0..D7、次字节 A1..FE）。
 - 光栅化：变量字重 560（Medium/SemiBold 之间，为 16px 无 hint 可读性选定）、
   4× 超采样（64px 渲染）、**50% 覆盖率阈值**（正文字重下笔画约占超采样块
@@ -52,9 +52,9 @@ CACHE_DIR = os.path.join(os.path.expanduser("~"), ".cache", "esp32-buddy-fonts")
 
 
 def gb2312_level1():
-    """GB2312 一级汉字（分区 16..55）→ Unicode 码点列表。"""
+    """GB2312 汉字全集（一级 16..55 + 二级 56..87）→ Unicode 码点列表。"""
     out = []
-    for hi in range(0xB0, 0xD8):
+    for hi in range(0xB0, 0xF8):
         for lo in range(0xA1, 0xFF):
             try:
                 ch = bytes([hi, lo]).decode("gb2312")
@@ -170,7 +170,7 @@ def emit_header(chars, glyphs, font_sha, out_path, size):
     lines.append(f" *   {FONT_URL}")
     lines.append(f" *   sha256 {font_sha}")
     lines.append(f" * 许可：{FONT_LICENSE}")
-    lines.append(" * 覆盖：ASCII 0x20..0x7E + GB2312 一级汉字(3755) + 常用中文标点")
+    lines.append(" * 覆盖：ASCII 0x20..0x7E + GB2312 全集汉字(6763) + 常用中文标点")
     lines.append(f" * 光栅化：{SS}x 超采样、{int(THRESH * 100)}% 覆盖率阈值；"
                  f"渲染字号 {size}")
     lines.append(" * 位序：行主序 16 行 × 2 字节/行，MSB = 最左列像素。")
@@ -217,7 +217,7 @@ def main():
     print(f"font: {font_path}")
     print(f"font sha256: {font_sha}")
     print(f"render size: {size}px (SS={SS}, weight={WGHT}, thresh={THRESH})")
-    print(f"glyphs: {n} (ascii 95 + gb2312-l1 "
+    print(f"glyphs: {n} (ascii 95 + gb2312 "
           f"{len(gb2312_level1())} + punct {len(PUNCT)})")
     print(f"index: {idx_bytes} bytes, bitmap: {bmp_bytes} bytes, "
           f"total: {idx_bytes + bmp_bytes} bytes")

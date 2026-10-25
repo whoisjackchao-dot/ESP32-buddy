@@ -120,6 +120,13 @@ static void font_covers_cjk_and_punct(void)
     CHECK(memcmp(pet_font16_glyph(0x4E2D), pet_font16_glyph(0x4E00), 32) != 0);
 }
 
+static void font_gb2312_level2_covered(void)
+{
+    /* 回归：UI 文案“聆听中”的“聆”属 GB2312 二级字，必须有一字形 */
+    CHECK(pet_font16_glyph(0x8046) != NULL);
+    CHECK(pet_font16_glyph(0x542C) != NULL); /* 听 */
+}
+
 static void font_missing_returns_null(void)
 {
     CHECK(pet_font16_glyph(0x3042) == NULL);    /* 平假名：GB2312 外 */
@@ -130,7 +137,7 @@ static void font_missing_returns_null(void)
 
 static void font_table_sorted_and_complete(void)
 {
-    CHECK(CJK16_COUNT == 3862u); /* 95 ASCII + 3755 GB2312 一级 + 12 标点 */
+    CHECK(CJK16_COUNT == 6870u); /* 95 ASCII + 6763 GB2312 全集 + 12 标点 */
     for (uint32_t i = 0; i + 1 < CJK16_COUNT; i++) {
         CHECK(cjk16_index[i] < cjk16_index[i + 1]); /* 二分前提：严格升序 */
         if (cjk16_index[i] >= cjk16_index[i + 1]) {
@@ -328,6 +335,7 @@ int main(void)
 
     RUN(font_covers_ascii);
     RUN(font_covers_cjk_and_punct);
+    RUN(font_gb2312_level2_covered);
     RUN(font_missing_returns_null);
     RUN(font_table_sorted_and_complete);
     RUN(draw16_counts_cells_and_pixels);

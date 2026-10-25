@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T10:59:49+08:00",
+  "generated_at": "2026-10-25T11:07:29+08:00",
   "git": {
-    "commit": "2f3be7a016e5bf4a000f11f45361f87d92e66189",
+    "commit": "44090c216d6e165290872cc292bbb73f9656af57",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 194,
-    "bytes": 2161470
+    "bytes": 2846074
   },
   "groups": {
     "firmware": [
@@ -19,8 +19,8 @@
       },
       {
         "path": "firmware/components/pet/assets/cjk16.h",
-        "bytes": 879338,
-        "sha256": "8a3321781f529f0849d0726b8dfb7d9516dc23477863237575b9213e14eead59"
+        "bytes": 1563658,
+        "sha256": "b8a1f2d6b4082962edf2445f52b2cd8904217b7c8bc1a91a33655ffd15e21b10"
       },
       {
         "path": "firmware/components/pet/assets/done.pcm",
@@ -458,8 +458,8 @@
       },
       {
         "path": "tests/test_pet_text.c",
-        "bytes": 10999,
-        "sha256": "5b33cb8638544a0ed7c5cbcf1ec64aa9052c3622c476ac296cccb88e75323608"
+        "bytes": 11283,
+        "sha256": "31b12de50c747253f54e223f9e743ecc8c26d34e1956c1b6a14c96509cce2424"
       },
       {
         "path": "tests/test_pet_voice.c",
@@ -1014,7 +1014,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "2bcdb444915ae0dc8b7d3d8bfae61054cd3d5178af0daa92d86792408a3ab6b4"
+        "sha256": "d61e251133f2fb6912b7732149953e353760ebeacb4b67ec480cbaaa0f1a4cb0"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1025,8 +1025,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1460336,
-        "sha256": "3cde69a2cb412b185c81bc5894266100644390f2cae7ed70ad8b4d9a5f95a359"
+        "bytes": 1568624,
+        "sha256": "102e68dcc199079a0e1905a3a18ce4b886777106a170c6fa839e94e827a76e34"
       }
     ]
   }
