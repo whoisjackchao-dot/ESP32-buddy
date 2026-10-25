@@ -12,6 +12,7 @@ import time
 TARGET_CLASS = "CASCADIA_HOSTING_WINDOW_CLASS"
 TITLE_PREFIX = "OC"
 SW_RESTORE = 9
+SW_SHOW = 5
 FOCUS_SETTLE_SECONDS = 0.2
 
 
@@ -53,12 +54,20 @@ def _find_target_hwnd(user32):
     return found[0] if found else None
 
 
+def _show_keep_size(user32, hwnd) -> None:
+    """Maximized/normal windows must keep their size: only un-minimize."""
+    if user32.IsIconic(hwnd):
+        user32.ShowWindow(hwnd, SW_RESTORE)
+    else:
+        user32.ShowWindow(hwnd, SW_SHOW)
+
+
 def _activate(user32, kernel32, hwnd) -> bool:
     import ctypes
     import time
     from ctypes import wintypes
 
-    user32.ShowWindow(hwnd, SW_RESTORE)
+    _show_keep_size(user32, hwnd)
     user32.SetForegroundWindow(hwnd)
     time.sleep(0.1)
     if user32.GetForegroundWindow() == hwnd:
@@ -69,7 +78,7 @@ def _activate(user32, kernel32, hwnd) -> bool:
     fg_thread = user32.GetWindowThreadProcessId(fg_hwnd, None) if fg_hwnd else 0
     if fg_thread and fg_thread != this_thread:
         if user32.AttachThreadInput(this_thread, fg_thread, True):
-            user32.ShowWindow(hwnd, SW_RESTORE)
+            _show_keep_size(user32, hwnd)
             user32.SetForegroundWindow(hwnd)
             user32.AttachThreadInput(this_thread, fg_thread, False)
             time.sleep(0.1)
