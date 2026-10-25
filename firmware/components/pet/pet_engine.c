@@ -97,17 +97,21 @@ static void draw_voice_overlay(pet_surface_t *s)
         return;
     }
 
-    char line[16];
+    char line[32];
+    uint16_t color = PET_VOICE_RED;
     if (st == PET_PTT_RECORDING) {
-        snprintf(line, sizeof line, "REC %lus",
-                 (unsigned long)(pet_ptt_elapsed_ms() / 1000u));
+        /* 聆听中 + 1..3 个点（每 500ms 递增，轻微动效） */
+        const uint32_t dots = (pet_ptt_elapsed_ms() / 500u) % 3u + 1u;
+        snprintf(line, sizeof line, "聆听中%.*s", (int)dots, "...");
+        color = PET_VOICE_WHITE;
     } else if (st == PET_PTT_UPLOADING) {
-        snprintf(line, sizeof line, "ASR...");
+        snprintf(line, sizeof line, "理解你的意思");
+        color = PET_VOICE_WHITE;
     } else {
-        snprintf(line, sizeof line, "ERR");
+        snprintf(line, sizeof line, "出错了");
     }
     pet_text_draw16(s, PET_VOICE_X, PET_VOICE_Y, line,
-                    PET_VOICE_CELLS, PET_VOICE_RED, 1);
+                    PET_VOICE_CELLS, color, 1);
 }
 
 

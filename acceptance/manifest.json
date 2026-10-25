@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T10:53:38+08:00",
+  "generated_at": "2026-10-25T10:59:49+08:00",
   "git": {
-    "commit": "f341083eabc6e50995883bb8722c75d7ee55c2f2",
+    "commit": "2f3be7a016e5bf4a000f11f45361f87d92e66189",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 194,
-    "bytes": 2161227
+    "bytes": 2161470
   },
   "groups": {
     "firmware": [
@@ -174,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 14677,
-        "sha256": "fa6cd83d135fa4ec2e3f43cbf22d8b1fb8825f3c1a17e2e0369b9c5e87482206"
+        "bytes": 14894,
+        "sha256": "16e24bd9b1d57616fd22e5d3a31883d680ba88796f3b8db2e928c7e1599b0191"
       },
       {
         "path": "firmware/components/pet/pet_evt_tcp.c",
@@ -510,8 +510,8 @@
       },
       {
         "path": "acceptance/操作与恢复手册.md",
-        "bytes": 7804,
-        "sha256": "2a14799fd06ca582146374ab3949e1fd745d1d1964e0a68506797dc314531758"
+        "bytes": 7830,
+        "sha256": "f06b69c91063db2ea097986714635c3ca008c13a186ad17622170ecdc590f20d"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -1014,7 +1014,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "4c61bd773d24a108551f5a0c26bad194b73b41866aa97b7fd7b30cba84037d71"
+        "sha256": "2bcdb444915ae0dc8b7d3d8bfae61054cd3d5178af0daa92d86792408a3ab6b4"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1025,8 +1025,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1460272,
-        "sha256": "b719648ac03fb1675312a4f3eb941deaa5a91a3639a0b654ef079cf2c5477742"
+        "bytes": 1460336,
+        "sha256": "3cde69a2cb412b185c81bc5894266100644390f2cae7ed70ad8b4d9a5f95a359"
       }
     ]
   }
