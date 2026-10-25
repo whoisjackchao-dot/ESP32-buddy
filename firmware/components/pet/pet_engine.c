@@ -1,5 +1,6 @@
 #include "pet_engine.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -14,10 +15,12 @@
 #include "pet_leisure.h"
 #include "pet_menu.h"
 #include "pet_net.h"
+#include "pet_ptt.h"
 #include "pet_pomo.h"
 #include "pet_pomo_store.h"
 #include "pet_render.h"
 #include "pet_state.h"
+#include "pet_text.h"
 #include "pet_voice.h"
 
 static const char *TAG = "pet-engine";
@@ -32,6 +35,132 @@ static struct pet_state *s_state;
 static pet_look_t  *s_look;
 static uint8_t     *s_pixels;
 static pet_surface_t s_surface;
+
+/* PTT 语音浮层（值班/番茄钟画面顶部；菜单画面不画） */
+#ifndef PET_VOICE_BOX_COLOR
+#define PET_VOICE_BOX_COLOR 0x0000u /* 黑底 */
+#endif
+#ifndef PET_VOICE_RED
+#define PET_VOICE_RED 0xF800u
+#endif
+#ifndef PET_VOICE_WHITE
+#define PET_VOICE_WHITE 0xFFFFu
+#endif
+#define PET_VOICE_MAX_CHARS ((135 - 4) / 8) /* 8×8 字库，135px 宽 → 16 字/行 */
+#define PET_VOICE_MAX_LINES 3
+_Static_assert(PET_VOICE_MAX_LINES * (PET_VOICE_MAX_CHARS + 1) + 1 <= 80,
+               "overlay text buffer too small");
+
+static void voice_put_px(pet_surface_t *s, int x, int y, uint16_t c)
+{
+    if (x < 0 || y < 0 || x >= s->width || y >= s->height) {
+        return;
+    }
+    uint8_t *p = s->pixels + (size_t)y * s->stride + (size_t)x * 2;
+    p[0] = (uint8_t)(c & 0xFF);
+    p[1] = (uint8_t)(c >> 8);
+}
+
+static void voice_box(pet_surface_t *s, int lines)
+{
+    const int h = lines * 8 + 4;
+    for (int y = 0; y < h; y++) {
+        for (int x = 0; x < s->width; x++) {
+            voice_put_px(s, x, y, PET_VOICE_BOX_COLOR);
+        }
+    }
+}
+
+/* 屏显副本：UTF-8 非 ASCII 段折叠为 '?'（8×8 字库无汉字字形，pet_text_draw
+ * 会跳过续字节），保证换行/截断按字符格计。 */
+static void voice_display_copy(const char *src, char *dst, size_t dst_sz)
+{
+    size_t o = 0;
+    for (const char *p = src; *p != '\0' && o + 1 < dst_sz; p++) {
+        if ((unsigned char)*p < 0x80u) {
+            dst[o++] = *p;
+        } else {
+            while (p[1] != '\0' && ((unsigned char)p[1] & 0xC0u) == 0x80u) {
+                p++;
+            }
+            dst[o++] = '?';
+        }
+    }
+    dst[o] = '\0';
+}
+
+static void draw_voice_overlay(pet_surface_t *s)
+{
+    const pet_ptt_state_t st = pet_ptt_state();
+    if (st == PET_PTT_IDLE) {
+        return;
+    }
+    char line[16];
+    char shown[80]; /* 3 行 × 16 字 + 2 换行 + 余量 */
+    int lines = 1;
+    uint16_t color = PET_VOICE_WHITE;
+    shown[0] = '\0';
+
+    if (st == PET_PTT_RECORDING) {
+        snprintf(line, sizeof line, "REC %lus",
+                 (unsigned long)(pet_ptt_elapsed_ms() / 1000u));
+        color = PET_VOICE_RED;
+    } else if (st == PET_PTT_UPLOADING) {
+        snprintf(line, sizeof line, "ASR...");
+        color = PET_VOICE_RED;
+    } else if (st == PET_PTT_DONE) {
+        char disp[64];
+        disp[0] = '\0';
+        voice_display_copy(pet_ptt_text(), disp, sizeof disp);
+        /* 按 16 字/行硬折行，最多 3 行；仍有余文时末行补 "..." */
+        lines = 0;
+        for (const char *p = disp; *p != '\0' && lines < PET_VOICE_MAX_LINES;
+             p += PET_VOICE_MAX_CHARS) {
+            size_t n = strlen(p);
+            const bool more = n > PET_VOICE_MAX_CHARS;
+            if (more) {
+                n = (lines + 1 == PET_VOICE_MAX_LINES) ? PET_VOICE_MAX_CHARS - 3
+                                                       : PET_VOICE_MAX_CHARS;
+            }
+            if (lines > 0) {
+                strncat(shown, "\n", sizeof(shown) - strlen(shown) - 1);
+            }
+            strncat(shown, p, n);
+            if (more && lines + 1 == PET_VOICE_MAX_LINES) {
+                strncat(shown, "...", sizeof(shown) - strlen(shown) - 1);
+            }
+            lines++;
+        }
+        if (lines == 0) {
+            snprintf(shown, sizeof shown, "OK");
+            lines = 1;
+        }
+    } else {
+        snprintf(line, sizeof line, "ERR");
+        color = PET_VOICE_RED;
+    }
+
+    voice_box(s, lines);
+    if (st == PET_PTT_DONE) {
+        int y = 2;
+        for (const char *p = shown; *p != '\0';) {
+            char row[PET_VOICE_MAX_CHARS + 1];
+            size_t n = 0;
+            while (*p != '\0' && *p != '\n' && n < PET_VOICE_MAX_CHARS) {
+                row[n++] = *p++;
+            }
+            row[n] = '\0';
+            if (*p == '\n') {
+                p++;
+            }
+            pet_text_draw(s, 2, y, row, (int)PET_VOICE_MAX_CHARS, color, 1);
+            y += 8;
+        }
+    } else {
+        pet_text_draw(s, 2, 2, line, -1, color, 1);
+    }
+}
+
 
 /* M7 增量 2：番茄钟（模式切换由 M6 调用 pet_engine_set_mode） */
 static pet_pomo_t s_pomo;
@@ -86,6 +215,7 @@ void pet_engine_init(void)
     pet_pomo_nvs_load(&s_pomo);
     pet_menu_init(&s_menu);
     pet_leisure_init(&s_leisure, 0, 20261017u);
+    pet_ptt_init();
 
 #ifndef PET_ENGINE_AUTOSTART_POMO
 #define PET_ENGINE_AUTOSTART_POMO 0
@@ -125,6 +255,7 @@ void pet_engine_redraw(void)
         pet_pomo_view_get(&s_pomo, &pv);
         pet_net_get_ip(pv.ip, sizeof pv.ip);
         pet_render_pomo(&s_surface, &pv);
+        draw_voice_overlay(&s_surface);
     } else {
         pet_view_t view;
         pet_state_view(s_state, &view);
@@ -163,6 +294,7 @@ void pet_engine_redraw(void)
         } else {
             pet_render_scene(&view, s_look, &s_surface); /* 整屏：宠物 + 任务卡 */
         }
+        draw_voice_overlay(&s_surface);
     }
     hal->present(&s_surface);
 
@@ -287,8 +419,15 @@ void pet_engine_pomo_command(pet_pomo_cmd_t cmd)
 
 void pet_engine_request_back_window(void)
 {
-    static const char line[] = "{\"v\":1,\"cmd\":\"back_window\"}\n";
-    (void)usb_serial_jtag_write_bytes(line, sizeof line - 1, pdMS_TO_TICKS(50));
+    pet_engine_send_line("{\"v\":1,\"cmd\":\"back_window\"}\n");
+}
+
+void pet_engine_send_line(const char *line)
+{
+    if (line == NULL) {
+        return;
+    }
+    (void)usb_serial_jtag_write_bytes(line, strlen(line), pdMS_TO_TICKS(50));
 }
 
 void pet_engine_key(pet_key_t key, pet_key_event_t ev)
@@ -298,6 +437,16 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
     }
     /* M8：任意按键唤醒休闲（复位空闲计时 + 回值班 → 下一帧恢复背光） */
     pet_leisure_tick(&s_leisure, pet_hal_now_ms(), true, s_hour24);
+
+    /* PTT：KEY1 按下/松开沿直通录音模块（不进键表）；菜单打开时不录；
+     * 其余键/菜单中的 PRESS/RELEASE 一律吞掉。 */
+    if (ev == PET_KEY_EV_PRESS || ev == PET_KEY_EV_RELEASE) {
+        if (key == PET_KEY1 && !s_menu_open) {
+            pet_ptt_on_key(ev == PET_KEY_EV_PRESS);
+        }
+        return;
+    }
+
     if (s_menu_open) {
         const pet_menu_cmd_t cmd = pet_menu_key(&s_menu, key, ev);
         if (cmd == PET_MENU_CMD_PROVISION) {

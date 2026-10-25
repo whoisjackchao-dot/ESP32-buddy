@@ -26,6 +26,10 @@ void pet_engine_pomo_command(pet_pomo_cmd_t cmd);
 /* M6 增量 2：向主机发"回窗口"控制线（契约 M6 §8.1）。 */
 void pet_engine_request_back_window(void);
 
+/* 控制线出口（同一 USB-Serial-JTAG 写入口；line 以 \n 结尾）。
+ * PTT 增量：pet_ptt 的 voice.text 也走这里。 */
+void pet_engine_send_line(const char *line);
+
 /* M6 增量 3：按键事件入口（菜单优先；否则按 Q11 映射分派）。 */
 void pet_engine_key(pet_key_t key, pet_key_event_t ev);
 

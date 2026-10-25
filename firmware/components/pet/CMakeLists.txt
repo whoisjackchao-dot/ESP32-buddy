@@ -18,12 +18,13 @@ idf_component_register(
          "pet_keys.c"
          "pet_voice.c"
          "pet_audio.c"
+         "pet_ptt.c"
          "pet_engine.c"
          "pet_hal.c"
          "pet_hal_sticks3.c"
          "pm1.c"
     INCLUDE_DIRS "include"
-    PRIV_REQUIRES esp_lcd esp_driver_spi esp_driver_i2c esp_driver_gpio esp_driver_i2s esp_driver_usb_serial_jtag esp_timer nvs_flash es8311 esp_wifi esp_netif esp_event esp_http_server lwip
+    PRIV_REQUIRES esp_lcd esp_driver_spi esp_driver_i2c esp_driver_gpio esp_driver_i2s esp_driver_usb_serial_jtag esp_timer nvs_flash es8311 esp_wifi esp_netif esp_event esp_http_server lwip esp_http_client esp-tls mbedtls
     EMBED_FILES "assets/robot.look"
                 "assets/input.pcm"
                 "assets/done.pcm"

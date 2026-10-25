@@ -23,6 +23,7 @@
 
 #include "pet_engine.h"
 #include "pet_evt_tcp.h"
+#include "pet_ptt.h"
 #include "pet_prov.h"
 
 static const char *TAG = "pet-net";
@@ -483,6 +484,24 @@ bool pet_net_handle_line(const char *line)
     }
     if (strcmp(cmd, "wifi.clear") == 0) {
         net_notify(NET_NOTIFY_CLEAR);
+        return true;
+    }
+    /* PTT：ASR key 供给（存储与日志在 pet_ptt；key 永不回显） */
+    if (strcmp(cmd, "asr.set") == 0) {
+        char key[129];
+        if (json_string(line, "key", key, sizeof key)) {
+            pet_ptt_key_set(key);
+        } else {
+            ESP_LOGW(TAG, "asr: set invalid");
+        }
+        return true;
+    }
+    if (strcmp(cmd, "asr.status") == 0) {
+        ESP_LOGI(TAG, "asr: key %s", pet_ptt_key_present() ? "set" : "missing");
+        return true;
+    }
+    if (strcmp(cmd, "asr.clear") == 0) {
+        pet_ptt_key_clear();
         return true;
     }
     return false; /* 其他 cmd：交给事件解析路径按原样拒绝 */

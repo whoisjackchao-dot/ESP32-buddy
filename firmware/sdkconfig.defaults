@@ -15,3 +15,8 @@ CONFIG_LOG_DEFAULT_LEVEL_INFO=y
 # App 需容纳 WiFi/lwip：2MB 自定义分区（NVS 偏移保持 0x9000，统计不丢）
 CONFIG_PARTITION_TABLE_CUSTOM=y
 CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# HTTPS 证书捆绑（PTT：智谱 ASR esp_crt_bundle_attach 校验用）
+# 注意：仅改 defaults 不影响已存在的 D:\buddy_flash\firmware\sdkconfig，
+# 该机构建前需同步此行（或删除旧 sdkconfig 让其重新生成）。
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE=y
