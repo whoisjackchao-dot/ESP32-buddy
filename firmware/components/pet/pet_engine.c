@@ -78,6 +78,27 @@ static void voice_clear(pet_surface_t *s)
     }
 }
 
+/* 待机页右上角：WiFi 接入状态（绿点+IP / 红点+OFFLINE） */
+static void draw_net_badge(pet_surface_t *s)
+{
+    char ip[16];
+    pet_net_get_ip(ip, sizeof ip);
+    const int w = s->width;
+    const int y = 3;
+    const uint16_t dot = (ip[0] != '\0') ? 0x07E0u : 0xF800u;
+    for (int dy = 0; dy < 4; dy++) {
+        for (int dx = 0; dx < 4; dx++) {
+            voice_put_px(s, w - 6 + dx, y + 3 + dy, dot);
+        }
+    }
+    if (ip[0] != '\0') {
+        const int n = (int)strlen(ip);
+        (void)pet_text_draw(s, w - 8 - n * 8, y, ip, (int)sizeof ip, 0xFFFFu, 1);
+    } else {
+        (void)pet_text_draw(s, w - 8 - 7 * 8, y, "OFFLINE", 8, 0xF800u, 1);
+    }
+}
+
 static void draw_voice_overlay(pet_surface_t *s)
 {
     const pet_ptt_state_t st = pet_ptt_state();
@@ -247,6 +268,7 @@ void pet_engine_redraw(void)
         } else {
             pet_render_scene(&view, s_look, &s_surface); /* 整屏：宠物 + 任务卡 */
         }
+        draw_net_badge(&s_surface); /* 右上角：WiFi 状态 */
         draw_voice_overlay(&s_surface);
     }
     hal->present(&s_surface);

@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T13:06:25+08:00",
+  "generated_at": "2026-10-25T13:23:53+08:00",
   "git": {
-    "commit": "43b06df3165fc7a34b9025e49cae3064375bf61d",
+    "commit": "842fce1669eaedb057ca59ccc66ab8b820099318",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 197,
-    "bytes": 2888144
+    "files": 198,
+    "bytes": 2892401
   },
   "groups": {
     "firmware": [
@@ -174,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 15306,
-        "sha256": "0f8d29d3616977d77faa2977046595787a4222d354f65a2e8263d7f1aa1222bd"
+        "bytes": 16055,
+        "sha256": "80d004534cccf9905ccadf119677c2db7cdbe7a0066ebe0daf72b96a33d40b69"
       },
       {
         "path": "firmware/components/pet/pet_evt_tcp.c",
@@ -677,7 +677,7 @@
       {
         "path": "evidence/2026-10-24-WiFi与NTP-设备.md",
         "bytes": 8544,
-        "sha256": "a99d55bf87d345125b15f4b90dbe6d370fb32e737cdaa237e72d087ab8b8a2a4"
+        "sha256": "e1eb9532c18a2b9a0bd51aaac5d4189731d3393979e641cd31ebdd9c3c1f9d49"
       },
       {
         "path": "evidence/2026-10-24-交付操作验证.md",
@@ -698,6 +698,11 @@
         "path": "evidence/2026-10-25-BLE-WiFi共存可行性.md",
         "bytes": 2944,
         "sha256": "bf79df10947c9cf73b0337649956584232fb793186b84c68c75273e3fe0258ba"
+      },
+      {
+        "path": "evidence/2026-10-25-BLE配对与WiFi双连接.md",
+        "bytes": 3508,
+        "sha256": "7e52b078eb51bf380a26775c70bee6de40505378bea33a8532a72c392476d939"
       },
       {
         "path": "evidence/2026-10-25-WiFi控制通道-T.md",
@@ -1029,7 +1034,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "4b6d960c5d19835456c8715943694214beae8135f851d165ece5eea382dfae8b"
+        "sha256": "b76b9f9c287e9636fb1323f7fa391ace1cfcab296beaa8e4ee00e0aea95c181d"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1040,8 +1045,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1570864,
-        "sha256": "0c51ce48596604cf8f6aa9dc08269f7b607f8a9307ff0b9fd7759b8c3d6e1065"
+        "bytes": 1571008,
+        "sha256": "02c7b703cdd145e6bb28a08ab206a4665b446089961557747f02b0bce0e81b4d"
       }
     ]
   }
