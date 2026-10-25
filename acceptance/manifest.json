@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T15:16:18+08:00",
+  "generated_at": "2026-10-25T15:48:58+08:00",
   "git": {
-    "commit": "442775ea4ee6d7f28662b9305d6ed505a1f8cc56",
+    "commit": "6823ab792eb35c0668ba6d2eabde50c987d8b05d",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
     "files": 202,
-    "bytes": 2903231
+    "bytes": 2905953
   },
   "groups": {
     "firmware": [
@@ -54,8 +54,8 @@
       },
       {
         "path": "firmware/components/pet/include/pet_ble.h",
-        "bytes": 346,
-        "sha256": "219784c322a2741f68050a759989358b512d93b0e6a9a5547c395acc1c1d33f1"
+        "bytes": 502,
+        "sha256": "f0ea5bf48abea5486d0d9e0d23a8ad603b0d7cd874c1a0691cf23c77692fa470"
       },
       {
         "path": "firmware/components/pet/include/pet_button.h",
@@ -109,8 +109,8 @@
       },
       {
         "path": "firmware/components/pet/include/pet_menu.h",
-        "bytes": 1095,
-        "sha256": "5dd9cda6104ec385eb60dd28bf21bebbb138a617ee78781171ad856fc4fba24c"
+        "bytes": 1185,
+        "sha256": "b2b5ce12054303db124bc91acb0f3c6e4043cf4000ad466b004f87a05b17f470"
       },
       {
         "path": "firmware/components/pet/include/pet_net.h",
@@ -174,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_ble.c",
-        "bytes": 2696,
-        "sha256": "7872f7a75d8c1f4411f0b457dce8d8a614ece9f94a39c4db3dd17d2a43eda7e4"
+        "bytes": 4250,
+        "sha256": "bc1b512e975a95e1357a41f17c4b4291012a77dcdf8e3e24f9dffecd230c2339"
       },
       {
         "path": "firmware/components/pet/pet_button.c",
@@ -184,8 +184,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 17572,
-        "sha256": "e6f63a844e783f48b7835ed833be63a43510bd25f7e296d7252a980b7d554fdf"
+        "bytes": 17798,
+        "sha256": "a2ca863ab6b7c84183deb2d7cdd3f50f493e3e873ed26de588b6989b835421b3"
       },
       {
         "path": "firmware/components/pet/pet_evt_tcp.c",
@@ -229,8 +229,8 @@
       },
       {
         "path": "firmware/components/pet/pet_menu.c",
-        "bytes": 1138,
-        "sha256": "98dd6efe3262e635040de2430c1b0230e961c2080e04e3866924f7424f629baf"
+        "bytes": 1227,
+        "sha256": "4fdfb243c3cc78ac85f7bbbe895ac8816e9e5a7d91fcdce3726087cd61ea218e"
       },
       {
         "path": "firmware/components/pet/pet_net.c",
@@ -259,8 +259,8 @@
       },
       {
         "path": "firmware/components/pet/pet_render.c",
-        "bytes": 21956,
-        "sha256": "69f6240163ecd8813fd5872fc69594351df5a71a06fc49b75e7ab7ad364180b1"
+        "bytes": 22013,
+        "sha256": "66fe868302e0e910167768a996e36ff4b297f40200be67360a5814ca6ba05332"
       },
       {
         "path": "firmware/components/pet/pet_rx.c",
@@ -453,8 +453,8 @@
       },
       {
         "path": "tests/test_pet_menu.c",
-        "bytes": 3871,
-        "sha256": "7f8ee2cb0523017224e09856df1eea6d19144e7b0f2c5aa97070b8759d9ce172"
+        "bytes": 4421,
+        "sha256": "43a2f87d559baa8987c7f9f35493915e64c3b33c8415cf97c337ceea7221598c"
       },
       {
         "path": "tests/test_pet_pomo.c",
@@ -1054,7 +1054,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "848e2a3dc2bf394ef7005d3f88fabd1ed0a1ff8523b979d52b5bdd17c5401961"
+        "sha256": "65318abbeacfb59f7165193de4c56b9aeb739233f3db23529d04d65c2eed0cf3"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1065,8 +1065,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1777120,
-        "sha256": "b6c113e86dd6ed30f8f358c9e3170db4d1f2197fcc1e421cff3ae44763bc5baa"
+        "bytes": 1780896,
+        "sha256": "ea0e69f091984df7f00774f892e32a2ad2e586043322e24f8f48cf567f3c7af7"
       }
     ]
   }

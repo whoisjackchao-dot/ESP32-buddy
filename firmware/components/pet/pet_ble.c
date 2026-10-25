@@ -14,19 +14,49 @@
 #include "host/ble_hs_adv.h"
 #include "host/ble_hs_id.h"
 #include "host/util/util.h"
+#include "host/ble_store.h"
 #include "nimble/nimble_port.h"
 #include "nimble/nimble_port_freertos.h"
 #include "services/gap/ble_svc_gap.h"
+#include "services/gatt/ble_svc_gatt.h"
 
 static const char *TAG = "pet-ble";
 
 static char    s_name[24];
+static int     s_started;
 static uint8_t s_own_addr_type;
+
+static void ble_advertise(void);
 
 static int ble_gap_event_cb(struct ble_gap_event *event, void *arg)
 {
-    (void)event;
     (void)arg;
+    switch (event->type) {
+    case BLE_GAP_EVENT_CONNECT: {
+        const bool ok = (event->connect.status == 0);
+        ESP_LOGI(TAG, "ble: connect %s handle=%d", ok ? "ok" : "fail", event->connect.conn_handle);
+        if (!ok) {
+            ble_advertise();
+        }
+        break;
+    }
+    case BLE_GAP_EVENT_DISCONNECT:
+        ESP_LOGI(TAG, "ble: disconnect reason=0x%02x", event->disconnect.reason);
+        ble_advertise();
+        break;
+    case BLE_GAP_EVENT_ENC_CHANGE:
+        ESP_LOGI(TAG, "ble: enc change status=%d", event->enc_change.status);
+        break;
+    case BLE_GAP_EVENT_REPEAT_PAIRING: {
+        struct ble_gap_conn_desc desc;
+        if (ble_gap_conn_find(event->repeat_pairing.conn_handle, &desc) == 0) {
+            (void)ble_store_util_delete_peer(&desc.peer_id_addr);
+        }
+        return BLE_GAP_REPEAT_PAIRING_RETRY;
+    }
+    default:
+        break;
+    }
     return 0;
 }
 
@@ -79,6 +109,18 @@ static void ble_host_task(void *param)
     nimble_port_freertos_deinit();
 }
 
+bool pet_ble_pairing_mode(void)
+{
+    if (!s_started) {
+        return false;
+    }
+    (void)ble_store_clear(); /* 清绑定：PC 需重新配对 */
+    (void)ble_gap_adv_stop();
+    ble_advertise();
+    ESP_LOGI(TAG, "ble: pairing mode (bonds cleared, advertising)");
+    return true;
+}
+
 void pet_ble_start(void)
 {
     uint8_t mac[6];
@@ -91,7 +133,15 @@ void pet_ble_start(void)
         return;
     }
     ble_hs_cfg.sync_cb = ble_on_sync;
+    ble_hs_cfg.sm_io_cap = BLE_HS_IO_NO_INPUT_OUTPUT; /* Just Works */
+    ble_hs_cfg.sm_bonding = 1;
+    ble_hs_cfg.sm_sc = 1;
+    ble_hs_cfg.sm_mitm = 0;
     (void)ble_svc_gap_device_name_set(s_name);
+    ble_svc_gap_init();
+    ble_svc_gatt_init();
+    (void)ble_gatts_start();
     nimble_port_freertos_init(ble_host_task);
+    s_started = 1;
     ESP_LOGI(TAG, "ble: start name=%s", s_name);
 }

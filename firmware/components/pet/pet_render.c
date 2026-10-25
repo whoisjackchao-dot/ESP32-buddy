@@ -499,18 +499,19 @@ void pet_render_menu(pet_surface_t *s, const pet_menu_view_t *v)
     (void)pet_text_draw(s, MENU_ROW_X, 16, "MENU", MENU_TEXT_MAX, MENU_C_TEXT, 1);
 
     snprintf(row, sizeof row, "MUTE: %s", v->muted ? "ON" : "OFF");
-    menu_draw_row(s, 64, row, v->selected == 0);
+    menu_draw_row(s, 48, row, v->selected == 0);
 
     snprintf(row, sizeof row, "STATUS: %s %s", (v->mode == 0) ? "DUTY" : "POMO",
              menu_phase_word(v->phase));
-    menu_draw_row(s, 96, row, v->selected == 1);
+    menu_draw_row(s, 80, row, v->selected == 1);
 
-    menu_draw_row(s, 128, "WIFI: SETUP", v->selected == 2);
-    menu_draw_row(s, 160, "BACK: WINDOW", v->selected == 3);
+    menu_draw_row(s, 112, "WIFI: SETUP", v->selected == 2);
+    menu_draw_row(s, 144, "BT: PAIR", v->selected == 3);
+    menu_draw_row(s, 176, "BACK: WINDOW", v->selected == 4);
 
     snprintf(row, sizeof row, "done %lu  %lus", (unsigned long)v->done_count,
              (unsigned long)v->focus_seconds);
-    (void)pet_text_draw(s, MENU_ROW_X, 200, row, MENU_TEXT_MAX, MENU_C_TEXT, 1);
+    (void)pet_text_draw(s, MENU_ROW_X, 208, row, MENU_TEXT_MAX, MENU_C_TEXT, 1);
 }
 
 /* ---- M8 增量 1b：小剧渲染（契约 M8 §7.1）---- */

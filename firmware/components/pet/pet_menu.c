@@ -16,14 +16,18 @@ pet_menu_cmd_t pet_menu_key(pet_menu_t *m, pet_key_t key, pet_key_event_t ev)
             return PET_MENU_CMD_NONE;
         }
         if (key == PET_KEY2) {
-            if (m->selected == 0) {
+            switch (m->selected) {
+            case 0:
                 return PET_MENU_CMD_TOGGLE_MUTE;
-            }
-            if (m->selected == 2) {
+            case 2:
                 return PET_MENU_CMD_PROVISION;
+            case 3:
+                return PET_MENU_CMD_BT_PAIR;
+            case 4:
+                return PET_MENU_CMD_BACK_WINDOW;
+            default:
+                return PET_MENU_CMD_CLOSE; /* 1=STATUS：仅关闭 */
             }
-            return (m->selected == 3) ? PET_MENU_CMD_BACK_WINDOW
-                                      : PET_MENU_CMD_CLOSE;
         }
     } else if (ev == PET_KEY_EV_LONG && key == PET_KEY2) {
         return PET_MENU_CMD_CLOSE;

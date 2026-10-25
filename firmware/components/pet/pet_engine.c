@@ -1,3 +1,4 @@
+#include "pet_ble.h"
 #include "pet_engine.h"
 
 #include <stdio.h>
@@ -482,6 +483,10 @@ void pet_engine_key(pet_key_t key, pet_key_event_t ev)
             s_menu_open = false;
             pet_net_request_provision();
             ESP_LOGI(TAG, "menu: provisioning requested");
+        } else if (cmd == PET_MENU_CMD_BT_PAIR) {
+            s_menu_open = false;
+            const bool ok = pet_ble_pairing_mode();
+            ESP_LOGI(TAG, "menu: bt pair %s", ok ? "ok" : "ble-off");
         } else if (cmd == PET_MENU_CMD_TOGGLE_MUTE) {
             pet_voice_set_muted(!pet_voice_muted());
         } else if (cmd == PET_MENU_CMD_CLOSE) {
