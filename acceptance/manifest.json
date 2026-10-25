@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T11:23:52+08:00",
+  "generated_at": "2026-10-25T11:32:00+08:00",
   "git": {
-    "commit": "44bd905b55ab1b427a0296abb92990805eab6a36",
+    "commit": "fff25e150d1da5f7bdc06a477d0a4db3e6261796",
     "branch": "main",
-    "tracked_clean": true
+    "tracked_clean": false
   },
   "totals": {
     "files": 194,
-    "bytes": 2847204
+    "bytes": 2847213
   },
   "groups": {
     "firmware": [
@@ -475,8 +475,8 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 16271,
-        "sha256": "9cc4c270b4193a581f0d2b371b9403e169aeb30ad557cbe36a8f92217a47509c"
+        "bytes": 16280,
+        "sha256": "de50211d7e9e3826a162ed29fdbe3b0ed95169f2b03377a209d80124138c4427"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
