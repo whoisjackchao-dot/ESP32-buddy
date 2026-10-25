@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T15:00:02+08:00",
+  "generated_at": "2026-10-25T15:01:33+08:00",
   "git": {
-    "commit": "9f996f617a46dc9d6fe681a9f37c2b15db9c6d8e",
+    "commit": "2d6eebafbc0c23a0d5e6e855f809f485803101ab",
     "branch": "main",
     "tracked_clean": true
   },
   "totals": {
-    "files": 198,
-    "bytes": 2892401
+    "files": 199,
+    "bytes": 2897255
   },
   "groups": {
     "firmware": [
@@ -473,6 +473,11 @@
       }
     ],
     "docs": [
+      {
+        "path": "ESP32-buddy_BLE与WiFi双连接方案.md",
+        "bytes": 4854,
+        "sha256": "21ed9f32acf63678222a8d206338e6d47a5c0e7cb9beedfb175157a00ae06b27"
+      },
       {
         "path": "ESP32-buddy_M0-M9开发计划.md",
         "bytes": 10055,
