@@ -31,6 +31,7 @@
 | 资源 | 来源 | 许可 | 用途 |
 | --- | --- | --- | --- |
 | `firmware/components/pet/font8x8_basic.h` | Daniel Hepper（基于 Marcel Sondaar / IBM VGA 公有领域点阵字体） | **Public Domain** | 任务卡与菜单文本（8×8 ASCII） |
+| `firmware/components/pet/assets/cjk16.h` | **自动生成**：`tools/make-cjk-font.py` 从 **Noto Sans SC**（Google Fonts 仓库 `ofl/notosanssc/NotoSansSC[wght].ttf`，变量字重 560 实例，sha256 `a3041811…`）光栅化；源字体 © 2014-2021 Adobe，为 Source Han Sans SC 的 Google Fonts 发行 | **SIL Open Font License 1.1**（OFL.txt 随生成头文件内注释保留版权与许可声明） | M15 语音转写 16×16 中文点阵（ASCII + GB2312 一级 3755 字 + 常用标点；嵌入位图为生成产物，OFL 允许再分发但保留版权行） |
 | `firmware/components/pet/assets/{done,failed,input}.pcm` | `tools/voice-tts.sh` 用 **edge-tts** 合成，音色 `zh-CN-XiaoyiNeural` | edge-tts 代码 **MIT**；**合成音频的再分发需自行确认服务条款** | M5 三段短语音（16 kHz / 16-bit / stereo 槽位） |
 | `firmware/components/es8311/` | **vendored**：`espressif/esp-bsp` → `components/es8311`，版本 `1.0.0~1`，commit `4dabefca` | **Apache-2.0**（原样保留 `LICENSE` 与 `CHECKSUMS.json`） | ES8311 音频编解码器驱动 |
 | `.opencode/skills/dayu/` | 本项目作者内置的方法论技能 | **MIT**（`LICENSE` 随附） | 项目流程规范 |
@@ -52,5 +53,5 @@
 | 代码 LICENSE 全文（MIT） | ✅ 已落盘（`LICENSE`，署名行 `ESP32-buddy contributors`） |
 | 立绘许可 | ✅ **原创，MIT**（不再是 CC BY-SA） |
 | 上游 CC BY-SA 全文引用 | ✅ **不适用**（未使用上游美术） |
-| 其他第三方组件 | ✅ 已登记（es8311 / font8x8 / edge-tts / dayu） |
+| 其他第三方组件 | ✅ 已登记（es8311 / font8x8 / cjk16(Noto Sans SC·OFL) / edge-tts / dayu） |
 | 机器可校验哈希 | ✅ `acceptance/manifest.json`（`legal` 组 + `third_party` 组） |

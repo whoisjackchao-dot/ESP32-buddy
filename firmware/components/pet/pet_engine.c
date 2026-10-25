@@ -36,20 +36,28 @@ static pet_look_t  *s_look;
 static uint8_t     *s_pixels;
 static pet_surface_t s_surface;
 
-/* PTT 语音浮层（值班/番茄钟画面顶部；菜单画面不画） */
-#ifndef PET_VOICE_BOX_COLOR
-#define PET_VOICE_BOX_COLOR 0x0000u /* 黑底 */
-#endif
+/* PTT 语音浮层（值班/番茄钟画面下方卡区；菜单画面不画）。
+ * M15：16×16 中文点阵重排——转写画在宠物下方卡区，不再盖顶部状态。
+ * 版面：清屏区 x 4..130、y 156..233（卡区下缘，宠物 y≤151 之下不重叠）；
+ * 文本原点 (6,160)，7 格/行 × 4 行（行距 18px）→ 28 格，超长末格 "…"。
+ * 字号取 scale=1（16px）：123px 可用宽下 scale=2（32px）仅 3 格/行 × 4 行
+ * = 12 字 < 常见转写，且 REC/ASR 标签 7 格都放不下；16px 可读性由加重
+ * 字重（wght 560）保证（决策记录：evidence/2026-10-25-中文点阵字库-T.md）。 */
 #ifndef PET_VOICE_RED
 #define PET_VOICE_RED 0xF800u
 #endif
 #ifndef PET_VOICE_WHITE
 #define PET_VOICE_WHITE 0xFFFFu
 #endif
-#define PET_VOICE_MAX_CHARS ((135 - 4) / 8) /* 8×8 字库，135px 宽 → 16 字/行 */
-#define PET_VOICE_MAX_LINES 3
-_Static_assert(PET_VOICE_MAX_LINES * (PET_VOICE_MAX_CHARS + 1) + 1 <= 80,
-               "overlay text buffer too small");
+#define PET_VOICE_X 6
+#define PET_VOICE_Y 160
+#define PET_VOICE_CELLS 7
+#define PET_VOICE_LINES 4
+#define PET_VOICE_LINE_H 18
+#define PET_VOICE_CLEAR_X 4
+#define PET_VOICE_CLEAR_Y 156
+#define PET_VOICE_CLEAR_W 127
+#define PET_VOICE_CLEAR_H 78
 
 static void voice_put_px(pet_surface_t *s, int x, int y, uint16_t c)
 {
@@ -61,32 +69,13 @@ static void voice_put_px(pet_surface_t *s, int x, int y, uint16_t c)
     p[1] = (uint8_t)(c >> 8);
 }
 
-static void voice_box(pet_surface_t *s, int lines)
+static void voice_clear(pet_surface_t *s)
 {
-    const int h = lines * 8 + 4;
-    for (int y = 0; y < h; y++) {
-        for (int x = 0; x < s->width; x++) {
-            voice_put_px(s, x, y, PET_VOICE_BOX_COLOR);
+    for (int y = PET_VOICE_CLEAR_Y; y < PET_VOICE_CLEAR_Y + PET_VOICE_CLEAR_H; y++) {
+        for (int x = PET_VOICE_CLEAR_X; x < PET_VOICE_CLEAR_X + PET_VOICE_CLEAR_W; x++) {
+            voice_put_px(s, x, y, PET_SCENE_BG);
         }
     }
-}
-
-/* 屏显副本：UTF-8 非 ASCII 段折叠为 '?'（8×8 字库无汉字字形，pet_text_draw
- * 会跳过续字节），保证换行/截断按字符格计。 */
-static void voice_display_copy(const char *src, char *dst, size_t dst_sz)
-{
-    size_t o = 0;
-    for (const char *p = src; *p != '\0' && o + 1 < dst_sz; p++) {
-        if ((unsigned char)*p < 0x80u) {
-            dst[o++] = *p;
-        } else {
-            while (p[1] != '\0' && ((unsigned char)p[1] & 0xC0u) == 0x80u) {
-                p++;
-            }
-            dst[o++] = '?';
-        }
-    }
-    dst[o] = '\0';
 }
 
 static void draw_voice_overlay(pet_surface_t *s)
@@ -95,70 +84,30 @@ static void draw_voice_overlay(pet_surface_t *s)
     if (st == PET_PTT_IDLE) {
         return;
     }
-    char line[16];
-    char shown[80]; /* 3 行 × 16 字 + 2 换行 + 余量 */
-    int lines = 1;
-    uint16_t color = PET_VOICE_WHITE;
-    shown[0] = '\0';
 
+    voice_clear(s);
+
+    if (st == PET_PTT_DONE) {
+        if (pet_text_draw16_wrap(s, PET_VOICE_X, PET_VOICE_Y, pet_ptt_text(),
+                                 PET_VOICE_CELLS, PET_VOICE_LINES,
+                                 PET_VOICE_LINE_H, PET_VOICE_WHITE, 1) == 0) {
+            pet_text_draw16(s, PET_VOICE_X, PET_VOICE_Y, "OK",
+                            PET_VOICE_CELLS, PET_VOICE_WHITE, 1);
+        }
+        return;
+    }
+
+    char line[16];
     if (st == PET_PTT_RECORDING) {
         snprintf(line, sizeof line, "REC %lus",
                  (unsigned long)(pet_ptt_elapsed_ms() / 1000u));
-        color = PET_VOICE_RED;
     } else if (st == PET_PTT_UPLOADING) {
         snprintf(line, sizeof line, "ASR...");
-        color = PET_VOICE_RED;
-    } else if (st == PET_PTT_DONE) {
-        char disp[64];
-        disp[0] = '\0';
-        voice_display_copy(pet_ptt_text(), disp, sizeof disp);
-        /* 按 16 字/行硬折行，最多 3 行；仍有余文时末行补 "..." */
-        lines = 0;
-        for (const char *p = disp; *p != '\0' && lines < PET_VOICE_MAX_LINES;
-             p += PET_VOICE_MAX_CHARS) {
-            size_t n = strlen(p);
-            const bool more = n > PET_VOICE_MAX_CHARS;
-            if (more) {
-                n = (lines + 1 == PET_VOICE_MAX_LINES) ? PET_VOICE_MAX_CHARS - 3
-                                                       : PET_VOICE_MAX_CHARS;
-            }
-            if (lines > 0) {
-                strncat(shown, "\n", sizeof(shown) - strlen(shown) - 1);
-            }
-            strncat(shown, p, n);
-            if (more && lines + 1 == PET_VOICE_MAX_LINES) {
-                strncat(shown, "...", sizeof(shown) - strlen(shown) - 1);
-            }
-            lines++;
-        }
-        if (lines == 0) {
-            snprintf(shown, sizeof shown, "OK");
-            lines = 1;
-        }
     } else {
         snprintf(line, sizeof line, "ERR");
-        color = PET_VOICE_RED;
     }
-
-    voice_box(s, lines);
-    if (st == PET_PTT_DONE) {
-        int y = 2;
-        for (const char *p = shown; *p != '\0';) {
-            char row[PET_VOICE_MAX_CHARS + 1];
-            size_t n = 0;
-            while (*p != '\0' && *p != '\n' && n < PET_VOICE_MAX_CHARS) {
-                row[n++] = *p++;
-            }
-            row[n] = '\0';
-            if (*p == '\n') {
-                p++;
-            }
-            pet_text_draw(s, 2, y, row, (int)PET_VOICE_MAX_CHARS, color, 1);
-            y += 8;
-        }
-    } else {
-        pet_text_draw(s, 2, 2, line, -1, color, 1);
-    }
+    pet_text_draw16(s, PET_VOICE_X, PET_VOICE_Y, line,
+                    PET_VOICE_CELLS, PET_VOICE_RED, 1);
 }
 
 

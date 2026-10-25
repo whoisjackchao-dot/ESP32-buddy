@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T09:59:44+08:00",
+  "generated_at": "2026-10-25T10:53:38+08:00",
   "git": {
-    "commit": "f1f3b98a424ee6529a05657b80358a63e54b377c",
+    "commit": "f341083eabc6e50995883bb8722c75d7ee55c2f2",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 191,
-    "bytes": 1257240
+    "files": 194,
+    "bytes": 2161227
   },
   "groups": {
     "firmware": [
@@ -16,6 +16,11 @@
         "path": "firmware/components/pet/CMakeLists.txt",
         "bytes": 1489,
         "sha256": "8ca13557a4367a9a403d46d1c4b172f9576a04e1342168ca8ed170d63f00b5a5"
+      },
+      {
+        "path": "firmware/components/pet/assets/cjk16.h",
+        "bytes": 879338,
+        "sha256": "8a3321781f529f0849d0726b8dfb7d9516dc23477863237575b9213e14eead59"
       },
       {
         "path": "firmware/components/pet/assets/done.pcm",
@@ -144,8 +149,8 @@
       },
       {
         "path": "firmware/components/pet/include/pet_text.h",
-        "bytes": 503,
-        "sha256": "1bb85a5f4ec64de5cb95c1734544fb27aacaab07ac0cffda8768382500a71572"
+        "bytes": 1659,
+        "sha256": "f63c00f062e59dcdfb9c04030ec5be3d07a56882e7e4989aee20444d2151fe0c"
       },
       {
         "path": "firmware/components/pet/include/pet_types.h",
@@ -169,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 16087,
-        "sha256": "341c20b4b5c18b40704ee2a4ef2044d024c8c3a1d5dd6c43885ec90280ac3415"
+        "bytes": 14677,
+        "sha256": "fa6cd83d135fa4ec2e3f43cbf22d8b1fb8825f3c1a17e2e0369b9c5e87482206"
       },
       {
         "path": "firmware/components/pet/pet_evt_tcp.c",
@@ -259,8 +264,8 @@
       },
       {
         "path": "firmware/components/pet/pet_text.c",
-        "bytes": 2484,
-        "sha256": "eb8475e7d52bc8d9c41ff16968436fd50fb1b11c39ba788979cb8a4d27f7db4d"
+        "bytes": 7955,
+        "sha256": "6dacbc4ba065a685edc6432334e40d7d429e6ca795679bf97afeb35398106996"
       },
       {
         "path": "firmware/components/pet/pet_voice.c",
@@ -398,8 +403,8 @@
       },
       {
         "path": "tests/run.sh",
-        "bytes": 2900,
-        "sha256": "4b101c004ffe78140fa4bb35f8ade529b95875316d6a7a69a4853f3fa9435cb3"
+        "bytes": 3123,
+        "sha256": "9651564533381b5b37629dce04bbf6b7326342e83097b458b6208e32ade0c209"
       },
       {
         "path": "tests/test_pet_button.c",
@@ -452,6 +457,11 @@
         "sha256": "43f8945fd20dae8767887dc3756fc34324df615c83bd6301660ad004e05c9511"
       },
       {
+        "path": "tests/test_pet_text.c",
+        "bytes": 10999,
+        "sha256": "5b33cb8638544a0ed7c5cbcf1ec64aa9052c3622c476ac296cccb88e75323608"
+      },
+      {
         "path": "tests/test_pet_voice.c",
         "bytes": 3210,
         "sha256": "55352b67637cfc8b41c505959260dfca2698275924c67b0eaae1fe3a5a6de133"
@@ -480,8 +490,8 @@
       },
       {
         "path": "NOTICE.md",
-        "bytes": 3790,
-        "sha256": "227b533f7c98fea5926d157e9a30c0045c8f0a4928dfc7b50ee26e9f7e3ee8eb"
+        "bytes": 4390,
+        "sha256": "64f61bfe1114209b3da389fb64097138f8721e7c7194322b0210c230d884e284"
       },
       {
         "path": "README.md",
@@ -500,8 +510,8 @@
       },
       {
         "path": "acceptance/操作与恢复手册.md",
-        "bytes": 7775,
-        "sha256": "a4acd27b8229c7f4db0ee09699bfdaf51c4b36582096f473d5f9f5fcc66c3ff7"
+        "bytes": 7804,
+        "sha256": "2a14799fd06ca582146374ab3949e1fd745d1d1964e0a68506797dc314531758"
       },
       {
         "path": "acceptance/许可证登记.md",
@@ -678,6 +688,11 @@
         "path": "evidence/2026-10-25-BLE-WiFi共存可行性.md",
         "bytes": 2944,
         "sha256": "bf79df10947c9cf73b0337649956584232fb793186b84c68c75273e3fe0258ba"
+      },
+      {
+        "path": "evidence/2026-10-25-中文点阵字库-T.md",
+        "bytes": 7581,
+        "sha256": "7f7e8711aa5460d676c036a2ed5c6766de096276c4cf1e2c772c1505dffa9c1f"
       },
       {
         "path": "evidence/2026-10-25-双通道事件入口-M13.md",
@@ -999,7 +1014,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "850280e53f81e20e3891a2a1177925f7a57a60d303d707e9de92647ede272f2b"
+        "sha256": "4c61bd773d24a108551f5a0c26bad194b73b41866aa97b7fd7b30cba84037d71"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1010,8 +1025,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1320672,
-        "sha256": "2da6a7ec5b8011eb3feb5f9b6056189d8c5470a6b1a0b9a87c68487f87065211"
+        "bytes": 1460272,
+        "sha256": "b719648ac03fb1675312a4f3eb941deaa5a91a3639a0b654ef079cf2c5477742"
       }
     ]
   }
