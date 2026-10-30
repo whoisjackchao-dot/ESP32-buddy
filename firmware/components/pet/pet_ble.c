@@ -15,6 +15,10 @@
 #include "host/ble_hs_id.h"
 #include "host/util/util.h"
 #include "host/ble_store.h"
+#include "host/ble_gatt.h"
+#include "host/ble_hs_mbuf.h"
+#include "pet_linebuf.h"
+#include "pet_rx.h"
 #include "nimble/nimble_port.h"
 #include "nimble/nimble_port_freertos.h"
 #include "services/gap/ble_svc_gap.h"
@@ -24,6 +28,72 @@ static const char *TAG = "pet-ble";
 
 static char    s_name[24];
 static int     s_started;
+static uint16_t s_conn_handle;
+static uint16_t s_tx_handle;
+static pet_linebuf_t s_rx_lb;
+
+/* B2：GATT 服务 0xFFE0；RX 0xFFE1(写事件行) / TX 0xFFE2(notify 控制行) */
+static int ble_rx_access(uint16_t conn_handle, uint16_t attr_handle,
+                         struct ble_gatt_access_ctxt *ctxt, void *arg)
+{
+    (void)conn_handle; (void)attr_handle; (void)arg;
+    if (ctxt->op != BLE_GATT_ACCESS_OP_WRITE_CHR) {
+        return BLE_ATT_ERR_UNLIKELY;
+    }
+    const uint16_t len = OS_MBUF_PKTLEN(ctxt->om);
+    uint8_t buf[64];
+    uint16_t off = 0;
+    while (off < len) {
+        uint16_t chunk = (uint16_t)((len - off > sizeof buf) ? sizeof buf : (len - off));
+        if (os_mbuf_copydata(ctxt->om, off, chunk, buf) != 0) {
+            break;
+        }
+        for (uint16_t i = 0; i < chunk; i++) {
+            if (pet_linebuf_feed(&s_rx_lb, (char)buf[i]) == PET_LINE_READY) {
+                pet_rx_submit(s_rx_lb.buf, s_rx_lb.len);
+            }
+        }
+        off += chunk;
+    }
+    return 0;
+}
+
+static int ble_tx_access(uint16_t conn_handle, uint16_t attr_handle,
+                         struct ble_gatt_access_ctxt *ctxt, void *arg)
+{
+    (void)conn_handle; (void)attr_handle; (void)ctxt; (void)arg;
+    return BLE_ATT_ERR_UNLIKELY; /* TX 只做 notify */
+}
+
+static const struct ble_gatt_svc_def ble_gatt_svcs[] = {
+    {
+        .type = BLE_GATT_SVC_TYPE_PRIMARY,
+        .uuid = BLE_UUID16_DECLARE(0xFFE0),
+        .characteristics = (struct ble_gatt_chr_def[]){
+            { .uuid = BLE_UUID16_DECLARE(0xFFE1),
+              .access_cb = ble_rx_access,
+              .flags = BLE_GATT_CHR_F_WRITE | BLE_GATT_CHR_F_WRITE_NO_RSP },
+            { .uuid = BLE_UUID16_DECLARE(0xFFE2),
+              .access_cb = ble_tx_access,
+              .flags = BLE_GATT_CHR_F_NOTIFY,
+              .val_handle = &s_tx_handle },
+            { 0 } },
+    },
+    { 0 },
+};
+
+bool pet_ble_send_line(const char *line)
+{
+    if (line == NULL || s_conn_handle == 0 || s_tx_handle == 0) {
+        return false;
+    }
+    struct os_mbuf *om = ble_hs_mbuf_from_flat(line, (uint16_t)strlen(line));
+    if (om == NULL) {
+        return false;
+    }
+    const int rc = ble_gatts_notify_custom(s_conn_handle, s_tx_handle, om);
+    return rc == 0;
+}
 static uint8_t s_own_addr_type;
 
 static void ble_advertise(void);
@@ -34,6 +104,9 @@ static int ble_gap_event_cb(struct ble_gap_event *event, void *arg)
     switch (event->type) {
     case BLE_GAP_EVENT_CONNECT: {
         const bool ok = (event->connect.status == 0);
+        if (ok) {
+            s_conn_handle = event->connect.conn_handle;
+        }
         ESP_LOGI(TAG, "ble: connect %s handle=%d", ok ? "ok" : "fail", event->connect.conn_handle);
         if (!ok) {
             ble_advertise();
@@ -42,6 +115,8 @@ static int ble_gap_event_cb(struct ble_gap_event *event, void *arg)
     }
     case BLE_GAP_EVENT_DISCONNECT:
         ESP_LOGI(TAG, "ble: disconnect reason=0x%02x", event->disconnect.reason);
+        s_conn_handle = 0;
+        s_tx_handle = 0;
         ble_advertise();
         break;
     case BLE_GAP_EVENT_ENC_CHANGE:
@@ -140,7 +215,12 @@ void pet_ble_start(void)
     (void)ble_svc_gap_device_name_set(s_name);
     ble_svc_gap_init();
     ble_svc_gatt_init();
-    (void)ble_gatts_start();
+    pet_linebuf_init(&s_rx_lb);
+    {
+        const int n = ble_gatts_count_cfg(ble_gatt_svcs);
+        const int a = ble_gatts_add_svcs(ble_gatt_svcs);
+        ESP_LOGI(TAG, "ble: gatt count=%d add=%d", n, a);
+    }
     nimble_port_freertos_init(ble_host_task);
     s_started = 1;
     ESP_LOGI(TAG, "ble: start name=%s", s_name);

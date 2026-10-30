@@ -454,6 +454,7 @@ void pet_engine_send_line(const char *line)
     }
     (void)usb_serial_jtag_write_bytes(line, strlen(line), pdMS_TO_TICKS(50));
     pet_net_send_control_line(line); /* WiFi 镜像（不阻塞；主机侧 500ms 去重） */
+    (void)pet_ble_send_line(line);   /* BLE 镜像（未连接则忽略） */
 }
 
 void pet_engine_key(pet_key_t key, pet_key_event_t ev)

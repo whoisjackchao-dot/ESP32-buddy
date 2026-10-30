@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-25T15:48:58+08:00",
+  "generated_at": "2026-10-30T20:50:29+08:00",
   "git": {
-    "commit": "6823ab792eb35c0668ba6d2eabde50c987d8b05d",
+    "commit": "2e62881eacffca02df57d6807d35e057d62ad538",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 202,
-    "bytes": 2905953
+    "files": 203,
+    "bytes": 2910317
   },
   "groups": {
     "firmware": [
@@ -54,8 +54,8 @@
       },
       {
         "path": "firmware/components/pet/include/pet_ble.h",
-        "bytes": 502,
-        "sha256": "f0ea5bf48abea5486d0d9e0d23a8ad603b0d7cd874c1a0691cf23c77692fa470"
+        "bytes": 621,
+        "sha256": "4c15d934895b80efb200a7061f427903369f47a72b67e526aa52c4c442b9a155"
       },
       {
         "path": "firmware/components/pet/include/pet_button.h",
@@ -174,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_ble.c",
-        "bytes": 4250,
-        "sha256": "bc1b512e975a95e1357a41f17c4b4291012a77dcdf8e3e24f9dffecd230c2339"
+        "bytes": 6924,
+        "sha256": "2ca10090afd16ad8159998796091274e26f12c00dced99e00eb2052541a1bb6c"
       },
       {
         "path": "firmware/components/pet/pet_button.c",
@@ -184,8 +184,8 @@
       },
       {
         "path": "firmware/components/pet/pet_engine.c",
-        "bytes": 17798,
-        "sha256": "a2ca863ab6b7c84183deb2d7cdd3f50f493e3e873ed26de588b6989b835421b3"
+        "bytes": 17876,
+        "sha256": "09ae99f86aeeded9e75741de9cba51095fc0e74b8088423b00886dc0d46ebe0e"
       },
       {
         "path": "firmware/components/pet/pet_evt_tcp.c",
@@ -710,6 +710,11 @@
         "sha256": "1e65606e6537a783aca2c1ce78cf73a00eefb7047409e4007f32aa81e53b3af2"
       },
       {
+        "path": "evidence/2026-10-25-BLE-GATT通道-B2.md",
+        "bytes": 1493,
+        "sha256": "840811f195d043c81e564cc34bec13403d714ccb3b2310709d1442e5951bbd66"
+      },
+      {
         "path": "evidence/2026-10-25-BLE-WiFi共存可行性.md",
         "bytes": 2944,
         "sha256": "bf79df10947c9cf73b0337649956584232fb793186b84c68c75273e3fe0258ba"
@@ -1054,7 +1059,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "65318abbeacfb59f7165193de4c56b9aeb739233f3db23529d04d65c2eed0cf3"
+        "sha256": "82c03e3c8f0f3e02022b125f4db3dc8d2aee6952229584a2a432e2a385344839"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1065,8 +1070,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1780896,
-        "sha256": "ea0e69f091984df7f00774f892e32a2ad2e586043322e24f8f48cf567f3c7af7"
+        "bytes": 1787024,
+        "sha256": "7beab56834fc4f898ed8db754ccf17403846e2375f6957dd494808c3795078b3"
       }
     ]
   }

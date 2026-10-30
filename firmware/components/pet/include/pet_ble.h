@@ -10,3 +10,6 @@ void pet_ble_start(void);
 
 /* M16：激活配对模式（清绑定 + 重新广播）。返回 false 表示 BLE 未启动。 */
 bool pet_ble_pairing_mode(void);
+
+/* B2：通过 BLE TX(notify) 下发控制行；未连接返回 false。 */
+bool pet_ble_send_line(const char *line);
