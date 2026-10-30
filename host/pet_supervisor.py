@@ -30,6 +30,7 @@ DEFAULT_WIN_PYTHON = (r"D:\Espressif\python_env"
 DEFAULT_PORT = "COM5"  # §9.3: device sits on COM5 (USB-Serial-JTAG)
 BACKOFF_BASE = 1.0
 BACKOFF_CAP = 30.0
+CONTROL_PORT = 8767  # file_to_serial 的 ControlServer（USB/WiFi/BLE 共用）
 
 
 def default_win_python():
@@ -74,7 +75,14 @@ def build_children(out=DEFAULT_OUT, win_python=None, host_dir=None,
         wsl_to_win(out) + ".stop",
         wsl_to_win(out) + ".ip")
     bridge = ["powershell.exe", "-NoProfile", "-Command", ps]
-    return [poll, bridge]
+    # B5：BLE 控制兜底桥（Windows Python 3.12 + winrt；失败不影响 USB/WiFi）
+    ble_ps = "& 'py' '-3.12' '%s' --local 127.0.0.1:%d --log '%s.ble.log' --stop-file '%s'" % (
+        wsl_to_win(os.path.join(host_dir, "ble_bridge.py")),
+        CONTROL_PORT,
+        wsl_to_win(out),
+        wsl_to_win(out) + ".stop")
+    ble = ["powershell.exe", "-NoProfile", "-Command", ble_ps]
+    return [poll, bridge, ble]
 
 
 def next_delay(current, cap=BACKOFF_CAP):

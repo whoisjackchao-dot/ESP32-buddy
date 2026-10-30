@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-30T21:05:26+08:00",
+  "generated_at": "2026-10-30T21:10:39+08:00",
   "git": {
-    "commit": "aa50d79356165849fdccdc1fe08e9294be99a689",
+    "commit": "6c88c41f74ab6214243ad5dcbc2d6f1b02009e33",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 204,
-    "bytes": 2911066
+    "files": 206,
+    "bytes": 2916784
   },
   "groups": {
     "firmware": [
@@ -310,6 +310,11 @@
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       {
+        "path": "host/ble_bridge.py",
+        "bytes": 3950,
+        "sha256": "27fb7b3123149825885d1565d13633144de07ca8c04c582f4a2f49591c73765b"
+      },
+      {
         "path": "host/file_to_serial.py",
         "bytes": 21732,
         "sha256": "69f39b245aee3ebd20457345a9d3913d8c07aa3a0cb0e3a0a7cc54608d2b033e"
@@ -356,8 +361,8 @@
       },
       {
         "path": "host/pet_supervisor.py",
-        "bytes": 13249,
-        "sha256": "ace9e49ff3cb23b93b31bb73f722dc97b12c09c6633f10582bc008e24f0070d5"
+        "bytes": 13728,
+        "sha256": "f2320e6b6a60b2c155912dda1e9128a4845b963c1a8e094c8180c3f53dbcca66"
       },
       {
         "path": "host/pet_transport.py",
@@ -728,6 +733,11 @@
         "path": "evidence/2026-10-25-BLE广播基线-B1.md",
         "bytes": 1304,
         "sha256": "4e93327edb49d51509b76951dfc918034e721700e3274baa32dad7aa768fe092"
+      },
+      {
+        "path": "evidence/2026-10-25-BLE控制兜底桥-B5.md",
+        "bytes": 1289,
+        "sha256": "6e1a80d84193aa2d89df398dd11bf37b4d47a49c5129ff8ea0566bb7d6fe87f7"
       },
       {
         "path": "evidence/2026-10-25-BLE配对与WiFi双连接.md",
