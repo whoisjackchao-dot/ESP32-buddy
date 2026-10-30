@@ -5,16 +5,17 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前阶段 | **阶段 6（交付）已完成**：M1–M9 全部门槛 PASS（含用户批准的缩减口径）；已发布 **v1.0.0 / v1.1.0 / v1.2.0**；**v1.3.0 已发布** |
-| 当前节点 | **M1–M8 ✅ + M9 全门槛 ✅ + M11（WiFi/NTP + 守护 + `/esp32-buddy`）✅ + M12（热点配网/菜单配网/SNTP/IP）✅ + M13（事件双通道 USB+WiFi TCP+去重）✅ + M14（长按 KEY1 语音：麦克风/PTT/智谱 ASR/中文上屏/剪贴板粘贴）✅**；真机：G1 20/20、G2 各1组、G3 124ms、G4 15.0–15.06s、G5 120min、G6 HTTP 54ms、G7 20/20+对照、F1–F8、多卡 3 行、热点配网（扫列表）、菜单配网、番茄钟页 IP |
+| 当前节点 | **M1–M8 ✅ + M9 全门槛 ✅ + M11（WiFi/NTP + 守护 + `/esp32-buddy`）✅ + M12（热点配网/菜单配网/SNTP/IP）✅ + M13（事件双通道 USB+WiFi TCP+去重）✅ + M14（长按 KEY1 语音：麦克风/PTT/智谱 ASR/中文上屏/剪贴板粘贴）✅ + **M16 BLE+WiFi 双连接（B1–B5）✅**（广播/GATT 事件+控制/加密配对/持久化/主机兜底桥；菜单 BT: PAIR）+ 待机状态点 + 番茄钟页电池**；真机：G1 20/20、G2 各1组、G3 124ms、G4 15.0–15.06s、G5 120min、G6 HTTP 54ms、G7 20/20+对照、F1–F8、多卡 3 行、热点配网（扫列表）、菜单配网、番茄钟页 IP |
 | 本会话目标 | ✅ 已完成：M9 验收真机 + 多卡 H + B16/B17 缺陷 + WiFi/NTP + 热点 Web 配网（扫描列表）+ 菜单配网 + 入口守护 + `/esp32-buddy` + 番茄钟页 IP + 发行 v1.0–v1.3 |
-| 文档版本 | **v0.20（2026-10-24；M9 全门槛 + WiFi 热点配网 + 入口守护 + v1.3.0）** |
+| 文档版本 | **v0.21（2026-10-30；BLE+WiFi 双连接 B1–B5 + v1.6.0 + ASR 内存/DNS 修复）** |
 | 已冻结 | M1 契约（含缺陷修订）；M2 §7 状态机 + §8 渲染半段 + §9 动画节拍；M3 §5 版式/任务卡；M4 §6 增量1 事件线格式 + §8 增量2a 主机入口核心 + §9 增量2b 传输；M5 §5 增量1 语音逻辑/资产；M7 §6 增量1 番茄钟逻辑 + §7 增量2 番茄钟视图/落盘；M8 §6/§7/§8；**M9 测量契约** |
 | 待批准 | ✅ **无**（`Q10` 2026-10-23 按提案值批准；`Q19=A` 2026-10-24；`Q20/Q21` 定为仪器法；`Q17` 已决 A） |
 | 已发布 | ✅ 仓库公开（2026-10-16）；**Releases**：`v1.0.0`（M9 验收）/ `v1.1.0`（WiFi/NTP + 守护 + `/esp32-buddy`）/ `v1.2.0`（热点配网 + 菜单配网 + SNTP）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases ；**`v1.3.0`**（番茄钟页 IP）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.3.0
 ✅ **Release `v1.4.0`**（2026-10-25）：**语音闭环**（聆听中/理解你的意思/中文文本/自动填入/短按发送）+ 事件双通道 + GB2312 全集字库 → https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.4.0
-✅ **Release `v1.5.0`**（2026-10-25）：**WiFi 控制通道**（拔掉 USB 也能语音自动填入/短按发送）+ 系统架构图 → https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.5.0 |
+✅ **Release `v1.5.0`**（2026-10-25）：**WiFi 控制通道**（拔掉 USB 也能语音自动填入/短按发送）+ 系统架构图 → https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.5.0
+✅ **Release `v1.6.0`**（2026-10-30）：**BLE + WiFi 双连接（B1–B5）**：NimBLE 广播 / GATT(RX 事件+TX 控制) / LE SC 加密+绑定持久化 / 菜单 BT: PAIR / 主机兜底桥；待机页状态点（去 IP）+ 番茄钟页电池；修复 DNS 兜底与 BLE 内存（NimBLE/mbedTLS 迁 PSRAM）→ https://github.com/whoisjackchao-dot/ESP32-buddy/releases/tag/v1.6.0 |
 | 阻塞 | ✅ **无**（B14 已解除；B16/B17 已修；B11 配网已落地）；**仅剩**：`v1.3.0` 已推送并发布；`B09` 多 Agent 源属范围外；未验证项见下 |
-| 下一步 | ① 网络恢复后 `git push --tags` + 建 `v1.3.0` Release；② 可选复验：DNS 自动弹窗 / STA 失败 ≈2 min 回落；③ 后续增量（B09 多 Agent、RLCD）另立项 |
+| 下一步 | ① 可选：BLE 桥自动策略（WiFi 控制健康时才连 BLE）；② 可选复验：DNS 自动弹窗 / STA 失败 ≈2 min 回落 / 真实断 WiFi 走 BLE；③ 后续增量（B09 多 Agent、RLCD）另立项 |
 
 ## 文档地图
 
@@ -45,7 +46,7 @@
 | [ADR-02 WiFi 角色](./contracts/ADR-2026-10-16-02-WiFi角色.md) | ✅ 已批准（方案 A：仅授时 + 保留 BLE） |
 | [参数冻结表](./contracts/参数冻结表.md) | 📊 汇总（常量待批准） |
 
-## 交接（最后更新：2026-10-24）
+## 交接（最后更新：2026-10-30）
 
 - **阶段/节点**：**阶段 6（交付）**；M1–M9 ✅（G1–G7 + F1–F8 真机）；M11 WiFi/NTP ✅、M12 热点配网/菜单配网/SNTP/IP ✅、入口守护 ✅、`/esp32-buddy` ✅；已发布 v1.0–v1.2，v1.3.0 待推
 - **本次（2026-10-22）完成**：
@@ -86,7 +87,8 @@
   22. **热点 Web 配网（推翻一次性写入）**：无凭据/菜单触发 → `ESP32-Buddy-XXXX` 开放热点 + `192.168.4.1` 网页 + DNS 劫持；页面**扫描列表选网**（`GET /scan`，APSTA）→ 点选 + 密码 → STA；真机 `ip=192.168.31.198`、`sntp hour=21`
   23. **菜单「配网模式」**：长按 KEY2 → 3 项（MUTE/STATUS/WIFI: SETUP）→ 确认重开热点（M6 §9 变更记录）
   24. **缺陷**：修 `esp_wifi_start` 不自动连接（补 `esp_wifi_connect`）；守护 down 残留（停止文件）；harness 前缀解析；CMake `-DPOMO_*` 转发
-  25. **发行**：v1.0.0（M9）→ v1.1.0（WiFi/NTP+守护）→ v1.2.0（热点配网+菜单+SNTP）→ **v1.3.0（番茄钟页 IP，待推）**
+  25. **发行**：v1.0.0（M9）→ v1.1.0（WiFi/NTP+守护）→ v1.2.0（热点配网+菜单+SNTP）→ v1.3.0（番茄钟页 IP）→ v1.4.0（语音闭环）→ v1.5.0（WiFi 控制通道）→ **v1.6.0（BLE+WiFi 双连接）**
+  26. **M16 BLE + WiFi 双连接（B1–B5，2026-10-30）**：`pet_ble`（NimBLE 广播；GATT 0xFFE0/RX 0xFFE1/TX 0xFFE2；LE SC Just Works + NVS 绑定持久化）；菜单 **BT: PAIR**（清绑定+重广播）；主机 `host/ble_bridge.py`（BLE notify → 本机 :8767，与 USB/WiFi 共用去重；默认不挂守护，因 BLE 同连占 50% 射频拖慢 ASR）；待机页只留状态点、番茄钟页电池；**修复 ASR 失败**：静态 DNS + 探针、NimBLE/mbedTLS 迁 PSRAM（内部堆 34.7KB）→ `evidence/2026-10-25-BLE*-B*.md`、`evidence/2026-10-25-ASR失败修复-DNS与内存.md`
 - **本次未完成 / 阻塞**：
   - **`v1.3.0`**：✅ 已推送 tag + Release（4 资产）
   - **未验证（如实）**：DNS 劫持自动弹窗、STA 密码错误 ≈2 min 回落热点、扫描期间手机掉线压测、栈/内存水位
