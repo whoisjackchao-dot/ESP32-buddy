@@ -72,10 +72,11 @@ static const struct ble_gatt_svc_def ble_gatt_svcs[] = {
         .characteristics = (struct ble_gatt_chr_def[]){
             { .uuid = BLE_UUID16_DECLARE(0xFFE1),
               .access_cb = ble_rx_access,
-              .flags = BLE_GATT_CHR_F_WRITE | BLE_GATT_CHR_F_WRITE_NO_RSP },
+              .flags = BLE_GATT_CHR_F_WRITE | BLE_GATT_CHR_F_WRITE_NO_RSP |
+                       BLE_GATT_CHR_F_WRITE_ENC },
             { .uuid = BLE_UUID16_DECLARE(0xFFE2),
               .access_cb = ble_tx_access,
-              .flags = BLE_GATT_CHR_F_NOTIFY,
+              .flags = BLE_GATT_CHR_F_NOTIFY | BLE_GATT_CHR_F_NOTIFY_INDICATE_ENC,
               .val_handle = &s_tx_handle },
             { 0 } },
     },

@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-30T20:50:29+08:00",
+  "generated_at": "2026-10-30T21:05:26+08:00",
   "git": {
-    "commit": "2e62881eacffca02df57d6807d35e057d62ad538",
+    "commit": "aa50d79356165849fdccdc1fe08e9294be99a689",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 203,
-    "bytes": 2910317
+    "files": 204,
+    "bytes": 2911066
   },
   "groups": {
     "firmware": [
@@ -174,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_ble.c",
-        "bytes": 6924,
-        "sha256": "2ca10090afd16ad8159998796091274e26f12c00dced99e00eb2052541a1bb6c"
+        "bytes": 7011,
+        "sha256": "695b5df667354626794fbe80a19666262add098f9a1c02c1212edbb82b22a2d6"
       },
       {
         "path": "firmware/components/pet/pet_button.c",
@@ -720,6 +720,11 @@
         "sha256": "bf79df10947c9cf73b0337649956584232fb793186b84c68c75273e3fe0258ba"
       },
       {
+        "path": "evidence/2026-10-25-BLE加密与绑定-B3.md",
+        "bytes": 662,
+        "sha256": "98ad8e8becb0732b49a2a3515c9f79424115b148a97a8f7bc4b72e2a9e66069c"
+      },
+      {
         "path": "evidence/2026-10-25-BLE广播基线-B1.md",
         "bytes": 1304,
         "sha256": "4e93327edb49d51509b76951dfc918034e721700e3274baa32dad7aa768fe092"
@@ -1059,7 +1064,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "82c03e3c8f0f3e02022b125f4db3dc8d2aee6952229584a2a432e2a385344839"
+        "sha256": "5e99dcd064afe82d4b1ea3802bfb0e6fe6dce3b742526836d8b0bf389599808b"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1071,7 +1076,7 @@
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
         "bytes": 1787024,
-        "sha256": "7beab56834fc4f898ed8db754ccf17403846e2375f6957dd494808c3795078b3"
+        "sha256": "fd85d2cad6ae4f1aa80c79282b1b5b5af4a88215826866050ed24a8e4f27af33"
       }
     ]
   }
