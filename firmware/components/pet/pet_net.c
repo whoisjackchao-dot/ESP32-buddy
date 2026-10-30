@@ -16,6 +16,9 @@
 #include "esp_log.h"
 #include "esp_netif.h"
 #include "esp_sntp.h"
+#include <sys/socket.h>
+#include <netdb.h>
+#include "lwip/inet.h"
 #include "esp_timer.h"
 #include "esp_wifi.h"
 #include "freertos/FreeRTOS.h"
@@ -29,6 +32,8 @@
 #include "pet_evt_tcp.h"
 #include "pet_ptt.h"
 #include "pet_prov.h"
+
+static void dns_probe_task(void *arg);
 
 static const char *TAG = "pet-net";
 
@@ -443,8 +448,47 @@ static void net_event_handler(void *arg, esp_event_base_t base, int32_t id, void
         s_reconnect_req = false;
         s_fails = 0;
         ESP_LOGI(TAG, "net: wifi connected ip=%s", s_ip);
+        /* 静态 DNS 兜底：DHCP 未下发/不可达时，ASR(open.bigmodel.cn)/NTP 会解析失败 */
+        {
+            esp_netif_dns_info_t dns = {0};
+            dns.ip.type = ESP_IPADDR_TYPE_V4;
+            dns.ip.u_addr.ip4.addr = htonl(0xDF050505); /* 223.5.5.5 */
+            (void)esp_netif_set_dns_info(ev->esp_netif, ESP_NETIF_DNS_MAIN, &dns);
+            dns.ip.u_addr.ip4.addr = htonl(0x72727272); /* 114.114.114.114 */
+            (void)esp_netif_set_dns_info(ev->esp_netif, ESP_NETIF_DNS_BACKUP, &dns);
+        }
+        {
+            esp_netif_dns_info_t dm = {0};
+            if (esp_netif_get_dns_info(ev->esp_netif, ESP_NETIF_DNS_MAIN, &dm) == ESP_OK &&
+                dm.ip.type == ESP_IPADDR_TYPE_V4) {
+                ESP_LOGI(TAG, "net: dns main=" IPSTR, IP2STR(&dm.ip.u_addr.ip4));
+            }
+        }
+        (void)xTaskCreate(dns_probe_task, "dnsprobe", 4096, NULL, 3, NULL);
         pet_evt_tcp_start(); /* M13：拿到 IP 即开事件通道 tcp://<ip>:8766（幂等） */
     }
+}
+
+/* DNS 探针（诊断）：拿到 IP 后 3s 解析一次 ASR 域名并打印 */
+static void dns_probe_task(void *arg);
+
+static void dns_probe_task(void *arg)
+{
+    (void)arg;
+    vTaskDelay(pdMS_TO_TICKS(3000));
+    struct addrinfo hints = {0};
+    struct addrinfo *res = NULL;
+    hints.ai_family = AF_INET;
+    const int rc = getaddrinfo("open.bigmodel.cn", NULL, &hints, &res);
+    char ip[24] = "-";
+    if (rc == 0 && res != NULL && res->ai_addr != NULL) {
+        const struct sockaddr_in *in = (const struct sockaddr_in *)res->ai_addr;
+        esp_ip4_addr_t v = {.addr = in->sin_addr.s_addr};
+        snprintf(ip, sizeof ip, IPSTR, IP2STR(&v));
+        freeaddrinfo(res);
+    }
+    ESP_LOGI(TAG, "net: dns probe rc=%d ip=%s", rc, ip);
+    vTaskDelete(NULL);
 }
 
 /* ---- 底座（一次性）：netif + 事件循环 + wifi 驱动 + 事件注册 ---- */

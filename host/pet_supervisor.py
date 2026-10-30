@@ -82,7 +82,10 @@ def build_children(out=DEFAULT_OUT, win_python=None, host_dir=None,
         wsl_to_win(out),
         wsl_to_win(out) + ".stop")
     ble = ["powershell.exe", "-NoProfile", "-Command", ble_ps]
-    return [poll, bridge, ble]
+    # 默认不挂 BLE 桥：BLE 连接会让 WiFi+BLE 各占 50% 射频，拖慢 ASR 上传。
+    # 需要 WiFi 控制兜底时手动启动：python host/ble_bridge.py（见 evidence B5）。
+    _ = ble
+    return [poll, bridge]
 
 
 def next_delay(current, cap=BACKOFF_CAP):

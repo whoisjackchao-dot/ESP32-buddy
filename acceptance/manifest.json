@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-30T21:10:39+08:00",
+  "generated_at": "2026-10-30T21:44:43+08:00",
   "git": {
-    "commit": "6c88c41f74ab6214243ad5dcbc2d6f1b02009e33",
+    "commit": "773d968782e2267d924d29561d9b547efde934c6",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 206,
-    "bytes": 2916784
+    "files": 207,
+    "bytes": 2919983
   },
   "groups": {
     "firmware": [
@@ -234,8 +234,8 @@
       },
       {
         "path": "firmware/components/pet/pet_net.c",
-        "bytes": 25536,
-        "sha256": "16ce957306f10e996cd852d99001c6e25b87de4ed78c46801d7d00f949e894c3"
+        "bytes": 27325,
+        "sha256": "454b467956a48d3fdc86ea062a1db515901565734323cd4f25065de63e070084"
       },
       {
         "path": "firmware/components/pet/pet_pomo.c",
@@ -299,8 +299,8 @@
       },
       {
         "path": "firmware/main/main.c",
-        "bytes": 1728,
-        "sha256": "10b8e71457f7833f6520f5469b66f4a6367a0f48b3d2d63807ff74c54ad3d9ee"
+        "bytes": 1841,
+        "sha256": "450d2f6a7267c8443efb2ededb669f011c85f9c04bb45d4db14c14531a80fd32"
       }
     ],
     "host": [
@@ -361,8 +361,8 @@
       },
       {
         "path": "host/pet_supervisor.py",
-        "bytes": 13728,
-        "sha256": "f2320e6b6a60b2c155912dda1e9128a4845b963c1a8e094c8180c3f53dbcca66"
+        "bytes": 13929,
+        "sha256": "81455f4a3fb7dcc4633480c472e6c78813611111e62400260eb23ad870e2c860"
       },
       {
         "path": "host/pet_transport.py",
@@ -713,6 +713,11 @@
         "path": "evidence/2026-10-24-双通道事件-T.md",
         "bytes": 6874,
         "sha256": "1e65606e6537a783aca2c1ce78cf73a00eefb7047409e4007f32aa81e53b3af2"
+      },
+      {
+        "path": "evidence/2026-10-25-ASR失败修复-DNS与内存.md",
+        "bytes": 1096,
+        "sha256": "fd9a245055636f3b0d5662a178df3c29f5006e4bd28c169b2f8784af49c373f4"
       },
       {
         "path": "evidence/2026-10-25-BLE-GATT通道-B2.md",
@@ -1074,7 +1079,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "5e99dcd064afe82d4b1ea3802bfb0e6fe6dce3b742526836d8b0bf389599808b"
+        "sha256": "58471c63b7bd49ce8c8a9aa5b9e09f36b742b01b8ae6b3a0b248e8596512fa7c"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1085,8 +1090,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1787024,
-        "sha256": "fd85d2cad6ae4f1aa80c79282b1b5b5af4a88215826866050ed24a8e4f27af33"
+        "bytes": 1788048,
+        "sha256": "23938aa9643a46bb744af36f45753320d392b74eb9c39d748e6012ef08503b06"
       }
     ]
   }

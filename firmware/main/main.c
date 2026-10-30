@@ -1,6 +1,7 @@
 /* ESP32-buddy M1 入口：把三层接起来，在 M5StickS3 上显示宠物一帧。
  * M1 范围：只显示 IDLE/NORMAL 一帧；状态机与动画属 M2。 */
 #include "esp_log.h"
+#include "esp_heap_caps.h"
 #include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -48,8 +49,9 @@ void app_main(void)
 
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(10000));
-        ESP_LOGI(TAG, "hb: uptime=%llds heap=%lu",
+        ESP_LOGI(TAG, "hb: uptime=%llds heap=%lu int=%lu",
                  (long long)(esp_timer_get_time() / 1000000),
-                 (unsigned long)esp_get_free_heap_size());
+                 (unsigned long)esp_get_free_heap_size(),
+                 (unsigned long)heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
     }
 }
