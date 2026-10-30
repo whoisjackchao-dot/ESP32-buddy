@@ -1,14 +1,14 @@
 {
   "schema": "esp32-buddy-manifest/1",
-  "generated_at": "2026-10-30T21:49:42+08:00",
+  "generated_at": "2026-10-30T22:06:27+08:00",
   "git": {
-    "commit": "1c175c42c128efdc339faa0a7bc89812c7a5e64b",
+    "commit": "33d79322cb8579cca9a82cc66e819629a91e6d2a",
     "branch": "main",
     "tracked_clean": false
   },
   "totals": {
-    "files": 207,
-    "bytes": 2921259
+    "files": 208,
+    "bytes": 2926444
   },
   "groups": {
     "firmware": [
@@ -174,8 +174,8 @@
       },
       {
         "path": "firmware/components/pet/pet_ble.c",
-        "bytes": 7011,
-        "sha256": "695b5df667354626794fbe80a19666262add098f9a1c02c1212edbb82b22a2d6"
+        "bytes": 9620,
+        "sha256": "f139a083f4cd8c0c839fb9c6267e3e458eafe67287cf82d751cdf0311dd8f3f1"
       },
       {
         "path": "firmware/components/pet/pet_button.c",
@@ -311,8 +311,8 @@
       },
       {
         "path": "host/ble_bridge.py",
-        "bytes": 3950,
-        "sha256": "27fb7b3123149825885d1565d13633144de07ca8c04c582f4a2f49591c73765b"
+        "bytes": 4941,
+        "sha256": "cb9ed6b182dcf644e87df2d2cfc35203034d53eb13bbfddaa8d087bdfe63ac18"
       },
       {
         "path": "host/file_to_serial.py",
@@ -500,8 +500,8 @@
       },
       {
         "path": "ESP32-buddy_文档索引.md",
-        "bytes": 18010,
-        "sha256": "f81e457389fb4662dd9ae6e07a3cede65839f6fafe4d72142ae9f7c2ff848cc5"
+        "bytes": 18303,
+        "sha256": "61a2892bdbac29cad2679965350d3dad234bc73a84994a048d8d8d5992cd5491"
       },
       {
         "path": "ESP32-buddy_测试用例与追踪矩阵.md",
@@ -773,6 +773,11 @@
         "path": "evidence/2026-10-25-语音输入-PTT-智谱.md",
         "bytes": 8269,
         "sha256": "e80db2bb426f9bb9f0508ca8073632dd67951772bfa69e7e7a4652f266c63553"
+      },
+      {
+        "path": "evidence/2026-10-30-BLE握手与心跳.md",
+        "bytes": 1292,
+        "sha256": "234ea61e51e54c2c3c08fafb124dc806d4718c14bfd6c9f08a97f3222f0820c3"
       },
       {
         "path": "evidence/B08-回窗口可行性-spike.md",
@@ -1079,7 +1084,7 @@
         "file": "bootloader/bootloader.bin",
         "offset": "0x0",
         "bytes": 20832,
-        "sha256": "58471c63b7bd49ce8c8a9aa5b9e09f36b742b01b8ae6b3a0b248e8596512fa7c"
+        "sha256": "4b222fa922994edc50728ee80e50c50cfd7d85601de337cce9fcf74b2716ba35"
       },
       {
         "file": "partition_table/partition-table.bin",
@@ -1090,8 +1095,8 @@
       {
         "file": "esp32_buddy.bin",
         "offset": "0x10000",
-        "bytes": 1788048,
-        "sha256": "23938aa9643a46bb744af36f45753320d392b74eb9c39d748e6012ef08503b06"
+        "bytes": 1788832,
+        "sha256": "b8d3cedb6bd1f6f779d14c7f774439e327b8e90437de55d13e91f6fe72d21621"
       }
     ]
   }

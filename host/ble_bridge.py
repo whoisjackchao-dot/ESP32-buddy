@@ -17,6 +17,7 @@ import time
 
 DEVICE_SERVICE = "0000ffe0"
 DEVICE_TX = "0000ffe2"
+DEVICE_STATUS = "0000ffe3"
 
 
 def log(msg, path):
@@ -48,7 +49,23 @@ async def main_async(args, stop_file):
     )
 
     addr = int(args.addr, 16)
-    got = {"n": 0}
+    got = {"n": 0, "hb": 0, "hello": 0}
+
+    def on_status(sender, event_args):
+        try:
+            buf = event_args.characteristic_value
+            data = bytes(buf) if buf is not None else b""
+        except Exception:
+            return
+        text = data.decode("utf-8", "replace").strip()
+        if not text:
+            return
+        if '"evt":"hello"' in text:
+            got["hello"] += 1
+            log("ble handshake OK %s" % text[:120], args.log)
+        elif '"evt":"hb"' in text:
+            got["hb"] += 1
+            log("ble hb#%d %s" % (got["hb"], text[:120]), args.log)
 
     def on_value(sender, event_args):
         try:
@@ -79,13 +96,18 @@ async def main_async(args, stop_file):
                     continue
                 chars = (await svc.get_characteristics_async()).characteristics
                 for ch in chars:
-                    if not str(ch.uuid).lower().startswith(DEVICE_TX):
-                        continue
-                    ch.add_value_changed(on_value)
-                    status = await ch.write_client_characteristic_configuration_descriptor_async(
-                        GattClientCharacteristicConfigurationDescriptorValue.NOTIFY)
-                    log("ble: subscribed status=%s" % status, args.log)
-                    found = True
+                    cu = str(ch.uuid).lower()
+                    if cu.startswith(DEVICE_TX):
+                        ch.add_value_changed(on_value)
+                        st = await ch.write_client_characteristic_configuration_descriptor_async(
+                            GattClientCharacteristicConfigurationDescriptorValue.NOTIFY)
+                        log("ble: subscribed ctl status=%s" % st, args.log)
+                        found = True
+                    elif cu.startswith(DEVICE_STATUS):
+                        ch.add_value_changed(on_status)
+                        st = await ch.write_client_characteristic_configuration_descriptor_async(
+                            GattClientCharacteristicConfigurationDescriptorValue.NOTIFY)
+                        log("ble: subscribed status status=%s" % st, args.log)
             if not found:
                 log("ble: service not found, retry", args.log)
                 await asyncio.sleep(3)
